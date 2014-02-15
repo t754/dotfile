@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: capsLock
+# key: capsLock
+# --
+\${${2:n}:\$\$(upcase yas-text)}$0

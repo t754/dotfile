@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: htmltable
+# key: htmltable
+# --
+#+ATTR_HTML: ${1:id=} ${2:class=}  border="2" rules="all" frame="all"
+|-$0

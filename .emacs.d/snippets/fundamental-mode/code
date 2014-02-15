@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: code
+# key: code
+# binding: C-c C-c
+# --
+<%
+	$0
+%>

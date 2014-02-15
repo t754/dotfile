@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: header1
+# key: header1
+# --
+<!DOCTYPE html>
+<html lang="ja">
+html>(head>title+meta charset="UTF-8" content="text/html" http-equiv="content-type"+link rel="stylesheet" type="text/css" href="${1:my}.css")+body

@@ -1,0 +1,26 @@
+[user]
+	name = nagoshi
+	email = tamakoron7@gmail.com
+
+[color]
+    ui = true
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+	ch = checkout
+	co = commit
+	br = branch
+	st = status
+	s = status -s -b
+	hint = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	l   = log --abbrev-commit --date=iso --graph --pretty=format:'%C(red)%h %C(yellow)%d%C(green)%cd %C(blue)%cn\n%C(reset)%s\n'
+[core]
+    excludesfile = ~/.gitignore
+	pager = less -r
+[mergetool.ediff]
+    cmd = emacs --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\" 
+[merge]
+	tool = ediff
+
+	

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: latextable
+# key: latextable
+# --
+
+#+CAPTION: $1
+#+LABEL: tbl:${2:$$(upcase yas-text)}
+#+ATTR_LATEX: :environment ${3:$$(yas-choose-value '("bmatrix :mode math :math-suffix \\\\times" "tabular" "longtable"))} :align |c|c|
+${0:|||}
+

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: latexpic
+# key: latexpic
+# --
+#+CAPTION: $1
+#+LABEL: fig:${2:$$(upcase yas-text)}
+#+ATTR_LATEX: :width 0.5\textwidth ${3:$$(yas-choose-value '(":float t" ":float wrap :placement {r}{0.4\textwidth}"))}
+[[./$0]]
+

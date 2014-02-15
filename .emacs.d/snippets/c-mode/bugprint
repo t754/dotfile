@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: bugprint
+# key: bugprint
+# --
+$0printf("%s %s:%d\n", __func__, __FILE__, __LINE__);

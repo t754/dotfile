@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: BeginEnd
+# key: BeginEnd
+# --
+#+BEGIN_${2:$$(yas-choose-value '("SRC" "QUOTE" "VERSE")) } ${3:srcChoice}$0
+
+#+END_$2

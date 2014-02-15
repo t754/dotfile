@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: latexref
+# key: latexref
+# --
+${1:図}\ref{${2:fig:${3:foo}}}$0

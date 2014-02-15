@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: head
+# key: head
+# --
+#+TITLE: $1
+#+AUTHOR: 名前  名越 琢真
+#+EMAIL: 
+#+DATE: \today 提出
+#+OPTIONS: toc:nil num:t author:t creator:t timestamp:nil \n:t ^:nil -:t ::t
+#+LANGUAGE: ja
+#+LATEX_CLASS: jarticle
+#+LATEX_CLASS_OPTIONS: [a4j]
+$0
+

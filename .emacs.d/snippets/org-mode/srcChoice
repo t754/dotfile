@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: srcChoice
+# key: srcChoice
+# --
+${2:$$(yas-choose-value '(
+"ditaa :file something.png :cmdline -r "
+"dot :file something.png :cmdline -Kdot -Tpng"
+"ruby"
+"sh"
+))}
+$0

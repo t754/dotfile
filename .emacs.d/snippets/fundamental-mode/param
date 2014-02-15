@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: param
+# key: param
+# binding: C-c C-p
+# --
+<%= $1 %>
