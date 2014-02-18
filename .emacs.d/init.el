@@ -85,8 +85,8 @@
 
 
 
-(when (equal system-name "utrtamako")
-  (when
+
+  (when (require 'mozc nil t)
       (load-file "/usr/share/emacs/site-lisp/emacs-mozc/mozc.elc")
     (set-language-environment "Japanese")
     (setq mozc-candidate-style 'overlay)
@@ -102,7 +102,7 @@
     (set-clipboard-coding-system 'utf-8)
     (setq default-input-method "japanese-mozc")
     )
-  )
+  
 
 
 
