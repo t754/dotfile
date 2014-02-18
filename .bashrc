@@ -2,6 +2,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
+
 alias ls='ls -x -v --color=auto'
 alias ll='ls -la'
 alias la='ls -a'
@@ -62,30 +63,9 @@ function uuuu {
 }
 
 function mmmm {
-	free | awk ' /^Mem/{ printf("\033[1;42;37m%05.2f\033[0m ",$3/$2*100) } /^Swap/{printf("\033[1;44;37m%05.2f\033[0m",$3/$2*100) } '
+	free | awk '/^\-\/\+/{ printf("\033[1;42;37m%05.2f\033[0m ",$3/($3+$4)*100) } /^Swap/{printf("\033[1;44;37m%05.2f\033[0m",$3/$2*100) }'
 }
 
-function aa_mod_parameters () { 
-    N=/dev/null;
-    C=`tput op` O=$(echo -en "\n`tput setaf 2`>>> `tput op`");
-    for mod in $(cat /proc/modules|cut -d" " -f1);
-    do
-        md=/sys/module/$mod/parameters;
-        [[ ! -d $md ]] && continue;
-        m=$mod;
-        d=`modinfo -d $m 2>$N | tr "\n" "\t"`;
-        echo -en "$O$m$C";
-        [[ ${#d} -gt 0 ]] && echo -n " - $d";
-        echo;
-        for mc in $(cd $md; echo *);
-        do
-            de=`modinfo -p $mod 2>$N | grep ^$mc 2>$N|sed "s/^$mc=//" 2>$N`;
-            echo -en "\t$mc=`cat $md/$mc 2>$N`";
-            [[ ${#de} -gt 1 ]] && echo -en " - $de";
-            echo;
-        done;
-    done
-}
 
 function proml {
 	export PS1="\e[41m \e[0m\e[1;32m\@\e[0m \e[1;105;93m\w\e[0m \e[41m \e[0m\j\e[0m
@@ -96,43 +76,45 @@ function proml {
 proml
 
 
-# extract() {
-#     local c e i
-
-#     (($#)) || return
-
-#     for i; do
-#         c=''
-#         e=1
-
-#         if [[ ! -r $i ]]; then
-# 			echo "$0: file is unreadable: \`$i'" >&2
-#             continue
-#         fi
-
-#         case $i in
-#             *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='bsdtar xvf';;
-# *.7z)  c='7z x';;
-# *.Z)   c='uncompress';;
-# *.bz2) c='bunzip2';;
-# *.exe) c='cabextract';;
-# *.gz)  c='gunzip';;
-# *.rar) c='unrar x';;
-# *.xz)  c='unxz';;
-# *.zip) c='unzip';;
-# *.lzh) c='lha x';;
-# *)     echo "$0: unrecognized file extension: \`$i'" >&2
-# continue;;
-# esac
-# command $c "$i"
-# e=$?
-# done
-# return $e
-# }
+extract() {
+    local c e i
+    (($#)) || return
+    for i; do
+        c=''
+        e=1
+        if [[ ! -r $i ]]; then
+			echo "$0: file is unreadable: \`$i'" >&2
+            continue
+        fi
+        case $i in
+            *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='bsdtar xvf';;
+*.7z)  c='7z x';;
+*.Z)   c='uncompress';;
+*.bz2) c='bunzip2';;
+*.exe) c='cabextract';;
+*.gz)  c='gunzip';;
+*.rar) c='unrar x';;
+*.xz)  c='unxz';;
+*.zip) c='unzip';;
+*.lzh) c='lha x';;
+*)     echo "$0: unrecognized file extension: \`$i'" >&2
+continue;;
+esac
+command $c "$i"
+e=$?
+done
+return $e
+}
 
 EC() { echo -e '\e[1;33m'code $?'\e[m\n'; }
 trap EC ERR
 
 ulimit -c 4096
 
+
+
+# export GTK_IM_MODULE=ibus
+# export XMODIFIERS=@im=ibus
+# export QT_IM_MODULE=ibus
+# ibus-daemon -drx
 
