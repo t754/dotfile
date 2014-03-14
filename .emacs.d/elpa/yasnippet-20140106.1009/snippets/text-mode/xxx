@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: xxx
-# key: x
+# key: xxx
 # --
-`(ca-with-comment "XXX: ")`
+`((lambda (str)  (format "%s%s%s" comment-start str comment-end)) "XXX: ")`

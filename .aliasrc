@@ -1,0 +1,23 @@
+alias ls='ls -x -v --color=auto'
+alias ll='ls -la'
+alias la='ls -a'
+alias df='df -h'
+alias starte='emacs --daemon'
+alias e="emacsclient -c"
+alias enox="emacsclient"
+alias E='SUDO_EDITOR="emacsclient -c" sudo -e '
+alias Enox='SUDO_EDITOR="emacsclient " sudo -e '
+alias mv="mv -i"
+alias cp="cp -i"
+alias rm="rm -i"
+alias server_name='ssh -v -l USERNAME IP ADDRESS'
+alias du="du -h -c"
+alias df="df -h -T --total"
+alias grep="grep -i -n --color"
+alias bee='aplay ~/beep.wav' 
+alias pgg='ps -Af | grep'
+alias xsels='xsel -ib < /tmp/screen-exchange'
+
+# coredump した場所
+alias core="sudo systemd-coredumpctl list | tail"
+alias coreout='sudo systemd-coredumpctl dump -o core'

@@ -143,8 +143,6 @@ function runcpp () { g++ $1 && shift && ./a.out $@ }
 
 
 
-
-
 ######powerline
 function powerline_precmd() {
     export PS1="$(~/powerline-shell.py $? --shell zsh 2> /dev/null)"

@@ -14,30 +14,26 @@
 
 
 
-;; anything interface
- (eval-after-load "anything-config"
-   '(progn
- 	 (defun my-yas/prompt (prompt choices &optional display-fn)
- 	   (let* ((names (loop for choice in choices
- 						   collect (or (and display-fn (funcall display-fn choice))
- 									   choice)))
- 			  (selected (anything-other-buffer
- 						 `(((name . ,(format "%s" prompt))
- 							(candidates . names)
- 							(action . (("Insert snippet" . (lambda (arg) arg))))))
- 						 "*anything yas/prompt*")))
- 		 (if selected
- 			 (let ((n (position selected names :test 'equal)))
- 			   (nth n choices))
- 		   (signal 'quit "user quit!"))))
- 	 (custom-set-variables '(yas/prompt-functions '(my-yas/prompt)))
- 	 (define-key anything-command-map (kbd "y") 'yas/insert-snippet)))
-
 ;;(setq yas-wrap-around-region nil)
 ;;(setq )
  ;;; 単語展開キーバインド (ver8.0から明記しないと機能しない)
  ;;; (setqだとtermなどで干渉問題ありでした)
  ;;; もちろんTAB以外でもOK 例えば "C-;"とか
+(defun my-yas/prompt (prompt choices &optional display-fn)
+  (let* ((names (loop for choice in choices
+                      collect (or (and display-fn (funcall display-fn choice))
+                                  coice)))
+         (selected (helm-other-buffer
+                    `(((name . ,(format "%s" prompt))
+                       (candidates . names)
+                       (action . (("Insert snippet" . (lambda (arg) arg))))))
+                    "*helm yas/prompt*")))
+    (if selected
+        (let ((n (position selected names :test 'equal)))
+          (nth n choices))
+      (signal 'quit "user quit!"))))
+(custom-set-variables '(yas/prompt-functions '(my-yas/prompt)))
+
 
 (custom-set-variables '(yas-trigger-key "TAB"))
 
@@ -47,9 +43,16 @@
 ;; 既存スニペットを挿入する
 (define-key yas-minor-mode-map (kbd "C-x i i") 'yas-insert-snippet)
 ;; 新規スニペットを作成するバッファを用意する
-(define-key yas-minor-mode-map (kbd "C-x i n") 'yas-new-snippet)
+;; fine-key yas-minor-mode-map (kbd "C-x i n") 'yas-new-snippet)
 ;; 既存スニペットを閲覧・編集する
-(define-key yas-minor-mode-map (kbd "C-x i v") 'yas-visit-snippet-file)
+;; fine-key yas-minor-mode-map (kbd "C-x i v") 'yas-visit-snippet-file)
+   (add-hook 'org-mode-hook
+                    (lambda ()
+                      (make-variable-buffer-local 'yas/trigger-key)
+                      (setq yas/trigger-key [tab])
+                      (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+                      (define-key yas/keymap [tab] 'yas/next-field)))
+
 
 
 

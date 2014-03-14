@@ -115,7 +115,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
- '(org-agenda-files (quote ("~/Dropbox/org/notes.org" "~/Dropbox/org/office.org" "~/Dropbox/org/home.org")))
+ '(org-agenda-files (quote ("/home/tama/Dropbox/org/home.org" "/home/tama/Dropbox/org/notes.org" "/home/tama/Dropbox/org/office.org")))
+ '(org-drill-optimal-factor-matrix nil)
  '(tab-width 4)
  '(yas-prompt-functions (quote (my-yas/prompt)))
  '(yas-trigger-key "TAB"))

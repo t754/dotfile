@@ -1924,7 +1924,8 @@ If a prefix arg is given or `helm-follow-mode' is on open file."
            (and (file-directory-p candidate) (file-symlink-p candidate))
            (funcall insert-in-minibuffer (file-name-as-directory
                                           (file-truename
-                                           (expand-file-name candidate)))))
+;;;--MY-CCC;;;                                           ;; (expand-file-name candidate)))))
+                                           (expand-file-name candidate))));;;change
           ;; A directory, open it.
           ((file-directory-p candidate)
            (when (string= (helm-basename candidate) "..")
@@ -1933,10 +1934,13 @@ If a prefix arg is given or `helm-follow-mode' is on open file."
                                           (expand-file-name candidate))))
           ;; A symlink file, expand to it's true name. (cl-first hit)
           ((and (file-symlink-p candidate) (not current-prefix-arg) (not follow))
-           (funcall insert-in-minibuffer (file-truename candidate)))
+;;;--MY-CHNGE           (funcall insert-in-minibuffer (file-truename candidate)))
+           (funcall insert-in-minibuffer candidate))
+           
           ;; A regular file, expand it, (cl-first hit)
           ((and (>= num-lines-buf 3) (not current-prefix-arg) (not follow))
            (funcall insert-in-minibuffer new-pattern))
+           
           ;; An image file and it is the second hit on C-z,
           ;; show the file in `image-dired'.
           ((string-match (image-file-name-regexp) candidate)

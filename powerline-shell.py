@@ -1,0 +1,1 @@
+/home/tama/powerline-shell/powerline-shell.py

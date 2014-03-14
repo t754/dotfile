@@ -4,6 +4,9 @@
 (require 'org)
 (require 'org-install)
 (require 'org-habit)
+(require 'org-mobile)
+;; (require 'org-drill)
+;; (require 'table)
 (add-to-list 'org-modules "org-habit")
 ;;(require 'org-compat)
 ;;(define-key global-map "\C-cl" 'org-store-link)
@@ -23,14 +26,25 @@
 ;; (setq org-agenda-files `("~/Dropbox/org/main.org"))
 ;; (setq org-agenda-files (list "notes.org")) 
 (setq org-default-notes-file "notes.org")
-(setq org-mobile-inbox-for-pull "~/Dropbox/org/inbox.org")
-(setq org-mobile-directory "~/Dropbox/mobileorg")
+;; (setq org-mobile-inbox-for-pull "~/Dropbox/org/inbox.org")
+(setq org-mobile-directory "~/Dropbox/mobileorg/")
+   ;; 編集するorgファイルがある場所を指定する。
+;; MobileOrg側で新しく作成したノートを保存するファイルの名前を指定する。
+   (setq org-mobile-inbox-for-pull "~/Dropbox/mobileorg/flagged.org")
+   ;; Dropboxで同期するMobileOrgフォルダへのパスを設定
+;; 同期するファイルを指定する。
+;; (setq org-agenda-files (quote ("C:/Users/ユーザー名/Dropbox/org/test.
+;;    ))
+
 ;; org-default-notes-fileのファイル名
 
 ;; TODO状態
+
 (setq org-todo-keywords
       '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)")))
+(setq org-enforce-todo-dependencies t)
 ;; DONEの時刻を記録
+
 (setq org-log-done 'time)
 (add-hook 'orgtbl-mode-hook (function (lambda ()
 										(define-key orgtbl-mode-map [?\e (return)] 'org-meta-return)
@@ -74,6 +88,15 @@
 (setq org-tag-alist
   '(("@OFFICE" . ?o) ("@HOME" . ?h) ("NOTE" . ?s)
     ))
+
+(setq org-refile-targets
+       (quote (("ical.org" :level . 1)
+               ("home.org" :level . 1)
+               ("office.org" :level . 1)
+               ("notes.org" :level . 1)
+               )))
+(setq org-icalendar-combined-agenda-file "~/Dropbox/Public/Dc3co90x5sGgggOi/org.ics")
+
 ;; Explicitly load required exporters
 (require 'ox-icalendar)
 (require 'ox-html)
@@ -266,3 +289,32 @@
   (setq org-crypt-disable-auto-save 'nil)
   (setq auto-save-default 'nil)
   )
+
+
+(defvar my-org-mobile-sync-timer nil)
+
+(defvar my-org-mobile-sync-secs (* 60 20))
+
+(defun my-org-mobile-sync-pull-and-push ()
+  (org-mobile-pull)
+  (org-mobile-push)
+  (when (fboundp 'sauron-add-event)
+    (sauron-add-event 'my 3 "Called org-mobile-pull and org-mobile-push")))
+
+(defun my-org-mobile-sync-start ()
+  "Start automated `org-mobile-push'"
+  (interactive)
+  (setq my-org-mobile-sync-timer
+        (run-with-idle-timer my-org-mobile-sync-secs t
+                             'my-org-mobile-sync-pull-and-push)))
+
+(defun my-org-mobile-sync-stop ()
+  "Stop automated `org-mobile-push'"
+  (interactive)
+  (cancel-timer my-org-mobile-sync-timer))
+
+(my-org-mobile-sync-start)
+
+
+
+

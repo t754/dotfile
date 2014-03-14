@@ -2,30 +2,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
+[[ -s /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash 
+[ -r $HOME/.aliasrc ] && . $HOME/.aliasrc
 
-alias ls='ls -x -v --color=auto'
-alias ll='ls -la'
-alias la='ls -a'
-alias df='df -h'
-alias starte='emacs --daemon'
-alias e="emacsclient -c"
-alias enox="emacsclient"
-alias E='SUDO_EDITOR="emacsclient -c" sudo -e '
-alias Enox='SUDO_EDITOR="emacsclient " sudo -e '
-alias mv="mv -i"
-alias cp="cp -i"
-alias rm="rm -i"
-alias server_name='ssh -v -l USERNAME IP ADDRESS'
-alias du="du -h -c"
-alias df="df -h -T --total"
-alias grep="grep -i -n --color"
-alias bee='aplay ~/beep.wav' 
-alias pgg='ps -Af | grep'
-alias xsels='xsel -ib < /tmp/screen-exchange'
-
-# coredump した場所
-alias core="sudo systemd-coredumpctl list | tail"
-alias coreout='sudo systemd-coredumpctl dump -o core'
 # 重複服歴を無視
 export HISTCONTROL=ignoredups
 export HISTIGNORE="fg*:bg*:history*:rm*"
@@ -34,8 +13,11 @@ export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 export latexs='latexmk -e =q/platex -interaction nonstopmode %S/ -e =q/pbibtex %B/ -e =q/mendex -o %D %S/ -e =q/dvipdfmx -o %D %S/ -norc -gg -pdfdvi'
 
 export LANG=ja_JP.UTF-8
+export SHELL="/bin/bash"
+export TERM="xterm"
+export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
-export PAGER=less
+export PAGER="less"
 
 
 export PATH="$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin/:$HOME/.gem/ruby/2.1.0/bin/"
@@ -69,9 +51,9 @@ function mmmm {
 
 function proml {
 	export PS1="\e[41m \e[0m\e[1;32m\@\e[0m \e[1;105;93m\w\e[0m \e[41m \e[0m\j\e[0m
-\e[41m \e[0m \e[1;47;34m\u\e[0m\e[1;35m\$(parse_git_branch) \e[0m\
-\e[0m\$(uuuu)℃ \$(mmmm)\e[41m \e[0m
-\$>"
+\e[41m \e[0m \e[1;47;34m\u\e[1;93;104m\h\e[0m\e[1;35m\$(parse_git_branch) \e[0m\
+\e[0m\$(uuuu)℃ \$(mmmm) \e[41m \e[0m
+\\$>"
 }
 proml
 
@@ -106,15 +88,43 @@ done
 return $e
 }
 
-EC() { echo -e '\e[1;33m'code $?'\e[m\n'; }
+EC() { echo -e '\e[1;33m'code $?'\e[m'; }
 trap EC ERR
 
 ulimit -c 4096
 
+export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 
+colors() {
+	local fgc bgc vals seq0
+
+	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
+	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
+	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
+	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+
+	# foreground colors
+	for fgc in {30..37}; do
+		# background colors
+		for bgc in {40..47}; do
+			fgc=${fgc#37} # white
+			bgc=${bgc#40} # black
+
+			vals="${fgc:+$fgc;}${bgc}"
+			vals=${vals%%;}
+
+			seq0="${vals:+\e[${vals}m}"
+			printf "  %-9s" "${seq0:-(default)}"
+			printf " ${seq0}TEXT\e[m"
+			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+		done
+		echo; echo
+	done
+}
 # export GTK_IM_MODULE=ibus
 # export XMODIFIERS=@im=ibus
 # export QT_IM_MODULE=ibus
 # ibus-daemon -drx
-
+archey3
+fortune -s | tee /tmp/trans;echo;goslate.py -t ja /tmp/trans 
