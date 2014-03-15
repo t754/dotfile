@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: xxx
-# key: xxx
-# --
-`((lambda (str)  (format "%s%s%s" comment-start str comment-end)) "XXX: ")`

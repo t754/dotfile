@@ -9,7 +9,7 @@
 
 (setq helm-use-migemo t)
 ;; (require 'helm-git)
-(require 'helm-ls-git)
+;; (require 'helm-ls-git)
 
 ;;;;;;;;;;;;
 ;; migemo ;;
@@ -26,8 +26,6 @@
 
   (load-library "migemo")
   (migemo-init)
-
-  
 )
 
 
