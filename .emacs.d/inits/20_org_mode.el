@@ -5,7 +5,7 @@
 (require 'org-install)
 (require 'org-habit)
 (require 'org-mobile)
-;; (require 'org-drill)
+(require 'org-drill)
 ;; (require 'table)
 (add-to-list 'org-modules "org-habit")
 ;;(require 'org-compat)
@@ -21,6 +21,7 @@
 (setq org-hide-leading-stars t)
 ;; org-modeでの強調表示を可能にする
 (add-hook 'org-mode-hook 'turn-on-font-lock)
+
 ;; org-default-notes-fileのディレクトリ
 (setq org-directory "~/Dropbox/org/")
 ;; (setq org-agenda-files `("~/Dropbox/org/main.org"))
@@ -73,8 +74,15 @@
          "** %?\n %U\n %a\n %i\n")
         ("i" "Idea" entry (file+headline nil "Idea")
          "** %?\n %U\n %i\n %a\n %i\n")
+        ("d" "drill" entry
+         (file+headline (concat (getenv "HOME") "/Dropbox/flashCard.org") "hat")
+               "* Word :drill:\n%^ \n** Answer \n%^")
+        ("c" "同期カレンダーにエントリー" entry
+          (file+headline nil "Schedule")
+          "** TODO %?\n\t")
         ;; ("w" "Twitter" entry (file+datetree "twitter.org")
-        ;;  "** %U %?\n")
+        ;;  "** %U %?\n") 
+        
         )
       )
 (global-set-key (kbd "C-c c") 'org-capture)

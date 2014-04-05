@@ -126,5 +126,7 @@ colors() {
 # export XMODIFIERS=@im=ibus
 # export QT_IM_MODULE=ibus
 # ibus-daemon -drx
-archey3
-fortune -s | tee /tmp/trans;echo;goslate.py -t ja /tmp/trans 
+archey3 2> /dev/null
+fortune -s 2> /dev/null | tee /tmp/trans 2> /dev/null 
+echo;
+goslate.py -t ja /tmp/trans 2> /dev/null
