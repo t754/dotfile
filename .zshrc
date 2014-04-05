@@ -1,4 +1,7 @@
- [[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh 
+ # [[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+[[ -s $HOME/.autojump/etc/profile.d/autojump.zsh ]] && source $HOME/.autojump/etc/profile.d/autojump.zsh
+
 
 # autoload -U  promptinit && promptinit
 autoload -U compinit && compinit -u
@@ -175,6 +178,6 @@ setopt pushd_ignore_dups        # 同じディレクトリは追加しない
 #     archey3
 #     fortune -s | tee /tmp/trans;echo;goslate.py -t ja /tmp/trans
 # fi
-    
+$HOME/screenfetch 2> /dev/null    
 
 

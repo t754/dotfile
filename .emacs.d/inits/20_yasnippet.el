@@ -46,12 +46,12 @@
 ;; fine-key yas-minor-mode-map (kbd "C-x i n") 'yas-new-snippet)
 ;; 既存スニペットを閲覧・編集する
 ;; fine-key yas-minor-mode-map (kbd "C-x i v") 'yas-visit-snippet-file)
-   (add-hook 'org-mode-hook
-                    (lambda ()
-                      (make-variable-buffer-local 'yas/trigger-key)
-                      (setq yas/trigger-key [tab])
-                      (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-                      (define-key yas/keymap [tab] 'yas/next-field)))
+   ;; (add-hook 'org-mode-hook
+   ;;                  (lambda ()
+   ;;                    (make-variable-buffer-local 'yas/trigger-key)
+   ;;                    (setq yas/trigger-key [tab])
+   ;;                    (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+   ;;                    (define-key yas/keymap [tab] 'yas/next-field)))
 
 
 

@@ -71,7 +71,9 @@ backup-directory-alist))
 (fset 'yes-or-no-p 'y-or-n-p)
 (custom-set-variables
   '(tab-width 4))
-(custom-set-faces)
+
+;;;; 色設定
+;; (custom-set-faces)
 ;;; ツールバーを消す
 (tool-bar-mode 0)
 ;;大文字小文字を区別しない
@@ -81,10 +83,6 @@ backup-directory-alist))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;かっこの強調
-(setq show-paren-delay 0)
-(show-paren-mode t)
-(setq show-paren-style 'expression)
-(set-face-background 'show-paren-match-face "grey30")
-(set-face-underline-p 'show-paren-match-face "red")
+;; かっこ強調は color theme に移動
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

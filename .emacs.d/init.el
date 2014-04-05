@@ -86,24 +86,6 @@
 
 
 
-  (when (require 'mozc nil t)
-      (load-file "/usr/share/emacs/site-lisp/emacs-mozc/mozc.elc")
-    (set-language-environment "Japanese")
-    (setq mozc-candidate-style 'overlay)
-    (setq mozc-candidate-style 'echo-area)
-    (global-set-key (kbd "C-\\") 'toggle-input-method) 
-    (prefer-coding-system 'utf-8-unix)
-;;    (set-default-coding-systems 'utf-8)
-    (set-terminal-coding-system 'utf-8)
-    (set-keyboard-coding-system 'utf-8)
-    (set-buffer-file-coding-system 'utf-8)
-    (setq default-buffer-file-coding-system 'utf-8)
-    (set-buffer-file-coding-system 'utf-8)
-    (set-clipboard-coding-system 'utf-8)
-    (setq default-input-method "japanese-mozc")
-    )
-  
-
 
 
 
@@ -116,7 +98,7 @@
  ;; If there is more than one, they won't work right.
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
  '(org-agenda-files (quote ("/home/tama/Dropbox/org/home.org" "/home/tama/Dropbox/org/notes.org" "/home/tama/Dropbox/org/office.org")))
- '(org-drill-optimal-factor-matrix nil)
+ '(org-drill-optimal-factor-matrix (quote ((1 (2.1799999999999997 . 3.72) (1.7000000000000002 . 3.44)))))
  '(tab-width 4)
  '(yas-prompt-functions (quote (my-yas/prompt)))
  '(yas-trigger-key "TAB"))
