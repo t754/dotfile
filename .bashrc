@@ -40,22 +40,22 @@ function parse_git_branch() {
 }
 
 
-function uuuu {
-	/usr/bin/sensors 2> /dev/null | awk '"Core" == $1 { i += int($3); n++} END{ printf( "%d",i/n) }'
-}
+# function uuuu {
+# 	/usr/bin/sensors 2> /dev/null | awk '"Core" == $1 { i += int($3); n++} END{ printf( "%d",i/n) }'
+# }
 
-function mmmm {
-	free | awk '/^\-\/\+/{ printf("\033[1;42;37m%05.2f\033[0m ",$3/($3+$4)*100) } /^Swap/{printf("\033[1;44;37m%05.2f\033[0m",$3/$2*100) }'
-}
+# function mmmm {
+# 	free | awk '/^\-\/\+/{ printf("\033[1;42;37m%05.2f\033[0m ",$3/($3+$4)*100) } /^Swap/{printf("\033[1;44;37m%05.2f\033[0m",$3/$2*100) }'
+# }
 
 
-function proml {
-	export PS1="\e[41m \e[0m\e[1;32m\@\e[0m \e[1;105;93m\w\e[0m \e[41m \e[0m\j\e[0m
-\e[41m \e[0m \e[1;47;34m\u\e[1;93;104m\h\e[0m\e[1;35m\$(parse_git_branch) \e[0m\
-\e[0m\$(uuuu)℃ \$(mmmm) \e[41m \e[0m
-\\$>"
-}
-proml
+# function proml {
+# 	export PS1="\e[41m \e[0m\e[1;32m\@\e[0m \e[1;105;93m\w\e[0m \e[41m \e[0m\j\e[0m
+# \e[41m \e[0m \e[1;47;34m\u\e[1;93;104m\h\e[0m\e[1;35m\$(parse_git_branch) \e[0m\
+# \e[0m\$(uuuu)'C \$(mmmm) \e[41m \e[0m
+# \\$>"
+# }
+# proml
 
 
 extract() {
@@ -104,7 +104,8 @@ colors() {
 	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
 	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
 
-	# foreground colors
+
+    # foreground colors
 	for fgc in {30..37}; do
 		# background colors
 		for bgc in {40..47}; do
@@ -126,7 +127,13 @@ colors() {
 # export XMODIFIERS=@im=ibus
 # export QT_IM_MODULE=ibus
 # ibus-daemon -drx
+function _update_ps1() {
+    export PS1="$(~/powerline-shell.py $? 2> /dev/null)"
+}
+PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+
+
 archey3 2> /dev/null
-fortune -s 2> /dev/null | tee /tmp/trans 2> /dev/null 
+fortune -s 2> /dev/null | tr "\n" " " | tee /tmp/trans 2> /dev/null  
 echo;
 goslate.py -t ja /tmp/trans 2> /dev/null

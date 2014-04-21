@@ -1,7 +1,7 @@
 ((("not" .
    [1 0 0])
   ("n" .
-   [1])
+   [2])
   ("color-theme-molokai" .
    [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
   ("color-theme-matrix" .

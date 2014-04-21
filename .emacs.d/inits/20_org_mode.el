@@ -27,7 +27,7 @@
 ;; (setq org-agenda-files `("~/Dropbox/org/main.org"))
 ;; (setq org-agenda-files (list "notes.org")) 
 (setq org-default-notes-file "notes.org")
-;; (setq org-mobile-inbox-for-pull "~/Dropbox/org/inbox.org")
+;; (aetq org-mobile-inbox-for-pull "~/Dropbox/org/inbox.org")
 (setq org-mobile-directory "~/Dropbox/mobileorg/")
    ;; 編集するorgファイルがある場所を指定する。
 ;; MobileOrg側で新しく作成したノートを保存するファイルの名前を指定する。
@@ -97,13 +97,13 @@
   '(("@OFFICE" . ?o) ("@HOME" . ?h) ("NOTE" . ?s)
     ))
 
-(setq org-refile-targets
-       (quote (("ical.org" :level . 1)
-               ("home.org" :level . 1)
-               ("office.org" :level . 1)
-               ("notes.org" :level . 1)
-               )))
-(setq org-icalendar-combined-agenda-file "~/Dropbox/Public/Dc3co90x5sGgggOi/org.ics")
+;; (setq org-refile-targets
+;;        (quote (("ical.org" :level . 1)
+;;                ("home.org" :level . 1)
+;;                ("office.org" :level . 1)
+;;                ("notes.org" :level . 1)
+;;                )))
+;; (setq org-icalendar-combined-agenda-file "~/Dropbox/Public/Dc3co90x5sGgggOi/org.ics")
 
 ;; Explicitly load required exporters
 (require 'ox-icalendar)
@@ -154,7 +154,7 @@
 
 ;; Viewerの設定(acroread)
 (customize-set-variable 'org-file-apps
-                        '(("pdf" . "acroread %s")))
+                        '(("pdf" . "evince %s")))
 
 (setq org-export-latex-coding-system 'utf-8-unix)
 (setq org-export-with-sub-superscripts nil)
@@ -299,29 +299,28 @@
   )
 
 
-(defvar my-org-mobile-sync-timer nil)
+;; (defvar my-org-mobile-sync-timer nil)
 
-(defvar my-org-mobile-sync-secs (* 60 20))
+;; (defvar my-org-mobile-sync-secs (* 60 20))
 
-(defun my-org-mobile-sync-pull-and-push ()
-  (org-mobile-pull)
-  (org-mobile-push)
-  (when (fboundp 'sauron-add-event)
-    (sauron-add-event 'my 3 "Called org-mobile-pull and org-mobile-push")))
+;; (defun my-org-mobile-sync-pull-and-push ()
+;;   (org-mobile-pull)
+;;   (org-mobile-push)
+;;   (when (fboundp 'sauron-add-event)
+;;     (sauron-add-event 'my 3 "Called org-mobile-pull and org-mobile-push")))
 
-(defun my-org-mobile-sync-start ()
-  "Start automated `org-mobile-push'"
-  (interactive)
-  (setq my-org-mobile-sync-timer
-        (run-with-idle-timer my-org-mobile-sync-secs t
-                             'my-org-mobile-sync-pull-and-push)))
+;; (defun my-org-mobile-sync-start ()
+;;   "Start automated `org-mobile-push'"
+;;   (interactive)
+;;   (setq my-org-mobile-sync-timer
+;;         (run-with-idle-timer my-org-mobile-sync-secs t
+;;                              'my-org-mobile-sync-pull-and-push)))
 
-(defun my-org-mobile-sync-stop ()
-  "Stop automated `org-mobile-push'"
-  (interactive)
-  (cancel-timer my-org-mobile-sync-timer))
-
-(my-org-mobile-sync-start)
+;; (defun my-org-mobile-sync-stop ()
+;;   "Stop automated `org-mobile-push'"
+;;   (interactive)
+;;   (cancel-timer my-org-mobile-sync-timer))
+;; (my-org-mobile-sync-start)
 
 
 
