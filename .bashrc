@@ -14,8 +14,8 @@ export latexs='latexmk -e =q/platex -interaction nonstopmode %S/ -e =q/pbibtex %
 
 export LANG=ja_JP.UTF-8
 export SHELL="/bin/bash"
-export TERM="xterm"
-export COLORTERM="mlterm"
+export TERM="screen-256color-bce"
+# export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
 export PAGER="less"
 

@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: math
+# key: math
+# --
+$\displaystyle $0 $

@@ -41,11 +41,11 @@
 ;;(define-key yas-minor-mode-map (kbd "TAB") nil)
 ;;(define-key yas-minor-mode-map (kbd "C-;") 'yas-expand)
 ;; 既存スニペットを挿入する
-(define-key yas-minor-mode-map (kbd "C-x i i") 'yas-insert-snippet)
+(define-key yas-minor-mode-map (kbd "C-c i i") 'yas-insert-snippet)
 ;; 新規スニペットを作成するバッファを用意する
-;; fine-key yas-minor-mode-map (kbd "C-x i n") 'yas-new-snippet)
+(define-key yas-minor-mode-map (kbd "C-c i n") 'yas-new-snippet)
 ;; 既存スニペットを閲覧・編集する
-;; fine-key yas-minor-mode-map (kbd "C-x i v") 'yas-visit-snippet-file)
+(define-key yas-minor-mode-map (kbd "C-c i v") 'yas-visit-snippet-file)
    ;; (add-hook 'org-mode-hook
    ;;                  (lambda ()
    ;;                    (make-variable-buffer-local 'yas/trigger-key)
