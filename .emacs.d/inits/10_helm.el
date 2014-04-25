@@ -2,6 +2,7 @@
 (require 'recentf)
 (require 'helm-config)
 (require 'helm-descbinds)
+
 (helm-descbinds-install)
 (helm-descbinds-mode)
 
@@ -47,9 +48,10 @@
 
 
 (define-key helm-map (kbd "C-h") 'delete-backward-char)
+;; (define-key helm-map (kbd "C-u C-z") 'helm-buffer-run-kill-buffers)
 (define-key helm-map (kbd "C-z") 'scroll-down-command)
 
-
+(setq helm-delete-minibuffer-contents-from-point t)
 ;; (define-key global-map (kbd "C-x C-g") 'helm-git-find-file)
 
 ;; TABで任意補完。選択肢が出てきたらC-nやC-pで上下移動してから決定することも可能

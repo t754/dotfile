@@ -2,6 +2,9 @@
 (require 'helm-ag);;agg
 (require 'helm-config) 
 (require 'all-ext)
+;; (require 'color-moccur)
+;; (require 'helm-c)
+;; (require 'helm-c-moccur)
 (setq helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
 (setq helm-ag-thing-at-point 'symbol)
 
