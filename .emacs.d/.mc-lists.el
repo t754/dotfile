@@ -3,24 +3,33 @@
 
 (setq mc/cmds-to-run-for-all
       '(
-		anything-filelist+
-		beginning-of-indented-line
-		c-electric-delete-forward
-		c-electric-paren
-		c-electric-semi&comma
-		c-electric-star
-		cua-clear-rectangle-mark
-		flymake-goto-next-error
-		kill-buffer
-		mozc-handle-event
-		my-insert-bracket
-		my-insert-paren
-		switch-to-buffer
-		))
+        anything-filelist+
+        beginning-of-indented-line
+        c-electric-delete-forward
+        c-electric-paren
+        c-electric-semi&comma
+        c-electric-star
+        cua-clear-rectangle-mark
+        cua-paste
+        flymake-goto-next-error
+        helm-confirm-and-exit-minibuffer
+        kill-buffer
+        mozc-handle-event
+        my-insert-bracket
+        my-insert-paren
+        org-beginning-of-line
+        org-end-of-line
+        org-kill-line
+        org-return
+        org-yank
+        switch-to-buffer
+        yas-expand
+        ))
 
 (setq mc/cmds-to-run-once
       '(
-		cua-delete-region
-		eval-buffer
-		toggle-input-method
-		))
+        cua-delete-region
+        eval-buffer
+        org-self-insert-command
+        toggle-input-method
+        ))

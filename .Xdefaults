@@ -15,7 +15,6 @@ Xft.rgba: rgb
 
 
 
-
 URxvt*termName:                         rxvt
 URxvt*geometry:                         110x40
 ! URxvt*chdir:                          string
@@ -51,8 +50,9 @@ URxvt*shading:                          20
 ! URxvt*cursorUnderline:                boolean
 ! URxvt*cursorBlink:                    boolean
 ! URxvt*pointerBlank:                   boolean
- URxvt*background:                      rgba:0000/0000/0000/cccc
- URxvt*foreground:                      rgba:ffff/ffff/ffff/bbbb
+ ! URxvt*background:                      rgba:0000/0000/0000/cccc
+URxvt*background:                      rgba:1111/1111/1111/dddd
+URxvt*foreground:                      rgba:ffff/ffff/ffff/bbbb
 ! URxvt*color0:                         color
 ! URxvt*color1:                         color
 ! URxvt*color2:                         color
@@ -78,9 +78,9 @@ URxvt*shading:                          20
 ! URxvt*troughColor:                    color
 ! URxvt*highlightColor:                 color
 ! URxvt*highlightTextColor:             color
-! URxvt*cursorColor:                    color
-! URxvt*cursorColor2:                   color
-! URxvt*pointerColor:                   color
+URxvt*cursorColor:                      1
+ ! URxvt*cursorColor2:                     2
+URxvt*pointerColor:                   2
 ! URxvt*pointerColor2:                  color
 ! URxvt*borderColor:                    color
 ! URxvt*iconFile:                       file
@@ -91,7 +91,7 @@ URxvt*font:                             xft:Ricty for Powerline-BoldForPowerline
 ! URxvt*boldItalicFont:                 xft:RictyDiscord-Regular-Powerline
 ! URxvt*intensityStyles:                boolean
 ! URxvt*inputMethod:                    name
-! URxvt*preeditType:                    style
+URxvt*preeditType:                    OverTheSpot
 ! URxvt*imLocale:                       string
 ! URxvt*imFont:                         fontname
 ! URxvt*title:                          string
@@ -120,19 +120,30 @@ URxvt*letterSpace:                      -1
 ! URxvt*secondaryScroll:                boolean
 ! URxvt*perl-lib:                       string
 ! URxvt*perl-eval:                      perl-eval
-URxvt*perl-ext-common:                  default,clipboard,url-select,keyboard-select,font-size
+URxvt*perl-ext-common:                  default,clipboard,url-select,keyboard-select,font-size,tabbed
 ! URxvt*perl-ext:                       string
 ! URxvt*iso14755:                       boolean
 ! URxvt*iso14755_52:                    boolean
 ! URxvt*xrm:                            string
 ! URxvt*keysym.sym:                     keysym
-URxvt*keysym.C-Up:                      perl:font-size:increase 
-URxvt*keysym.C-Down:                    perl:font-size:decrease 
-URxvt*keysym.C-S-Up:                    perl:font-size:incglobal
-URxvt*keysym.C-S-Down:                  perl:font-size:decglobal
+URxvt.keysym.C-Up:                      perl:font-size:increase 
+URxvt.keysym.C-Down:                    perl:font-size:decrease 
+! URxvt.keysym.C-S-Up:                    perl:font-size:incglobal
+! URxvt.keysym.C-S-Down:                  perl:font-size:decglobal
 URxvt.keysym.M-u:                       perl:url-select:select_next
 URxvt.keysym.M-Escape:                  perl:keyboard-select:activate
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s:                       perl:keyboard-select:search
+! URxvt.keysym.M-c:                       perl:clipboard:copy
+URxvt.keysym.M-w:                       perl:clipboard:copy
+URxvt.keysym.M-c:                       perl:clipboard:copy
+URxvt.keysym.M-v:                       perl:clipboard:paste
+URxvt.keysym.M-y:                       perl:clipboard:paste
+URxvt.keysym.M-C-v:                     perl:clipboard:paste_escaped
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 3
+URxvt.tabbed.tab-bg: 0
 ! URxvt*background.border:              boolean
 ! URxvt*background.expr:                string
 ! URxvt*background.interval:            seconds
@@ -155,11 +166,12 @@ URxvt.keysym.M-s:                       perl:keyboard-select:search
 ! URxvt*tabbar-fg:                      colour
 ! URxvt*url-launcher:                   string
 
-URxvt.url-select.launcher:              firefox
+URxvt.url-select.launcher:              firefox -new-tab
 URxvt.url-select.underline:             true
 
-
-
-
-
-
+! # Options:
+! #   URxvt.clipboard.autocopy: If true, PRIMARY overwrites clipboard
+! # You can also overwrite the system commands to use for copying/pasting.
+! # The default ones are:
+URxvt.clipboard.copycmd:  xsel -ib
+URxvt.clipboard.pastecmd: xsel -ob

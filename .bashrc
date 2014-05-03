@@ -8,31 +8,19 @@
 # 重複服歴を無視
 export HISTCONTROL=ignoredups
 export HISTIGNORE="fg*:bg*:history*:rm*"
-
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 export latexs='latexmk -e =q/platex -interaction nonstopmode %S/ -e =q/pbibtex %B/ -e =q/mendex -o %D %S/ -e =q/dvipdfmx -o %D %S/ -norc -gg -pdfdvi'
-
-export LANG=ja_JP.UTF-8
-export SHELL="/bin/bash"
-export TERM="screen-256color-bce"
 # export COLORTERM="mlterm"
-export EDITOR="emacsclient -nw"
-export PAGER="less"
-
-
 export PATH="$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin/:$HOME/.gem/ruby/2.1.0/bin/"
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
-
 # SCREEN buffer
 export SCREENEXCHANGE="/tmp/screen-exchange"
-
-if [ -n ${DISPLAY} ] ; then
-    export DISPLAY=:0.0
-fi
+export IGNOREEOF=1
+stty stop undef
 
 function Cl(){
-	echo "$1" | xsel --input --clipboard
+	echo "$*" | xsel --input --clipboard
 }
 
 function parse_git_branch() {
@@ -69,23 +57,23 @@ extract() {
             continue
         fi
         case $i in
-            *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='bsdtar xvf';;
-*.7z)  c='7z x';;
-*.Z)   c='uncompress';;
-*.bz2) c='bunzip2';;
-*.exe) c='cabextract';;
-*.gz)  c='gunzip';;
-*.rar) c='unrar x';;
-*.xz)  c='unxz';;
-*.zip) c='unzip';;
-*.lzh) c='lha x';;
-*)     echo "$0: unrecognized file extension: \`$i'" >&2
-continue;;
-esac
-command $c "$i"
-e=$?
-done
-return $e
+            *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='bsdtar xvf';; # 
+            *.7z)  c='7z x';;
+            *.Z)   c='uncompress';;
+            *.bz2) c='bunzip2';;
+            *.exe) c='cabextract';;
+            *.gz)  c='gunzip';;
+            *.rar) c='unrar x';;
+            *.xz)  c='unxz';;
+            *.zip) c='unzip';;
+            *.lzh) c='lha x';;
+            *)     echo "$0: unrecognized file extension: \`$i'" >&2
+            continue;;
+        esac
+        command $c "$i"
+        e=$?
+    done
+    return $e
 }
 
 EC() { echo -e '\e[1;33m'code $?'\e[m'; }
@@ -95,7 +83,18 @@ ulimit -c 4096
 
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
-
+cl() {
+    dir=$1
+    if [[ -z "$dir" ]]; then
+        dir=$HOME
+    fi
+    if [[ -d "$dir" ]]; then
+        cd "$dir"
+        ls
+    else
+        echo "bash: cl: '$dir': Directory not found"
+    fi
+}
 colors() {
 	local fgc bgc vals seq0
 
@@ -132,8 +131,13 @@ function _update_ps1() {
 }
 PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 
+complete -cf sudo
+complete -cf man
 
 archey3 2> /dev/null
 fortune -s 2> /dev/null | tr "\n" " " | tee /tmp/trans 2> /dev/null  
 echo;
 goslate.py -t ja /tmp/trans 2> /dev/null
+
+
+

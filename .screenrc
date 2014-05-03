@@ -32,8 +32,9 @@ deflog on
 logfile "/home/tama/log/screen-%Y%m%d-%n.log"
 defscrollback 3000
 vbell off
+
 hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
-# hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
+
 
 bufferfile "/tmp/screen-exchange"
 bindkey -m ' ' eval 'stuff \040' 'writebuf'
