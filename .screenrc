@@ -35,7 +35,6 @@ vbell off
 
 hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
 
-
 bufferfile "/tmp/screen-exchange"
 bindkey -m ' ' eval 'stuff \040' 'writebuf'
 bindkey -m Y eval 'stuff Y' 'writebuf' 

@@ -17,6 +17,8 @@ alias grep="grep -i -n --color"
 alias bee='aplay ~/beep.wav' 
 alias pgg='ps -Af | grep'
 alias xsels='xsel -ib < /tmp/screen-exchange'
+alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
+alias kpclimy='kpcli --kdb="$HOME/Dropbox/database/NewDatabase.kdbx"'
 alias open="xdg-open"
 # coredump した場所
 alias core="sudo systemd-coredumpctl list | tail"
