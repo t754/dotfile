@@ -16,10 +16,13 @@
 		    :family "Ricty"
 		    :height 180))
  ((equal system-name "localhost.localdomain")
-  (set-face-attribute 'default nil
-		    :family "Ricty"
-		    :height 120))
+   (set-frame-font "Ricty-12")
+   (set-face-attribute 'default nil
+     	    :family "Ricty"
+     	    :height 120)
+  (setq default-frame-alist '((font . "Ricty-12")))
   )
+ )
 
 
 
