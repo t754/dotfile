@@ -20,14 +20,17 @@
 (prefer-coding-system 'utf-8-unix)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
-
 (set-keyboard-coding-system 'utf-8)
-(set-buffer-file-coding-system 'utf-8)
+(setq set-buffer-process-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+
 (set-buffer-file-coding-system 'utf-8)
 (set-clipboard-coding-system 'utf-8)
 
-(set-face-attribute 'default nil :height 160)
+;; (set-face-attribute 'default nil :height 120)
 
+
+    
 
 

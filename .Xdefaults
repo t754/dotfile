@@ -24,8 +24,8 @@ URxvt*loginShell:                       ture
 ! URxvt*skipScroll:                     boolean
 ! URxvt*pastableTabs:                   boolean
 ! URxvt*scrollstyle:                    mode
-! URxvt*scrollBar:                      boolean
-! URxvt*scrollBar_right:                boolean
+URxvt*scrollBar:                        true
+! Urxvt*scrollBar_right:                boolean
 ! URxvt*scrollBar_floating:             boolean
 ! URxvt*scrollBar_align:                mode
 ! URxvt*thickness:                      number
@@ -43,7 +43,7 @@ URxvt*shading:                          20
 ! URxvt*urgentOnBell:                   boolean
 ! URxvt*visualBell:                     boolean
 ! URxvt*mapAlert:                       boolean
-! URxvt*meta8:                          boolean
+URxvt*meta8:                            False
 ! URxvt*mouseWheelScrollPage:           boolean
 ! URxvt*tripleclickwords:               boolean
 ! URxvt*insecure:                       boolean
@@ -84,7 +84,7 @@ URxvt*pointerColor:                     2
 ! URxvt*pointerColor2:                  color
 ! URxvt*borderColor:                    color
 ! URxvt*iconFile:                       file
-URxvt*font:                             xft:Ricty for Powerline-BoldForPowerline:size=14:antialias=true
+ URxvt*font:                             xft:Ricty for Powerline-BoldForPowerline:size=14:antialias=true
 ! xft:RictyDiscord-Regular-Powerline:size=72:antialias=true
 ! URxvt*boldFont:                       xft:RictyDiscord-Regular-Powerline
 ! URxvt*italicFont:                     xft:RictyDiscord-Regular-Powerline
@@ -122,14 +122,14 @@ URxvt*letterSpace:                      -1
 ! URxvt*perl-eval:                      perl-eval
 URxvt*perl-ext-common:                  default,clipboard,url-select,keyboard-select,font-size,tabbed
 ! URxvt*perl-ext:                       string
-! URxvt*iso14755:                       boolean
-! URxvt*iso14755_52:                    boolean
+URxvt*iso14755:                         False
+URxvt*iso14755_52:                      False
 ! URxvt*xrm:                            string
 ! URxvt*keysym.sym:                     keysym
-! URxvt.keysym.C-S-Up:                      perl:font-size:increase 
-! URxvt.keysym.C-S-Down:                    perl:font-size:decrease 
-URxvt.keysym.C-S-Up:                    perl:font-size:incglobal
-URxvt.keysym.C-S-Down:                  perl:font-size:decglobal
+URxvt.keysym.C-S-Up:                      perl:font-size:increase 
+URxvt.keysym.C-S-Down:                    perl:font-size:decrease 
+! URxvt.keysym.C-S-Up:                    perl:font-size:incglobal
+! URxvt.keysym.C-S-Down:                  perl:font-size:decglobal
 URxvt.keysym.M-u:                       perl:url-select:select_next
 URxvt.keysym.M-Escape: 					perl:keyboard-select:activate
 URxvt.keysym.M-s:                       perl:keyboard-select:search
@@ -140,7 +140,8 @@ URxvt.keysym.M-v:                       perl:clipboard:paste
 URxvt.keysym.M-y:                       perl:clipboard:paste
 URxvt.keysym.M-C-v:                     perl:clipboard:paste_escaped
 URxvt.tabbed.saveLines: 1000
-URxvt.tabbed.scrollBar: false
+URxvt.tabbed.scrollBar: ture
+URxvt.tabbed.no-tabbedex-keys: true
 URxvt.tabbed.tabbar-fg: 2
 URxvt.tabbed.tabbar-bg: 0
 URxvt.tabbed.tab-fg: 3

@@ -7,7 +7,7 @@
 (helm-descbinds-mode)
 
 
-
+(setq recentf-max-menu-items 200)
 (setq helm-use-migemo t)
 ;; (require 'helm-git)
 ;; (require 'helm-ls-git)
