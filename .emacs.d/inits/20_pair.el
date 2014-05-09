@@ -1,3 +1,5 @@
-(electric-pair-mode)
+;; (electric-pair-mode)
+(require 'smartparens-config)
+(smartparens-global-mode)
 
 

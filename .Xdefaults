@@ -48,7 +48,7 @@ URxvt*meta8:                            False
 ! URxvt*tripleclickwords:               boolean
 ! URxvt*insecure:                       boolean
 ! URxvt*cursorUnderline:                boolean
-! URxvt*cursorBlink:                    boolean
+URxvt*cursorBlink:                      True
 ! URxvt*pointerBlank:                   boolean
  ! URxvt*background:                    rgba:0000/0000/0000/cccc
 URxvt*background:                      rgba:1111/1111/1111/dddd
@@ -78,8 +78,8 @@ URxvt*foreground:                      rgba:ffff/ffff/ffff/bbbb
 ! URxvt*troughColor:                    color
 ! URxvt*highlightColor:                 color
 ! URxvt*highlightTextColor:             color
-URxvt*cursorColor:                      1
-!URxvt*cursorColor2:                     2
+URxvt*cursorColor:                      red
+! URxvt*cursorColor2:                     1
 URxvt*pointerColor:                     2
 ! URxvt*pointerColor2:                  color
 ! URxvt*borderColor:                    color
