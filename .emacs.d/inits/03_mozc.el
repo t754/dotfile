@@ -2,7 +2,7 @@
       ;; (load-file "/usr/share/emacs/site-lisp/emacs-mozc/mozc.elc")
     (set-language-environment "Japanese")
      ;;(setq mozc-candidate-style 'overlay)
-      (setq mozc-candidate-style 'echo-area)
+    (setq mozc-candidate-style 'echo-area)
     (global-set-key (kbd "C-\\") 'toggle-input-method)
     (prefer-coding-system 'utf-8-unix)
     (set-default-coding-systems 'utf-8)

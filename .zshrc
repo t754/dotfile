@@ -4,6 +4,7 @@
 
 
 # autoload -U  promptinit && promptinit
+fpath=($HOME/zsh-completions/src $fpath)
 autoload -U compinit && compinit -u
 # # 問題解決？
 # export PROMPT_COMMAND="history -a"
@@ -32,6 +33,7 @@ export PAGER="less"
 ##ls 色の付け方？
 export LSCOLORS=Exfxcxdxbxegedabagacad
 
+export PATH="$PATH:$HOME/adt-bundle-linux/sdk/platform-tools"
 
 #####Kemmap?
 # create a zkbd compatible hash;
