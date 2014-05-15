@@ -18,7 +18,7 @@
 
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8-unix)
-(set-default-coding-systems 'utf-8)
+(set-default-coding-systems 'utf-8-unix)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (setq set-buffer-process-coding-system 'utf-8)
@@ -27,6 +27,7 @@
 
 (set-buffer-file-coding-system 'utf-8)
 (set-clipboard-coding-system 'utf-8)
+(set-locale-environment "utf-8")
 (setenv "LC_ALL" "ja_JP.UTF-8")
 (setenv "LANG" "ja_JP.UTF-8")
 ;; (set-face-attribute 'default nil :height 120)

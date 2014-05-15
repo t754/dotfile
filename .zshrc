@@ -18,6 +18,12 @@ autoload -U compinit && compinit -u
 
 ###### alias  bashと一緒の
 [ -r $HOME/.aliasrc ] && . $HOME/.aliasrc
+export GTK_IM_MODULE="ibus"
+export XMODIFIERS="@im=ibus"
+export XMODIFIER="@im=ibus"
+export QT_IM_MODULE="ibus"
+export DefaultIMModule=ibus
+
 
 export TERM="xterm-256color"
 export COLORTERM="mlterm"
