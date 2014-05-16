@@ -111,7 +111,7 @@
 (require 'ox-latex)
 (require 'ox-ascii)
 (require 'ox-beamer)
-
+(setq org-latex-image-default-width ".45\\linewidth")
 (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
 
 (defun bh/display-inline-images ()
