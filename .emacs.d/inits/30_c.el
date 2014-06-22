@@ -18,3 +18,18 @@
 			;; (flymake-mode t)
 			(flymake-mode t)
 			(define-key c-mode-map(kbd "C-c C-p") 'c-indent-defun)))
+
+(dolist (hook
+         '(c-mode-hook
+           c++-mode-hook))
+  
+  (add-hook hook
+            (lambda ()
+              (local-set-key [f3]
+                             (lambda ()
+                               (interactive)
+                               (manual-entry (current-word))))
+              )
+            )
+  )
+

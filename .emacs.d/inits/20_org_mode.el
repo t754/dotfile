@@ -152,7 +152,7 @@
 										;(setq org-export-latex-inline-image-extensions nil)
 										;(add-to-list 'org-export-latex-inline-image-extensions "eps")
 
-;; Viewerの設定(acroread)
+;; Viewerの設定(evince)
 (customize-set-variable 'org-file-apps
                         '(("pdf" . "evince %s")))
 
@@ -161,10 +161,7 @@
 (setq org-export-latex-classes nil)
 
 
-
-
 (setq org-latex-default-class "jarticle")
-
 (add-to-list 'org-latex-classes
 			 '("jarticle"
 			   "\\documentclass{jarticle}

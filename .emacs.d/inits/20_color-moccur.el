@@ -17,4 +17,6 @@
 (global-set-key (kbd "C-o .") 'helm-ag-pop-stack);;
 (global-set-key (kbd "C-o C-o") 'helm-ag-this-file);;;;;
 (global-set-key (kbd "C-M-o") 'helm-ag)
+;; M-n で現在地にある文字を入力
+
 
