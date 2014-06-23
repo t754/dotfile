@@ -12,9 +12,12 @@
 ;; (setq default-frame-alist '((font . "VL ゴシック-16")))
 (cond
  ((equal system-name "utrtamako")
+  (setq default-frame-alist '((font . "Ricty-18")))
+  (set-frame-font "Ricty-18")
   (set-face-attribute 'default nil
-		    :family "Ricty"
-		    :height 180))
+    	    :family "Ricty"
+    	    :height 180))
+ 
  ((equal system-name "localhost.localdomain")
    (set-frame-font "Ricty-12")
    (set-face-attribute 'default nil

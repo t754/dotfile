@@ -124,7 +124,7 @@
  (quote org-babel-load-languages)
  (quote (
          (emacs-lisp . t)
-         (dot . t)
+         (dot .  t)
          (ditaa . t)
          (R . t)
          (python . t)
@@ -136,6 +136,7 @@
          (org . t)
          ;;(plantuml . t)
          (latex . t))))
+(add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
 
 (setq org-export-latex-date-format "%Y-%m-%d")
 ;;(setq org-export-latex-default-class "jarticle")

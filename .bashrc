@@ -5,6 +5,10 @@
 [[ -s /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash 
 [ -r $HOME/.aliasrc ] && . $HOME/.aliasrc
 
+export TERM="xterm-256color"
+# export COLORTERM="mlterm"
+export EDITOR="emacsclient -nw"
+export PAGER="less"
 # 重複服歴を無視
 export HISTCONTROL=ignoredups
 export HISTIGNORE="fg*:bg*:history*:rm*"
@@ -133,8 +137,8 @@ PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 
 complete -cf sudo
 complete -cf man
-
-archey3 2> /dev/null
+screenfetch  2> /dev/null    
+# archey3 2> /dev/null
 fortune -s 2> /dev/null | tr "\n" " " | tee /tmp/trans 2> /dev/null  
 echo;
 goslate.py -t ja /tmp/trans 2> /dev/null
