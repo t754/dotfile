@@ -20,11 +20,14 @@
 ;; ;;(package-initialize)
  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
-                         
                           ("melpa" . "http://melpa.milkbox.net/packages/")
                           ("ELPA" . "http://tromey.com/elpa/" )
                           ("org" . "http://orgmode.org/elpa/")
                           ))
+
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+(require 'pallet)
 ;;(package-initialize)
 ;; ;;インストールするディレクトリを指定
 ;; (add-to-list 'package-archives

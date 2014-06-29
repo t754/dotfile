@@ -114,6 +114,23 @@
 (setq org-latex-image-default-width ".45\\linewidth")
 (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
 
+(setq org-latex-text-markup-alist '((bold . "\\textbf{%s}")
+					 (code . verb)
+					 (italic . "\\emph{%s}")
+					 (strike-through . "\\sout{%s}")
+					 (underline . "\\underline{%s}")
+					 (verbatim . protectedtexttt)))
+;; ( org-export-latex-emphasis-alist
+;;   '(
+;;      ("*" "{\\bfseries{%s}}" nil)
+;;      ("/" "{\\emph{%s}}" nil)
+;;      ("_" "\\underline{%s}" nil)
+;;      ("+" "\\st{%s}" nil)
+;;      ("=" "\\protectedtexttt" nil)
+;;      ("~" "\\verb" t)
+;;      ))
+
+
 (defun bh/display-inline-images ()
   (condition-case nil
       (org-display-inline-images)
@@ -153,7 +170,7 @@
 										;(setq org-export-latex-inline-image-extensions nil)
 										;(add-to-list 'org-export-latex-inline-image-extensions "eps")
 
-;; Viewerの設定(acroread)
+;; Viewerの設定(evince)
 (customize-set-variable 'org-file-apps
                         '(("pdf" . "evince %s")))
 
@@ -162,10 +179,7 @@
 (setq org-export-latex-classes nil)
 
 
-
-
 (setq org-latex-default-class "jarticle")
-
 (add-to-list 'org-latex-classes
 			 '("jarticle"
 			   "\\documentclass{jarticle}
@@ -175,6 +189,7 @@
 \\usepackage{hyperref}
 \\usepackage{longtable}
 \\usepackage{wrapfig}
+\\usepackage{ulem}
 \\hypersetup{setpagesize=false,colorlinks=true}
 \\usepackage{wrapfig}
 \\setlength{\\topmargin}{20mm}

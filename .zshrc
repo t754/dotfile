@@ -24,16 +24,15 @@ export XMODIFIERS="@im=ibus"
 export XMODIFIER="@im=ibus"
 export QT_IM_MODULE="ibus"
 export DefaultIMModule=ibus
-
-
+export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient
 export TERM="xterm-256color"
 export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
 export PAGER="less"
 ##ls 色の付け方？
 export LSCOLORS=Exfxcxdxbxegedabagacad
-
 export PATH="$PATH:$HOME/adt-bundle-linux/sdk/platform-tools"
+export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 #####Kemmap?
 # create a zkbd compatible hash;

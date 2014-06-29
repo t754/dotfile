@@ -8,17 +8,18 @@
 ;あああああ|||||||||||||||||||
 ;ああああああ|||||||||||||||||
 ;あ|||||||||||||||||||||||||||
+
 ;;  フォントファミリ (pp (font-family-list))
 ;; (setq default-frame-alist '((font . "VL ゴシック-16")))
 (cond
  ((equal system-name "utrtamako")
-  (setq default-frame-alist '((font . "Ricty-18")))
+  (setq default-frame-alist '((font . "Ricty")))
   (set-frame-font "Ricty-18")
   (set-face-attribute 'default nil
     	    :family "Ricty"
-    	    :height 180))
- 
- ((equal system-name "localhost.localdomain")
+    	    :height 120)
+  )
+  ((equal system-name "localhost.localdomain")
    (set-frame-font "Ricty-12")
    (set-face-attribute 'default nil
      	    :family "Ricty"
@@ -26,8 +27,6 @@
   (setq default-frame-alist '((font . "Ricty-12")))
   )
  )
-
-
 
 
 
