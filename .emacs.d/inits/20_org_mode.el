@@ -5,7 +5,7 @@
 (require 'org-install)
 (require 'org-habit)
 (require 'org-mobile)
-(require 'org-drill)
+;; (require 'org-drill)
 ;; (require 'table)
 (add-to-list 'org-modules "org-habit")
 ;;(require 'org-compat)
@@ -74,9 +74,9 @@
          "** %?\n %U\n %a\n %i\n")
         ("i" "Idea" entry (file+headline nil "Idea")
          "** %?\n %U\n %i\n %a\n %i\n")
-        ("d" "drill" entry
-         (file+headline (concat (getenv "HOME") "/Dropbox/flashCard.org") "hat")
-               "* Word :drill:\n%^ \n** Answer \n%^")
+        ;; ("d" "drill" entry
+        ;;  (file+headline (concat (getenv "HOME") "/Dropbox/flashCard.org") "hat")
+        ;;        "* Word :drill:\n%^ \n** Answer \n%^")
         ("c" "同期カレンダーにエントリー" entry
           (file+headline nil "Schedule")
           "** TODO %?\n\t")
@@ -106,7 +106,7 @@
 ;; (setq org-icalendar-combined-agenda-file "~/Dropbox/Public/Dc3co90x5sGgggOi/org.ics")
 
 ;; Explicitly load required exporters
-(require 'ox-icalendar)
+;; (require 'ox-icalendar)
 (require 'ox-html)
 (require 'ox-latex)
 (require 'ox-ascii)
@@ -120,16 +120,6 @@
 					 (strike-through . "\\sout{%s}")
 					 (underline . "\\underline{%s}")
 					 (verbatim . protectedtexttt)))
-;; ( org-export-latex-emphasis-alist
-;;   '(
-;;      ("*" "{\\bfseries{%s}}" nil)
-;;      ("/" "{\\emph{%s}}" nil)
-;;      ("_" "\\underline{%s}" nil)
-;;      ("+" "\\st{%s}" nil)
-;;      ("=" "\\protectedtexttt" nil)
-;;      ("~" "\\verb" t)
-;;      ))
-
 
 (defun bh/display-inline-images ()
   (condition-case nil
