@@ -4,7 +4,7 @@
             (local-unset-key ">")
 			(c-toggle-auto-state 1)
 			(c-toggle-hungry-state 1)
-			(define-key c-mode-map(kbd "C-c p") 'smart-compile)
+			;; (define-key c-mode-map(kbd "C-c p") 'smart-compile)
 
 			;;;; C-c e で next-error コマンドを呼び出す
             (define-key mode-specific-map "e" 'next-error)
@@ -17,7 +17,8 @@
             ;;
 			;; (flymake-mode t)
 			(flymake-mode t)
-			(define-key c-mode-map(kbd "C-c C-p") 'c-indent-defun)))
+			(define-key c-mode-map(kbd "C-c C-p") 'c-indent-defun)
+            ))
 
 (dolist (hook
          '(c-mode-hook

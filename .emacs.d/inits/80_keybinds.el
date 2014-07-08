@@ -6,9 +6,11 @@
 (global-set-key (kbd "C-c g") 'goto-line)
 
 ;;smart-compile
-(define-key mode-specific-map (kbd "C-c p") 'compile)
-(define-key mode-specific-map "e" 'next-error)
-(global-set-key (kbd "C-c p") 'smart-compile)
+ (global-set-key (kbd "C-c p") 'quickrun)
+;; (global-set-key (kbd "C-c p") 'smart-compile)
+;; (define-key mode-specific-map (kbd "C-c p") 'compile)
+;; (define-key mode-specific-map "e" 'next-error)
+
 ;;
 (global-set-key (kbd "M-i") 'auto-complete)
 
