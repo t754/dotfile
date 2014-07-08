@@ -15,7 +15,9 @@ export HISTIGNORE="fg*:bg*:history*:rm*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 export latexs='latexmk -e =q/platex -interaction nonstopmode %S/ -e =q/pbibtex %B/ -e =q/mendex -o %D %S/ -e =q/dvipdfmx -o %D %S/ -norc -gg -pdfdvi'
 # export COLORTERM="mlterm"
-export PATH="$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin/:$HOME/.gem/ruby/2.1.0/bin/:/$HOME/.cask/bin"
+
+export GOPATH="$HOME/go"
+export PATH="$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin/:$HOME/.gem/ruby/2.1.0/bin/:$HOME/.cask/bin:$HOME/go/bin:"
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
 # SCREEN buffer

@@ -1,8 +1,11 @@
-(source SC)
+;;(source org)
+(source melpa);
+;;(source marmalade)
 (source gnu)
-(source marmalade)
-(source melpa)
-(source org)
+;;(source SC)
+
+
+
 
 (depends-on "all-ext")
 (depends-on "cask")
@@ -17,6 +20,7 @@
 (depends-on "flymake-haskell-multi")
 (depends-on "fold-dwim-org")
 (depends-on "git-gutter")
+(depends-on "go-mode")
 (depends-on "google-translate")
 (depends-on "haskell-mode")
 (depends-on "helm")
@@ -30,6 +34,7 @@
 (depends-on "magit")
 (depends-on "multiple-cursors")
 (depends-on "org")
+(depends-on "ox-textile")
 (depends-on "pallet")
 (depends-on "popwin")
 (depends-on "powerline")
