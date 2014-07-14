@@ -24,3 +24,4 @@ alias dp='docker ps  -q --no-trunc'
 # coredump した場所
 alias core="sudo systemd-coredumpctl list | tail"
 alias coreout='sudo systemd-coredumpctl dump -o core'
+alias beep="for i in {1..5}; do aplay ~/beep.wav; done"

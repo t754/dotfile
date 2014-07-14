@@ -31,7 +31,7 @@ export EDITOR="emacsclient -nw"
 export PAGER="less"
 ##ls 色の付け方？
 export LSCOLORS=Exfxcxdxbxegedabagacad
-export PATH="$PATH:$HOME/adt-bundle-linux/sdk/platform-tools"
+export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 #####Kemmap?
