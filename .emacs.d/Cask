@@ -1,11 +1,6 @@
-;;(source org)
-(source melpa);
-;;(source marmalade)
+
+(source melpa)
 (source gnu)
-;;(source SC)
-
-
-
 
 (depends-on "all-ext")
 (depends-on "cask")
@@ -18,6 +13,7 @@
 (depends-on "flycheck-cask")
 (depends-on "flymake-cursor")
 (depends-on "flymake-haskell-multi")
+(depends-on "flymake-python-pyflakes")
 (depends-on "fold-dwim-org")
 (depends-on "git-gutter")
 (depends-on "go-mode")
@@ -26,6 +22,8 @@
 (depends-on "helm")
 (depends-on "helm-ag")
 (depends-on "helm-descbinds")
+(depends-on "helm-emmet")
+(depends-on "highlight-indentation")
 (depends-on "htmlize")
 (depends-on "idle-highlight-mode")
 (depends-on "init-loader")
@@ -33,12 +31,14 @@
 (depends-on "multiple-cursors")
 (depends-on "org")
 (depends-on "ox-textile")
+(depends-on "emmet-mode")
 (depends-on "pallet")
 (depends-on "popwin")
 (depends-on "powerline")
 (depends-on "quickrun")
 (depends-on "smartparens")
 (depends-on "smartrep")
+(depends-on "undo-tree")
 (depends-on "use-package")
 (depends-on "web-beautify")
 (depends-on "web-mode")
