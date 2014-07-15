@@ -1,11 +1,5 @@
-;;(source org)
-(source melpa);
-;;(source marmalade)
 (source gnu)
-;;(source SC)
-
-
-
+(source melpa)
 
 (depends-on "all-ext")
 (depends-on "cask")
@@ -19,6 +13,7 @@
 (depends-on "flymake-cursor")
 (depends-on "flymake-haskell-multi")
 (depends-on "fold-dwim-org")
+(depends-on "git")
 (depends-on "git-gutter")
 (depends-on "go-mode")
 (depends-on "google-translate")

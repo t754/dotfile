@@ -15,7 +15,6 @@
 
             
             ;;
-			;; (flymake-mode t)
 			(flymake-mode t)
 			(define-key c-mode-map(kbd "C-c C-p") 'c-indent-defun)
             ))
@@ -26,7 +25,7 @@
   
   (add-hook hook
             (lambda ()
-              (local-set-key [f3]
+              (local-set-key [f9]
                              (lambda ()
                                (interactive)
                                (manual-entry (current-word))))

@@ -1,6 +1,6 @@
  # [[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
-[[ -s $HOME/.autojump/etc/profile.d/autojump.zsh ]] && source $HOME/.autojump/etc/profile.d/autojump.zsh
+# [[ -s $HOME/.autojump/etc/profile.d/autojump.zsh ]] && source $HOME/.autojump/etc/profile.d/autojump.zsh
 
 
 # autoload -U  promptinit && promptinit
@@ -32,6 +32,7 @@ export PAGER="less"
 ##ls 色の付け方？
 export LSCOLORS=Exfxcxdxbxegedabagacad
 export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools"
+export PATH="$HOME/H8H/bin:$PATH"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 #####Kemmap?
@@ -93,8 +94,8 @@ setopt bang_hist          # !を使ったヒストリ展開を行う(d)
 # setopt extended_history   # ヒストリに実行時間も保存する
 setopt hist_ignore_dups   # 直前と同じコマンドはヒストリに追加しない
 setopt share_history      # 他のシェルのヒストリをリアルタイムで共有する
-setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに保存す
-
+# setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに保存す
+setopt EXTENDED_HISTORY
 
 
 #### 補完の設定
