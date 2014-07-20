@@ -31,7 +31,9 @@ export EDITOR="emacsclient -nw"
 export PAGER="less"
 ##ls 色の付け方？
 export LSCOLORS=Exfxcxdxbxegedabagacad
-export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools"
+export GOPATH="$HOME/go"
+
+export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools:$GOPATH/bin"
 export PATH="$HOME/H8H/bin:$PATH"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
@@ -176,6 +178,9 @@ export AUTOJUMP_IGNORE_CASE=1
 setopt auto_cd                  # ディレクトリ名と一致した場合 cd 
 setopt autopushd
 setopt pushd_ignore_dups        # 同じディレクトリは追加しない
+
+
+
 # [ -s /etc/profile.d/autojump.zsh ] && source /etc/profile.d/autojump.zsh 
 # (set -x ; source /etc/profile.d/autojump.zsh)
 
@@ -186,6 +191,6 @@ setopt pushd_ignore_dups        # 同じディレクトリは追加しない
 #     archey3
 #     fortune -s | tee /tmp/trans;echo;goslate.py -t ja /tmp/trans
 # fi
-$HOME/screenfetch 2> /dev/null    
+# $HOME/screenfetch 2> /dev/null    
 
 

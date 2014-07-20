@@ -1,8 +1,13 @@
 ;; zencoding-mode
+;; (when (require 'zencoding-mode nil t)
+;; (add-hook 'sgml-mode-hook 'zencoding-mode)
+;; (define-key zencoding-mode-keymap (kbd "C-i") 'zencoding-expand-line))
 
-(when (require 'zencoding-mode nil t)
-(add-hook 'sgml-mode-hook 'zencoding-mode)
-(define-key zencoding-mode-keymap (kbd "C-i") 'zencoding-expand-line))
+;; ;; emmet - mode
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+;; (setq emmet-move-cursor-after-expanding nil) 
 
 ;web-mode設定
 (require 'web-mode)
