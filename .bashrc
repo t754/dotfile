@@ -2,7 +2,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
-[[ -s /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash 
+
 [ -r $HOME/.aliasrc ] && . $HOME/.aliasrc
 
 export TERM="xterm-256color"
@@ -10,20 +10,30 @@ export TERM="xterm-256color"
 export EDITOR="emacsclient -nw"
 export PAGER="less"
 # 重複服歴を無視
-export HISTCONTROL=ignoredups
+# export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoredups:erasedups  
+shopt -s histappend
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+
 export HISTIGNORE="fg*:bg*:history*:rm*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 export latexs='latexmk -e =q/platex -interaction nonstopmode %S/ -e =q/pbibtex %B/ -e =q/mendex -o %D %S/ -e =q/dvipdfmx -o %D %S/ -norc -gg -pdfdvi'
 # export COLORTERM="mlterm"
 
 export GOPATH="$HOME/go"
-export PATH="$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin/:$HOME/.gem/ruby/2.1.0/bin/:$HOME/.cask/bin:$HOME/go/bin:"
+export PATH="$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin/:$HOME/.gem/ruby/2.1.0/bin/:$HOME/.cask/bin:$HOME/go/bin:$HOME/bin"
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
 # SCREEN buffer
 export SCREENEXCHANGE="/tmp/screen-exchange"
 export IGNOREEOF=1
 stty stop undef
+
+export _Z_CMD=z
+source ~/bin/z.sh
+
+
 
 function Cl(){
 	echo "$*" | xsel --input --clipboard
@@ -139,6 +149,10 @@ PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 
 complete -cf sudo
 complete -cf man
+
+
+
+
 net_tools_deprecated_message () {
   echo -n 'net-tools コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
 }
@@ -172,10 +186,31 @@ route () {
   echo 'Use `ip r`'
 }
 
+peco-select-history() {
+    declare l=$(HISTTIMEFORMAT= history | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$READLINE_LINE")
+    READLINE_LINE="$l"
+    READLINE_POINT=${#l}
+}
+bind -x '"\C-r": peco-select-history'
+bind    '"\C-xr": reverse-search-history'
 
+if [ -x "`which ag`" ]; then
+function peco-ag () {
+    ag $@ | peco --query "$LBUFFER" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
+}
+fi
+
+function j(){
+    if [ $# -eq 0 ] ; then
+        cd $(z | tac | awk "{print \$2}" | peco)
+    else
+        z $*
+    fi
+}
 screenfetch  2> /dev/null    
 # archey3 2> /dev/null
 fortune -s 2> /dev/null | tr "\n" " " | tee /tmp/trans 2> /dev/null  
 echo;
 goslate.py -t ja /tmp/trans 2> /dev/null
+
 
