@@ -55,6 +55,10 @@
 										(define-key orgtbl-mode-map [?\e (down)]   'org-metadown)
 										)))
 
+
+
+
+
 ;; アジェンダ表示の対象ファイル
 (setq org-agenda-files (list org-directory) )
 ;; アジェンダ表示で下線を用いる
@@ -116,7 +120,7 @@
 
 (setq org-latex-text-markup-alist '((bold . "\\textbf{%s}")
 					 (code . verb)
-					 (italic . "\\textit{%s}")
+					 (italic . "\\emph{%s}")
 					 (strike-through . "\\sout{%s}")
 					 (underline . "\\underline{%s}")
 					 (verbatim . protectedtexttt)))
@@ -149,8 +153,11 @@
 ;;(setq org-export-latex-default-class "jarticle")
 ;;(setq org-latex-to-pdf-process '("mylatex.sh %b""mylatex.sh %b"))
 
- (setq org-latex-pdf-process '("extractbb *\\.png 2> /dev/null "
-                               "latexmk -e '$latex=q/platex -interaction nonstopmode %S/' -e '$bibtex=q/pbibtex %B/' -e '$makeindex=q/mendex -o %D %S/' -e '$dvipdf=q/dvipdfmx -o %D %S/' -norc -gg -pdfdvi %f"))
+
+
+(setq org-latex-create-formula-image-program 'imagemagick)
+
+ (setq org-latex-pdf-process '("latexmk -e '$latex=q/platex -interaction nonstopmode %S/' -e '$bibtex=q/pbibtex %B/' -e '$makeindex=q/mendex -o %D %S/' -e '$dvipdf=q/dvipdfmx -o %D %S/' -norc -gg -pdfdvi %f"))
 
 
 ;; (setq org-latex-to-pdf-process '("platex --kanji=utf8 -interaction nonstopmode %b"
@@ -175,6 +182,7 @@
 			   "\\documentclass{jarticle}
  [NO-DEFAULT-PACKAGES]
 \\usepackage[dvipdfmx]{graphicx,color}
+\\usepackage{amsmath}
 \\usepackage{float}
 \\usepackage{hyperref}
 \\usepackage{longtable}
@@ -182,8 +190,58 @@
 \\usepackage{ulem}
 \\hypersetup{setpagesize=false,colorlinks=true}
 \\usepackage{wrapfig}
-\\usepackage{typearea}
-\\typearea{15}
+\\setlength{\\topmargin}{20mm}
+\\addtolength{\\topmargin}{-1in}
+\\setlength{\\oddsidemargin}{20mm}
+\\addtolength{\\oddsidemargin}{-1in}
+\\setlength{\\evensidemargin}{15mm}
+\\addtolength{\\evensidemargin}{-1in}
+\\setlength{\\textwidth}{170mm}
+\\setlength{\\textheight}{254mm}
+\\setlength{\\headsep}{0mm}
+\\setlength{\\headheight}{0mm}
+\\setlength{\\topskip}{0mm}
+
+
+\\renewenvironment{itemize}
+{
+   \\begin{list}{\\parbox{1zw}{$\\bullet$}}
+   {
+      \\setlength{\\topsep}{0zh}
+      \\setlength{\\itemindent}{0zw}
+      \\setlength{\\leftmargin}{2zw}
+      \\setlength{\\rightmargin}{0zw}
+      \\setlength{\\labelsep}{1zw}
+      \\setlength{\\labelwidth}{3zw}
+      \\setlength{\\itemsep}{-2mm}
+      \\setlength{\\parsep}{0em}
+      \\setlength{\\listparindent}{0zw}
+      \\setlength{\\parskip}{0cm}
+}
+}{
+   \\end{list}
+}
+\\renewenvironment{enumerate}
+{
+   
+   \\begin{list}{\\arabic{enumi}.}
+    {
+      \\usecounter{enumi}
+      \\setlength{\\topsep}{0zh}
+      \\setlength{\\itemindent}{0zw}
+      \\setlength{\\leftmargin}{2zw}
+      \\setlength{\\rightmargin}{0zw}
+      \\setlength{\\labelsep}{1zw}
+      \\setlength{\\labelwidth}{3zw}
+      \\setlength{\\itemsep}{-2mm}
+      \\setlength{\\parsep}{0em}
+      \\setlength{\\listparindent}{0zw}
+      \\setlength{\\parskip}{0cm}
+}
+}{
+   \\end{list}
+}
+
 
 "
 			   ("\\section{%s}" . "\\section*{%s}")
