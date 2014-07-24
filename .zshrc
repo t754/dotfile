@@ -1,5 +1,5 @@
  # [[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
-[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+# [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 # [[ -s $HOME/.autojump/etc/profile.d/autojump.zsh ]] && source $HOME/.autojump/etc/profile.d/autojump.zsh
 
 
@@ -37,6 +37,22 @@ export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools:$GO
 export PATH="$HOME/H8H/bin:$PATH"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
+# z.sh JUMP!!
+if [ -r $HOME/.ghq/github.com/rupa/z/z.sh ] ; then
+    export _Z_CMD=z
+    source $HOME/.ghq/github.com/rupa/z/z.sh
+
+    function j(){
+        if [ $# -eq 0 ] ; then
+            cd $(z | tac | awk "{print \$2}" | peco)
+        else
+            z $*
+        fi
+    }
+fi
+
+
+    
 #####Kemmap?
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
@@ -152,8 +168,23 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
 # コンパイル面倒くさい用 
 function runcpp () { g++ $1 && shift && ./a.out $@ }
-
-
+# peco 用
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^R' peco-select-history # M-xに割り当て
+bindkey '^X^R' history-incremental-search-backward
 
 
 ######powerline
@@ -174,15 +205,11 @@ install_powerline_precmd
 
 
 # autojump
-export AUTOJUMP_IGNORE_CASE=1
-setopt auto_cd                  # ディレクトリ名と一致した場合 cd 
-setopt autopushd
-setopt pushd_ignore_dups        # 同じディレクトリは追加しない
+# export AUTOJUMP_IGNORE_CASE=1
+# setopt auto_cd                  # ディレクトリ名と一致した場合 cd 
+# setopt autopushd
+# setopt pushd_ignore_dups        # 同じディレクトリは追加しない
 
-
-
-# [ -s /etc/profile.d/autojump.zsh ] && source /etc/profile.d/autojump.zsh 
-# (set -x ; source /etc/profile.d/autojump.zsh)
 
 
 # if [ -z "$STY" ] ; then
