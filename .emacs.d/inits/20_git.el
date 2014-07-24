@@ -1,6 +1,8 @@
 (require 'magit)
 (require 'git-gutter)
+
 ;; (global-git-gutter-mode +1)
+
 (add-hook 'ruby-mode-hook 'git-gutter-mode)
 (add-hook 'c-mode-hook 'git-gutter-mode)
 (add-hook 'python-mode-hook 'git-gutter-mode)
@@ -24,7 +26,4 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 ;; diffのバッファを上下ではなく左右に並べる
 (setq ediff-split-window-function 'split-window-horizontally)
-
-
-
 
