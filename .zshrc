@@ -1,4 +1,5 @@
  # [[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
+
 # [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 # [[ -s $HOME/.autojump/etc/profile.d/autojump.zsh ]] && source $HOME/.autojump/etc/profile.d/autojump.zsh
 
@@ -31,6 +32,7 @@ export EDITOR="emacsclient -nw"
 export PAGER="less"
 ##ls 色の付け方？
 export LSCOLORS=Exfxcxdxbxegedabagacad
+
 export GOPATH="$HOME/go"
 
 export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools:$GOPATH/bin"

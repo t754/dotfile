@@ -120,7 +120,7 @@
 
 (setq org-latex-text-markup-alist '((bold . "\\textbf{%s}")
 					 (code . verb)
-					 (italic . "\\emph{%s}")
+					 (italic . "\\textit{%s}")
 					 (strike-through . "\\sout{%s}")
 					 (underline . "\\underline{%s}")
 					 (verbatim . protectedtexttt)))
@@ -190,58 +190,8 @@
 \\usepackage{ulem}
 \\hypersetup{setpagesize=false,colorlinks=true}
 \\usepackage{wrapfig}
-\\setlength{\\topmargin}{20mm}
-\\addtolength{\\topmargin}{-1in}
-\\setlength{\\oddsidemargin}{20mm}
-\\addtolength{\\oddsidemargin}{-1in}
-\\setlength{\\evensidemargin}{15mm}
-\\addtolength{\\evensidemargin}{-1in}
-\\setlength{\\textwidth}{170mm}
-\\setlength{\\textheight}{254mm}
-\\setlength{\\headsep}{0mm}
-\\setlength{\\headheight}{0mm}
-\\setlength{\\topskip}{0mm}
-
-
-\\renewenvironment{itemize}
-{
-   \\begin{list}{\\parbox{1zw}{$\\bullet$}}
-   {
-      \\setlength{\\topsep}{0zh}
-      \\setlength{\\itemindent}{0zw}
-      \\setlength{\\leftmargin}{2zw}
-      \\setlength{\\rightmargin}{0zw}
-      \\setlength{\\labelsep}{1zw}
-      \\setlength{\\labelwidth}{3zw}
-      \\setlength{\\itemsep}{-2mm}
-      \\setlength{\\parsep}{0em}
-      \\setlength{\\listparindent}{0zw}
-      \\setlength{\\parskip}{0cm}
-}
-}{
-   \\end{list}
-}
-\\renewenvironment{enumerate}
-{
-   
-   \\begin{list}{\\arabic{enumi}.}
-    {
-      \\usecounter{enumi}
-      \\setlength{\\topsep}{0zh}
-      \\setlength{\\itemindent}{0zw}
-      \\setlength{\\leftmargin}{2zw}
-      \\setlength{\\rightmargin}{0zw}
-      \\setlength{\\labelsep}{1zw}
-      \\setlength{\\labelwidth}{3zw}
-      \\setlength{\\itemsep}{-2mm}
-      \\setlength{\\parsep}{0em}
-      \\setlength{\\listparindent}{0zw}
-      \\setlength{\\parskip}{0cm}
-}
-}{
-   \\end{list}
-}
-
+\\usepackage{typearea}
+\\typearea{15}
 
 "
 			   ("\\section{%s}" . "\\section*{%s}")
