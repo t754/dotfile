@@ -1,6 +1,8 @@
 # ~/.bashrc
 # If not running interactively, don't do anything
+
 [[ $- != *i* ]] && return
+
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
 [ -r $HOME/.aliasrc ] && . $HOME/.aliasrc
@@ -13,8 +15,7 @@ export PAGER="less"
 # export HISTCONTROL=ignoredups
 export HISTCONTROL=ignoredups:erasedups  
 shopt -s histappend
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
-
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'} history -a; history -c; history -r"
 
 export HISTIGNORE="fg*:bg*:history*:rm*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
@@ -145,7 +146,7 @@ colors() {
 function _update_ps1() {
     export PS1="$(~/powerline-shell.py $? 2> /dev/null)"
 }
-PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 
 complete -cf sudo
 complete -cf man

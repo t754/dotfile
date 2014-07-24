@@ -55,6 +55,10 @@
 										(define-key orgtbl-mode-map [?\e (down)]   'org-metadown)
 										)))
 
+
+
+
+
 ;; アジェンダ表示の対象ファイル
 (setq org-agenda-files (list org-directory) )
 ;; アジェンダ表示で下線を用いる
@@ -149,8 +153,11 @@
 ;;(setq org-export-latex-default-class "jarticle")
 ;;(setq org-latex-to-pdf-process '("mylatex.sh %b""mylatex.sh %b"))
 
- (setq org-latex-pdf-process '("extractbb *\\.png 2> /dev/null "
-                               "latexmk -e '$latex=q/platex -interaction nonstopmode %S/' -e '$bibtex=q/pbibtex %B/' -e '$makeindex=q/mendex -o %D %S/' -e '$dvipdf=q/dvipdfmx -o %D %S/' -norc -gg -pdfdvi %f"))
+
+
+(setq org-latex-create-formula-image-program 'imagemagick)
+
+ (setq org-latex-pdf-process '("latexmk -e '$latex=q/platex -interaction nonstopmode %S/' -e '$bibtex=q/pbibtex %B/' -e '$makeindex=q/mendex -o %D %S/' -e '$dvipdf=q/dvipdfmx -o %D %S/' -norc -gg -pdfdvi %f"))
 
 
 ;; (setq org-latex-to-pdf-process '("platex --kanji=utf8 -interaction nonstopmode %b"
@@ -175,6 +182,7 @@
 			   "\\documentclass{jarticle}
  [NO-DEFAULT-PACKAGES]
 \\usepackage[dvipdfmx]{graphicx,color}
+\\usepackage{amsmath}
 \\usepackage{float}
 \\usepackage{hyperref}
 \\usepackage{longtable}
