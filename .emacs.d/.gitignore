@@ -4,3 +4,4 @@ inits/*.elc
 .cask
 session.*
 url/
+.org-id-locations
