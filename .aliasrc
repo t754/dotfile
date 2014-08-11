@@ -1,3 +1,4 @@
+# -*- coding:utf-8 mode:shell-script -*-
 alias ls='ls -x -v --color=auto'
 alias ll='ls -la'
 alias la='ls -a'
@@ -14,7 +15,7 @@ alias server_name='ssh -v -l USERNAME IP ADDRESS'
 alias du="du -h -c"
 alias df="df -h -T --total"
 alias grep="grep -i -n --color"
-alias bee='aplay -D plughw:1,7 ~/beep.wav' 
+alias bee='for i in {1..5}; do aplay -D plughw:1,7 ~/beep.wav; done' 
 alias pgg='ps -Af | grep'
 alias xsels='xsel -ib < /tmp/screen-exchange'
 alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
@@ -26,10 +27,7 @@ alias coreout='sudo systemd-coredumpctl dump -o core'
 alias beep="for i in {1..5}; do aplay ~/beep.wav; done"
 
 
-# ------------------------------------
-# Docker alias and function
-# ------------------------------------
-
+############################################
 # Get latest container ID
 alias dl="docker ps -l -q"
 
@@ -64,7 +62,56 @@ alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 dri() { docker rmi $(docker images -q); }
 
 # Dockerfile build, e.g., $dbu tcnksm/test 
-dbu() {docker build -t=$1 .;}
+dbu() { docker build -t=$1 .; }
 
 # Show all alias related docker
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort;}
+#
+docker-nsenter() {
+    declare container_id=$1
+    if [ -z "$container_id" ]; then
+        echo "Usage: docker_container <container_id>" >&2
+        return 1
+    fi
+    nsenter --mount --uts --ipc --net --pid --target $(docker inspect --format '{{.State.Pid}}' $container_id)
+}
+
+
+
+
+
+
+
+############################################
+net_tools_deprecated_message () {
+  echo -n 'net-tools コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
+}
+
+arp () {
+  net_tools_deprecated_message
+  echo 'Use `ip n`'
+}
+ifconfig () {
+  net_tools_deprecated_message
+  echo 'Use `ip a`, `ip link`, `ip -s link`'
+}
+iptunnel () {
+  net_tools_deprecated_message
+  echo 'Use `ip tunnel`'
+}
+iwconfig () {
+  echo -n 'iwconfig コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
+  echo 'Use `iw`'
+}
+nameif () {
+  net_tools_deprecated_message
+  echo 'Use `ip link`, `ifrename`'
+}
+netstat () {
+  net_tools_deprecated_message
+  echo 'Use `ss`, `ip route` (for netstat -r), `ip -s link` (for netstat -i), `ip maddr` (for netstat -g)'
+}
+route () {
+  net_tools_deprecated_message
+  echo 'Use `ip r`'
+}
