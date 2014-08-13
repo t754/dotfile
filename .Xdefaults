@@ -16,22 +16,22 @@ Xft.rgba: rgb
 
 
 URxvt*termName:                         rxvt
-URxvt*geometry:                         110x40
+! URxvt*geometry:                         110x40
 ! URxvt*chdir:                          string
 ! URxvt*reverseVideo:                   boolean
 URxvt*loginShell:                       ture
 ! URxvt*jumpScroll:                     boolean
 ! URxvt*skipScroll:                     boolean
 ! URxvt*pastableTabs:                   boolean
-! URxvt*scrollstyle:                    mode
+ URxvt*scrollstyle:                     plain
 URxvt*scrollBar:                        true
 ! Urxvt*scrollBar_right:                boolean
 ! URxvt*scrollBar_floating:             boolean
 ! URxvt*scrollBar_align:                mode
 ! URxvt*thickness:                      number
-! URxvt*scrollTtyOutput:                boolean
-! URxvt*scrollTtyKeypress:              boolean
-! URxvt*scrollWithBuffer:               boolean
+URxvt*scrollTtyOutput:                true
+URxvt*scrollTtyKeypress:              true
+URxvt*scrollWithBuffer:               true
 ! URxvt*inheritPixmap:                  boolean
 ! URxvt*transparent:                    boolean
 ! URxvt*tintColor:                      color
@@ -51,13 +51,13 @@ URxvt*meta8:                            False
 URxvt*cursorBlink:                      True
 ! URxvt*pointerBlank:                   boolean
  ! URxvt*background:                    rgba:0000/0000/0000/cccc
-URxvt*background:                      rgba:1111/1111/1111/dddd
-URxvt*foreground:                      rgba:ffff/ffff/ffff/bbbb
+URxvt*background:                       rgba:1111/1111/1111/ffff
+URxvt*foreground:                       rgba:ffff/ffff/ffff/bbbb
 ! URxvt*color0:                         color
 ! URxvt*color1:                         color
 ! URxvt*color2:                         color
 ! URxvt*color3:                         color
-! URxvt*color4:                         color
+URxvt*color4:                           #5566ff
 ! URxvt*color5:                         color
 ! URxvt*color6:                         color
 ! URxvt*color7:                         color
@@ -65,7 +65,7 @@ URxvt*foreground:                      rgba:ffff/ffff/ffff/bbbb
 ! URxvt*color9:                         color
 ! URxvt*color10:                        color
 ! URxvt*color11:                        color
-! URxvt*color12:                        color
+URxvt*color12:                          #7799ff
 ! URxvt*color13:                        color
 ! URxvt*color14:                        color
 ! URxvt*color15:                        color
@@ -83,7 +83,7 @@ URxvt*cursorColor:                      red
 URxvt*pointerColor:                     2
 ! URxvt*pointerColor2:                  color
 ! URxvt*borderColor:                    color
-! URxvt*iconFile:                       file
+ URxvt*iconFile:                        /usr/share/icons/ContrastHigh-SVG/scalable/apps/terminal.svg
  URxvt*font:                             xft:Ricty for Powerline-BoldForPowerline:size=14:antialias=true
 ! xft:RictyDiscord-Regular-Powerline:size=72:antialias=true
 ! URxvt*boldFont:                       xft:RictyDiscord-Regular-Powerline
@@ -96,7 +96,7 @@ URxvt*preeditType:  					OverTheSpot
 ! URxvt*imFont:                         fontname
 ! URxvt*title:                          string
 ! URxvt*iconName:                       string
-URxvt*saveLines:                        10000     
+URxvt*saveLines:                        8000
 ! URxvt*buffered:                       boolean
 URxvt*depth:                            32
 ! URxvt*visual:                         number
@@ -122,12 +122,12 @@ URxvt*letterSpace:                      -1
 ! URxvt*perl-eval:                      perl-eval
 URxvt*perl-ext-common:                  default,clipboard,url-select,keyboard-select,font-size,tabbed
 ! URxvt*perl-ext:                       string
-URxvt*iso14755:                         False
-URxvt*iso14755_52:                      False
+URxvt*iso14755:                         false
+URxvt*iso14755_52:                      false
 ! URxvt*xrm:                            string
 ! URxvt*keysym.sym:                     keysym
-URxvt.keysym.C-S-Up:                      perl:font-size:increase 
-URxvt.keysym.C-S-Down:                    perl:font-size:decrease 
+! URxvt.keysym.C-S-Up:                      perl:font-size:increase 
+! URxvt.keysym.C-S-Down:                    perl:font-size:decrease 
 ! URxvt.keysym.C-S-Up:                    perl:font-size:incglobal
 ! URxvt.keysym.C-S-Down:                  perl:font-size:decglobal
 URxvt.keysym.M-u:                       perl:url-select:select_next
@@ -167,8 +167,6 @@ URxvt.tabbed.tab-bg: 0
 ! URxvt*tabbar-bg:                      colour
 ! URxvt*tabbar-fg:                      colour
 ! URxvt*url-launcher:                   string
-URxvt.iso14755: false
-URxvt.iso14755_52: false
 URxvt.url-select.launcher:              firefox -new-tab
 URxvt.url-select.underline:             true
 
