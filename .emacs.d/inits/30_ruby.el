@@ -1,4 +1,4 @@
-(require 'smartparens-ruby)   
+;; (require 'smartparens-ruby)   
 
 (eval-after-load "ruby-mode"
    '(progn

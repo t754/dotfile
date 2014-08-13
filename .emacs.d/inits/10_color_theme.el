@@ -14,6 +14,7 @@
 ;; (cond ((require 'helm-themes nil t)
 ;;  'ok
 ;;  )
+
 (eval-when-compile
   (require 'color-theme))
 
@@ -88,30 +89,23 @@
 
 ;; (provide 'color-theme-molokai) ;; カラーテーマ名
 
-(when (require 'color-theme nil t)
-
-
-  
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-      (color-theme-calm-forest)
 	 ;; (color-theme-robin-hood)
      ;; (color-theme-subtle-hacker)
      ;; (color-theme-matrix)
      ;; (color-theme-montz)
      ;; (color-theme-molokai)
-
-
+;; (autoload 'color-theme nil t)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+      (color-theme-calm-forest)
 
       ;;かっこの強調
-(show-paren-mode 1)
-(setq show-paren-delay 0)
-(setq show-paren-style 'expression)
-(set-face-background 'show-paren-match-face "grey30")
-(set-face-underline-p 'show-paren-match-face "red")
-
-	 )))
+      (show-paren-mode 1)
+      (setq show-paren-delay 0)
+      (setq show-paren-style 'expression)
+      (set-face-background 'show-paren-match-face "grey30")
+      (set-face-underline-p 'show-paren-match-face "red")))
 
 
 
