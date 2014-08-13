@@ -23,7 +23,7 @@ export latexs='latexmk -e =q/platex -interaction nonstopmode %S/ -e =q/pbibtex %
 # export COLORTERM="mlterm"
 eval "$(rbenv init -)"
 export GOPATH="$HOME/go"
-export PATH="$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin/:$HOME/.gem/ruby/2.1.0/bin/:$HOME/.cask/bin:$HOME/go/bin:$HOME/bin:$HOME/.rbenv/bin"
+export PATH="$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin:$HOME/.gem/ruby/2.1.0/bin:$HOME/.cask/bin:$GOPATH/bin:$HOME/bin:$HOME/.rbenv/bin"
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
 # SCREEN buffer

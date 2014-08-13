@@ -9,10 +9,11 @@
 (when (require 'auto-complete nil t)
   (require 'auto-complete-config)
 ;; グローバルでauto-completeを利用
-
+  (require 'ac-helm)
 (global-auto-complete-mode t)
   ;(ac-config-default)
-
+(global-set-key (kbd "C-:") 'ac-complete-with-helm)
+(define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
 ;;(global-auto-complete-mode t)
   (ac-config-default)
 

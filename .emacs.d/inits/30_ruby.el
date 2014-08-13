@@ -1,17 +1,25 @@
-;;; (add-hook 'ruby-mode-hook
-;;;  '(lambda ()
-;; 	;;C-m 改行&インデント
-;; 	(define-key ruby-mode-map (kbd "C-m") 'newline-and-indent)
-;; 	;; (define-key ruby-mode-map (kbd "C-c p") 'smart-compile
-;; 	))
+(require 'smartparens-ruby)   
 
 (eval-after-load "ruby-mode"
-  '(progn
-     (require 'smartparens-ruby)
-     ;; (flycheck-mode 1)
-     ;; (set-face-attribute 'sp-show-pair-match-face nil
-     ;;                     :background "grey20" :foreground "green"
-     ;;                     :weight 'semi-bold)
-     ))
-(add-hook 'ruby-mode-hook '(lambda()  (show-smartparens-mode) (flycheck-mode) ))
+   '(progn
+  
+     (define-key ruby-mode-map (kbd "C-c ?") 'robe-doc)))
+
+
+(custom-set-variables
+ '(robe-completing-read-func 'helm-robe-completing-read))
+
+
+;;;;;; gem → rubocop ruby-lint pry  pry-doc  method_source 
+(defun my/ruby-mode-hook ()
+  (show-smartparens-mode t)
+  (setq flycheck-checker 'ruby-rubocop)
+  (flycheck-mode t)
+  (robe-mode t)
+  ;; (ruby-end-mode +1)
+  )
+
+
+(add-hook 'robe-mode-hook 'ac-robe-setup)
+(add-hook 'ruby-mode-hook 'my/ruby-mode-hook)
 
