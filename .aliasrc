@@ -26,7 +26,6 @@ alias core="sudo systemd-coredumpctl list | tail"
 alias coreout='sudo systemd-coredumpctl dump -o core'
 alias beep="for i in {1..5}; do aplay ~/beep.wav; done"
 
-
 ############################################
 # Get latest container ID
 alias dl="docker ps -l -q"
@@ -49,14 +48,15 @@ alias dkd="docker run -d -P"
 # Run interactive container, e.g., $dki base /bin/bash
 alias dki="docker run -i -t -P"
 
+# Stop and Remove all containers
+alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+
 # Stop all containers
 dstop() { docker stop $(docker ps -a -q);}
 
 # Remove all containers
 drm() { docker rm $(docker ps -a -q); }
 
-# Stop and Remove all containers
-alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # Remove all images
 dri() { docker rmi $(docker images -q); }
@@ -65,9 +65,11 @@ dri() { docker rmi $(docker images -q); }
 dbu() { docker build -t=$1 .; }
 
 # Show all alias related docker
-dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort;}
+# dalias(){ alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort;}
+alias dalias='\grep -E -e "^alias.*docker" -e '\''\(\)\s+{.*docker'\'' $HOME/.aliasrc'
 #
-docker-nsenter() {
+
+docker-nsenter() {              #docker
     declare container_id=$1
     if [ -z "$container_id" ]; then
         echo "Usage: docker_container <container_id>" >&2
@@ -115,3 +117,4 @@ route () {
   net_tools_deprecated_message
   echo 'Use `ip r`'
 }
+

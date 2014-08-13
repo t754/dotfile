@@ -22,7 +22,7 @@ export PROMPT_COMMAND=" history -a; history -c; history -r;"
 
 export HISTIGNORE="fg*:bg*:history*:rm*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
-export latexs='latexmk -e =q/platex -interaction nonstopmode %S/ -e =q/pbibtex %B/ -e =q/mendex -o %D %S/ -e =q/dvipdfmx -o %D %S/ -norc -gg -pdfdvi'
+
 # export COLORTERM="mlterm"
 eval "$(rbenv init -)"
 export GOPATH="$HOME/go"
