@@ -15,7 +15,10 @@ export PAGER="less"
 # export HISTCONTROL=ignoredups
 export HISTCONTROL=ignoredups:erasedups  
 shopt -s histappend
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'} history -a; history -c; history -r"
+
+# echo  ${PROMPT_COMMAND:?aaaaaaaaaaaaa}
+# ${PROMPT_COMMAND:$PROMPT_COMMAND$'\n'}
+export PROMPT_COMMAND=" history -a; history -c; history -r;"
 
 export HISTIGNORE="fg*:bg*:history*:rm*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
