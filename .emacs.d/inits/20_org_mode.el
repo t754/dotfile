@@ -76,6 +76,8 @@
          "** TODO %?   :bug:\n  %T\n %a\n %i\n")
         ("m" "Meeting" entry (file+headline nil "Meeting")
          "** %?\n %U\n %a\n %i\n")
+        ;; ("o" "Office" entry (file+headline nil "Me")
+        ;;  "** %?\n %U\n %a\n %i\n")
         ("i" "Idea" entry (file+headline nil "Idea")
          "** %?\n %U\n %i\n %a\n %i\n")
         ;; ("d" "drill" entry

@@ -2,6 +2,7 @@
 (require 'git-gutter)
 
 ;; (global-git-gutter-mode +1)
+(git-gutter:linum-setup)
 
 (add-hook 'ruby-mode-hook 'git-gutter-mode)
 (add-hook 'c-mode-hook 'git-gutter-mode)
@@ -27,3 +28,19 @@
 ;; diffのバッファを上下ではなく左右に並べる
 (setq ediff-split-window-function 'split-window-horizontally)
 
+
+
+(custom-set-variables
+ '(git-gutter:modified-sign "  ") ;; two space
+ '(git-gutter:added-sign "++")    ;; multiple character is OK
+ '(git-gutter:deleted-sign "--"))
+
+(set-face-background 'git-gutter:modified "purple") ;; background color
+(set-face-foreground 'git-gutter:added "green")
+(set-face-foreground 'git-gutter:deleted "red")
+
+;; You can change minor-mode name in mode-line to set git-gutter:lighter. Default is " GitGutter"
+
+;; ;; first character should be a space
+(custom-set-variables
+ '(git-gutter:lighter " GG"))

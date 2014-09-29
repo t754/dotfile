@@ -35,7 +35,7 @@ export LSCOLORS=Exfxcxdxbxegedabagacad
 
 export GOPATH="$HOME/go"
 
-export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools:$GOPATH/bin"
+export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools:$GOPATH/bin:$HOME/.rbenv/bin:$HOME/share/flex/flex3/bin"
 export PATH="$HOME/H8H/bin:$PATH"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
@@ -205,6 +205,7 @@ function install_powerline_precmd() {
 
 install_powerline_precmd
 
+eval "$(rbenv init -)"
 
 # autojump
 # export AUTOJUMP_IGNORE_CASE=1
@@ -221,5 +222,6 @@ install_powerline_precmd
 #     fortune -s | tee /tmp/trans;echo;goslate.py -t ja /tmp/trans
 # fi
 # $HOME/screenfetch 2> /dev/null    
+
 
 

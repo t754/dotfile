@@ -22,9 +22,13 @@ alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
 alias kpclimy='kpcli --kdb="$HOME/Dropbox/database/NewDatabase.kdbx"'
 alias open="xdg-open"
 # coredump した場所
+
 alias core="sudo systemd-coredumpctl list | tail"
 alias coreout='sudo systemd-coredumpctl dump -o core'
 alias beep="for i in {1..5}; do aplay ~/beep.wav; done"
+
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 
 ############################################
 # Get latest container ID

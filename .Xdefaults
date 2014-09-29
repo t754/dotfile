@@ -23,9 +23,9 @@ URxvt*loginShell:                       ture
 ! URxvt*jumpScroll:                     boolean
 ! URxvt*skipScroll:                     boolean
 ! URxvt*pastableTabs:                   boolean
- URxvt*scrollstyle:                     plain
+URxvt*scrollstyle:                     plain 
 URxvt*scrollBar:                        true
-! Urxvt*scrollBar_right:                boolean
+! Urxvt*scrollBar_right:                  true
 ! URxvt*scrollBar_floating:             boolean
 ! URxvt*scrollBar_align:                mode
 ! URxvt*thickness:                      number
@@ -83,8 +83,8 @@ URxvt*cursorColor:                      red
 URxvt*pointerColor:                     2
 ! URxvt*pointerColor2:                  color
 ! URxvt*borderColor:                    color
- URxvt*iconFile:                        /usr/share/icons/ContrastHigh-SVG/scalable/apps/terminal.svg
- URxvt*font:                             xft:Ricty for Powerline-BoldForPowerline:size=14:antialias=true
+URxvt*iconFile:                        /usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
+URxvt*font:                            xft:Ricty for Powerline-BoldForPowerline:size=14:antialias=true
 ! xft:RictyDiscord-Regular-Powerline:size=72:antialias=true
 ! URxvt*boldFont:                       xft:RictyDiscord-Regular-Powerline
 ! URxvt*italicFont:                     xft:RictyDiscord-Regular-Powerline

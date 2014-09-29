@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        cua-delete-region
         org-self-insert-command
         sp--cua-replace-region
         sp--self-insert-command

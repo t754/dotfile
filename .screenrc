@@ -10,8 +10,7 @@ defencodig utf-8
 autodetach on
 ## bind S eval "exec sh -c 'screen -X hardcopy -h hardcopy; cat hardcopy | tail -n 10000 | sendmail tamakoron7+log@gmail.com'"
 
-
-
+term rxvt-unicode-256color
 
 shelltitle '$ |bash'
 bind x eval 'echo "2: split / 1: only / 0: remove / o: focus r: resize"' 'command -c REGION'

@@ -1,4 +1,4 @@
-
+(menu-bar-mode -1)
 ;;オートセーブ、バックアップ用 作成先を変更
 ;;(require 'auto-save-buffers)
 ;;(run-with-idle-timer 0.5 t 'auto-save-buffers) 
