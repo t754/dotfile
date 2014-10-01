@@ -180,8 +180,8 @@ function j(){
 }
 screenfetch  2> /dev/null    
 # archey3 2> /dev/null
-fortune -s 2> /dev/null | tr "\n" " " | tee /tmp/trans 2> /dev/null  
-echo;
-goslate.py -t ja /tmp/trans 2> /dev/null
+fortune # -s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
+
+# goslate.py -t ja /tmp/trans 2> /dev/null
 
 
