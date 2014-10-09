@@ -5,3 +5,4 @@ inits/*.elc
 session.*
 url/
 .org-id-locations
+eshell/
