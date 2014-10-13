@@ -120,7 +120,8 @@ URxvt*letterSpace:                      -1
 ! URxvt*secondaryScroll:                boolean
 ! URxvt*perl-lib:                       string
 ! URxvt*perl-eval:                      perl-eval
-URxvt*perl-ext-common:                  default,clipboard,url-select,keyboard-select,font-size,tabbed
+! URxvt*perl-ext-common:                  default,clipboard,url-select,keyboard-select,font-size,tabbed
+URxvt*perl-ext-common: default,font-size
 ! URxvt*perl-ext:                       string
 URxvt*iso14755:                         false
 URxvt*iso14755_52:                      false
@@ -128,24 +129,24 @@ URxvt*iso14755_52:                      false
 ! URxvt*keysym.sym:                     keysym
 ! URxvt.keysym.C-S-Up:                      perl:font-size:increase 
 ! URxvt.keysym.C-S-Down:                    perl:font-size:decrease 
-! URxvt.keysym.C-S-Up:                    perl:font-size:incglobal
-! URxvt.keysym.C-S-Down:                  perl:font-size:decglobal
+URxvt.keysym.C-S-Up:                    perl:font-size:incglobal
+URxvt.keysym.C-S-Down:                  perl:font-size:decglobal
 URxvt.keysym.M-u:                       perl:url-select:select_next
 URxvt.keysym.M-Escape: 					perl:keyboard-select:activate
 URxvt.keysym.M-s:                       perl:keyboard-select:search
 ! URxvt.keysym.M-c:                       perl:clipboard:copy
-URxvt.keysym.M-w:                       perl:clipboard:copy
-URxvt.keysym.M-c:                       perl:clipboard:copy
-URxvt.keysym.M-v:                       perl:clipboard:paste
-URxvt.keysym.M-y:                       perl:clipboard:paste
-URxvt.keysym.M-C-v:                     perl:clipboard:paste_escaped
-URxvt.tabbed.saveLines: 1000
-URxvt.tabbed.scrollBar: ture
-URxvt.tabbed.no-tabbedex-keys: true
-URxvt.tabbed.tabbar-fg: 2
-URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg: 3
-URxvt.tabbed.tab-bg: 0
+! URxvt.keysym.M-w:                       perl:clipboard:copy
+! URxvt.keysym.M-c:                       perl:clipboard:copy
+! URxvt.keysym.M-v:                       perl:clipboard:paste
+! URxvt.keysym.M-y:                       perl:clipboard:paste
+! URxvt.keysym.M-C-v:                     perl:clipboard:paste_escaped
+! URxvt.tabbed.saveLines: 1000
+! URxvt.tabbed.scrollBar: ture
+! URxvt.tabbed.no-tabbedex-keys: true
+! URxvt.tabbed.tabbar-fg: 2
+! URxvt.tabbed.tabbar-bg: 0
+! URxvt.tabbed.tab-fg: 3
+! URxvt.tabbed.tab-bg: 0
 ! URxvt*background.border:              boolean
 ! URxvt*background.expr:                string
 ! URxvt*background.interval:            seconds
@@ -174,5 +175,5 @@ URxvt.url-select.underline:             true
 ! #   URxvt.clipboard.autocopy: If true, PRIMARY overwrites clipboard
 ! # You can also overwrite the system commands to use for copying/pasting.
 ! # The default ones are:
-URxvt.clipboard.copycmd:  xsel -ib
-URxvt.clipboard.pastecmd: xsel -ob
+! URxvt.clipboard.copycmd:  xsel -ib
+! URxvt.clipboard.pastecmd: xsel -ob

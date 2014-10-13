@@ -74,6 +74,6 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
 
 
 ;;バッファの再読み込み
-(global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
+(global-set-key (kbd "C-c <f5>") 'revert-buffer-no-confirm)
 
 
