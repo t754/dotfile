@@ -67,6 +67,7 @@ backup-directory-alist))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;tab -> 空白に
 (setq-default tab-width 4 indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 ;; "yes or no"を"y or n"に
 (fset 'yes-or-no-p 'y-or-n-p)
 (custom-set-variables
@@ -86,3 +87,4 @@ backup-directory-alist))
 ;; かっこ強調は color theme に移動
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+

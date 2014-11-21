@@ -11,9 +11,15 @@ export TERM="xterm-256color"
 # export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
 export PAGER="less"
+export LESS='-R'
+
+export VISUAL="emacs"
+export BROWSER="firefox"
+export TZ="JST"
+export LC_MESSAGES="C"
 # 重複服歴を無視
 # export HISTCONTROL=ignoredups
-export HISTCONTROL=ignoredups:erasedups  
+export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 
 # echo  ${PROMPT_COMMAND:?aaaaaaaaaaaaa}
@@ -25,7 +31,7 @@ export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 
 # export COLORTERM="mlterm"
 eval "$(rbenv init -)"
-export GOPATH="$HOME/go"
+export GOPATH="$HOME/.go"
 export PATH="$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin:$HOME/.gem/ruby/2.1.0/bin:$HOME/.cask/bin:$GOPATH/bin:$HOME/bin:$HOME/.rbenv/bin"
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
@@ -40,7 +46,7 @@ source ~/bin/z.sh
 
 
 function Cl(){
-	echo "$*" | xsel --input --clipboard
+	echo $@ | xsel --input --clipboard
 }
 
 function parse_git_branch() {
@@ -103,18 +109,18 @@ ulimit -c 4096
 
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
-cl() {
-    dir=$1
-    if [[ -z "$dir" ]]; then
-        dir=$HOME
-    fi
-    if [[ -d "$dir" ]]; then
-        cd "$dir"
-        ls
-    else
-        echo "bash: cl: '$dir': Directory not found"
-    fi
-}
+# cl() {
+#     dir=$1
+#     if [[ -z "$dir" ]]; then
+#         dir=$HOME
+#     fi
+#     if [[ -d "$dir" ]]; then
+#         cd "$dir"
+#         ls
+#     else
+#         echo "bash: cl: '$dir': Directory not found"
+#     fi
+# }
 colors() {
 	local fgc bgc vals seq0
 
@@ -157,7 +163,7 @@ complete -cf man
 
 
 
-peco-select-history() {
+function peco-select-history () {
     declare l=$(HISTTIMEFORMAT= history | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$READLINE_LINE")
     READLINE_LINE="$l"
     READLINE_POINT=${#l}
@@ -167,7 +173,7 @@ bind    '"\C-xr": reverse-search-history'
 
 if [ -x "`which ag`" ]; then
 function peco-ag () {
-    ag $@ | peco --query "$LBUFFER" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
+    ag $@ | peco --query "$READLINE_LINE" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
 }
 fi
 
@@ -181,6 +187,8 @@ function j(){
 screenfetch  2> /dev/null    
 # archey3 2> /dev/null
 fortune # -s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
+
+
 
 # goslate.py -t ja /tmp/trans 2> /dev/null
 
