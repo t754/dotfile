@@ -153,7 +153,7 @@ colors() {
 # export QT_IM_MODULE=ibus
 # ibus-daemon -drx
 function _update_ps1() {
-    export PS1="$(~/powerline-shell.py $? 2> /dev/null)"
+	export PS1="$(~/powerline-shell.py $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
 }
 PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 

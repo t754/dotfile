@@ -45,6 +45,16 @@ function  alert {
     fi
 }
 
+function  beee {
+    local ar=$?
+    if [ $ar -eq 0 ] ; then
+        beep -f 400 -l 70
+    else
+        beep -f 200 -l 70 -D 100 -n -f 200 -l 70
+    fi
+}
+
+
 
 ############################################
 # Get latest container ID
@@ -160,13 +170,21 @@ function google() {
     xdg-open http://www.google.co.jp/$opt
 }
 
-function peco-ghq() {
+function ghq-peco() {
     local selected_dir=$(ghq list -p | peco --query "$READLINE_LINE")
     if [ -n "$selected_dir" ]; then
         # BUFFER=
         cd $selected_dir
     fi
 }
+function hg-peco() {
+    local selected_dir=$(hg locate | peco --query "$READLINE_LINE")
+    if [ -n "$selected_dir" ]; then
+        cd $(dirname $selected_dir)
+    fi
+}
+
+
 
 
 
