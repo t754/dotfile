@@ -209,7 +209,7 @@ eval "$(rbenv init -)"
 
 # autojump
 # export AUTOJUMP_IGNORE_CASE=1
-# setopt auto_cd                  # ディレクトリ名と一致した場合 cd 
+
 # setopt autopushd
 # setopt pushd_ignore_dups        # 同じディレクトリは追加しない
 
@@ -225,3 +225,7 @@ eval "$(rbenv init -)"
 
 
 
+setopt auto_cd                  # ディレクトリ名と一致した場合 cd 
+function chpwd {
+    ls
+}

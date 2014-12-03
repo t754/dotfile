@@ -15,7 +15,7 @@
 
             
             ;;
-			(flymake-mode t)
+			;; (flymake-mode t)
 			(define-key c-mode-map(kbd "C-c C-p") 'c-indent-defun)
             ))
 

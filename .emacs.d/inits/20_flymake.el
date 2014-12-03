@@ -16,9 +16,17 @@
 ;;; 
 ;;;  )
 
+
+
+
+
+
+
 (require 'flymake)
 (require 'popup)
 
+(setq flymake-run-in-place nil)
+(setq flymake-gui-warnings-enabled nil)
 ;; Show error message under current line
 
 (defun my-flymake-display-err-menu-for-current-line ()
@@ -58,3 +66,15 @@
 
 (ad-activate 'flymake-goto-prev-error 'flymake-goto-prev-error-display-message)
 (ad-activate 'flymake-goto-next-error 'flymake-goto-next-error-display-message)
+
+
+(defun flymake-get-make-cmdline (source base-dir)
+  (list "make"
+	(list "-s"
+	      "-C"
+	      base-dir
+	      (concat "CHK_SOURCES=" source)
+	      "SYNTAX_CHECK_MODE=1"
+          "LANG=C"
+          "LC_MESSAGES=C"
+	      "check-syntax")))

@@ -2,11 +2,12 @@
 # name: days
 # key: days
 # --
-日報 
-1. 今日やったこと
-
-2. 困っていること
-
-3. 次回作業日とやること
-
-4. スケジュールの遅れなど
+#+OPTIONS: toc:nil num:t author:t creator:nil timestamp:nil \n:nil ^:nil -:t ::t
+#+LANGUAGE: ja
+#+LATEX_CLASS: jarticle
+#+LATEX_CLASS_OPTIONS: [a4j]
+* 日報 
+** 今日やったこと
+** 困っていること
+** 次回作業日とやること
+** スケジュールの遅れなど

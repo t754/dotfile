@@ -45,6 +45,16 @@ function  alert {
     fi
 }
 
+function  beee {
+    local ar=$?
+    if [ $ar -eq 0 ] ; then
+        beep -f 400 -l 70
+    else
+        beep -f 200 -l 70 -D 100 -n -f 200 -l 70
+    fi
+}
+
+
 
 ############################################
 # Get latest container ID
@@ -140,7 +150,7 @@ route () {
 
 # 
 function cdd {
-    local dir="$( find . -maxdepth 1 -type d | sed -e 's;\./;;' | peco )"
+    local dir=$( find . -maxdepth 1 -type d | sed  -e '1d' -e 's;\./;;' | sort | sed -e '$a..\n.' | peco --query "$READLINE_LINE" )
     if [ ! -z "$dir" ] ; then
         cd "$dir"
     fi
@@ -150,3 +160,32 @@ function peco-ssh() {
   local SSH=$(\grep "^\s*Host " ~/.ssh/config | sed s/"[\s ]*Host "// | \grep -v "^\*$" | sort | peco)
   ssh $SSH
 }
+
+function google() {
+    local str opt
+    if [ $# != 0 ]; then
+        for i in $*; do
+            # $strが空じゃない場合、検索ワードを+記号でつなぐ(and検索)
+            str="$str${str:++}$i"
+        done
+        opt='search?num=100'
+        opt="${opt}&q=${str}"
+    fi
+    xdg-open http://www.google.co.jp/$opt
+}
+
+function ghq-peco() {
+    local selected_dir=$(ghq list -p | peco --query "$READLINE_LINE")
+    if [ -n "$selected_dir" ]; then
+        # BUFFER=
+        cd $selected_dir
+    fi
+}
+function hg-peco() {
+    local selected_dir=$(hg locate | peco --query "$READLINE_LINE")
+    if [ -n "$selected_dir" ]; then
+        cd $(dirname $selected_dir)
+    fi
+}
+
+

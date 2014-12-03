@@ -1,6 +1,7 @@
 (require 'rbenv)
 (require 'projectile)
 (require 'projectile-rails)
+(require 'helm-rails)
 ;; 
 ;;
 
