@@ -9,10 +9,11 @@
 ;; (add-to-list 'auto-mode-alist '("\\.hs$".haskell-mode))
 ;; (add-hook 'haskell-mode-hook (lambda () (ghc-init) ))
 ;; (load "haskell-site-file")
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;; (add-hook 'haskell-mode-hook 'font-lock-mode)
-;; (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(add-hook 'haskell-mode-hook 'font-lock-mode)
+(add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
 (require 'flymake-haskell-multi) ;; not needed if installed via package
  (add-hook 'haskell-mode-hook 'flymake-haskell-multi-load)
 

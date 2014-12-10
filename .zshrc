@@ -28,14 +28,19 @@ export DefaultIMModule=ibus
 export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient
 export TERM="xterm-256color"
 export COLORTERM="mlterm"
-export EDITOR="emacsclient -nw"
 export PAGER="less"
 ##ls 色の付け方？
 export LSCOLORS=Exfxcxdxbxegedabagacad
 
 export GOPATH="$HOME/go"
+# perl
+PERL_MB_OPT="--install_base \"/home/tamas/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/tamas/perl5"; export PERL_MM_OPT;
+export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB
 
-export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools:$GOPATH/bin:$HOME/.rbenv/bin:$HOME/share/flex/flex3/bin"
+
+# 
+export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools:$GOPATH/bin:$HOME/.rbenv/bin:$HOME/share/flex/flex3/bin:$HOME/perl5/bin"
 export PATH="$HOME/H8H/bin:$PATH"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
@@ -229,3 +234,4 @@ setopt auto_cd                  # ディレクトリ名と一致した場合 cd
 function chpwd {
     ls
 }
+
