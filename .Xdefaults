@@ -85,14 +85,14 @@ URxvt*pointerColor:                     2
 ! URxvt*borderColor:                    color
 URxvt*iconFile:                        /usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
 ! URxvt*font:								xft:Source Code Pro for Powerline:size=14:antialias=true
- URxvt*font:							xft:Ricty Discord4powerline:Regular:size=14:antialias=true
- 
+URxvt*font:		                    xft:Ricty Discord4Powerline:Regular:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
+! URxvt*font: xft:Android Emoji:size=14:antialias=true
+URxvt*boldFont:                        xft:Ricty Discord4Powerline:Bold:size=14:antialias=true   ,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
 
 ! URxvt*font:								xft:Ricty Discord for Powerline for Powerline:size=14:antialias=true
 ! URxvt*font:                            xft:RictyDiscord-Regular2-Powerline for Powerline-BoldForPowerline:size=14:antialias=true
 ! URxvt*font:                            	 xft:unk:size=14:antialias=true
-! xft:RictyDiscord-Regular-Powerline:size=72:antialias=true
-URxvt*boldFont:	xft:Ricty Discord4powerline:Bold:size=14:antialias=true
+
 ! URxvt*italicFont:                     xft:RictyDiscord-Regular-Powerline
 ! URxvt*boldItalicFont:                 xft:RictyDiscord-Regular-Powerline
 ! URxvt*intensityStyles:                boolean

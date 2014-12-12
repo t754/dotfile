@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: inputlisting
+# key: inputlisting
+# --
+#+begin_latex
+\lstinputlisting[caption=${1:test.c},label=code:1]
+{$1}
+#+end_latex$0

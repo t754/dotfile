@@ -47,6 +47,7 @@
 (if (eq 'unspecified (face-attribute 'popup-tip-face :weight))
     (set-face-attribute 'popup-tip-face nil :weight 'normal))
 
+
 (defun my/display-error-message ()
   (let ((orig-face (face-attr-construct 'popup-tip-face)))
     (set-face-attribute 'popup-tip-face nil

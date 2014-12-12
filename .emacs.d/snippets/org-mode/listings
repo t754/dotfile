@@ -1,0 +1,25 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: listings
+# key: listings
+# --
+${1:#+latex_header: \usepackage{listings,jlisting}}
+#+begin_latex
+\lstset{
+  language=C,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\bfseries\color[rgb]{0,0.56,0.25},
+  commentstyle=\itshape\color[rgb]{0.41,0.30,0.56},
+  identifierstyle=\color{blue},
+  stringstyle=\color[rgb]{1,0.64,0},
+  frame=tRBl,
+  breaklines = true,
+  captionpos=b,
+  classoffset=1,
+  framesep=5pt,
+  showstringspaces=false,
+  numbers=left,
+  stepnumber=1,
+  numberstyle=\tiny,
+  tabsize=2,
+}
+#+end_latex

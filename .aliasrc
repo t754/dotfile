@@ -4,7 +4,8 @@ alias ll='ls -la'
 alias la='ls -a'
 alias df='df -h'
 alias starte='emacs --daemon'
-alias e="emacsclient -c"
+alias e="emacsclient -c -n"
+alias et="emacsclient -t -n"
 alias enox="emacsclient"
 alias E='SUDO_EDITOR="emacsclient -c" sudo -e '
 alias Enox='SUDO_EDITOR="emacsclient " sudo -e '
@@ -156,6 +157,10 @@ function cdd {
     fi
 }
 
+function peco-ssh() {
+  local SSH=$(\grep "^\s*Host " ~/.ssh/config | sed s/"[\s ]*Host "// | \grep -v "^\*$" | sort | peco)
+  ssh $SSH
+}
 
 function google() {
     local str opt
@@ -183,9 +188,5 @@ function hg-peco() {
         cd $(dirname $selected_dir)
     fi
 }
-
-
-
-
 
 
