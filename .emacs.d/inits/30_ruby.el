@@ -8,7 +8,7 @@
 ;; (custom-set-variables
 ;;  '(robe-completing-read-func 'helm-robe-completing-read))
 
-
+(setq ruby-insert-encoding-magic-comment nil)
 ;;;;;; gem → rubocop ruby-lint pry  pry-doc  method_source 
 (defun my/ruby-mode-hook ()
   (show-smartparens-mode t)
