@@ -7,3 +7,4 @@ cygwin-home
 powerline-shell.py
 blackList
 myInstall.sh
+emacs.service
