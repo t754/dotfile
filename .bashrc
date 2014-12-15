@@ -30,7 +30,9 @@ export HISTIGNORE="fg*:bg*:history*:rm*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 
 # export COLORTERM="mlterm"
-eval "$(rbenv init -)"
+if type rbenv >/dev/null 2>&1; then
+    eval "$(rbenv init -)"
+fi
 export GOPATH="$HOME/.go"
 export PATH="$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin:$HOME/.gem/ruby/2.1.0/bin:$HOME/.cask/bin:$GOPATH/bin:$HOME/bin:$HOME/.rbenv/bin"
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
@@ -186,7 +188,8 @@ function j(){
 }
 screenfetch  2> /dev/null    
 # archey3 2> /dev/null
-fortune # -s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
+fortune 2> /dev/null
+# -s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
 
 
 
