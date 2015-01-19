@@ -40,8 +40,6 @@
   ;;                 'katakana-jisx0201
   ;;                 (cons "Ricty Discord" "iso10646-1"))
   )
-
- 
   ((equal system-name "localhostss")
    (set-frame-font "Ricty-12")
    (set-face-attribute 'default nil
@@ -49,7 +47,17 @@
      	    :height 120)
   (setq default-frame-alist '((font . "Ricty-12")))
   )
+  ((equal system-name "localhost.localdomain")
+   (set-frame-font "Ricty Discord4Powerline-12")
+   (set-face-attribute 'default nil
+     	    :family "Ricty Discord4Powerline"
+     	    :height 120)
+  (setq default-frame-alist '((font . "Ricty Discord4Powerline-12")))
+  )
+  
  )
+
+ 
 
 
 

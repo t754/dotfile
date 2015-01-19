@@ -4,7 +4,8 @@
 .gitconfig
 .vim
 cygwin-home
-powerline-shell.py
 blackList
 myInstall.sh
+README.md
 emacs.service
+ghqlist

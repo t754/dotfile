@@ -12,7 +12,6 @@ pushd $HOME
         echo
         ln -s "$c/$a"
     done
-
 popd
 
 
