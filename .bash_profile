@@ -10,4 +10,5 @@ if [ -n ${DISPLAY} ] ; then
     export DISPLAY=:0.0
 fi
 export BASH_ENV="$HOME/.bashrc"
+eval `keychain --eval --agents id_rsa.bit`
 [[ -f ~/.bashrc ]] && . ~/.bashrc
