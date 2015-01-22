@@ -10,5 +10,5 @@ if [ -n ${DISPLAY} ] ; then
     export DISPLAY=:0.0
 fi
 export BASH_ENV="$HOME/.bashrc"
-eval $(keychain --eval --agents "ssh id_rsa.bit,ssh id_rsa")
 [[ -f ~/.bashrc ]] && . ~/.bashrc
+eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
