@@ -10,6 +10,7 @@
 export TERM="xterm-256color"
 # export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
+export ALTERNATE_EDITOR=""
 export PAGER="less"
 export LESS='-R'
 
