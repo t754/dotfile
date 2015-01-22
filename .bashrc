@@ -47,8 +47,8 @@ stty stop undef
 
 export _Z_CMD=z
 source ~/bin/z.sh
-
-
+#
+source ~/.tmuxinator/tmuxinator.bash
 
 function Cl(){
 	echo $@ | xsel --input --clipboard
