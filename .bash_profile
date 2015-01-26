@@ -11,4 +11,4 @@ if [ -n ${DISPLAY} ] ; then
 fi
 export BASH_ENV="$HOME/.bashrc"
 [[ -f ~/.bashrc ]] && . ~/.bashrc
-eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
+
