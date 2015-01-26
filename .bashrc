@@ -189,7 +189,7 @@ function j(){
         z $*
     fi
 }
-screenfetch  2> /dev/null    &&  fortune 2> /dev/null
+timeout -s INT 2 screenfetch  2> /dev/null && timeout -s INT 2 fortune 2> /dev/null
 # archey3 2> /dev/null
 
 # -s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
