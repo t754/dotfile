@@ -48,7 +48,7 @@ stty stop undef
 export _Z_CMD=z
 source ~/bin/z.sh
 #
-source ~/.tmuxinator/tmuxinator.bash
+[ -r $HOME/.tmuxinator/tmuxinator.bash ] && . $HOME/.tmuxinator/tmuxinator.bash
 
 function Cl(){
 	echo $@ | xsel --input --clipboard
@@ -158,7 +158,7 @@ function colors() {
 # export QT_IM_MODULE=ibus
 # ibus-daemon -drx
 function _update_ps1() {
-	export PS1="$(~/powerline-shell.py $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
+	export PS1="$(~/powerline-shell.py --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
 }
 PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 
@@ -189,6 +189,7 @@ function j(){
         z $*
     fi
 }
+eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
 screenfetch  2> /dev/null    &&  fortune 2> /dev/null
 # archey3 2> /dev/null
 
