@@ -1,7 +1,7 @@
 										;C-hで バックスペース
 (global-set-key (kbd "C-h") 'delete-backward-char)
 ;;C-m 改行&インデント
-(global-set-key (kbd "C-m") 'newline-and-indent)
+;;(global-set-key (kbd "C-m") 'newline-and-indent)
 ;;goto-line
 (global-set-key (kbd "C-c g") 'goto-line)
 
