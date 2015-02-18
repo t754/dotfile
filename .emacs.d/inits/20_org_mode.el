@@ -115,6 +115,7 @@
 ;; (require 'ox-icalendar)
 (require 'ox-html)
 (require 'ox-latex)
+(require 'ox-bibtex)
 (require 'ox-ascii)
 (require 'ox-beamer)
 (require 'ox-md)
@@ -160,7 +161,8 @@
 
 (setq org-latex-create-formula-image-program 'imagemagick)
 
- (setq org-latex-pdf-process '("latexmk -e '$latex=q/platex -interaction nonstopmode %S/' -e '$bibtex=q/pbibtex %B/' -e '$makeindex=q/mendex -o %D %S/' -e '$dvipdf=q/dvipdfmx -o %D %S/' -norc -gg -pdfdvi %f"))
+(setq org-latex-pdf-process '
+      ("latexmk -e '$latex=q/platex -interaction nonstopmode %S/' -e '$bibtex=q/pbibtex %B/' -e '$makeindex=q/mendex -o %D %S/' -e '$dvipdf=q/dvipdfmx -o %D %S/' -norc -gg -pdfdvi %f"))
 
 
 ;; (setq org-latex-to-pdf-process '("platex --kanji=utf8 -interaction nonstopmode %b"

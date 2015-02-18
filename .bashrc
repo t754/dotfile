@@ -192,8 +192,10 @@ function j(){
 function lll(){
     ls -a1 | awk  '(NR >2){print $0}' | peco
 }
+
+timeout -s INT 2 screenfetch  2> /dev/null && timeout -s INT 2 fortune 2> /dev/null
+
 eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
-screenfetch  2> /dev/null    &&  fortune 2> /dev/null
 # archey3 2> /dev/null
 
 # -s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
