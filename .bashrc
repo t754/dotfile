@@ -8,7 +8,7 @@
 [ -r $HOME/.aliasrc ] && . $HOME/.aliasrc
 
 export TERM="xterm-256color"
-# export COLORTERM="mlterm"
+#export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
 export ALTERNATE_EDITOR=""
 export PAGER="less"
@@ -37,7 +37,7 @@ fi
 export GOPATH="$HOME/.go"
 
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
-export PATH="$HOME/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.gem/ruby/2.0.0/bin:$HOME/.gem/ruby/2.1.0/bin:$HOME/.cask/bin:$GOPATH/bin:$HOME/.rbenv/bin"
+export PATH="$HOME/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.cask/bin:$GOPATH/bin:$HOME/.rbenv/bin:$HOME/.gem/ruby/2.0.0/bin:$HOME/.gem/ruby/2.2.0/bin:$HOME/.gem/ruby/2.1.0/bin"
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
 # SCREEN buffer
@@ -188,6 +188,9 @@ function j(){
     else
         z $*
     fi
+}
+function lll(){
+    ls -a1 | awk  '(NR >2){print $0}' | peco
 }
 eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
 screenfetch  2> /dev/null    &&  fortune 2> /dev/null

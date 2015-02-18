@@ -39,16 +39,17 @@
   (set-face-attribute 'default nil
                     :family "Migu 1m"
                     :height 150)
-(set-fontset-font (frame-parameter nil 'font)
-                  'japanese-jisx0208
-                  (cons "Migu 1m" "iso10646-1"))
-(set-fontset-font (frame-parameter nil 'font)
-                  'japanese-jisx0212
-                  (cons "Migu 1m" "iso10646-1"))
-(set-fontset-font (frame-parameter nil 'font)
-                  'katakana-jisx0201
-                  (cons "Migu 1m" "iso10646-1"))
+;;  (set-fontset-font (frame-parameter nil 'font)
+;;                  'japanese-jisx0208
+;;                  (cons "Migu 1m" "iso10646-1"))
+;;  (set-fontset-font (frame-parameter nil 'font)
+;;                  'japanese-jisx0212
+;;                  (cons "Migu 1m" "iso10646-1"))
+;;  (set-fontset-font (frame-parameter nil 'font)
+;;                  'katakana-jisx0201
+;;                  (cons "Migu 1m" "iso10646-1"))
   )
+
   ((equal system-name "localhostss")
    (set-frame-font "Ricty-12")
    (set-face-attribute 'default nil
