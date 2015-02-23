@@ -46,7 +46,10 @@ export IGNOREEOF=1
 stty stop undef
 
 export _Z_CMD=z
-source ~/bin/z.sh
+source ~/.ghq/github.com/rupa/z/z.sh
+
+
+
 #
 [ -r $HOME/.tmuxinator/tmuxinator.bash ] && . $HOME/.tmuxinator/tmuxinator.bash
 
