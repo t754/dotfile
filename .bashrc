@@ -13,7 +13,16 @@ export EDITOR="emacsclient -nw"
 export ALTERNATE_EDITOR=""
 export PAGER="less"
 export LESS='-R'
-
+export LESS_TERMCAP_me=$(printf '\e[0m')
+export LESS_TERMCAP_se=$(printf '\e[0m')
+export LESS_TERMCAP_ue=$(printf '\e[0m')
+export LESS_TERMCAP_mb=$(printf '\e[1;32m')
+export LESS_TERMCAP_md=$(printf '\e[1;34m')
+export LESS_TERMCAP_us=$(printf '\e[1;32m')
+export LESS_TERMCAP_so=$(printf '\e[1;44;1m')
+if type src-hilite-lesspipe.sh  >/dev/null 2>&1 ; then
+    export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+fi    
 export VISUAL="emacs"
 export BROWSER="firefox"
 export TZ="JST"
@@ -44,11 +53,28 @@ export LDFLAGS=""
 export SCREENEXCHANGE="/tmp/screen-exchange"
 export IGNOREEOF=1
 stty stop undef
-
+export MANPATH=/usr/share/man/ja:
 export _Z_CMD=z
-source ~/bin/z.sh
+source ~/.ghq/github.com/rupa/z/z.sh
+
+
+
 #
 [ -r $HOME/.tmuxinator/tmuxinator.bash ] && . $HOME/.tmuxinator/tmuxinator.bash
+
+if [ x${WINDOWID} != x ] ; then
+    # TMUX
+    if which tmux >/dev/null 2>&1; then
+        # if no session is started, start a new session
+        test -z ${TMUX} && tmux
+        # when quitting tmux, try to attach
+        while test -z ${TMUX}; do
+            tmux attach || break
+        done
+    fi
+    eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
+fi
+
 
 function Cl(){
 	echo $@ | xsel --input --clipboard
@@ -70,7 +96,7 @@ function extract() {
             continue
         fi
         case $i in
-            *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='bsdtar xvf';; # 
+            *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='tar xvf';; # 
             *.7z)  c='7z x';;
             *.Z)   c='uncompress';;
             *.bz2) c='bunzip2';;
@@ -140,6 +166,15 @@ PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 complete -cf sudo
 complete -cf man
 
+function ipif() { 
+    if \grep -P "(([1-9]\d{0,2})\.){3}(?2)" <<< "$1"; then
+	curl ipinfo.io/"$1"
+    else
+	ipawk=($(host "$1" | awk '/address/ { print $NF }'))
+	curl ipinfo.io/${ipawk[1]}
+    fi
+    echo
+}
 
 
 
@@ -167,14 +202,21 @@ function j(){
 function lll(){
     ls -a1 | awk  '(NR >2){print $0}' | peco
 }
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
 
 # timeout -s INT 2 screenfetch  2> /dev/null && timeout -s INT 2 fortune 2> /dev/null
 #archey3 2> /dev/null
 #-s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
 #goslate.py -t ja /tmp/trans 2> /dev/null
 
-if [ x${WINDOWID} != x ] ; then
-    eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
-fi
 
 
