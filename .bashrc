@@ -27,7 +27,7 @@ shopt -s histappend
 # ${PROMPT_COMMAND:$PROMPT_COMMAND$'\n'}
 export PROMPT_COMMAND=" history -a; history -c; history -r;"
 
-export HISTIGNORE="fg*:bg*:history*:rm*"
+export HISTIGNORE="fg*:bg*:history*:rm*:ls"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 
 # export COLORTERM="mlterm"
@@ -57,24 +57,6 @@ function Cl(){
 function parse_git_branch() {
 	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-
-
-# function uuuu {
-# 	/usr/bin/sensors 2> /dev/null | awk '"Core" == $1 { i += int($3); n++} END{ printf( "%d",i/n) }'
-# }
-
-# function mmmm {
-# 	free | awk '/^\-\/\+/{ printf("\033[1;42;37m%05.2f\033[0m ",$3/($3+$4)*100) } /^Swap/{printf("\033[1;44;37m%05.2f\033[0m",$3/$2*100) }'
-# }
-
-
-# function proml {
-# 	export PS1="\e[41m \e[0m\e[1;32m\@\e[0m \e[1;105;93m\w\e[0m \e[41m \e[0m\j\e[0m
-# \e[41m \e[0m \e[1;47;34m\u\e[1;93;104m\h\e[0m\e[1;35m\$(parse_git_branch) \e[0m\
-# \e[0m\$(uuuu)'C \$(mmmm) \e[41m \e[0m
-# \\$>"
-# }
-# proml
 
 
 function extract() {
@@ -114,18 +96,7 @@ ulimit -c 4096
 
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
-# cl() {
-#     dir=$1
-#     if [[ -z "$dir" ]]; then
-#         dir=$HOME
-#     fi
-#     if [[ -d "$dir" ]]; then
-#         cd "$dir"
-#         ls
-#     else
-#         echo "bash: cl: '$dir': Directory not found"
-#     fi
-# }
+
 function colors() {
 	local fgc bgc vals seq0
 
@@ -153,13 +124,14 @@ function colors() {
 		echo; echo
 	done
 }
-# export GTK_IM_MODULE=ibus
-# export XMODIFIERS=@im=ibus
-# export QT_IM_MODULE=ibus
-# ibus-daemon -drx
 
 #  or flat
-export POWERSHELL_MODE="patched"
+
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    export POWERSHELL_MODE="flat"
+else
+    export POWERSHELL_MODE="patched"
+fi    
 function _update_ps1() {
     export PS1="$(~/powerline-shell.py --mode ${POWERSHELL_MODE} --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
 }
@@ -196,17 +168,13 @@ function lll(){
     ls -a1 | awk  '(NR >2){print $0}' | peco
 }
 
-timeout -s INT 2 screenfetch  2> /dev/null && timeout -s INT 2 fortune 2> /dev/null
+# timeout -s INT 2 screenfetch  2> /dev/null && timeout -s INT 2 fortune 2> /dev/null
+#archey3 2> /dev/null
+#-s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
+#goslate.py -t ja /tmp/trans 2> /dev/null
 
 if [ x${WINDOWID} != x ] ; then
     eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
 fi
-# archey3 2> /dev/null
-
-# -s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
-
-
-
-# goslate.py -t ja /tmp/trans 2> /dev/null
 
 
