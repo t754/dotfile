@@ -24,4 +24,5 @@
 [ghq]
     root = ~/.ghq
     root = ~/.go/src
-	
+[push]
+	default = simple
