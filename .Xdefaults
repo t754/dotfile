@@ -69,10 +69,10 @@ URxvt*color12:                          #7799ff
 ! URxvt*color13:                        color
 ! URxvt*color14:                        color
 ! URxvt*color15:                        color
-! URxvt*colorBD:                        color
-! URxvt*colorIT:                        color
-! URxvt*colorUL:                        color
-! URxvt*colorRV:                        color
+URxvt.colorBD:      #87CEFA
+URxvt.colorIT:      #87af5f
+URxvt.colorUL:      #87afd7
+URxvt*colorRV:      #ff96b4
 ! URxvt*underlineColor:                 color
 ! URxvt*scrollColor:                    color
 ! URxvt*troughColor:                    color
