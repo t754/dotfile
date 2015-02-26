@@ -32,7 +32,7 @@ export LC_MESSAGES="C"
 export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 
-# echo  ${PROMPT_COMMAND:?aaaaaaaaaaaaa}
+
 # ${PROMPT_COMMAND:$PROMPT_COMMAND$'\n'}
 export PROMPT_COMMAND=" history -a; history -c; history -r;"
 
