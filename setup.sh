@@ -7,3 +7,5 @@ mkdir -p ~/.tmux/plugins
 ln -s ~/.ghq/github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir -p ~/.config/systemd/user/
 ln -s ${PWD}/emacs.service  ~/.config/systemd/user/emacs/
+mkdir -p $HOME/.urxvt/ext
+ln -s $HOME/.ghq/github.com/majutsushi/urxvt-font-size/font-size $HOME/.urxvt/ext/
