@@ -188,7 +188,7 @@ function j(){
     fi
 }
 function lll(){
-    ls -a1 | awk  '(NR >2){print $0}' | peco
+    ls -a1 $* | awk  '(NR >2){print $0}' | peco
 }
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
