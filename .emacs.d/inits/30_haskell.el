@@ -1,21 +1,29 @@
 ;;  (require 'haskell-mode-autoloads)
- (require 'haskell-mode)
-    (custom-set-variables
-     '(haskell-mode-hook '(turn-on-haskell-indentation)))
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;; (require 'haskell-cabal)
-;; (autoload 'ghc-init "ghc" nil t)
-;; (add-to-list 'exec-path (concat (getenv "HOME") "/.cabal/bin"))
-;; (add-to-list 'auto-mode-alist '("\\.hs$".haskell-mode))
-;; (add-hook 'haskell-mode-hook (lambda () (ghc-init) ))
-;; (load "haskell-site-file")
+(require 'haskell-mode)
+(require 'flymake-haskell-multi) ;; not needed if installed via package
+(custom-set-variables
+ '(haskell-mode-hook '(turn-on-haskell-indentation)))
+(add-hook 'haskell-mode-hook
+          '(lambda ()
+             (setq flycheck-checker 'haskell-hlint)
+             (setq flycheck-disabled-checkers '(haskell-ghc))
+             (flycheck-mode 1)))
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'font-lock-mode)
 (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
-(require 'flymake-haskell-multi) ;; not needed if installed via package
- (add-hook 'haskell-mode-hook 'flymake-haskell-multi-load)
+(add-hook 'haskell-mode-hook 'flymake-haskell-multi-load)
+;;(add-hook 'haskell-mode-hook 'company-mode)
+
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (require 'haskell-cabal)
+;; (autoload 'ghc-init "ghc" nil t)
+;; (add-to-list 'exec-path (concat (getenv "HOME") "/.cabal/bin"))
+;; (add-to-list 'auto-mode-alist '("\\.hs$".haskell-mode))
+ ;;(add-hook 'haskell-mode-hook (lambda () (ghc-init) ))
+;; (load "haskell-site-file")
+
 
 ;; (defun flymake-get-Haskell-cmdline (source base-dir)
 ;;   (list "ghc"
