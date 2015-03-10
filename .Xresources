@@ -15,7 +15,7 @@ Xft.rgba: rgb
 
 
 
-URxvt*termName:                         rxvt
+URxvt*termName:                         screen-256color
 ! URxvt*geometry:                         110x40
 ! URxvt*chdir:                          string
 ! URxvt*reverseVideo:                   boolean
@@ -83,7 +83,7 @@ URxvt*cursorColor:                      red
 URxvt*pointerColor:                     2
 ! URxvt*pointerColor2:                  color
 ! URxvt*borderColor:                    color
-URxvt*iconFile:                         /usr/share/icons/Humanity/apps/128/utilities-terminal.svg
+URxvt*iconFile:                         /usr/share/icons/Adwaita/96x96/apps/utilities-terminal-symbolic.symbolic.png
 ! /usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
 ! URxvt*font:								xft:Source Code Pro for Powerline:size=14:antialias=true
 URxvt*font:		                    xft:Ricty Discord4Powerline:Regular:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true

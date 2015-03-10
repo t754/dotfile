@@ -7,13 +7,13 @@
 (setq make-backup-files t)       ; バックアップファイルを作成する。
 (setq backup-directory-alist
 (cons (cons "\\.*$" (expand-file-name "~/.backup"))
-backup-directory-alist))
+      backup-directory-alist))
 ;;;backupfi(setq version-control t)     
 (setq version-control t); 複数のバックアップを残します。世代。
 (setq kept-new-versions 5)   ; 新しいものをいくつ残すか
 (setq kept-old-versions 5)   ; 古いものをいくつ残すか
 (setq delete-old-versions t) ; 確認せずに古いものを消す。
-(setq vc-make-backup-files t) ;; バージョン管理下のファイルもバックアップを作る。leの保存`場所を指定。
+(setq vc-make-backup-files nil) ;; バージョン管理下のファイルもバックアップを作る。leの保存`場所を指定。
 ;;create backup file in ~/.buckup
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/.backup") t)))

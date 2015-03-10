@@ -16,7 +16,7 @@
 (setq helm-multi-swoop-edit-save t)
 (custom-set-variables
  '(ace-isearch-input-length 5)
- '(ace-isearch-input-idle-delay 0.3))
+ '(ace-isearch-input-idle-delay 1))
 
 ;; 値がtの場合はウィンドウ内に分割、nilなら別のウィンドウを使用
 (setq helm-swoop-split-with-multiple-windows nil)

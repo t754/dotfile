@@ -1,4 +1,4 @@
-# ~/.bashrc
+# ~/.bashrc 
 # If not running interactively, don't do anything
 
 [[ $- != *i* ]] && return
@@ -6,7 +6,7 @@
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
 [ -r $HOME/.aliasrc ] && . $HOME/.aliasrc
-
+# set -x
 export TERM="xterm-256color"
 #export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
@@ -59,21 +59,9 @@ source ~/.ghq/github.com/rupa/z/z.sh
 
 
 
-#
 [ -r $HOME/.tmuxinator/tmuxinator.bash ] && . $HOME/.tmuxinator/tmuxinator.bash
 
-if [ x${WINDOWID} != x ] ; then
-    # TMUX
-    if which tmux >/dev/null 2>&1; then
-        # if no session is started, start a new session
-        test -z ${TMUX} && tmux
-        # when quitting tmux, try to attach
-        while test -z ${TMUX}; do
-            tmux attach || break
-        done
-    fi
-    eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
-fi
+
 
 
 function Cl(){
@@ -166,15 +154,15 @@ PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 complete -cf sudo
 complete -cf man
 
-function ipif() { 
-    if \grep -P "(([1-9]\d{0,2})\.){3}(?2)" <<< "$1"; then
-	curl ipinfo.io/"$1"
-    else
-	ipawk=($(host "$1" | awk '/address/ { print $NF }'))
-	curl ipinfo.io/${ipawk[1]}
-    fi
-    echo
-}
+# function ipif() { 
+#     if \grep -P "(([1-9]\d{0,2})\.){3}(?2)" <<< "$1"; then
+# 	curl ipinfo.io/"$1"
+#     else
+# 	ipawk=($(host "$1" | awk '/address/ { print $NF }'))
+# 	curl ipinfo.io/${ipawk[1]}
+#     fi
+#     echo
+# }
 
 
 
@@ -213,10 +201,10 @@ man() {
     man "$@"
 }
 
-# timeout -s INT 2 screenfetch  2> /dev/null && timeout -s INT 2 fortune 2> /dev/null
-#archey3 2> /dev/null
-#-s 2> /dev/null # | tr "\n" " " # | tee /tmp/trans 2> /dev/null  
-#goslate.py -t ja /tmp/trans 2> /dev/null
+
+if [ x${WINDOWID} != x ] ; then
+    eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
+fi
 
 
 
