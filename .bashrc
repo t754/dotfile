@@ -64,7 +64,7 @@ source ~/.ghq/github.com/rupa/z/z.sh
 
 
 
-function Cl(){
+function Cl() {
 	echo $@ | xsel --input --clipboard
 }
 
@@ -180,17 +180,17 @@ function peco-ag () {
 }
 fi
 
-function j(){
+function j() {
     if [ $# -eq 0 ] ; then
         cd $(z | tac | awk "{print \$2}" | peco)
     else
         z $*
     fi
 }
-function lll(){
+function lll() {
     ls -a1 $* | awk  '(NR >2){print $0}' | peco
 }
-man() {
+function man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
     LESS_TERMCAP_me=$'\E[0m' \
@@ -202,9 +202,6 @@ man() {
 }
 
 
-if [ x${WINDOWID} != x ] ; then
-    eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
+if [ "x${WINDOWID}" != "x" ] ; then
+        eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
 fi
-
-
-

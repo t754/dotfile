@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: quickrun
+# key: quickrun
+# --
+Local Variables:
+quickrun-option-cmd-alist: ((:command . "g++")
+                            (:exec    . ("%c -std=c++0x -o %n %s"
+                                         "%n apple orange melon"))
+                            (:remove  . ("%n")))
+End:
