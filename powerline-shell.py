@@ -364,7 +364,7 @@ def get_git_status():
             if origin_status[0][0] == 'behind':
                 origin_position += u'\u2B61'
             if origin_status[0][0] == 'ahead':
-                origin_position += u'\u21E1'
+                origin_position += u'\u2B60'
         if diverged_status:
             origin_position = " %d%c %d%c" % (int(diverged_status[0][0]), u'\u21E1', int(diverged_status[0][1]), u'\u21E3')
 
