@@ -17,6 +17,7 @@
 ;;create backup file in ~/.buckup
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/.backup") t)))
+(setq create-lockfiles nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 行番号をデフォルトで表示
