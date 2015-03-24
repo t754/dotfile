@@ -29,7 +29,10 @@
 ;;  フォントファミリ (pp (font-family-list))
 ;; (setq default-frame-alist '((font . "VL ゴシック-16")))
 (cond
- ((equal system-name "utrtamako")
+ ((or 
+   (equal system-name "utrtamako" )
+   (equal system-name "zenlap.zendomain" )
+   )
   (setq default-frame-alist '((font . "Migu 1m")))
   (set-frame-font "Migu 1m-18")
   ;; (set-face-attribute 'default nil
