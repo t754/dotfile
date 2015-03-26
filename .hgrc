@@ -1,0 +1,28 @@
+[ui]
+username = 
+merge = internal:merge
+editor = emacsclient
+[extensions]
+hgext.graphlog =
+hgext.fetch =
+hgext.extdiff=
+progress =
+shelve=
+pager =
+color =
+# mq =
+# codereview = !
+
+[color]
+mode = auto
+
+[pager]
+pager = LESS='FSRX' less
+attend = annotate, blame, cat, export, glog, log, qdiff 
+ignore = diff
+
+[extdiff]
+cmd.vdiff = ediff.sh
+cmd.ddiff = diffuse
+cmd.ediff = sh
+opts.ediff = -c 'if [ -d $0 ]; then emacsclient -c --eval "(ediff-directories \"$0\" \"$1\" \"\")"; else emacs --eval "(ediff-files \"$0\" \"$1\")"; fi'
