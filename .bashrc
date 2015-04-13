@@ -12,14 +12,16 @@ export TERM="xterm-256color"
 export EDITOR="emacsclient -nw"
 export ALTERNATE_EDITOR=""
 export PAGER="less"
-export LESS='-R'
-export LESS_TERMCAP_me=$(printf '\e[0m')
-export LESS_TERMCAP_se=$(printf '\e[0m')
-export LESS_TERMCAP_ue=$(printf '\e[0m')
-export LESS_TERMCAP_mb=$(printf '\e[1;32m')
-export LESS_TERMCAP_md=$(printf '\e[1;34m')
-export LESS_TERMCAP_us=$(printf '\e[1;32m')
-export LESS_TERMCAP_so=$(printf '\e[1;44;1m')
+export LESS=' -R'
+export LESS_TERMCAP_mb=$'\E[01;31m' 
+export LESS_TERMCAP_md=$'\E[01;38;5;74m' 
+export LESS_TERMCAP_me=$'\E[0m' 
+export LESS_TERMCAP_se=$'\E[0m' 
+# export LESS_TERMCAP_so=$'\E[38;5;246m'
+export LESS_TERMCAP_so=$'\E[01;33;03;40m'
+export LESS_TERMCAP_so=$'\E[30;43m'
+export LESS_TERMCAP_ue=$'\E[0m' 
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' 
 if type src-hilite-lesspipe.sh  >/dev/null 2>&1 ; then
     export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
 fi    
@@ -46,7 +48,7 @@ fi
 export GOPATH="$HOME/.go"
 
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
-export PATH="$HOME/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.cask/bin:$GOPATH/bin:$HOME/.rbenv/bin:$HOME/.gem/ruby/2.0.0/bin:$HOME/.gem/ruby/2.2.0/bin:$HOME/.gem/ruby/2.1.0/bin"
+export PATH="$HOME/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/.cask/bin:$GOPATH/bin:$HOME/.rbenv/bin:$HOME/.gem/ruby/2.0.0/bin:$HOME/.gem/ruby/2.2.0/bin:$HOME/.gem/ruby/2.1.0/bin:/usr/bin/vendor_perl"
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
 # SCREEN buffer
@@ -188,14 +190,14 @@ function j() {
     fi
 }
 function lll() {
-    ls -a1 $* | awk  '(NR >2){print $0}' | peco
+    ls -a1 $* |  peco
 }
 function man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
     LESS_TERMCAP_me=$'\E[0m' \
     LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_so=$'\E[01;33;03;40m' \
     LESS_TERMCAP_ue=$'\E[0m' \
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
