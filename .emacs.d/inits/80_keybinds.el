@@ -13,6 +13,7 @@
 
 ;;
 (global-set-key (kbd "M-i") 'auto-complete)
+(global-set-key (kbd "C-M-m") 'minimap-toggle)
 
 (global-set-key (kbd "C-c C-r") 'window-resizer)
 

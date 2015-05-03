@@ -186,3 +186,5 @@
                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 (setq org-beamer-frame-default-options "fragile")
 
+
+(setq org-html-html5-fancy t)
