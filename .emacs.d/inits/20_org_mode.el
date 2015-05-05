@@ -188,3 +188,5 @@
 
 
 (setq org-html-html5-fancy t)
+
+(require 'org-trello)
