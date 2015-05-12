@@ -9,3 +9,6 @@ myInstall.sh
 README.md
 emacs.service
 ghqlist
+golist
+setup.sh
+default.sh

@@ -53,7 +53,7 @@ function  beee {
     if [ $ar -eq 0 ] ; then
         beep -f 1800 -l 70 -D 50 -n -f 2350 -l 70
     else
-        beep -f 200 -l 70 -D 100 -n -f 200 -l 70
+        beep -f 200 -l 70 -D 100 -n -f 200 -l 70 -D 100 -n -f 200 -l 70 -D 100 -n -f 200 -l 70
     fi
 }
 
