@@ -72,8 +72,11 @@ URxvt*color12:                          #7799ff
 ! URxvt*color13:                        color
 ! URxvt*color14:                        color
 ! URxvt*color15:                        color
-URxvt.colorBD:      #87CEFA
+! URxvt.colorBD:      #87CEFA
+! URxvt.colorIT:      #87af5f
+! URxvt.colorUL:      #87afd7
 URxvt.colorIT:      #87af5f
+URxvt.colorBD:      #d7d7d7
 URxvt.colorUL:      #87afd7
 URxvt*colorRV:      #ff96b4
 ! URxvt*underlineColor:                 color
@@ -194,6 +197,10 @@ URxvt.url-select.underline:             true
 ! URxvt.clipboard.copycmd:  xsel -ib
 ! URxvt.clipboard.pastecmd: xsel -ob
 
+
 dzen2.font: xft:Droid Sans Mono:size=8:antialias=true
-
-
+*VT100.veryBoldColors: 3
+*VT100.colorBDMode:     true
+*VT100.colorBD:         red
+*VT100.colorULMode:     true
+*VT100.colorUL:         cyan

@@ -2,7 +2,6 @@
 alias ls='ls -x -v --color=auto'
 alias ll='ls -la'
 alias la='ls -a'
-alias df='df -h'
 alias starte='emacs --daemon'
 alias e="emacsclient -c -n"
 alias et="emacsclient -t -n"
@@ -16,6 +15,8 @@ alias server_name='ssh -v -l USERNAME IP ADDRESS'
 alias du="du -h -c"
 alias df="df -h -T --total"
 alias grep="grep -i -n --color"
+# sudo alias get
+alias sudo="sudo " 
 
 # alias bee='for i in {1..5}; do aplay -D plughw:1,7 ~/beep.wav; done' 
 alias pgg='ps -Af | grep'
