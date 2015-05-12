@@ -1,4 +1,4 @@
-(when  (require 'mozc nil t) 
+(when  (require 'mozc nil t)
   (set-language-environment "Japanese")
   ;;(setq mozc-candidate-style 'overlay)
   (setq mozc-candidate-style 'echo-area)

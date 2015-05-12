@@ -53,6 +53,7 @@
 ;;                  (cons "Migu 1m" "iso10646-1"))
   )
 
+
   ((equal system-name "localhostss")
    (set-frame-font "Ricty-12")
    (set-face-attribute 'default nil
@@ -60,7 +61,8 @@
      	    :height 120)
   (setq default-frame-alist '((font . "Ricty-12")))
   )
-  ((equal system-name "localhost.localdomain")
+  ( (or (equal system-name "localhost.localdomain")
+        (equal system-name "localhost.homenetwork"))
    (set-frame-font "Ricty Discord4Powerline-12")
    (set-face-attribute 'default nil
      	    :family "Ricty Discord4Powerline"
