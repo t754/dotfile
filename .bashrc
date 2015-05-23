@@ -27,7 +27,7 @@ if type src-hilite-lesspipe.sh  >/dev/null 2>&1 ; then
 fi    
 export VISUAL="emacs"
 export BROWSER="firefox"
-export TZ="JST"
+export TZ="Asia/Tokyo"
 export LC_MESSAGES="C"
 # 重複服歴を無視
 # export HISTCONTROL=ignoredups

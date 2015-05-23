@@ -16,7 +16,18 @@
 (global-set-key (kbd "C-M-m") 'minimap-toggle)
 
 (global-set-key (kbd "C-c C-r") 'window-resizer)
+(defun kill-whitespace ()
+          "Kill the whitespace between two non-whitespace characters"
+          (interactive "*")
+          (save-excursion
+            (save-restriction
+              (save-match-data
+                (progn
+                  (re-search-backward "[^ \t\r\n]" nil t)
+                  (re-search-forward "[ \t\r\n]+" nil t)
+                  (replace-match "" nil nil))))))
 
+(global-set-key (kbd "M-\\") 'kill-whitespace)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
