@@ -8,7 +8,7 @@
 [ -r $HOME/.aliasrc ] && . $HOME/.aliasrc
 # set -x
 export TERM="xterm-256color"
-#export COLORTERM="mlterm"
+export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
 export ALTERNATE_EDITOR=""
 export PAGER="less"
@@ -57,7 +57,7 @@ export IGNOREEOF=1
 stty stop undef
 export MANPATH=/usr/share/man/ja:
 export _Z_CMD=z
-source ~/.ghq/github.com/rupa/z/z.sh
+[ -r ~/.ghq/github.com/rupa/z/z.sh ] && source ~/.ghq/github.com/rupa/z/z.sh
 
 
 
@@ -75,35 +75,35 @@ function parse_git_branch() {
 }
 
 
-function extract() {
-    local c e i
-    (($#)) || return
-    for i; do
-        c=''
-        e=1
-        if [[ ! -r $i ]]; then
-			echo "$0: file is unreadable: \`$i'" >&2
-            continue
-        fi
-        case $i in
-            *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='tar xvf';; # 
-            *.7z)  c='7z x';;
-            *.Z)   c='uncompress';;
-            *.bz2) c='bunzip2';;
-            *.exe) c='cabextract';;
-            *.gz)  c='gunzip';;
-            *.rar) c='unrar x';;
-            *.xz)  c='unxz';;
-            *.zip) c='unzip';;
-            *.lzh) c='lha x';;
-            *)     echo "$0: unrecognized file extension: \`$i'" >&2
-            continue;;
-        esac
-        command $c "$i"
-        e=$?
-    done
-    return $e
-}
+# function extract() {
+#     local c e i
+#     (($#)) || return
+#     for i; do
+#         c=''
+#         e=1
+#         if [[ ! -r $i ]]; then
+# 			echo "$0: file is unreadable: \`$i'" >&2
+#             continue
+#         fi
+#         case $i in
+#             *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='tar xvf';; # 
+#             *.7z)  c='7z x';;
+#             *.Z)   c='uncompress';;
+#             *.bz2) c='bunzip2';;
+#             *.exe) c='cabextract';;
+#             *.gz)  c='gunzip';;
+#             *.rar) c='unrar x';;
+#             *.xz)  c='unxz';;
+#             *.zip) c='unzip';;
+#             *.lzh) c='lha x';;
+#             *)     echo "$0: unrecognized file extension: \`$i'" >&2
+#             continue;;
+#         esac
+#         command $c "$i"
+#         e=$?
+#     done
+#     return $e
+# }
 
 function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
 trap EC ERR
@@ -147,7 +147,7 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     export POWERSHELL_MODE="flat"
 else
     export POWERSHELL_MODE="patched"
-fi    
+fi
 function _update_ps1() {
     export PS1="$(~/powerline-shell.py --mode ${POWERSHELL_MODE} --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
 }
@@ -173,13 +173,16 @@ function peco-select-history () {
     READLINE_LINE="$l"
     READLINE_POINT=${#l}
 }
+if [ -x "`which peco`" ]; then
 bind -x '"\C-r": peco-select-history'
 bind    '"\C-xr": reverse-search-history'
+fi
 
 if [ -x "`which ag`" ]; then
 function peco-ag () {
     ag $@ | peco --query "$READLINE_LINE" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
 }
+
 fi
 
 function j() {
@@ -205,5 +208,7 @@ function man() {
 
 
 if [ "x${WINDOWID}" != "x" ] ; then
+    if [ -x "`which keychain`" ]; then
         eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
+    fi
 fi

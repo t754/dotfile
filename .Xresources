@@ -7,15 +7,18 @@ XTerm*VT100*faceSize: 12
 ! フォント作者　フォント名　太さ　傾き　幅　スタイル指定　ドットサイズ　ポイントサイズ　水平解像度　垂直解像度　文字間隔　平均文字幅　文字体型　エンコーディング
 ! http://itpro.nikkeibp.co.jp/linux/column/inflection/3/2.shtml
 Xft.autohint: 0
+Xft.hinting: Full
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
-Xft.hinting: 1
-Xft.antialias: 1
+Xft.antialias: True
 Xft.rgba: rgb
+Xft.dpi: 96
+*customization: -color
+! URxvt*font:           -misc-fixed-medium-r-normal-*-18-120-100-100-c-90-iso8859-1
+! Using Xft
 
-
-
-URxvt*termName:                         screen-256color
+! URxvt*termName:                         screen-256color
+URxvt*termName:  xterm-256color
 ! URxvt*geometry:                         110x40
 ! URxvt*chdir:                          string
 ! URxvt*reverseVideo:                   boolean
@@ -86,12 +89,19 @@ URxvt*cursorColor:                      red
 URxvt*pointerColor:                     2
 ! URxvt*pointerColor2:                  color
 ! URxvt*borderColor:                    color
-URxvt*iconFile:                         /usr/share/icons/Adwaita/96x96/apps/utilities-terminal-symbolic.symbolic.png
+! URxvt*iconFile:                         /usr/share/icons/Adwaita/96x96/apps/utilities-terminal-symbolic.symbolic.png
 ! /usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
 ! URxvt*font:								xft:Source Code Pro for Powerline:size=14:antialias=true
-URxvt*font:		                    xft:Ricty Discord4Powerline:Regular:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
-! URxvt*font: xft:Android Emoji:size=14:antialias=true
-URxvt*boldFont:                        xft:Ricty Discord4Powerline:Bold:size=14:antialias=true   ,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
+! URxvt*imfont:		                    xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
+URxvt*font:		                        xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
+! ,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
+! URxvt*boldfont:		                    xft:RictyDiscord4Powerline:Bold:pixelsize=14:antialias=true
+! ! ,xft:Inconsolate-g for Powerline:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
+! ! URxvt*font: xft:Android Emoji:size=14:antialias=true
+! URxvt.italicFont:        xft:Ricty:italic:size=14:antialiase=true
+! ,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
+!URxvt*boldFont:                        xft:Inconsolate-g for Powerline:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
+
 
 ! URxvt*font:								xft:Ricty Discord for Powerline for Powerline:size=14:antialias=true
 ! URxvt*font:                            xft:RictyDiscord-Regular2-Powerline for Powerline-BoldForPowerline:size=14:antialias=true
@@ -101,14 +111,14 @@ URxvt*boldFont:                        xft:Ricty Discord4Powerline:Bold:size=14:
 ! URxvt*boldItalicFont:                 xft:RictyDiscord-Regular-Powerline
 ! URxvt*intensityStyles:                boolean
 ! URxvt*inputMethod:                    name
-URxvt*preeditType:  					OverTheSpot
+!URxvt*preeditType:  					OverTheSpot
 ! URxvt*imLocale:                       string
 ! URxvt*imFont:                         fontname
 ! URxvt*title:                          string
 ! URxvt*iconName:                       string
 URxvt*saveLines:                        8000
 ! URxvt*buffered:                       boolean
-URxvt*depth:                            32
+URxvt*depth:                            24
 ! URxvt*visual:                         number
 ! URxvt*transient-for:                  windowid
 ! URxvt*override-redirect:              boolean
@@ -187,6 +197,8 @@ URxvt.url-select.underline:             true
 ! URxvt.clipboard.copycmd:  xsel -ib
 ! URxvt.clipboard.pastecmd: xsel -ob
 
+
+dzen2.font: xft:Droid Sans Mono:size=8:antialias=true
 *VT100.veryBoldColors: 3
 *VT100.colorBDMode:     true
 *VT100.colorBD:         red
