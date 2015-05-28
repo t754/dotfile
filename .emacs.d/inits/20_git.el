@@ -5,7 +5,7 @@
 ;;;; (setq git-gutter-fr:side 'right-fringe)
 (global-git-gutter-mode t)
 (global-set-key (kbd "C-x C-g") 'git-gutter)
-(git-gutter:linum-setup)
+;; (git-gutter:linum-setup)
 (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
 (global-set-key (kbd "C-x p") 'git-gutter:previous-hunk)
 (global-set-key (kbd "C-x n") 'git-gutter:next-hunk)

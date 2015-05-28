@@ -21,10 +21,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 行番号をデフォルトで表示
-(when (require 'linum nil t)
-	(global-linum-mode t)
-	(line-number-mode t) 
-	(column-number-mode t))
+;; (when (require 'linum nil t)
+;; 	(global-linum-mode t)
+;; 	(line-number-mode t) 
+;; 	(column-number-mode t))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;ハイパーリンク (cygwinの場合)
 

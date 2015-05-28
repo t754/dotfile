@@ -6,12 +6,10 @@
 (helm-descbinds-install)
 (helm-descbinds-mode)
 
-
-(setq recentf-max-menu-items 200)
-(setq recentf-max-saved-items 200)
-
-
-(setq recentf-count 0)
+(setq recentf-exclude '("/dotfile/.emacs.d/" "/.mozilla/firefox/" "^/tmp/" "~$" )
+      recentf-max-menu-items 200
+      recentf-max-saved-items 200
+      recentf-count 0)
 (setq helm-use-migemo t)
 ;; (require 'helm-git)
 ;; (require 'helm-ls-git)
