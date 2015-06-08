@@ -9,12 +9,20 @@
 (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
 (global-set-key (kbd "C-x p") 'git-gutter:previous-hunk)
 (global-set-key (kbd "C-x n") 'git-gutter:next-hunk)
+(smartrep-define-key goto-map "M-f"
+  '(("n"      . 'git-gutter:next-hunk)
+    ("p"      . 'git-gutter:previous-hunk)))
+
+
+
 (global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
 (global-set-key (kbd "C-x v r") 'git-gutter:revert-hunk)
 ;; (custom-set-variables
 ;;  '(git-gutter:handled-backends '(git hg )))
 (custom-set-variables
- '(git-gutter:handled-backends '(git hg bzr)))
+ ;; '(git-gutter:handled-backends '(git hg bzr))
+ '(git-gutter:handled-backends '(hg))
+ )
 
 
 
