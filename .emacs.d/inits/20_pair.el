@@ -5,8 +5,10 @@
 (sp-local-pair 'org-mode "\\[" "\\]")
 
 ;; (require 'rainbow-delimiters)
-
 ;(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+
+
+
 ;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 ;; ;(global-rainbow-delimiters-mode)
 ;; (require 'cl-lib)
