@@ -4,33 +4,35 @@
 ;; (elscreen-start)
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-;;auto-complete
-(when (require 'auto-complete nil t)
-  (require 'auto-complete-config)
-;; グローバルでauto-completeを利用
-  (require 'ac-helm)
 (global-auto-complete-mode t)
-  ;(ac-config-default)
+;;auto-complete
+(require 'auto-complete)
+(require 'auto-complete-config)
+;; グローバルでauto-completeを利用
+(require 'ac-helm)
+
+(ac-config-default)
+
+(setq ac-use-menu-map t
+      ac-dwim nil  ; 空気読んでほしいをnil
+      ac-auto-start t 
+      ac-ignore-case t)
+;;(setq ac-auto-start nil)
+;;勝手に初まらない;(setq ac-ignore-case 'smart)										
 (global-set-key (kbd "C-:") 'ac-complete-with-helm)
 (define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
-;;(global-auto-complete-mode t)
-  (ac-config-default)
-
-  (setq ac-use-menu-map t)
-
-  (define-key ac-menu-map (kbd "M-n") 'ac-next)      ; M-nで次候補選択
-  (define-key ac-menu-map (kbd "M-p") 'ac-previous)  ; M-pで前候補選択
-  (setq ac-dwim nil)  ; 空気読んでほしいをnil
-  ;; 情報源として
-  ;;(setq ac-auto-start nil) ;勝手に初まらない
- 
-  (setq ac-auto-start t)
-										;(ac-set-trigger-key "))  ; TABで補完開始(トリガーキー)
-  ;; or
-  (setq ac-ignore-case t)
-										;(setq ac-ignore-case 'smart)
+(bind-keys :map ac-menu-map
+           ("M-n" . ac-next)
+           ("M-p" . ac-previous))
+(bind-keys :map ac-mode-map
+           ("M-TAB" . auto-complete)
+           ("C-i" . (lambda (arg)
+                      (interactive "p")
+                      (case arg
+                        (4 (ac-complete-with-helm))
+                        (t (auto-complete))))))
 (ac-set-trigger-key "TAB") ;TABで大体補完
-  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete) ) ; M-TABで補完開始
+
+
 
 

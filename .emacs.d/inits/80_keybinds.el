@@ -1,21 +1,15 @@
 										;C-hで バックスペース
-(global-set-key (kbd "C-h") 'delete-backward-char)
+
 ;;C-m 改行&インデント
 ;;(global-set-key (kbd "C-m") 'newline-and-indent)
 ;;goto-line
-(global-set-key (kbd "C-c g") 'goto-line)
+;; (global-set-key (kbd "C-c g") 'goto-line)
+
 
 ;;smart-compile
- (global-set-key (kbd "C-c p") 'quickrun)
 ;; (global-set-key (kbd "C-c p") 'smart-compile)
 ;; (define-key mode-specific-map (kbd "C-c p") 'compile)
 ;; (define-key mode-specific-map "e" 'next-error)
-
-;;
-(global-set-key (kbd "M-i") 'auto-complete)
-(global-set-key (kbd "C-M-m") 'minimap-toggle)
-
-(global-set-key (kbd "C-c C-r") 'window-resizer)
 (defun kill-whitespace ()
           "Kill the whitespace between two non-whitespace characters"
           (interactive "*")
@@ -26,7 +20,6 @@
                   (re-search-backward "[^ \t\r\n]" nil t)
                   (re-search-forward "[ \t\r\n]+" nil t)
                   (replace-match "" nil nil))))))
-
 (defun push-mark-no-activate ()
   "Pushes `point' to `mark-ring' and does not activate the region
    Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
@@ -34,19 +27,26 @@
   (push-mark (point) t nil)
   (message "Pushed mark to ring"))
 
-(global-set-key (kbd "C-`") 'push-mark-no-activate)
+(unbind-key "C-z")
+(bind-keys*
+ ("C-c p"   . quickrun)
+ ("C-c m"   . minimap-toggle)
+ ("C-c C-r" . window-resizer)
+ ("M-\\"    . kill-whitespace)
+ ("C-`"     . push-mark-no-activate)
+ ("C-h"     . delete-backward-char)
+ ("C-t"     . other-window)
+ ("C-z"     . scroll-down-command)
+ ("C-c l"   . toggle-truncate-lines))
 
-(global-set-key (kbd "M-\\") 'kill-whitespace)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "C-t") 'other-window)
+
 ;;Windowの切替
 ;;行の折り返し表示の切替
-(global-set-key (kbd "C-c l") 'toggle-truncate-lines)
-;; c-zの無効
-(global-unset-key "\C-z")
-(global-set-key (kbd "C-z") 'scroll-down-command)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; \C-aでインデントを飛ばした行頭に移動

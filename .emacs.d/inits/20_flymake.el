@@ -17,11 +17,6 @@
 ;;;  )
 
 
-
-
-
-
-
 (require 'flymake)
 (require 'popup)
 
