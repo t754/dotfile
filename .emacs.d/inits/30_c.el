@@ -3,6 +3,7 @@
   (local-unset-key ">")
   (c-toggle-auto-state 1)
   (c-toggle-hungry-state 1)
+  (set (make-local-variable 'eldoc-idle-delay) 0.20)
   (c-turn-on-eldoc-mode)
   ;; (define-key c-mode-map(kbd "C-c p") 'smart-compile)
 			;;;; C-c e で next-error コマンドを呼び出す

@@ -89,7 +89,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c C-r" . window-resizer)
  ("M-\\"    . kill-whitespace)
  ("C-`"     . push-mark-no-activate)
- ("C-h"     . delete-backward-char)
+ ;; ("C-h"     . delete-backward-char)
  ("C-t"     . other-window-or-split-or-close)
  ("C-z"     . scroll-down-command)
  ("C-c l"   . toggle-truncate-lines)
@@ -98,7 +98,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c <f5>" . revert-buffer-no-confirm)
  )
 
-
+(define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 
 
 (bind-key "C-x @ C" 'event-apply-control-shift-modifier function-key-map)

@@ -102,8 +102,8 @@
 
       ;;かっこの強調
       (show-paren-mode 1)
-      (setq show-paren-delay 0)
-      (setq show-paren-style 'expression)
+      (setq show-paren-delay 0
+            show-paren-style 'expression)
       (set-face-background 'show-paren-match-face "grey30")
       (set-face-underline-p 'show-paren-match-face "red")))
 

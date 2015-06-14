@@ -1,11 +1,8 @@
 
 ;;
-(setq sql-postgres-login-params
-      '((user :default "postgres")
-        (database :default "postgres")
-        (server :default "localhost")
-        (port :default 5432)))
-
+(defvar sql-connection-alist nil)
+(defvar sql-product nil)
+(defvar my-sql-password nil)
 (setq sql-connection-alist
       '((scope (sql-product 'mysql)
                   (sql-port 3306)
