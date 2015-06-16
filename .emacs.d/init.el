@@ -11,6 +11,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;ビープ音を消す 
 (setq visible-bell t);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq gc-cons-threshold (* 256 1024 1024))
 
                                         ; 常時デバッグ状態ではない
 (setq debug-on-error nil)
@@ -100,7 +101,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (package-build shut-up epl git commander f dash s))))
+ '(ac-delay 0.4)
+ '(ace-isearch-input-idle-delay 1)
+ '(ace-isearch-input-length 5)
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
+ '(mozc-leim-title "も")
+ '(package-selected-packages (quote (package-build shut-up epl git commander f dash s)))
+ '(tab-width 4)
+ '(yas-prompt-functions (quote (my-yas/prompt)))
+ '(yas-trigger-key "TAB"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
