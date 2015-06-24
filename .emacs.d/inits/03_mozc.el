@@ -1,7 +1,3 @@
-(defun mozc-change-cursor-color ()
-  (if mozc-mode
-      (set-cursor-color mozc-color)
-    (set-cursor-color "orange")))
 
 
 
@@ -21,7 +17,7 @@
   (prefer-coding-system 'utf-8-unix)
   
   (setq default-buffer-file-coding-system 'utf-8
-        mozc-color "blue"
+        mozc-color "PowderBlue"
         default-input-method "japanese-mozc"
         mozc-candidate-style 'echo-area)
 

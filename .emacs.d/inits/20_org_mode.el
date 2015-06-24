@@ -120,6 +120,8 @@
 ;; \\usepackage{typearea}
 ;; \\typearea{15}
 
+
+(require 'ox-bibtex)
 (with-eval-after-load "ox-latex"
   (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
   (setq latex 'platex
@@ -127,7 +129,7 @@
         org-ditaa-jar-path                      "~/.emacs.d/jditaa.jar"
         org-export-latex-date-format            "%Y-%m-%d"
         org-latex-create-formula-image-program  'imagemagick
-        org-latex-pdf-process                   '("latexmk -e '$latex=q/platex -interaction nonstopmode %S/' -e '$bibtex=q/pbibtex %B/' -e '$makeindex=q/mendex -o %D %S/' -e '$dvipdf=q/dvipdfmx -o %D %S/' -norc -gg -pdfdvi %f")
+        org-latex-pdf-process                   '("latexmk -c %f && latexmk -f %f");; ("latexmk -e '$latex=q/platex -interaction nonstopmode %S/' -e '$bibtex=q/pbibtex %B/' -e '$makeindex=q/mendex -o %D %S/' -e '$dvipdf=q/dvipdfmx -o %D %S/' -norc -gg -pdfdvi %f")
         org-file-apps                           '(("pdf" . "evince %s"));; Viewerの設定(evince)
         org-beamer-frame-default-options        "fragile"
         org-latex-default-class                 "jarticle"
@@ -138,7 +140,7 @@
               ('luatex "\\documentclass{ltjsarticle}\n")
               ('xetex  "\\documentclass[a4paper]{bxjsarticle}\n")
               ('euptex "\\documentclass[a4j,uplatex]{jarticle}\n")
-              (t       "\\documentclass{jarticle}"))
+              (t       "\\documentclass[dvipdfmx]{jarticle}"))
            ("\\section{%s}" . "\\section*{%s}")
            ("\\subsection{%s}" . "\\subsection*{%s}")
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")

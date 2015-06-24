@@ -11,7 +11,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;ビープ音を消す 
 (setq visible-bell t);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq gc-cons-threshold (* 256 1024 1024))
+;; (setq gc-cons-threshold (* 256 1024 1024))
 
                                         ; 常時デバッグ状態ではない
 (setq debug-on-error nil)
@@ -116,3 +116,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'upcase-region 'disabled nil)

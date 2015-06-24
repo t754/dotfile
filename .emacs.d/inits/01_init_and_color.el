@@ -20,6 +20,11 @@
 (setq create-lockfiles nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq linum-delay t)
+(defadvice linum-schedule (around my-linum-schedule () activate)
+  (run-with-idle-timer 0.2 nil #'linum-update-current))
+
+
 ;; 行番号をデフォルトで表示
 ;; (when (require 'linum nil t)
 ;; 	(global-linum-mode t)

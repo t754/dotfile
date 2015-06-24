@@ -40,12 +40,12 @@
 (bind-keys :map isearch-mode-map 
            ("M-i" . helm-swoop-from-isearch)
            ("C-o" . helm-occur-from-isearch)) ;; isearchからhelm-occurを起動
-(unbind-key "C-o")
+;; (unbind-key "C-o")
 (bind-key   "C-c C-a" 'all-from-helm-occur helm-map) ;; helm-occurからall-extに受け渡し
 (bind-keys*
  ("M-o"     . myfix-helm-occur)             ;; helm-occurの起動
- ("C-o ."   . helm-ag-pop-stack);;
- ("C-o C-o" . helm-ag-this-file);;;;;
+ ;; ("C-o ."   . helm-ag-pop-stack);;
+ ;; ("C-o C-o" . helm-ag-this-file);;;;;
  ("C-M-o"   . helm-ag))
 ;; M-n で現在地にある文字を入力
 
