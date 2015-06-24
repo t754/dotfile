@@ -1,7 +1,29 @@
-# cask
+#!/bin/sh
+function _myCheck(){
+    type $1 || exit
+}
+
+_myCheck go
+_myCheck curl
+_myCheck ghq
 
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
-myInstall.sh
+
+black="/tmp/black"
+now="/tmp/now"
+cat blackList | sort > $black
+ls -1 -a  > $now 
+b=`diff $black $now | grep ">" | sed "s/[> ]//g" `
+c="$PWD"
+pushd $HOME
+    for a in $b; do
+        rm -rv $a
+        echo "$c/$a"
+        echo
+        ln -s "$c/$a"
+    done
+popd
+
 source ~/.bashrc
 cat golist  | xargs -L 1 go  get
 cat ghqlist | xargs -L 1 ghq get
