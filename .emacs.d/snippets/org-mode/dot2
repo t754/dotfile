@@ -1,0 +1,20 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: dot2
+# key: dot2
+# --
+#+name: bb_skip
+#+begin_src sh :var data="" :results output :export none 
+   extractbb $(echo "$data" | awk -F ":" '{gsub("\]*","",$${0}2);print($${0}2)}') 
+   echo "$data"
+#+end_src
+
+#+header: :file /tmp/$1.png
+#+begin_src dot :post bb_skip(data=*this*) :results drawer
+  digraph{
+          a -> b;
+          b -> c;
+          c -> a;
+  }
+#+end_src
+
+

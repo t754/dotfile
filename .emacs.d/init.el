@@ -106,9 +106,27 @@
  '(ace-isearch-input-length 5)
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
  '(mozc-leim-title "も")
+ '(org-latex-default-packages-alist
+   (quote
+    (("AUTO" "inputenc" t)
+     ("T1" "fontenc" t)
+     ("" "fixltx2e" nil)
+     ("dvipdfmx" "graphicx" t)
+     ("" "longtable" nil)
+     ("" "float" nil)
+     ("" "wrapfig" nil)
+     ("" "rotating" nil)
+     ("normalem" "ulem" t)
+     ("" "amsmath" t)
+     ("" "textcomp" t)
+     ("" "marvosym" t)
+     ("" "wasysym" t)
+     ("" "amssymb" t)
+     ("" "hyperref" nil)
+     "\\tolerance=1000"
+     ("" "svg" nil))))
  '(package-selected-packages (quote (package-build shut-up epl git commander f dash s)))
  '(tab-width 4)
- '(yas-prompt-functions (quote (my-yas/prompt)))
  '(yas-trigger-key "TAB"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

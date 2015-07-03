@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: latex-math-equation
+# key: latex-math-equation
+# --
+\begin{equation}
+$0
+\end{equation}

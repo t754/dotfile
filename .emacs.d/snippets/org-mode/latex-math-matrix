@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: latex-math-matrix
+# key: latex-math-matrix
+# --
+\begin{pmatrix}
+ $0
+\end{pmatrix}

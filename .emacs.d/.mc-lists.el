@@ -3,10 +3,15 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        beginning-of-indented-line
         cua-delete-region
+        go-mode-insert-and-indent
+        org-delete-char
+        org-forward-sentence
         org-self-insert-command
         sp--cua-replace-region
         sp--self-insert-command
+        toggle-input-method
         ))
 
 (setq mc/cmds-to-run-once
