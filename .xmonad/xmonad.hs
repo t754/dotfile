@@ -47,7 +47,7 @@ myManageHook = composeAll
     --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
     ] 
   --- where copyToWss ids win = map (copyWindow win) ids
-myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
+-- myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
 
 
 
@@ -103,9 +103,9 @@ main = xmonad $ xfceConfig
     , modMask            = mod4Mask
     , borderWidth        = 3
     , manageHook         = myManageHook <+> myManageHookShift <+> manageHook xfceConfig
-    , handleEventHook    =  ewmhDesktopsEventHook <+> fullscreenEventHook
+    , handleEventHook    = ewmhDesktopsEventHook <+> fullscreenEventHook
     , startupHook        = ewmhDesktopsStartup <+> setWMName "LG3D"
-    , workspaces         = myWorkspaces
+    -- , workspaces         = myWorkspaces
     , mouseBindings      = myMouseBindings
      }
     `additionalKeysP`
@@ -118,8 +118,8 @@ main = xmonad $ xfceConfig
     , ("M-S-h"   , sendMessage MirrorShrink)
     , ("M-S-l"   , sendMessage MirrorExpand)
     , ("M-S-z"   , spawn "xscreensaver-command -lock")
-    , ("M-S-t"   , spawn "xclock -chime -update 1 -geometry $(xdpyinfo | grep -B1 resolution | gawk -v SS=400 'BEGIN{FS=\"[ x]+\"} (NR==1){print SS\"x\"SS\"+\"$3/2-(SS/2)\"+\"$4/2-(SS/2)}')")
-    --, ("M-S-t" , spawn "xclock -chime -update 1")
+    -- , ("M-S-t"   , spawn "xclock -chime -update 1 -geometry $(xdpyinfo | grep -B1 resolution | gawk -v SS=400 'BEGIN{FS=\"[ x]+\"} (NR==1){print SS\"x\"SS\"+\"$3/2-(SS/2)\"+\"$4/2-(SS/2)}')")
+    , ("M-S-t" , spawn "xclock -chime -update 1")
     , ("M-g"     , spawn "xdotool mousemove 0 0")
     ]
  
