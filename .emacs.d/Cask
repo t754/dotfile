@@ -52,6 +52,7 @@
 (depends-on "helm-descbinds")
 (depends-on "helm-emmet")
 (depends-on "helm-gtags")
+(depends-on "helm-projectile")
 (depends-on "helm-rails")
 (depends-on "helm-robe")
 (depends-on "helm-swoop")
