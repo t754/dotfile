@@ -105,8 +105,6 @@
 ;; (setq org-export-latex-classes nil)
 
 ;; beamerの設定
-
-
 ;; [NO-DEFAULT-PACKAGES]
 ;; \\usepackage[dvipdfmx]{graphicx,color}
 ;; \\usepackage{amsmath}
@@ -133,9 +131,7 @@
         org-file-apps                           '(("pdf" . "evince %s"));; Viewerの設定(evince)
         org-beamer-frame-default-options        "fragile"
         org-latex-default-class                 "jarticle"
-        org-latex-classes
-        
-        `(("jarticle"
+        org-latex-classes     `(("jarticle"
            ,(case latex
               ('luatex "\\documentclass{ltjsarticle}\n")
               ('xetex  "\\documentclass[a4paper]{bxjsarticle}\n")
@@ -180,6 +176,7 @@
              "[NO-PACKAGES]\n"
              "\\usepackage{graphicx}\n")
            org-beamer-sectioning))))
+
 ;;;------------------------------------------------------------------
 ;;;; org-trello
 ;; (require 'org-trello)

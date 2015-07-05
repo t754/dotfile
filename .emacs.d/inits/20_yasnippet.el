@@ -36,12 +36,15 @@
 (custom-set-variables '(yas-trigger-key "TAB"))
 
 
+(setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-dropdown-prompt yas-completing-prompt  yas-no-prompt))
+
 ;;(define-key yas-minor-mode-map (kbd "TAB") nil)
 ;;(define-key yas-minor-mode-map (kbd "C-;") 'yas-expand)
 
 (bind-keys :map yas-minor-mode-map
            ("C-c y" .   helm-yas-complete)
-           ("C-c i i" . yas-insert-snippet);; 既存スニペットを挿入する
+           ("C-c i i" . helm-yas-complete);; 既存スニペットを挿入する
+           ;; ("C-c i i" . yas-insert-snippet);; 既存スニペットを挿入する
            ("C-c i n" . yas-new-snippet);; 新規スニペットを作成するバッファを用意する
            ("C-c i v" . yas-visit-snippet-file);; 既存スニペットを閲覧・編集する
            )

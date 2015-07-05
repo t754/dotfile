@@ -96,6 +96,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-a" . beginning-of-indented-line)
  ("C-x C-c" . my-save-buffers-kill-emacs)
  ("C-c <f5>" . revert-buffer-no-confirm)
+ ("C-M-t" . mc/mark-all-in-region)
  )
 
 (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
