@@ -63,6 +63,7 @@
 (depends-on "inf-clojure")
 (depends-on "inf-ruby")
 (depends-on "init-loader")
+(depends-on "jedi")
 (depends-on "js2-mode")
 (depends-on "js2-refactor")
 (depends-on "json-reformat")

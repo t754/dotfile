@@ -1,4 +1,7 @@
 
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)                 ; optional
+
 (defun python-mode-hooks ()
   (when (require 'highlight-indentation nil t)
 	(highlight-indentation-mode)
