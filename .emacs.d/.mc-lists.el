@@ -6,6 +6,7 @@
         beginning-of-indented-line
         cua-delete-region
         go-mode-insert-and-indent
+        helm-M-x
         my/mc/insert-numbers
         org-delete-char
         org-forward-sentence

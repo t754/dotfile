@@ -45,7 +45,7 @@
  ("C-x b"   . helm-buffers-list)
  ("C-x C-b" . helm-for-files)
  ;; ("C-x c i" . helm-imenu)
- ) 
+ )
 ;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
 
 (bind-keys :map helm-map 
