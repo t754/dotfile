@@ -30,7 +30,9 @@ import XMonad.Layout.ToggleLayouts
 -- import XMonad.Layout.SimplestFloat
 
 myterm::String
-myterm = "urxvt256c-ml"
+-- myterm = "urxvt256c-ml"
+myterm = "mlterm"
+
 -- myterm = "urxvt256c-ml -e bash -c \"tmux -q has-session && exec tmux attach-session -d || exec tmux new-session \""
 -- myterm = "urxvt256c-ml -e bash -c \"tmux  new-session \""
 main::IO()

@@ -8,6 +8,7 @@
 ;; (global-set-key (kbd "C-c p") 'smart-compile)
 ;; (define-key mode-specific-map (kbd "C-c p") 'compile)
 ;; (define-key mode-specific-map "e" 'next-error)
+
 (defun kill-whitespace ()
           "Kill the whitespace between two non-whitespace characters"
           (interactive "*")

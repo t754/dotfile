@@ -3,8 +3,7 @@
 ;; (require 'git-gutter)
 ;;;; (require 'git-gutter-fringe)
 ;;;; (setq git-gutter-fr:side 'right-fringe)
-;; (git-gutter:linum-setup)
-(global-git-gutter-mode t)
+;;
 (with-eval-after-load "git-gutter"
   (bind-keys :map global-map
              ("C-x C-g" . git-gutter)
@@ -19,7 +18,8 @@
       ("p"      . 'git-gutter:previous-hunk)))
 
   ;; '(git hg )
-  (setq git-gutter:handled-backends '(hg)))
+  (global-git-gutter-mode t)
+  (setq git-gutter:handled-backends '(git hg)))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ;; 何故か ediffの設定   ;;
