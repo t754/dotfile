@@ -38,7 +38,7 @@ shopt -s histappend
 # ${PROMPT_COMMAND:$PROMPT_COMMAND$'\n'}
 export PROMPT_COMMAND=" history -a; history -c; history -r;"
 
-export HISTIGNORE="fg*:bg*:history*:rm*:ls"
+export HISTIGNORE="fg*:bg*:history*:rm*:ls*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 
 # export COLORTERM="mlterm"
@@ -107,8 +107,6 @@ function parse_git_branch() {
 #     return $e
 # }
 
-function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
-trap EC ERR
 
 ulimit -c 4096
 
@@ -143,17 +141,21 @@ function colors() {
 	done
 }
 
-#  or flat
 
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    export POWERSHELL_MODE="flat"
-else
-    export POWERSHELL_MODE="patched"
-fi
-function _update_ps1() {
-    export PS1="$(~/powerline-shell.py --mode ${POWERSHELL_MODE} --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
-}
-PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
+### POWERLINE OLD
+## if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+##     export POWERSHELL_MODE="flat"
+## else
+##     export POWERSHELL_MODE="patched"
+## fi
+## function _update_ps1() {
+##     export PS1="$(~/powerline-shell.py --mode ${POWERSHELL_MODE} --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
+## }
+## PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
+# POWERLINE new!!
+export POWERLINE_BASH_CONTINUATION=1
+export POWERLINE_BASH_SELECT=1
+. /usr/lib/python3.4/site-packages/powerline/bindings/bash/powerline.sh
 
 complete -cf sudo
 complete -cf man
@@ -211,6 +213,13 @@ function man() {
 
 if [ "x${WINDOWID}" != "x" ] ; then
     if [ -x "`which keychain`" ]; then
-        eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
+        if [ $(hostname) = "localhost.localdomain" ]; then
+            eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit2 id_rsa.zt)
+        else 
+            eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
+        fi
     fi
 fi
+
+function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
+trap EC ERR
