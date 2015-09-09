@@ -31,8 +31,8 @@ import XMonad.Layout.ToggleLayouts
 
 myterm::String
 -- myterm = "urxvt256c-ml"
-myterm = "mlterm"
-
+myterm = "st -f \"Hack:size=16\""
+-- myterm = "st -f \"RictyDiminished-Regular-Powerline:size=16\""
 -- myterm = "urxvt256c-ml -e bash -c \"tmux -q has-session && exec tmux attach-session -d || exec tmux new-session \""
 -- myterm = "urxvt256c-ml -e bash -c \"tmux  new-session \""
 main::IO()
@@ -45,11 +45,12 @@ myManageHook = composeAll
     , className =? "Xfrun4" --> doFloat
     , className =? "Xfce4-appfinder" --> doFloat
     , className =? "XClock" --> doFloat
+    , className =? "MPlayer" --> doFloat
     -- , className =? "Xfce4-panel" --> doIgnore
     --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
     ] 
   --- where copyToWss ids win = map (copyWindow win) ids
--- myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
+myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
 
 
 
@@ -106,19 +107,25 @@ main = xmonad $ xfceConfig
     , borderWidth        = 3
     , manageHook         = myManageHook <+> myManageHookShift <+> manageHook xfceConfig
     , handleEventHook    = ewmhDesktopsEventHook <+> fullscreenEventHook
-    , startupHook        = ewmhDesktopsStartup <+> setWMName "LG3D"
-    -- , workspaces         = myWorkspaces
+    , startupHook        = startupHook xfceConfig 
+                         >> setWMName "LG3D" -- Java app focus fix                       
+    -- , startupHook        = startupHook conf
+    
     , mouseBindings      = myMouseBindings
+    , logHook    = ewmhDesktopsLogHook                       
      }
     `additionalKeysP`
     [ ("M-S-r"   , restart "xmonad" True)
+     ,("M-q"     , spawn "setxkbmap && xmodmap ~/.xmodmap")
     , ("M-S-q"   , spawn "xfce4-session-logout")
     , ("M-p"     , spawn "xfce4-appfinder")
-    , ("M-S-f"   , spawn "pidof firefox || firefox")  
+    , ("M-S-f"   , spawn "pidof firefox || firefox")
+    , ("M-S-e"   , spawn "emacsclient -c -n")  
     , ("M-f"     , sendMessage  ToggleLayout)
     , ("M-b"     , sendMessage   ToggleStruts)
     , ("M-S-h"   , sendMessage MirrorShrink)
     , ("M-S-l"   , sendMessage MirrorExpand)
+    , ("M-S-z"   , spawn "xscreensaver-command -lock")
     , ("M-S-z"   , spawn "xscreensaver-command -lock")
     -- , ("M-S-t"   , spawn "xclock -chime -update 1 -geometry $(xdpyinfo | grep -B1 resolution | gawk -v SS=400 'BEGIN{FS=\"[ x]+\"} (NR==1){print SS\"x\"SS\"+\"$3/2-(SS/2)\"+\"$4/2-(SS/2)}')")
     , ("M-S-t" , spawn "xclock -chime -update 1")
