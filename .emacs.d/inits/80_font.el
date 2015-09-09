@@ -40,6 +40,26 @@
 
 ;;  フォントファミリ (pp (font-family-list))
 ;; (setq default-frame-alist '((font . "VL ゴシック-16")))
+
+  
+
+
+;; family-name → "RictyDiminished"
+(defun my/font-set (family-name font-sizee)
+  ;; 120 90 1.2
+  (dolist (xxx '(katakana-jisx0201 japanese-jisx0208 japanese-jisx0212))
+    (set-fontset-font (frame-parameter nil 'font)
+                      xxx
+                      (font-spec
+                       :family family-name 
+                       :height font-sizee)
+                      ))
+    ;; (add-to-list 'face-font-rescale-alist
+  ;;              '(concat ".*" family-name ".*") . (/ alphabet-size 100.0))
+  
+    )
+
+
 (cond
  ( (equal system-name "utrtamako" )
    ;; (setq default-frame-alist '((font . "Source Han Code JP")))
@@ -68,27 +88,18 @@
   ;;                  (cons "Migu 1m" "iso10646-1"))
   )
 
- ((equal system-name "localhostss")
+ ((some (lambda (strs) (equal system-name strs))
+        '("localhost.localdomain"
+          "localhost.homenetwork"
+          "localhostss"))
   (set-frame-font "Ricty-12")
   (set-face-attribute 'default nil
                       :family "Ricty"
                       :height 120)
-  (setq default-frame-alist '((font . "Ricty-12"))))
- 
- ((some (lambda (strs) (equal system-name strs))
-        '("localhost.localdomain"
-          "localhost.homenetwork"))
+  (add-to-list 'default-frame-alist '((font . "Ricty-12"))))
+  ;; (my/font-set "RictyDiminished" 120)
   
-  (set-frame-font "RictyDiminished-12")
-  (set-face-attribute 'default nil
-                      :family "RictyDiminished"
-                      :height 120)
-  (setq default-frame-alist '((font . "RictyDiminished-12")))
-  ))
-
-
-
-
+  )
 
 ;; (set-fontset-font nil 'japanese-jisx0208
 ;; 				  (font-spec :family "Migu 1M"))
