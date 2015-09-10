@@ -102,7 +102,6 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
 
 (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 
+(bind-keys :map goto-map ("M-d" . toggle-cleanup-spaces))
 
 (bind-key "C-x @ C" 'event-apply-control-shift-modifier function-key-map)
-
-

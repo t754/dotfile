@@ -76,6 +76,8 @@
 ;;tab -> 空白に
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq-default indent-tabs-mode nil)
+;; 末尾空白
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; "yes or no"を"y or n"に
 (fset 'yes-or-no-p 'y-or-n-p)
 (custom-set-variables
@@ -90,9 +92,32 @@
 ;;起動画面いれない
 (setq inhibit-startup-message t)
 
-;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; かっこ強調は color theme に移動
+;; ;;;;;;
+;; 行末のスペース + ファイル末尾の連続する改行の除去を行う
+(defvar my/current-cleanup-state "")
+(defun my/cleanup-for-spaces ()
+  (interactive)
+  (delete-trailing-whitespace)
+  (save-excursion
+    (save-restriction
+      (widen)
+      (goto-char (point-max))
+      (delete-blank-lines))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'before-save-hook 'my/cleanup-for-spaces)
+
+(setq-default mode-line-format
+              (cons '(:eval my/current-cleanup-state)
+                    mode-line-format))
+
+(defun toggle-cleanup-spaces ()
+  (interactive)
+  (cond ((memq 'my/cleanup-for-spaces before-save-hook)
+         (setq my/current-cleanup-state
+               (propertize "[DT-]" 'face '((:weight bold))))
+         (remove-hook 'before-save-hook 'my/cleanup-for-spaces))
+        (t
+         (setq my/current-cleanup-state "")
+         (add-hook 'before-save-hook 'my/cleanup-for-spaces)))
+  (force-mode-line-update))
