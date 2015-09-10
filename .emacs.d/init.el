@@ -1,5 +1,5 @@
 ;; (setq load-path (append '("~/.emacs.d/" ; 自作のlispやinit.el
-;;                           ;;						  "~/.emacs.d/howm/" 	
+;;                           ;;						  "~/.emacs.d/howm/"
 ;;                           "~/.emacs.d/org-mode2/lisp";元はorg-VERJON/elisp
 ;; 						  "~/.emacs.d/elpa/init-loader-20130218.1210/"
 ;;                           ;;						  "~/.emacs.d/elpa/"
@@ -9,7 +9,7 @@
 ;;                           "~/"
 ;; 						  ) load-path))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;ビープ音を消す 
+                                        ;ビープ音を消す
 (setq visible-bell t);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (setq gc-cons-threshold (* 256 1024 1024))
 
@@ -37,7 +37,7 @@
 ;;     (setq exec-path (append (list dir) exec-path))))
 ;; ;; shell の存在を確認
 ;; (defun skt:shell ()
-;;   (or 
+;;   (or
 ;;    (executable-find "bash")
 ;;    (executable-find "zsh")
 ;;                                         ;      (executable-find "f_zsh") ;; Emacs + Cygwin を利用する人は Zsh の代りにこれにしてください
@@ -85,7 +85,7 @@
 (pallet-mode t)
 
 
-;;inits -- start-els    
+;;inits -- start-els
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/inits")
 

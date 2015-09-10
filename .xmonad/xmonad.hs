@@ -19,7 +19,7 @@ import qualified Data.Map        as M
 
 -- import qualified Data.Map as M
 
-import XMonad.Hooks.EwmhDesktops 
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.SetWMName
 -- import Data.Ratio ((%))
 import XMonad.Layout.ToggleLayouts
@@ -48,13 +48,13 @@ myManageHook = composeAll
     , className =? "MPlayer" --> doFloat
     -- , className =? "Xfce4-panel" --> doIgnore
     --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
-    ] 
+    ]
   --- where copyToWss ids win = map (copyWindow win) ids
 myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
 
 
 
-myLayout = 
+myLayout =
     toggleLayouts Full
     $ avoidStruts
     $ smartBorders
@@ -63,10 +63,10 @@ myLayout =
     -- ||| simplestFloat
     ||| Full
     where
-      -- skype = And (ClassName "Skype") (Role "")       
+      -- skype = And (ClassName "Skype") (Role "")
       tall = ResizableTall 1 (3/100) (7/10) []
 
-    
+
 
 
 myManageHookShift = composeAll
@@ -77,7 +77,7 @@ myManageHookShift = composeAll
      , className =? "Thunderbird"   --> viewShift "5"
      , className =? "VirtualBox"   --> viewShift "3"
      ]
-  where viewShift = doF . liftM2 (.) W.view W.shift     
+  where viewShift = doF . liftM2 (.) W.view W.shift
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -107,12 +107,12 @@ main = xmonad $ xfceConfig
     , borderWidth        = 3
     , manageHook         = myManageHook <+> myManageHookShift <+> manageHook xfceConfig
     , handleEventHook    = ewmhDesktopsEventHook <+> fullscreenEventHook
-    , startupHook        = startupHook xfceConfig 
-                         >> setWMName "LG3D" -- Java app focus fix                       
+    , startupHook        = startupHook xfceConfig
+                         >> setWMName "LG3D" -- Java app focus fix
     -- , startupHook        = startupHook conf
-    
+
     , mouseBindings      = myMouseBindings
-    , logHook    = ewmhDesktopsLogHook                       
+    , logHook    = ewmhDesktopsLogHook
      }
     `additionalKeysP`
     [ ("M-S-r"   , restart "xmonad" True)
@@ -120,7 +120,7 @@ main = xmonad $ xfceConfig
     , ("M-S-q"   , spawn "xfce4-session-logout")
     , ("M-p"     , spawn "xfce4-appfinder")
     , ("M-S-f"   , spawn "pidof firefox || firefox")
-    , ("M-S-e"   , spawn "emacsclient -c -n")  
+    , ("M-S-e"   , spawn "emacsclient -c -n")
     , ("M-f"     , sendMessage  ToggleLayout)
     , ("M-b"     , sendMessage   ToggleStruts)
     , ("M-S-h"   , sendMessage MirrorShrink)
@@ -131,4 +131,4 @@ main = xmonad $ xfceConfig
     , ("M-S-t" , spawn "xclock -chime -update 1")
     , ("M-g"     , spawn "xdotool mousemove 0 0")
     ]
- 
+

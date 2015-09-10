@@ -26,7 +26,7 @@ URxvt*loginShell:                       ture
 ! URxvt*jumpScroll:                     boolean
 ! URxvt*skipScroll:                     boolean
 ! URxvt*pastableTabs:                   boolean
-URxvt*scrollstyle:                     plain 
+URxvt*scrollstyle:                     plain
 URxvt*scrollBar:                        true
 ! Urxvt*scrollBar_right:                  true
 ! URxvt*scrollBar_floating:             boolean
@@ -146,8 +146,8 @@ URxvt*iso14755:                         false
 URxvt*iso14755_52:                      false
 ! URxvt*xrm:                            string
 ! URxvt*keysym.sym:                     keysym
-! URxvt.keysym.C-S-Up:                      perl:font-size:increase 
-! URxvt.keysym.C-S-Down:                    perl:font-size:decrease 
+! URxvt.keysym.C-S-Up:                      perl:font-size:increase
+! URxvt.keysym.C-S-Down:                    perl:font-size:decrease
 URxvt.keysym.C-S-Up:                    perl:font-size:incglobal
 URxvt.keysym.C-S-Down:                  perl:font-size:decglobal
 URxvt.keysym.M-u:                       perl:url-select:select_next

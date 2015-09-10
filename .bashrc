@@ -1,4 +1,4 @@
-# ~/.bashrc 
+# ~/.bashrc
 # If not running interactively, don't do anything
 
 [[ $- != *i* ]] && return
@@ -13,18 +13,18 @@ export EDITOR="emacsclient -nw"
 export ALTERNATE_EDITOR=""
 export PAGER="less"
 export LESS=' -R -X -I'
-export LESS_TERMCAP_mb=$'\E[01;31m' 
-export LESS_TERMCAP_md=$'\E[01;38;5;74m' 
-export LESS_TERMCAP_me=$'\E[0m' 
-export LESS_TERMCAP_se=$'\E[0m' 
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
 # export LESS_TERMCAP_so=$'\E[38;5;246m'
 export LESS_TERMCAP_so=$'\E[01;33;03;40m'
 export LESS_TERMCAP_so=$'\E[30;43m'
-export LESS_TERMCAP_ue=$'\E[0m' 
-export LESS_TERMCAP_us=$'\E[04;38;5;146m' 
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[04;38;5;146m'
 if type src-hilite-lesspipe.sh  >/dev/null 2>&1 ; then
     export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
-fi    
+fi
 export VISUAL="emacs"
 export BROWSER="firefox"
 export TZ="Asia/Tokyo"
@@ -88,7 +88,7 @@ function parse_git_branch() {
 #             continue
 #         fi
 #         case $i in
-#             *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='tar xvf';; # 
+#             *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='tar xvf';; #
 #             *.7z)  c='7z x';;
 #             *.Z)   c='uncompress';;
 #             *.bz2) c='bunzip2';;
@@ -163,7 +163,7 @@ PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 complete -cf sudo
 complete -cf man
 
-# function ipif() { 
+# function ipif() {
 #     if \grep -P "(([1-9]\d{0,2})\.){3}(?2)" <<< "$1"; then
 # 	curl ipinfo.io/"$1"
 #     else
@@ -218,7 +218,7 @@ if [ "x${WINDOWID}" != "x" ] ; then
     if [ -x "`which keychain`" ]; then
         if [ $(hostname) = "localhost.localdomain" ]; then
             eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit2 id_rsa.zt)
-        else 
+        else
             eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
         fi
     fi

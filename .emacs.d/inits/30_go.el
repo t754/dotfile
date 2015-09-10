@@ -14,9 +14,9 @@
 
   (add-hook 'before-save-hook 'gofmt-before-save)
 
-  
+
   ;; (add-hook 'go-mode-hook 'flycheck-mode)
-  
+
   (define-key go-mode-map (kbd "M-.") 'godef-jump)
   (define-key go-mode-map (kbd "C-c C-r") 'go-remove-unused-imports))
 

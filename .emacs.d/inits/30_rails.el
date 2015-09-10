@@ -2,7 +2,7 @@
 (require 'projectile)
 (require 'projectile-rails)
 (require 'helm-rails)
-;; 
+;;
 ;;
 
 ;; (setq rbenv-show-active-ruby-in-modeline nil)

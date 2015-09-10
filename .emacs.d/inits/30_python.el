@@ -8,7 +8,7 @@
 	(highlight-indentation-current-column-mode)
 	(set-face-background 'highlight-indentation-face "gray4")
 	(set-face-background 'highlight-indentation-current-column-face "gray20"))
-  
+
   (when (require 'whitespace nil t)
 	(setq whitespace-style '(face; faceで可視化
 							 trailing; 行末
@@ -20,7 +20,7 @@
 							 ))
     ;; (setq whitespace-display-mappings
     ;;       '((space-mark   ?\    [?\xB7]     [?.])	; space
-    ;;        (space-mark   ?\xA0 [?\xA4]     [=?_])= 
+    ;;        (space-mark   ?\xA0 [?\xA4]     [=?_])=
     ;;         (newline-mark ?\n   [?\xB6 ?\n] [?$ ?\n])	; end-of-line
     ;;         ))
 	(setq whitespace-display-mappings
@@ -32,9 +32,9 @@
 			;; If this is a problem for you, please, comment the line below.
 			(tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
 	;; スペースは全角のみを可視化
-	(setq whitespace-space-regexp "\\(\u3000+\\)")   
+	(setq whitespace-space-regexp "\\(\u3000+\\)")
 	;; 保存前に自動でクリーンアップ
-	;;(setq whitespace-action '(auto-cleanup)) 
+	;;(setq whitespace-action '(auto-cleanup))
 	;;(global-whitespace-mode 1)f
 	(setq-default tab-width 4 indent-tabs-mode t)
 	(defvar my/bg-color "#232323")
@@ -85,7 +85,7 @@
 ;;              (setq whitespace-style '(face lines-tail))
 ;;              (whitespace-mode))))
 ;;(add-hook  'python-mode-hook 'whitespace-mode)
-;;(global-whitespace-mode 1)              
+;;(global-whitespace-mode 1)
 ;;(set-face-foreground 'whitespace-space "LightSlateGray")
 ;;(set-face-background 'whitespace-space "DarkSlateGray")
 ;;(set-face-foreground 'whitespace-tab "LightSlateGray")

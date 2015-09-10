@@ -61,7 +61,7 @@ class Powerline:
         return self.color('48', code)
 
     def append(self, content, fg, bg, separator=None, separator_fg=None):
-        self.segments.append((content, fg, bg, 
+        self.segments.append((content, fg, bg,
             separator if separator is not None else self.separator,
             separator_fg if separator_fg is not None else bg))
 
@@ -183,7 +183,7 @@ class Color(DefaultColor):
     USERNAME_FG = 236
     USERNAME_BG = 208
     USERNAME_ROOT_BG = 11
-    
+
     HOSTNAME_FG = 52
     HOSTNAME_BG = 220
 
@@ -206,7 +206,7 @@ class Color(DefaultColor):
     REPO_CLEAN_BG = 0
     REPO_DIRTY_FG = 3
     REPO_DIRTY_BG = 235
-    
+
     JOBS_FG = 11
     JOBS_BG = 28
     # %
@@ -222,7 +222,7 @@ class Color(DefaultColor):
     VIRTUAL_ENV_FG = 100
     LAST_BG= 0
     LAST_FG= 2
-    
+
 
 
 import os

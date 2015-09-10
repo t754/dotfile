@@ -1,6 +1,6 @@
 ;; (require 'moccur-edit nil t)
 (require 'helm-ag);;agg
-(require 'helm-config) 
+(require 'helm-config)
 (require 'all-ext)
 (require 'helm-swoop)
 (require 'ace-isearch)
@@ -37,7 +37,7 @@
 
 ;;;; C-u 4 M-x helm-swoop ← で 4行まとめ検索
 (global-set-key (kbd "M-i") 'helm-swoop)
-(bind-keys :map isearch-mode-map 
+(bind-keys :map isearch-mode-map
            ("M-i" . helm-swoop-from-isearch)
            ("C-o" . helm-occur-from-isearch)) ;; isearchからhelm-occurを起動
 ;; (unbind-key "C-o")

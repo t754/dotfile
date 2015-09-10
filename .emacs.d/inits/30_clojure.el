@@ -20,13 +20,13 @@
 ;;;;; nrepl-buffer-name-show-port   t
 ;;;;; nrepl-hide-special-buffers    t
 ;;;;; )
-;;;;; 
-;;;;;;; 
+;;;;;
+;;;;;;;
 ;;;;;;; ;; mini bufferに関数の引数を表示させる
 ;;;;;;; (add-hook 'cider-mode-hook #'cider-turn-on-eldoc-mode)
-;;;;; 
-;;;;; 
-;;;;; 
+;;;;;
+;;;;;
+;;;;;
 ;;;;;;;;; ----------------------------
 ;;;;;;;;; AAAAAAAAACCCCCCCCCCCC
 ;;;;;(add-hook 'clojure-mode-hook       'cider-mode)
@@ -35,18 +35,18 @@
 ;;;;;;; (add-hook 'cider-mode-hook         'ac-cider-setup)
 ;;;;;(add-hook 'cider-mode-hook         'set-auto-complete-as-completion-at-point-function)
 ;;;;;(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
-;;;;; 
+;;;;;
 ;;;;;(with-eval-after-load "auto-complete"
 ;;;;;  (add-to-list 'ac-modes 'cider-mode)
 ;;;;;  ;; (add-to-list 'ac-modes 'cider-repl-mode)
 ;;;;;  )
-;;;;; 
+;;;;;
 ;;;;;(defun set-auto-complete-as-completion-at-point-function ()
 ;;;;;  (setq completion-at-point-functions '(auto-complete)))
-;;;;; 
-;;;;; 
+;;;;;
+;;;;;
 ;;;;;;;;; ----------------------------
-;;;;; 
+;;;;;
 ;;;;;(defun clojure-auto-complete ()
 ;;;;;  (interactive)
 ;;;;;  (let ((ac-sources
@@ -58,8 +58,8 @@
 ;;;;;           ac-source-nrepl-static-methods
 ;;;;;           ,@ac-sources)))
 ;;;;;    (auto-complete)))
-;;;;; 
-;;;;; 
+;;;;;
+;;;;;
 ;;;;;;; M-x clojure-cheatsheetで以下のサイトにある情報(同じもの？)を参照できる。 helm 可
 ;;;;;;; M-x slamhoundすると , 必要なpackageを自動でrequrieしてくれるツール。
 ;;;;;(defun clojure-mode-hooks ()
@@ -72,7 +72,7 @@
 ;;;;;    (HEAD 2)
 ;;;;;    (ANY 2)
 ;;;;;    (context 2)))
-;;;;; 
+;;;;;
 ;;;;;(add-hook 'clojure-mode-hook 'clojure-mode-hooks)
 
 

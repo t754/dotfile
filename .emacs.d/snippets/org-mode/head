@@ -4,7 +4,7 @@
 # --
 #+TITLE: $1
 #+AUTHOR: 名越 琢真
-#+EMAIL: 
+#+EMAIL:
 #+DATE: \today 提出
 #+OPTIONS: toc:nil num:t author:t creator:nil timestamp:nil \n:nil ^:nil -:t ::t
 #+LANGUAGE: ja

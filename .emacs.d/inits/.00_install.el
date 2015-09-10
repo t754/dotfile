@@ -8,7 +8,7 @@
 ;; dammy desu
 (when(require 'auto-install nil t)
   (setq auto-install-directory "~/.emacs.d/elisp/")
-;; ↓ダミーですよ 
+;; ↓ダミーですよ
 (setq auto-install-update-emacswiki-package-name t)
   (auto-install-update-emacswiki-package-name t)
   ;(setq  url-proxy-services '(("http" . "localhost:8339")))
@@ -36,7 +36,7 @@
 ;;    			 '("gnu" . "http://elpa.gnu.org/packages/") t)
 ;; (add-to-list 'package-archives
 ;;              '("ELPA" . "http://tromey.com/elpa/" ) t)
-;; (add-to-list 'package-archives 
+;; (add-to-list 'package-archives
 ;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ;; (add-to-list 'package-archives
 ;;              '("org" . "http://orgmode.org/elpa/") t)

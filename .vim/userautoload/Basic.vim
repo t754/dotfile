@@ -1,7 +1,7 @@
 " カーソルの上または下に表示する最小限の行数
 set scrolloff=5
 " クリップボードをwindowsと連携
-set clipboard=unnamed,autoselect 
+set clipboard=unnamed,autoselect
 " 入力されているテキストの最大幅 「0」で無効
 set textwidth=0
 " バックアップの作成は行わない

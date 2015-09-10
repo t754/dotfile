@@ -32,7 +32,7 @@
          (connection-product  (eval (cadr (assoc 'sql-product connection-info))))
          (sql-password (car (last (assoc connection my-sql-password)))))
      (print connection-product)
-    
+
     (delete sql-password connection-info)
     (nconc connection-info `((sql-password ,sql-password)))
     (setq sql-connection-alist (assq-delete-all connection sql-connection-alist))

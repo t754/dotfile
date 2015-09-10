@@ -32,26 +32,26 @@
       org-return-follows-link                 t
       org-enforce-todo-dependencies           t
       org-log-done                            'time ;; DONEの時刻を記録
-      org-todo-keywords                       '((sequence "INBOX(i)" "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)"));; TODO状態 
+      org-todo-keywords                       '((sequence "INBOX(i)" "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)"));; TODO状態
       org-agenda-files                        (list org-directory) ;; アジェンダ表示の対象ファイル
       hl-line-face                            'underline
       calendar-holidays                       nil ;; 標準の祝日を利用しない
       org-alphabetical-lists                  t
       org-tag-alist                           '(("@OFFICE" . ?o) ("@HOME" . ?h) ("NOTE" . ?s))
-      
-      
+
+
       org-export-latex-coding-system          'utf-8-unix
       org-export-with-sub-superscripts        nil
 
       org-html-html5-fancy                    t
-      
-      org-latex-text-markup-alist             '((bold . "\\textbf{%s}") 
+
+      org-latex-text-markup-alist             '((bold . "\\textbf{%s}")
                                                 (code . verb)
                                                 (italic . "\\textit{%s}")
                                                 (strike-through . "\\sout{%s}")
                                                 (underline . "\\underline{%s}")
                                                 (verbatim . protectedtexttt))
-      
+
       org-capture-templates                   '(("t" "Task" entry (file+headline nil "Inbox")
                                                  "** TODO %?\n %T\n %a\n %i\n")
                                                 ("b" "Bug" entry (file+headline nil "Inbox")

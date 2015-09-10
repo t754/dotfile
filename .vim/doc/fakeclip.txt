@@ -114,7 +114,7 @@ KEY MAPPINGS					*fakeclip-key-mappings*
 			|i_CTRL-R_CTRL-P|, |c_CTRL-R|, |c_CTRL-R_CTRL-R| or
 			|c_CTRL-R_CTRL-O|, but insert the content of the
 			clipboard.
-	
+
 
 [count]<Plug>(fakeclip-screen-y){motion}	*<Plug>(fakeclip-screen-y)*
 [count]<Plug>(fakeclip-screen-Y)		*<Plug>(fakeclip-screen-Y)*
@@ -150,7 +150,7 @@ KEY MAPPINGS					*fakeclip-key-mappings*
 			|i_CTRL-R_CTRL-P|, |c_CTRL-R|, |c_CTRL-R_CTRL-R| or
 			|c_CTRL-R_CTRL-O|, but insert the content of the
 			paste buffer.
-	
+
 
 					  *g:fakeclip_no_default_key_mappings*
 						*:FakeclipDefaultKeyMappings*

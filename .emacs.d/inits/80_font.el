@@ -41,7 +41,7 @@
 ;;  フォントファミリ (pp (font-family-list))
 ;; (setq default-frame-alist '((font . "VL ゴシック-16")))
 
-  
+
 
 
 ;; family-name → "RictyDiminished"
@@ -51,12 +51,12 @@
     (set-fontset-font (frame-parameter nil 'font)
                       xxx
                       (font-spec
-                       :family family-name 
+                       :family family-name
                        :height font-sizee)
                       ))
     ;; (add-to-list 'face-font-rescale-alist
   ;;              '(concat ".*" family-name ".*") . (/ alphabet-size 100.0))
-  
+
     )
 
 
@@ -73,7 +73,7 @@
   ;; (set-face-attribute 'default nil
   ;;   	    :family "Ricty"
   ;;   	    :height 120)
-  
+
   (set-face-attribute 'default nil
                       :family "Migu 1m"
                       :height 150)
@@ -98,7 +98,7 @@
                       :height 120)
   (add-to-list 'default-frame-alist '((font . "Ricty-12"))))
   ;; (my/font-set "RictyDiminished" 120)
-  
+
   )
 
 ;; (set-fontset-font nil 'japanese-jisx0208

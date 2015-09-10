@@ -23,7 +23,7 @@
     ("o"        . 'mc/sort-regions)
     ("O"        . 'mc/reverse-regions)))
 
-;; 
+;;
 (defvar my/mc/counter 0)
 (defvar my/mc/format-list nil)
 

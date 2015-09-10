@@ -13,7 +13,7 @@
         gdb-use-separate-io-buffer t)
   (add-hook 'gdb-mode-hook '(lambda () (gud-tooltip-mode t)))
 
-  
+
   (set (make-local-variable 'eldoc-idle-delay) 0.20)
   ;; (flymake-mode t)
   (define-key c-mode-map (kbd "C-c C-p") 'c-indent-defun))

@@ -39,7 +39,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/tamas/perl5"; export PERL_MM_OPT;
 export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB
 
 
-# 
+#
 export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools:$GOPATH/bin:$HOME/.rbenv/bin:$HOME/share/flex/flex3/bin:$HOME/perl5/bin"
 export PATH="$HOME/H8H/bin:$PATH"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
@@ -59,7 +59,7 @@ if [ -r $HOME/.ghq/github.com/rupa/z/z.sh ] ; then
 fi
 
 
-    
+
 #####Kemmap?
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
@@ -173,7 +173,7 @@ function extract() {
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
-# コンパイル面倒くさい用 
+# コンパイル面倒くさい用
 function runcpp () { g++ $1 && shift && ./a.out $@ }
 # peco 用
 function peco-select-history() {
@@ -226,11 +226,11 @@ eval "$(rbenv init -)"
 #     archey3
 #     fortune -s | tee /tmp/trans;echo;goslate.py -t ja /tmp/trans
 # fi
-# $HOME/screenfetch 2> /dev/null    
+# $HOME/screenfetch 2> /dev/null
 
 
 
-setopt auto_cd                  # ディレクトリ名と一致した場合 cd 
+setopt auto_cd                  # ディレクトリ名と一致した場合 cd
 function chpwd {
     ls
 }

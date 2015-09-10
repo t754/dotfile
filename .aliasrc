@@ -16,9 +16,9 @@ alias du="du -h -c"
 alias df="df -h -T --total"
 alias grep="grep -i -n --color"
 # sudo alias get
-alias sudo="sudo " 
+alias sudo="sudo "
 
-# alias bee='for i in {1..5}; do aplay -D plughw:1,7 ~/beep.wav; done' 
+# alias bee='for i in {1..5}; do aplay -D plughw:1,7 ~/beep.wav; done'
 alias pgg='ps -Af | grep'
 alias xsels='xsel -ib < /tmp/screen-exchange'
 alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
@@ -95,7 +95,7 @@ drm() { docker rm $(docker ps -a -q); }
 # Remove all images
 dri() { docker rmi $(docker images -q); }
 
-# Dockerfile build, e.g., $dbu tcnksm/test 
+# Dockerfile build, e.g., $dbu tcnksm/test
 dbu() { docker build -t=$1 .; }
 
 # Show all alias related docker
@@ -152,7 +152,7 @@ route () {
   echo 'Use `ip r`'
 }
 
-# 
+#
 function cdd {
     local dir=$( find . -maxdepth 1 -type d | sed  -e '1d' -e 's;\./;;' | sort | sed -e '$a..\n.' | peco --query "$READLINE_LINE" )
     if [ ! -z "$dir" ] ; then

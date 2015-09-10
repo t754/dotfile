@@ -10,8 +10,8 @@
 ;;
 (setq process-coding-system-alist '(("bash" . undecided-unix)))
 (setq shell-file-name "bash")
-(setenv "SHELL" shell-file-name) 
-(setq explicit-shell-file-name shell-file-name) 
+(setenv "SHELL" shell-file-name)
+(setq explicit-shell-file-name shell-file-name)
 ;;
 ;; これは、Java アプリケーションの出力に出現する
 ;; 見苦しい ^M 文字を削除します。

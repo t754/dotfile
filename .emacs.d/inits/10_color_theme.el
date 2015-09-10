@@ -1,6 +1,6 @@
 ;;;;色設定 http://th.nao.ac.jp/MEMBER/zenitani/elisp-j.html#color
 ;;(set-background-color "#98bc98") ;; background color
-;;(set-foreground-color "black") 
+;;(set-foreground-color "black")
 ;;   ;; モードラインの文字の色を設定します。
 ;;  (set-face-foreground 'modeline "white")
 ;;  (set-face-background 'modeline "MediumPurple2")
@@ -18,7 +18,7 @@
 (eval-when-compile
   (require 'color-theme))
 
-;; (defun color-theme-molokai () 
+;; (defun color-theme-molokai ()
 ;;   "Color theme based on the Molokai color scheme for vim."
 ;;   (interactive)
 ;;   (color-theme-install
@@ -110,7 +110,7 @@
 
 
 
- 
+
 
 
 

@@ -106,7 +106,7 @@
   "Draw line right."
   (interactive "p")
   (picture-line-draw n 0 1 nil))
-			  
+
 (defun picture-line-draw-left (n)
   "Draw line left."
   (interactive "p")
@@ -126,7 +126,7 @@
   "Delete line right."
   (interactive "p")
   (picture-line-draw n 0 1 t))
-			  
+
 (defun picture-line-delete-left (n)
   "Delete line left."
   (interactive "p")

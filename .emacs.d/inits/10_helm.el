@@ -36,7 +36,7 @@
 ;; C-x b で helm-for-files
 ;; (eval-after-load 'helm
 ;;   '(progn
-(bind-keys* 
+(bind-keys*
  ("M-r"     . helm-resume)
  ("M-y"     . helm-show-kill-ring)
  ("C-<f6>"  . helm-ls-git-ls)
@@ -46,10 +46,10 @@
  ;; ("C-x c i" . helm-imenu)
  )
 (global-set-key (kbd "M-x") 'helm-M-x)
- 
+
 ;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
 
-(bind-keys :map helm-map 
+(bind-keys :map helm-map
            ;; ("C-h" . delete-backward-char)
            ;; ("C-z" . scroll-down-command)
            ("C-u C-z" . helm-buffer-run-kill-buffers))
