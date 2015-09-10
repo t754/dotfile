@@ -11,25 +11,22 @@
                    (switch-to-buffer "*scratch*")))
     (cond ((= arg 0) (message "*scratch* is cleared up."))
           ((= arg 1) (message "another *scratch* is created")))))
- 
+
 (add-hook 'kill-buffer-query-functions
           ;; *scratch* バッファで kill-buffer したら内容を消去するだけにする
           (lambda ()
             (if (string= "*scratch*" (buffer-name))
                 (progn (my-make-scratch 0) nil)
               t)))
- 
-(add-hook 'after-save-hook
-          ;; *scratch* バッファの内容を保存したら *scratch* バッファを新しく作る
-          (lambda ()
-            (unless (member (get-buffer "*scratch*") (buffer-list))
-              (my-make-scratch 1))))
 
-(defun make-scratch-buffer ()
-  (interactive)
-  (set-buffer
-	(switch-to-buffer "*scratch*")
-  )
-  (execute-extended-command 'lisp-interaction-mode)
-  (setq need-not-save t)
-)
+;; (add-hook 'after-save-hook
+;;           ;; *scratch* バッファの内容を保存したら *scratch* バッファを新しく作る
+;;           (lambda ()
+;;             (unless (member (get-buffer "*scratch*") (buffer-list))
+;;               (my-make-scratch 1))))
+;; (defun make-scratch-buffer ()
+;;   (interactive)
+;;   (set-buffer
+;; 	(switch-to-buffer "*scratch*"))
+;;   (execute-extended-command 'lisp-interaction-mode)
+;;   (setq need-not-save t))

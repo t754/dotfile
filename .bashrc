@@ -142,20 +142,23 @@ function colors() {
 }
 
 
-### POWERLINE OLD
-## if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-##     export POWERSHELL_MODE="flat"
-## else
-##     export POWERSHELL_MODE="patched"
-## fi
-## function _update_ps1() {
-##     export PS1="$(~/powerline-shell.py --mode ${POWERSHELL_MODE} --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
-## }
-## PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
-# POWERLINE new!!
-export POWERLINE_BASH_CONTINUATION=1
-export POWERLINE_BASH_SELECT=1
-. /usr/lib/python3.4/site-packages/powerline/bindings/bash/powerline.sh
+# POWERLINE OLD
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    export POWERSHELL_MODE="flat"
+else
+    export POWERSHELL_MODE="patched"
+fi
+function _update_ps1() {
+    export PS1="$(~/powerline-shell.py --mode ${POWERSHELL_MODE} --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
+}
+PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
+
+
+## POWERLINE new!!
+## export POWERLINE_BASH_CONTINUATION=1
+## export POWERLINE_BASH_SELECT=1
+## シンボル /usr/lib/python3.4/site-packages/powerline → ~/
+## source ~/powerline/bindings/bash/powerline.sh
 
 complete -cf sudo
 complete -cf man
@@ -223,3 +226,5 @@ fi
 
 function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
 trap EC ERR
+
+# source ~/.ghq/github.com/arialdomartini/oh-my-git/prompt.sh

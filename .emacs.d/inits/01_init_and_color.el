@@ -1,14 +1,14 @@
 (menu-bar-mode t)
 ;;オートセーブ、バックアップ用 作成先を変更
 ;;(require 'auto-save-buffers)
-;;(run-with-idle-timer 0.5 t 'auto-save-buffers) 
+;;(run-with-idle-timer 0.5 t 'auto-save-buffers)
 (setq auto-save-timeout 20)   ; 自動保存する間隔。秒。
 (setq auto-save-interval 150) ; 300打鍵ごとに自動保存
 (setq make-backup-files t)       ; バックアップファイルを作成する。
 (setq backup-directory-alist
 (cons (cons "\\.*$" (expand-file-name "~/.backup"))
       backup-directory-alist))
-;;;backupfi(setq version-control t)     
+;;;backupfi(setq version-control t)
 (setq version-control t); 複数のバックアップを残します。世代。
 (setq kept-new-versions 5)   ; 新しいものをいくつ残すか
 (setq kept-old-versions 5)   ; 古いものをいくつ残すか
@@ -28,7 +28,7 @@
 ;; 行番号をデフォルトで表示
 ;; (when (require 'linum nil t)
 ;; 	(global-linum-mode t)
-;; 	(line-number-mode t) 
+;; 	(line-number-mode t)
 ;; 	(column-number-mode t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -45,9 +45,9 @@
  (setq browse-url-generic-program (executable-find "firefox")
           browse-url-browser-function 'browse-url-generic)
 
-;; 
+;;
 ;;(setq default-frame-alist
-;;      (append (list 
+;;      (append (list
 ;;;       '(foreground-color . "azure3") ;;; 文字の色を設定します。
 ;;; 	'(background-color . "black") ;; 背景色を設定します。
 ;;;	'(border-color . "black") ;;
@@ -57,7 +57,7 @@
 ;; 			   '(left .  0) ; フレームの X 位置(ピクセル数)
 ;; 			   '(width . 188)  ;; <- 幅
 ;; 			   '(height . 38)  ;; <- 高さ
-;; 			   '(alpha . (85 40)) ;透明度 ？ 
+;; 			   '(alpha . (85 40)) ;透明度 ？
 ;; 			   )
 ;;;; 			  default-frame-alist))
 ;;;;; 新規フレームのデフォルト設定
@@ -90,9 +90,9 @@
 ;;起動画面いれない
 (setq inhibit-startup-message t)
 
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; かっこ強調は color theme に移動
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-

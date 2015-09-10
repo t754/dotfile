@@ -96,7 +96,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c l"		.	toggle-truncate-lines)
  ("C-a"			.	beginning-of-indented-line)
  ("C-x C-c"		.	my-save-buffers-kill-emacs)
- ("C-c <f5>"	.	revert-buffer-no-confirm)
+ ("<f5>"	.	revert-buffer-no-confirm)
  ("C-M-t"		.	mc/mark-all-in-region)
  )
 
