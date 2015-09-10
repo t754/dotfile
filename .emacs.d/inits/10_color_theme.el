@@ -89,7 +89,7 @@
 
 ;; (provide 'color-theme-molokai) ;; カラーテーマ名
 
-	 ;; (color-theme-robin-hood)
+     ;; (color-theme-robin-hood)
      ;; (color-theme-subtle-hacker)
      ;; (color-theme-matrix)
      ;; (color-theme-montz)

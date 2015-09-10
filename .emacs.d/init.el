@@ -1,13 +1,13 @@
 ;; (setq load-path (append '("~/.emacs.d/" ; 自作のlispやinit.el
-;;                           ;;						  "~/.emacs.d/howm/"
+;;                           ;;                       "~/.emacs.d/howm/"
 ;;                           "~/.emacs.d/org-mode2/lisp";元はorg-VERJON/elisp
-;; 						  "~/.emacs.d/elpa/init-loader-20130218.1210/"
-;;                           ;;						  "~/.emacs.d/elpa/"
-;; 						  "~/.emacs.d/elisp/"
-;; 						  "~/.emacs.d/elisp/grass/"
-;; 						  "~/.emacs.d/inits/"
+;;                        "~/.emacs.d/elpa/init-loader-20130218.1210/"
+;;                           ;;                       "~/.emacs.d/elpa/"
+;;                        "~/.emacs.d/elisp/"
+;;                        "~/.emacs.d/elisp/grass/"
+;;                        "~/.emacs.d/inits/"
 ;;                           "~/"
-;; 						  ) load-path))
+;;                        ) load-path))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;ビープ音を消す
 (setq visible-bell t);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -54,9 +54,9 @@
 ;;   (let (path)
 ;;     (dolist (path paths paths)
 ;;       (let ((default-directory (expand-file-name (concat user-emacs-directory path))))
-;;     	(add-to-list 'load-path default-directory)
-;;     	(if (fboundp 'normal-top-level-add-subdir-to-load-path)
-;;     	    (normal-top-level-add-subdirs-to-load-path))))))
+;;      (add-to-list 'load-path default-directory)
+;;      (if (fboundp 'normal-top-level-add-subdir-to-load-path)
+;;          (normal-top-level-add-subdirs-to-load-path))))))
 ;; ;;
 ;; (let ((default-directory (expand-file-name "~/.emacs.d/elisp")))
 ;;   (add-to-list 'load-path default-directory)

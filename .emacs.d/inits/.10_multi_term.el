@@ -61,8 +61,8 @@
 
 ;; (global-set-key (kbd "C-c t") '(lambda ()
 
-;; 								 (interactive)
-;; 								 (multi-term)))
+;;                               (interactive)
+;;                               (multi-term)))
 
 
 

@@ -71,8 +71,8 @@
   (setq default-frame-alist '((font . "Migu 1m")))
   (set-frame-font "Migu 1m-18")
   ;; (set-face-attribute 'default nil
-  ;;   	    :family "Ricty"
-  ;;   	    :height 120)
+  ;;        :family "Ricty"
+  ;;        :height 120)
 
   (set-face-attribute 'default nil
                       :family "Migu 1m"
@@ -102,7 +102,7 @@
   )
 
 ;; (set-fontset-font nil 'japanese-jisx0208
-;; 				  (font-spec :family "Migu 1M"))
+;;                (font-spec :family "Migu 1M"))
 ;; (setq face-font-rescale-alist '(("Migu 1M" . 1.08)))
 
 

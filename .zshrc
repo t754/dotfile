@@ -142,10 +142,10 @@ zstyle ':completion:*:default' menu select=1
 
 ##### root時に下線をつける
 if [ ${UID} -eq 0 ]; then
-	tmp_prompt="%B%U${tmp_prompt}%u%b"
-	tmp_prompt2="%B%U${tmp_prompt2}%u%b"
-	tmp_rprompt="%B%U${tmp_rprompt}%u%b"
-	tmp_sprompt="%B%U${tmp_sprompt}%u%b"
+    tmp_prompt="%B%U${tmp_prompt}%u%b"
+    tmp_prompt2="%B%U${tmp_prompt2}%u%b"
+    tmp_rprompt="%B%U${tmp_rprompt}%u%b"
+    tmp_sprompt="%B%U${tmp_sprompt}%u%b"
 fi
 
 # SSHログイン時のプロンプト
@@ -157,19 +157,19 @@ PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
 
 # 展開一式
 function extract() {
-	case $1 in
-		*.tar.gz|*.tgz) tar xzvf $1;;
-		*.tar.xz) tar Jxvf $1;;
-		*.zip) unzip $1;;
-		*.lzh) lha e $1;;
-		*.tar.bz2|*.tbz) tar xjvf $1;;
-		*.tar.Z) tar zxvf $1;;
-		*.gz) gzip -dc $1;;
-		*.bz2) bzip2 -dc $1;;
-		*.Z) uncompress $1;;
-		*.tar) tar xvf $1;;
-		*.arj) unarj $1;;
-	esac
+    case $1 in
+        *.tar.gz|*.tgz) tar xzvf $1;;
+        *.tar.xz) tar Jxvf $1;;
+        *.zip) unzip $1;;
+        *.lzh) lha e $1;;
+        *.tar.bz2|*.tbz) tar xjvf $1;;
+        *.tar.Z) tar zxvf $1;;
+        *.gz) gzip -dc $1;;
+        *.bz2) bzip2 -dc $1;;
+        *.Z) uncompress $1;;
+        *.tar) tar xvf $1;;
+        *.arj) unarj $1;;
+    esac
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
@@ -202,7 +202,7 @@ function powerline_precmd() {
 function install_powerline_precmd() {
     for s in "${precmd_functions[@]}"; do
         if [ "$s" = "powerline_precmd" ]; then
-			return
+            return
         fi
     done
     precmd_functions+=(powerline_precmd)

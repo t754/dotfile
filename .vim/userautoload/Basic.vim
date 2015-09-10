@@ -90,6 +90,6 @@ filetype indent on
 " 改行コードの自動認識set fileformats=unix,dos,mac
 " □とか○の文字があってもカーソル位置がずれないようにする
 if exists('&ambiwidth')
-	  set ambiwidth=double
+      set ambiwidth=double
   endif
 

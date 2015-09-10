@@ -114,10 +114,10 @@ e.x, 00_hoge.el, 01_huga.el ... 99_keybind.el"
     ;; 2011/06/12 zqwell Windows/Linux 固有設定ファイル読み込み用
     ;; windows
     (and (featurep 'dos-w32)
-	 (init-loader-re-load init-loader-win-regexp init-dir))
+     (init-loader-re-load init-loader-win-regexp init-dir))
     ;; Linux
     (and (equal system-type 'gnu/linux)
-	 (init-loader-re-load init-loader-lin-regexp init-dir))
+     (init-loader-re-load init-loader-lin-regexp init-dir))
 
     (when init-loader-show-log-after-init
       (add-hook  'after-init-hook 'init-loader-show-log))))
@@ -144,11 +144,11 @@ e.x, 00_hoge.el, 01_huga.el ... 99_keybind.el"
           (let ((time (car (benchmark-run (load (file-name-sans-extension el))))))
             (init-loader-log (format "loaded %s. %s" (locate-library el) time)))
         (error
-	 ;; 2011/06/12 zqwell エラー箇所表示対応
-	 ;; 参考URL: http://d.hatena.ne.jp/kitokitoki/20101205/p1
+     ;; 2011/06/12 zqwell エラー箇所表示対応
+     ;; 参考URL: http://d.hatena.ne.jp/kitokitoki/20101205/p1
          ; (init-loader-error-log (error-message-string e))
          (init-loader-error-log (format "%s. %s" (locate-library el) (error-message-string e)))
-	 ))));)
+     ))));)
 
 ;; 2011/06/12 zqwell elc優先読み込み対応
 ;; 参考URL: http://twitter.com/#!/fkmn/statuses/21411277599

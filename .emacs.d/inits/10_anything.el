@@ -13,22 +13,22 @@
 ;;    anything-quick-update t
 ;;    anything-enable-shortcuts 'alphabet)
 ;;   (when (require 'anything-config nil t)
-;; 	(setq anything-su-or-sudo "sudo")
+;;  (setq anything-su-or-sudo "sudo")
 ;; (setq anything-sources (list anything-c-source-buffers
 ;;                              anything-c-source-bookmarks
 ;;                              anything-c-source-recentf
 ;;                              anything-c-source-file-name-history
-;;                              anything-c-source-locate))	)
+;;                              anything-c-source-locate))  )
 ;;   (require 'anything-match-plugin nil t)
 ;;   (when (and (executable-find "cmigemo")
-;; 			 (ewquire 'migemo nil t))
-;; 	(require 'anything-migemo nil t))
+;;           (ewquire 'migemo nil t))
+;;  (require 'anything-migemo nil t))
 ;;   (when(require 'anything-complete nil t)
-;; 	(anything-lisp-complete-symbol-set-timer 150))
+;;  (anything-lisp-complete-symbol-set-timer 150))
 ;;   (require 'anything-show-completion nil t)
 ;;   (when (require 'auto-install nil t)
-;; 	(require 'anything-auto-install))
-;; 	(when (require 'descbinds-anything nil t)
+;;  (require 'anything-auto-install))
+;;  (when (require 'descbinds-anything nil t)
 ;;   (descbinds-anything-install)))
 ;; (global-set-key (kbd "C-}") 'anything)
 

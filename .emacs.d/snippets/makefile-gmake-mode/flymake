@@ -2,5 +2,5 @@
 # name: flymake
 # --
 check-syntax:
-	$(CC) -Wall -Wextra -pedantic -fsyntax-only $(CHK_SOURCES)
+    $(CC) -Wall -Wextra -pedantic -fsyntax-only $(CHK_SOURCES)
 $0

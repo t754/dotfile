@@ -1,4 +1,4 @@
-										;C-hで バックスペース
+                                        ;C-hで バックスペース
 ;;C-m 改行&インデント
 ;;(global-set-key (kbd "C-m") 'newline-and-indent)
 ;;goto-line
@@ -39,7 +39,7 @@
        "^[ ¥t]+$"
        (save-excursion
          (buffer-substring-no-properties
-		  (progn (beginning-of-line) (point))
+          (progn (beginning-of-line) (point))
           current-point)))
       (beginning-of-line)
     (back-to-indentation)))
@@ -58,15 +58,15 @@ C-uをつけるとウィンドウを閉じる。"
 (defun my-save-buffers-kill-emacs ()
   (interactive)
   (if (y-or-n-p "quit emacs? ")
-	  (save-buffers-kill-emacs)))
+      (save-buffers-kill-emacs)))
 
 ;;ターミナル上で C+S+? をつかう C-x @ C ?
 (defun event-apply-control-shift-modifier (ignore-prompt)
   "\\Add the Control+Shift modifier to the following event.
 For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Shift-SPC."
   (vector (event-apply-modifier
-		   (event-apply-modifier (read-event) 'shift 25 "S-")
-		   'control 26 "C-")))
+           (event-apply-modifier (read-event) 'shift 25 "S-")
+           'control 26 "C-")))
 
 ;; 再読み込み
 (defun revert-buffer-no-confirm (&optional force-reverting)
@@ -85,19 +85,19 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
 (unbind-key "C-z")
 
 (bind-keys*
- ("C-c p"		.	quickrun)
- ("C-c m"		.	minimap-toggle)
- ("C-c C-r"		.	window-resizer)
- ("M-\\"		.	kill-whitespace)
- ("C-`"			.	push-mark-no-activate)
+ ("C-c p"       .   quickrun)
+ ("C-c m"       .   minimap-toggle)
+ ("C-c C-r"     .   window-resizer)
+ ("M-\\"        .   kill-whitespace)
+ ("C-`"         .   push-mark-no-activate)
  ;; ("C-h"     . delete-backward-char)
- ("C-t"			.	other-window-or-split-or-close)
- ("C-z"			.	scroll-down-command)
- ("C-c l"		.	toggle-truncate-lines)
- ("C-a"			.	beginning-of-indented-line)
- ("C-x C-c"		.	my-save-buffers-kill-emacs)
- ("<f5>"	.	revert-buffer-no-confirm)
- ("C-M-t"		.	mc/mark-all-in-region)
+ ("C-t"         .   other-window-or-split-or-close)
+ ("C-z"         .   scroll-down-command)
+ ("C-c l"       .   toggle-truncate-lines)
+ ("C-a"         .   beginning-of-indented-line)
+ ("C-x C-c"     .   my-save-buffers-kill-emacs)
+ ("<f5>"    .   revert-buffer-no-confirm)
+ ("C-M-t"       .   mc/mark-all-in-region)
  )
 
 (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))

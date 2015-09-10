@@ -27,9 +27,9 @@
 
 ;; 行番号をデフォルトで表示
 ;; (when (require 'linum nil t)
-;; 	(global-linum-mode t)
-;; 	(line-number-mode t)
-;; 	(column-number-mode t))
+;;  (global-linum-mode t)
+;;  (line-number-mode t)
+;;  (column-number-mode t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;ハイパーリンク (cygwinの場合)
@@ -37,10 +37,10 @@
 (defun browse-url-chrome (url &optional new-window)
   (interactive (browse-url-interactive-arg "URL: "))
   (start-process "cygstart" nil "cygstart"
-				 url))
+                 url))
 ;(setq browse-url-browser-function 'browse-url-chrome)
 
-										;firefox の場合
+                                        ;firefox の場合
 ;; (setq browse-url-browser-function 'browse-url-firefox)
  (setq browse-url-generic-program (executable-find "firefox")
           browse-url-browser-function 'browse-url-generic)
@@ -49,23 +49,23 @@
 ;;(setq default-frame-alist
 ;;      (append (list
 ;;;       '(foreground-color . "azure3") ;;; 文字の色を設定します。
-;;; 	'(background-color . "black") ;; 背景色を設定します。
-;;;	'(border-color . "black") ;;
-;;;	'(mouse-color . "white") ;;マウスポインタ
-;;;	'(cursor-color . "white") ;;\カーソルカラー
-;; 			   '(top . 0)
-;; 			   '(left .  0) ; フレームの X 位置(ピクセル数)
-;; 			   '(width . 188)  ;; <- 幅
-;; 			   '(height . 38)  ;; <- 高さ
-;; 			   '(alpha . (85 40)) ;透明度 ？
-;; 			   )
-;;;; 			  default-frame-alist))
+;;;     '(background-color . "black") ;; 背景色を設定します。
+;;; '(border-color . "black") ;;
+;;; '(mouse-color . "white") ;;マウスポインタ
+;;; '(cursor-color . "white") ;;\カーソルカラー
+;;             '(top . 0)
+;;             '(left .  0) ; フレームの X 位置(ピクセル数)
+;;             '(width . 188)  ;; <- 幅
+;;             '(height . 38)  ;; <- 高さ
+;;             '(alpha . (85 40)) ;透明度 ？
+;;             )
+;;;;              default-frame-alist))
 ;;;;; 新規フレームのデフォルト設定
 ;;(setq default-frame-alist
-;; 	  (append
-;; 	   '((width				  . 188); フレーム幅(文字数)
-;; 		 (height			  . 38); フレーム高(文字数)
-;; 	   default-frame-alist)))
+;;    (append
+;;     '((width               . 188); フレーム幅(文字数)
+;;       (height              . 38); フレーム高(文字数)
+;;     default-frame-alist)))
 ;; (frame-width)
 ;; (frame-height)
 ;;

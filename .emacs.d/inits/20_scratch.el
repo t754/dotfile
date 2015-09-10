@@ -27,6 +27,6 @@
 ;; (defun make-scratch-buffer ()
 ;;   (interactive)
 ;;   (set-buffer
-;; 	(switch-to-buffer "*scratch*"))
+;;  (switch-to-buffer "*scratch*"))
 ;;   (execute-extended-command 'lisp-interaction-mode)
 ;;   (setq need-not-save t))

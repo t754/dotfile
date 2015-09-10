@@ -6,7 +6,7 @@
   (set (make-local-variable 'eldoc-idle-delay) 0.20)
   (c-turn-on-eldoc-mode)
   ;; (define-key c-mode-map(kbd "C-c p") 'smart-compile)
-			;;;; C-c e で next-error コマンドを呼び出す
+            ;;;; C-c e で next-error コマンドを呼び出す
   (define-key mode-specific-map "e" 'next-error)
   ;; gdb
   (setq gdb-many-windows           t

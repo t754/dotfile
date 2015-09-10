@@ -31,9 +31,9 @@
 ;;(package-initialize)
 ;; ;;インストールするディレクトリを指定
 ;; (add-to-list 'package-archives
-;;    			 '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;;               '("marmalade" . "http://marmalade-repo.org/packages/") t)
 ;; (add-to-list 'package-archives
-;;    			 '("gnu" . "http://elpa.gnu.org/packages/") t)
+;;               '("gnu" . "http://elpa.gnu.org/packages/") t)
 ;; (add-to-list 'package-archives
 ;;              '("ELPA" . "http://tromey.com/elpa/" ) t)
 ;; (add-to-list 'package-archives

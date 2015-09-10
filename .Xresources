@@ -91,11 +91,11 @@ URxvt*pointerColor:                     2
 ! URxvt*borderColor:                    color
 ! URxvt*iconFile:                         /usr/share/icons/Adwaita/96x96/apps/utilities-terminal-symbolic.symbolic.png
 ! /usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
-! URxvt*font:								xft:Source Code Pro for Powerline:size=14:antialias=true
-! URxvt*imfont:		                    xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
-URxvt*font:		                        xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
+! URxvt*font:                               xft:Source Code Pro for Powerline:size=14:antialias=true
+! URxvt*imfont:                         xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
+URxvt*font:                             xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
 ! ,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
-! URxvt*boldfont:		                    xft:RictyDiscord4Powerline:Bold:pixelsize=14:antialias=true
+! URxvt*boldfont:                           xft:RictyDiscord4Powerline:Bold:pixelsize=14:antialias=true
 ! ! ,xft:Inconsolate-g for Powerline:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
 ! ! URxvt*font: xft:Android Emoji:size=14:antialias=true
 ! URxvt.italicFont:        xft:Ricty:italic:size=14:antialiase=true
@@ -103,15 +103,15 @@ URxvt*font:		                        xft:Ricty Discord4Powerline:Regular:size=14
 !URxvt*boldFont:                        xft:Inconsolate-g for Powerline:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
 
 
-! URxvt*font:								xft:Ricty Discord for Powerline for Powerline:size=14:antialias=true
+! URxvt*font:                               xft:Ricty Discord for Powerline for Powerline:size=14:antialias=true
 ! URxvt*font:                            xft:RictyDiscord-Regular2-Powerline for Powerline-BoldForPowerline:size=14:antialias=true
-! URxvt*font:                            	 xft:unk:size=14:antialias=true
+! URxvt*font:                                xft:unk:size=14:antialias=true
 
 ! URxvt*italicFont:                     xft:RictyDiscord-Regular-Powerline
 ! URxvt*boldItalicFont:                 xft:RictyDiscord-Regular-Powerline
 ! URxvt*intensityStyles:                boolean
 ! URxvt*inputMethod:                    name
-!URxvt*preeditType:  					OverTheSpot
+!URxvt*preeditType:                     OverTheSpot
 ! URxvt*imLocale:                       string
 ! URxvt*imFont:                         fontname
 ! URxvt*title:                          string
@@ -151,7 +151,7 @@ URxvt*iso14755_52:                      false
 URxvt.keysym.C-S-Up:                    perl:font-size:incglobal
 URxvt.keysym.C-S-Down:                  perl:font-size:decglobal
 URxvt.keysym.M-u:                       perl:url-select:select_next
-URxvt.keysym.M-Escape: 					perl:keyboard-select:activate
+URxvt.keysym.M-Escape:                  perl:keyboard-select:activate
 URxvt.keysym.M-s:                       perl:keyboard-select:search
 ! URxvt.keysym.M-c:                       perl:clipboard:copy
 ! URxvt.keysym.M-w:                       perl:clipboard:copy
