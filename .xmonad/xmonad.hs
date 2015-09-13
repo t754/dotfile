@@ -26,7 +26,7 @@ import XMonad.Layout.ToggleLayouts
 -- import XMonad.Layout.Minimize
 -- import qualified Data.Map as M
 -- import XMonad.Actions.CopyWindow
-
+import XMonad.Hooks.DynamicLog
 -- import XMonad.Layout.SimplestFloat
 
 myterm::String
@@ -109,10 +109,7 @@ main = xmonad $ xfceConfig
     , handleEventHook    = ewmhDesktopsEventHook <+> fullscreenEventHook
     , startupHook        = startupHook xfceConfig
                          >> setWMName "LG3D" -- Java app focus fix
-    -- , startupHook        = startupHook conf
-
     , mouseBindings      = myMouseBindings
-    , logHook    = ewmhDesktopsLogHook
      }
     `additionalKeysP`
     [ ("M-S-r"   , restart "xmonad" True)
@@ -120,7 +117,7 @@ main = xmonad $ xfceConfig
     , ("M-S-q"   , spawn "xfce4-session-logout")
     , ("M-p"     , spawn "xfce4-appfinder")
     , ("M-S-f"   , spawn "pidof firefox || firefox")
-    , ("M-S-e"   , spawn "emacsclient -c -n")
+    , ("M-C-S-e" , spawn "emacsclient -c -n")
     , ("M-f"     , sendMessage  ToggleLayout)
     , ("M-b"     , sendMessage   ToggleStruts)
     , ("M-S-h"   , sendMessage MirrorShrink)
@@ -131,4 +128,3 @@ main = xmonad $ xfceConfig
     , ("M-S-t" , spawn "xclock -chime -update 1")
     , ("M-g"     , spawn "xdotool mousemove 0 0")
     ]
-
