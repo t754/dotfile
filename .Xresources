@@ -204,3 +204,7 @@ dzen2.font: xft:Droid Sans Mono:size=8:antialias=true
 *VT100.colorBD:         red
 *VT100.colorULMode:     true
 *VT100.colorUL:         cyan
+
+! Xft.embolden: true
+Emacs.FontBackend: xft
+Emacs.font: Monospace-12

@@ -47,17 +47,19 @@
 ;; family-name → "RictyDiminished"
 (defun my/font-set (family-name font-sizee)
   ;; 120 90 1.2
-  (dolist (xxx '(katakana-jisx0201 japanese-jisx0208 japanese-jisx0212))
-    (set-fontset-font (frame-parameter nil 'font)
+  (dolist (xxx '(katakana-jisx0201
+                 japanese-jisx0208
+                 japanese-jisx0212
+                 japanese-jisx0213-1
+                 japanese-jisx0213-2))
+    (set-fontset-font t
                       xxx
                       (font-spec
                        :family family-name
                        :height font-sizee)
-                      ))
-    ;; (add-to-list 'face-font-rescale-alist
+                      ) nil 'prepend))
+  ;; (add-to-list 'face-font-rescale-alist
   ;;              '(concat ".*" family-name ".*") . (/ alphabet-size 100.0))
-
-    )
 
 
 (cond
@@ -77,6 +79,7 @@
   (set-face-attribute 'default nil
                       :family "Migu 1m"
                       :height 150)
+
   ;;  (set-fontset-font (frame-parameter nil 'font)
   ;;                  'japanese-jisx0208
   ;;                  (cons "Migu 1m" "iso10646-1"))
@@ -92,23 +95,25 @@
         '("localhost.localdomain"
           "localhost.homenetwork"
           "localhostss"))
-  (set-frame-font "Ricty-12")
-  (set-face-attribute 'default nil
-                      :family "Ricty"
-                      :height 120)
-  (add-to-list 'default-frame-alist '((font . "Ricty-12"))))
-  ;; (my/font-set "RictyDiminished" 120)
+  (let* ((m-font "Ricty")
+         (m-size 12)
+         (m-fontsize (string-join (list m-font "-" (int-to-string m-size)))))
+    (set-frame-font   m-fontsize)
+    (set-default-font m-fontsize)
+    (set-face-attribute 'default nil
+                        :family m-font
+                        :height (* m-size 10))
+    (setq default-frame-alist `((font . ,m-font)))
+    (my/font-set m-font (* m-size 10))
+    )))
 
-  )
+(set-fontset-font
+ t 'symbol
+ (font-spec :family "Symbola") nil 'prepend)
 
+
+
+;; (my/font-set "RictyDiminished" 120)
 ;; (set-fontset-font nil 'japanese-jisx0208
 ;;                (font-spec :family "Migu 1M"))
 ;; (setq face-font-rescale-alist '(("Migu 1M" . 1.08)))
-
-
-
-
-
-
-
-
