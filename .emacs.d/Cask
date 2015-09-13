@@ -3,6 +3,7 @@
 (source org)
 
 (depends-on "ac-cider")
+(depends-on "ac-emoji")
 (depends-on "ac-helm")
 (depends-on "ac-math")
 (depends-on "ac-slime")

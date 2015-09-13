@@ -18,9 +18,10 @@
       ("p"      . 'git-gutter:previous-hunk)))
 
   ;; '(git hg )
-  (global-git-gutter-mode t)
+
   (setq git-gutter:handled-backends '(git hg)))
 
+(global-git-gutter-mode t)
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ;; 何故か ediffの設定   ;;
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -28,5 +29,3 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 ;; ;; diffのバッファを上下ではなく左右に並べる
 (setq ediff-split-window-function 'split-window-horizontally)
-
-

@@ -1,23 +1,17 @@
-(menu-bar-mode t)
 ;;オートセーブ、バックアップ用 作成先を変更
 ;;(require 'auto-save-buffers)
 ;;(run-with-idle-timer 0.5 t 'auto-save-buffers)
-(setq auto-save-timeout 20)   ; 自動保存する間隔。秒。
-(setq auto-save-interval 150) ; 300打鍵ごとに自動保存
-(setq make-backup-files t)       ; バックアップファイルを作成する。
-(setq backup-directory-alist
-(cons (cons "\\.*$" (expand-file-name "~/.backup"))
-      backup-directory-alist))
-;;;backupfi(setq version-control t)
-(setq version-control t); 複数のバックアップを残します。世代。
-(setq kept-new-versions 5)   ; 新しいものをいくつ残すか
-(setq kept-old-versions 5)   ; 古いものをいくつ残すか
-(setq delete-old-versions t) ; 確認せずに古いものを消す。
-(setq vc-make-backup-files nil) ;; バージョン管理下のファイルもバックアップを作る。leの保存`場所を指定。
-;;create backup file in ~/.buckup
-(setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "~/.backup") t)))
-(setq create-lockfiles nil)
+(setq auto-save-timeout               20  ; 自動保存する間隔。秒。
+      auto-save-interval              150 ; 300打鍵ごとに自動保存
+      make-backup-files               t       ; バックアップファイルを作成する。
+      backup-directory-alist          (cons (cons "\\.*$" (expand-file-name "~/.backup")) backup-directory-alist)
+      version-control                 t; 複数のバックアップを残します。世代。
+      kept-new-versions               5   ; 新しいものをいくつ残すか
+      kept-old-versions               5   ; 古いものをいくつ残すか
+      delete-old-versions             t ; 確認せずに古いものを消す。
+      vc-make-backup-files            nil ;; バージョン管理下のファイルもバックアップを作る。leの保存`場所を指定。
+      auto-save-file-name-transforms  `((".*" ,(expand-file-name "~/.backup") t)) ;;create backup file in ~/.buckup
+      create-lockfiles                nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq linum-delay t)
@@ -45,33 +39,6 @@
  (setq browse-url-generic-program (executable-find "firefox")
           browse-url-browser-function 'browse-url-generic)
 
-;;
-;;(setq default-frame-alist
-;;      (append (list
-;;;       '(foreground-color . "azure3") ;;; 文字の色を設定します。
-;;;     '(background-color . "black") ;; 背景色を設定します。
-;;; '(border-color . "black") ;;
-;;; '(mouse-color . "white") ;;マウスポインタ
-;;; '(cursor-color . "white") ;;\カーソルカラー
-;;             '(top . 0)
-;;             '(left .  0) ; フレームの X 位置(ピクセル数)
-;;             '(width . 188)  ;; <- 幅
-;;             '(height . 38)  ;; <- 高さ
-;;             '(alpha . (85 40)) ;透明度 ？
-;;             )
-;;;;              default-frame-alist))
-;;;;; 新規フレームのデフォルト設定
-;;(setq default-frame-alist
-;;    (append
-;;     '((width               . 188); フレーム幅(文字数)
-;;       (height              . 38); フレーム高(文字数)
-;;     default-frame-alist)))
-;; (frame-width)
-;; (frame-height)
-;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;tab -> 空白に
 (setq-default tab-width 4 indent-tabs-mode nil)
@@ -88,9 +55,9 @@
 ;;; ツールバーを消す
 (tool-bar-mode 0)
 ;;大文字小文字を区別しない
-(setq completion-ignore-case t)
+(setq completion-ignore-case t
 ;;起動画面いれない
-(setq inhibit-startup-message t)
+      inhibit-startup-message t)
 
 
 ;; ;;;;;;
@@ -121,3 +88,45 @@
          (setq my/current-cleanup-state "")
          (add-hook 'before-save-hook 'my/cleanup-for-spaces)))
   (force-mode-line-update))
+
+
+(setq-default gc-cons-threshold (* gc-cons-threshold 8))
+;;
+(savehist-mode 1)
+(require 'saveplace nil t)
+(setq-default save-place t)
+(setq save-place-file "~/.emacs.d/saved-places")
+;;
+(scroll-bar-mode -1)
+;;
+(global-set-key (kbd "M-/") 'hippie-expand)
+(setq
+ ;; クリップボードでコピー＆ペーストできるようにする
+ x-select-enable-clipboard t
+ ;; PRIMARY selectionを使う(Windowsでは対象外)
+ x-select-enable-primary t
+ ;; クリップボードでコピー・カットした文字列を
+ ;; キルリングにも保存させる
+ save-interprogram-paste-before-kill t
+ ;; M-x apropos等でより多くのシンボルを見つけるようにする
+ ;; ただし、ちょっと遅くなる
+ ;;
+ ;; M-x apropos-user-optionはすべての変数を
+ ;; M-x apropos-commandはすべての関数を
+ ;; M-x apropos-commandはすべてのシンボル(関数、変数、フェイス以外も)
+ ;; M-x apropos-valueは属性リストや関数内も
+ ;; M-x apropos-documentationはetc/DOC以外のすべての説明文字列も
+ apropos-do-all t
+ ;; マウスでyankしたとき、クリックした場所ではなくて現在位置を対象に
+ mouse-yank-at-point t
+ ;; 保存時にファイル末尾に改行を入れる
+ require-final-newline t
+ ;; エラー時などはベル音ではなくて画面を1回点滅させる
+ visible-bell t
+ ;; ediff時に新しいフレームを作らない(シンプルになる)
+ ediff-window-setup-function 'ediff-setup-windows-plain
+ ;; バックアップファイルはカレントディレクトリではなく
+ ;; ~/.emacs.d/backups 以下に保存する
+ backup-directory-alist `(("." . ,(concat user-emacs-directory
+                                          "backups"))))
+ (menu-bar-mode -1)
