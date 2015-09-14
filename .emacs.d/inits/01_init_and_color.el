@@ -20,10 +20,11 @@
 
 
 ;; 行番号をデフォルトで表示
-;; (when (require 'linum nil t)
-;;  (global-linum-mode t)
-;;  (line-number-mode t)
-;;  (column-number-mode t))
+(when (require 'linum nil t)
+ (global-linum-mode t))
+ ;; (line-number-mode t)
+ ;; (column-number-mode t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;ハイパーリンク (cygwinの場合)
@@ -59,7 +60,7 @@
 ;;起動画面いれない
       inhibit-startup-message t)
 
-
+(global-yascroll-bar-mode 1)
 ;; ;;;;;;
 ;; 行末のスペース + ファイル末尾の連続する改行の除去を行う
 (defvar my/current-cleanup-state "")
@@ -97,7 +98,7 @@
 (setq-default save-place t)
 (setq save-place-file "~/.emacs.d/saved-places")
 ;;
-(scroll-bar-mode -1)
+
 ;;
 (global-set-key (kbd "M-/") 'hippie-expand)
 (setq

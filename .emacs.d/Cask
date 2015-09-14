@@ -103,4 +103,5 @@
 (depends-on "web-beautify")
 (depends-on "web-mode")
 (depends-on "yaml-mode")
+(depends-on "yascroll")
 (depends-on "yasnippet")
