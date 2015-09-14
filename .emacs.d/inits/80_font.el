@@ -57,7 +57,7 @@
                       (font-spec
                        :family family-name
                        :height font-sizee)
-                      ) nil 'prepend))
+                       nil 'prepend)))
   ;; (add-to-list 'face-font-rescale-alist
   ;;              '(concat ".*" family-name ".*") . (/ alphabet-size 100.0))
 
@@ -95,6 +95,10 @@
         '("localhost.localdomain"
           "localhost.homenetwork"
           "localhostss"))
+  (set-fontset-font
+   t 'symbol
+   (font-spec :family "Symbola") nil 'prepend)
+
   (let* ((m-font "Ricty")
          (m-size 12)
          (m-fontsize (string-join (list m-font "-" (int-to-string m-size)))))
@@ -107,9 +111,6 @@
     (my/font-set m-font (* m-size 10))
     )))
 
-(set-fontset-font
- t 'symbol
- (font-spec :family "Symbola") nil 'prepend)
 
 
 

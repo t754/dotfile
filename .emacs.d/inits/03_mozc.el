@@ -1,6 +1,3 @@
-
-
-
 (when  (require 'mozc nil t)
 
   ;;(setq mozc-candidate-style 'overlay)
@@ -49,5 +46,3 @@
 ;; (defvar my-default-cursor-color)
 ;; (setq my-default-cursor-color (cdr (assoc 'cursor-color default-frame-alist)))
 ;; (add-hook 'input-method-activate-hook 'mozc-change-cursor-color)
-
-
