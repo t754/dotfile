@@ -149,7 +149,7 @@ else
     export POWERSHELL_MODE="patched"
 fi
 function _update_ps1() {
-    export PS1="$(~/powerline-shell.py --mode ${POWERSHELL_MODE} --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
+    export PS1="$(python2 ${HOME}/dotfile/powerline-shell.py --mode ${POWERSHELL_MODE} --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
 }
 PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 

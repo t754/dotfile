@@ -17,10 +17,10 @@ class Powerline:
             'separator_thin': u'\u276F'
         },
         'patched': {
-            'lock': u'\u2B64',
-            'network': u'\u2B64',
-            'separator': u'\u2B80',
-            'separator_thin': u'\u2B81'
+            'lock': u'\uE0A2',
+            'network': u'\uE0A2',
+            'separator': u'\uE0B0',
+            'separator_thin': u'\uE0B1'
         },
         'flat': {
             'lock': '',
@@ -88,21 +88,26 @@ def get_valid_cwd():
         We return the original cwd because the shell still considers that to be
         the working directory, so returning our guess will confuse people
     """
+    # Prefer the PWD environment variable. Python's os.getcwd function follows
+    # symbolic links, which is undesirable. But if PWD is not set then fall
+    # back to this func
     try:
-        cwd = os.getcwd()
+        cwd = os.getenv('PWD') or os.getcwd()
     except:
-        cwd = os.getenv('PWD')  # This is where the OS thinks we are
-        parts = cwd.split(os.sep)
-        up = cwd
-        while parts and not os.path.exists(up):
-            parts.pop()
-            up = os.sep.join(parts)
-        try:
-            os.chdir(up)
-        except:
-            warn("Your current directory is invalid.")
-            sys.exit(1)
-        warn("Your current directory is invalid. Lowest valid directory: " + up)
+        warn("Your current directory is invalid. If you open a ticket at " +
+            "https://github.com/milkbikis/powerline-shell/issues/new " +
+            "we would love to help fix the issue.")
+        sys.stdout.write("> ")
+        sys.exit(1)
+
+    parts = cwd.split(os.sep)
+    up = cwd
+    while parts and not os.path.exists(up):
+        parts.pop()
+        up = os.sep.join(parts)
+    if cwd != up:
+        warn("Your current directory is invalid. Lowest valid directory: "
+            + up)
     return cwd
 
 
@@ -171,18 +176,11 @@ class DefaultColor:
     VIRTUAL_ENV_BG = 35  # a mid-tone green
     VIRTUAL_ENV_FG = 00
 
-class Color(DefaultColor):
-    """
-    This subclass is required when the user chooses to use 'default' theme.
-    Because the segments require a 'Color' class for every theme.
-    """
-    pass
 
 
 class Color(DefaultColor):
     USERNAME_FG = 236
     USERNAME_BG = 208
-    USERNAME_ROOT_BG = 11
 
     HOSTNAME_FG = 52
     HOSTNAME_BG = 220
@@ -225,8 +223,6 @@ class Color(DefaultColor):
 
 
 
-import os
-
 def add_virtual_env_segment():
     env = os.getenv('VIRTUAL_ENV')
     if env is None:
@@ -240,7 +236,7 @@ def add_virtual_env_segment():
 add_virtual_env_segment()
 
 
-import os
+
 
 def add_ssh_segment():
 
@@ -252,7 +248,6 @@ add_ssh_segment()
 
 
 def add_username_segment():
-    import os
     if powerline.args.shell == 'bash':
         user_prompt = ' \\u '
     elif powerline.args.shell == 'zsh':
@@ -296,8 +291,6 @@ def add_hostname_segment():
 add_hostname_segment()
 
 
-import os
-
 def get_short_path(cwd):
     home = os.getenv('HOME')
     names = cwd.split(os.sep)
@@ -335,8 +328,6 @@ def add_cwd_segment():
 add_cwd_segment()
 
 
-import os
-
 def add_read_only_segment():
     cwd = powerline.cwd or os.getenv('PWD')
 
@@ -362,12 +353,11 @@ def get_git_status():
         if origin_status:
             origin_position = " %d" % int(origin_status[0][1])
             if origin_status[0][0] == 'behind':
-                origin_position += u'\u2B61'
+                origin_position += u'\u21E3'
             if origin_status[0][0] == 'ahead':
-                origin_position += u'\u2B60'
+                origin_position += u'\u21E1'
         if diverged_status:
             origin_position = " %d%c %d%c" % (int(diverged_status[0][0]), u'\u21E1', int(diverged_status[0][1]), u'\u21E3')
-
 
         if line.find('nothing to commit') >= 0:
             has_pending_commits = False
@@ -410,8 +400,6 @@ except subprocess.CalledProcessError:
     pass
 
 
-import os
-import subprocess
 
 def get_hg_status():
     has_modified_files = False
@@ -451,8 +439,6 @@ def add_hg_segment():
 add_hg_segment()
 
 
-import subprocess
-
 def add_svn_segment():
     is_svn = subprocess.Popen(['svn', 'status'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     is_svn_output = is_svn.communicate()[1].strip()
@@ -476,9 +462,6 @@ except OSError:
 except subprocess.CalledProcessError:
     pass
 
-
-import os
-import subprocess
 
 def get_fossil_status():
     has_modified_files = False
@@ -518,24 +501,15 @@ except OSError:
 except subprocess.CalledProcessError:
     pass
 
-
-import os
-import re
-import subprocess
-
 def add_jobs_segment():
-    if powerline.args.shell=='zsh':
-        powerline.append('%(1j.%j.)' , Color.JOBS_FG, Color.JOBS_BG)
-    else:
-        pppid = subprocess.Popen(['ps', '-p', str(os.getppid()), '-oppid='], stdout=subprocess.PIPE).communicate()[0].strip()
-        output = subprocess.Popen(['ps', '-a', '-o', 'ppid'], stdout=subprocess.PIPE).communicate()[0]
-        num_jobs = len(re.findall(str(pppid), output)) - 1
+    pppid = subprocess.Popen(['ps', '-p', str(os.getppid()), '-oppid='], stdout=subprocess.PIPE).communicate()[0].strip()
+    output = subprocess.Popen(['ps', '-a', '-o', 'ppid'], stdout=subprocess.PIPE).communicate()[0]
+    num_jobs = len(re.findall(str(pppid), output)) - 1
 
-        if num_jobs > 0:
-            powerline.append(' %d ' % num_jobs, Color.JOBS_FG, Color.JOBS_BG)
+    if num_jobs > 0:
+        powerline.append(' %d ' % num_jobs, Color.JOBS_FG, Color.JOBS_BG)
 
 add_jobs_segment()
-
 
 
 def add_root_indicator_segment():
@@ -549,12 +523,9 @@ def add_root_indicator_segment():
     if powerline.args.prev_error != 0:
         fg = Color.CMD_FAILED_FG
         bg = Color.CMD_FAILED_BG
-        root_indicators[powerline.args.shell]=" ! "
     powerline.append(root_indicators[powerline.args.shell], fg, bg)
 
 add_root_indicator_segment()
 
 
-# powerline.append("%s\n" % powerline.separator,Color.LAST_FG,Color.LAST_BG)
-print(powerline.draw()+'\\n')
-
+sys.stdout.write(powerline.draw())
