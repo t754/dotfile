@@ -528,4 +528,4 @@ def add_root_indicator_segment():
 add_root_indicator_segment()
 
 
-sys.stdout.write(powerline.draw())
+sys.stdout.write(powerline.draw()+'\\n')
