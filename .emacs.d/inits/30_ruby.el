@@ -1,4 +1,4 @@
-;; (require 'smartparens-ruby)   
+;; (require 'smartparens-ruby)
 
 ;; (eval-after-load "ruby-mode"
 ;;    '(progn
@@ -10,7 +10,7 @@
 
 (setq ruby-insert-encoding-magic-comment nil)
 (defun ruby-mode-set-encoding () nil)
-;;;;;; gem → rubocop ruby-lint pry  pry-doc  method_source 
+;;;;;; gem → rubocop ruby-lint pry  pry-doc  method_source
 (defun my/ruby-mode-hook ()
   (show-smartparens-mode t)
   ;; (setq flycheck-checker 'ruby-rubocop)
@@ -22,4 +22,3 @@
 
 ;; (add-hook 'robe-mode-hook 'ac-robe-setup)
 (add-hook 'ruby-mode-hook 'my/ruby-mode-hook)
-

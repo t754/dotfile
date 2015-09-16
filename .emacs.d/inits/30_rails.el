@@ -14,8 +14,4 @@
 
 (defun my/rails-start ()
   (global-rbenv-mode)
-  (projectile-global-mode)
-
-  )
-
-
+  (projectile-global-mode))
