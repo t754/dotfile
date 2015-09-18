@@ -16,3 +16,6 @@ kkcrc
 .python-environments
 history
 saved-places
+elpa
+projectile-bookmarks.eld
+el-get
