@@ -132,6 +132,7 @@
       (inf-clojure-minor-mode 1)
       (paredit-mode 1)
       (rainbow-delimiters-mode 1)
+      (eldoc-mode)
       ;; (smart-newline-mode 1)
       (helm-gtags-mode 1))
 

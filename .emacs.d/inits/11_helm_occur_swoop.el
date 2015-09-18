@@ -1,9 +1,9 @@
-;; (require 'moccur-edit nil t)
-(require 'helm-ag);;agg
-(require 'helm-config)
-(require 'all-ext)
-(require 'helm-swoop)
-(require 'ace-isearch)
+;; ;; (require 'moccur-edit nil t)
+;; (require 'helm-ag);;agg
+;; (require 'helm-config)
+;; (require 'all-ext)
+;; (require 'helm-swoop)
+;; (require 'ace-isearch)
 
 ;; (require 'color-moccur)
 ;; (require 'helm-c)
@@ -48,5 +48,3 @@
  ;; ("C-o C-o" . helm-ag-this-file);;;;;
  ("C-M-o"   . helm-ag))
 ;; M-n で現在地にある文字を入力
-
-

@@ -130,4 +130,5 @@
  ;; ~/.emacs.d/backups 以下に保存する
  backup-directory-alist `(("." . ,(concat user-emacs-directory
                                           "backups"))))
- (menu-bar-mode -1)
+(menu-bar-mode -1)
+(projectile-global-mode)

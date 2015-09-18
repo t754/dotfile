@@ -6,12 +6,17 @@
 (helm-descbinds-install)
 (helm-descbinds-mode)
 
-(setq recentf-exclude '("/dotfile/.emacs.d/" "/.mozilla/firefox/" "^/tmp/" "~$" )
-      recentf-max-menu-items 200
-      recentf-max-saved-items 200
+(setq recentf-exclude '("/dotfile/.emacs.d/" "/.mozilla/firefox/" "^/tmp/" "~$"
+                        "/.git/" "/.cask/" "recentf")
+      recentf-max-menu-items 700
+      recentf-max-saved-items 700
+      recentf-auto-cleanup 600
       recentf-count 0
       helm-use-migemo t
       helm-delete-minibuffer-contents-from-point t)
+
+(run-at-time t 600 'recentf-save-list)
+(recentf-mode 1)
 ;; (require 'helm-git)
 ;; (require 'helm-ls-git)
 
