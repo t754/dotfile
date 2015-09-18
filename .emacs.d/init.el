@@ -14,11 +14,11 @@
                           ))
    (package-initialize)
 
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
-(require 'pallet)
-(pallet-mode t)
-
+;; (require 'cask "~/.cask/cask.el")
+;; (cask-initialize)
+;; (require 'pallet)
+;; (pallet-mode t)
+(load (concat user-emacs-directory "el-gets.el"))
 
 ;;inits -- start-els
 (require 'init-loader)
@@ -56,7 +56,7 @@
      ("" "svg" nil))))
  '(package-selected-packages
    (quote
-    (yascroll package-build shut-up epl git commander f dash s)))
+    (mozc yascroll package-build shut-up epl git commander f dash s)))
  '(tab-width 4)
  '(yas-trigger-key "TAB"))
 
