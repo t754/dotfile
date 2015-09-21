@@ -12,5 +12,4 @@
 ;; =++++++++++++++++++++==++++++++++++=+++++++++++=+++++++++
 ;; quickrun.el
 ;; (require 'quickrun)
-(push '("*quickrun*") popwin:special-display-config)
-
+;; (push '("*quickrun*") popwin:special-display-config)
