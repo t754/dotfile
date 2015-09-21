@@ -41,16 +41,9 @@
 ;; C-x b で helm-for-files
 ;; (eval-after-load 'helm
 ;;   '(progn
-(bind-keys*
- ("M-r"     . helm-resume)
- ("M-y"     . helm-show-kill-ring)
- ("C-<f6>"  . helm-ls-git-ls)
- ("C-x C-r" . helm-recentf)
- ("C-x b"   . helm-buffers-list)
- ("C-x C-b" . helm-for-files)
  ;; ("C-x c i" . helm-imenu)
- )
-(global-set-key (kbd "M-x") 'helm-M-x)
+
+;; (global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
 
