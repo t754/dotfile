@@ -28,7 +28,7 @@
 (el-get-bundle bm)
 (el-get-bundle c-eldoc)
 ;; (el-get-bundle cask)
-(el-get-bundle cider)
+(el-get-bundle cider :type github :pkgname "clojure-emacs/cider")
 (el-get-bundle clj-refactor)
 (el-get-bundle clojure-cheatsheet)
 (el-get-bundle clojure-mode)
@@ -123,4 +123,7 @@
 (el-get-bundle fold-dwim)
 (el-get-bundle org-mode)
 
-;; (el-get-bundle )
+(el-get-bundle search-web :type github :pkgname "tomoya/search-web.el")
+(el-get-bundle smex)
+
+;; (el-get-bundle direx)
