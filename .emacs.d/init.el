@@ -33,6 +33,14 @@
  '(ac-delay 0.4)
  '(ace-isearch-input-idle-delay 1)
  '(ace-isearch-input-length 5)
+ '(git-gutter:added-sign "A")
+ '(git-gutter:deleted-sign "D")
+ '(git-gutter:handled-backends (quote (git hg)))
+ '(git-gutter:lighter "_GG")
+ '(git-gutter:modified-sign "X")
+ '(git-gutter:unchanged-sign nil)
+ '(git-gutter:update-interval 2)
+ '(git-gutter:window-width 1)
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
  '(mozc-leim-title "も")
  '(org-latex-default-packages-alist
@@ -66,4 +74,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(bold ((t (:weight bold :height 0.8))))
+ '(git-gutter:added ((t (:weight bold :height 0.8 :foreground "green"))))
+ '(git-gutter:deleted ((t (:weight bold :height 0.8 :foreground "red"))))
+ '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta")))))

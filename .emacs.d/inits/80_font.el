@@ -109,7 +109,17 @@
                         :height (* m-size 10))
     (setq default-frame-alist `((font . ,m-font)))
     (my/font-set m-font (* m-size 10))
-    )))
+
+    (custom-set-faces
+     ;; custom-set-faces was added by Custom.
+     ;; If you edit it by hand, you could mess it up, so be careful.
+     ;; Your init file should contain only one such instance.
+     ;; If there is more than one, they won't work right.
+     '(bold ((t (:weight bold :height 0.8))))
+     '(git-gutter:added    ((t (:weight bold :height 0.8 :foreground "green"))))
+     '(git-gutter:deleted  ((t (:weight bold :height 0.8 :foreground "red"))))
+     '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta"))))) )))
+
 
 
 
