@@ -94,9 +94,12 @@
 (setq-default gc-cons-threshold (* gc-cons-threshold 8))
 ;;
 (savehist-mode 1)
-(require 'saveplace nil t)
+(require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file "~/.emacs.d/saved-places")
+(setq save-place-file (concat user-emacs-directory "saved-places"))
+
+;;; 右から左に読む言語に対応させないことで描画高速化
+(setq-default bidi-display-reordering nil)
 ;;
 
 ;;
@@ -131,4 +134,4 @@
  backup-directory-alist `(("." . ,(concat user-emacs-directory
                                           "backups"))))
 (menu-bar-mode -1)
-(projectile-global-mode)
+;; (projectile-global-mode)

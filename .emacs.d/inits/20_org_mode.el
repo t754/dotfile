@@ -9,7 +9,7 @@
 ;; (require 'ox-bibtex)
 ;; (require 'ox-ascii)
 ;; (require 'ox-beamer)
-;; (require 'ox-md)
+ (require 'ox-md)
 (when (require 'org-crypt nil t)
   ;; org-encrypt-entries の影響を受けるタグを指定
   ;; 自動保存の確認を無効に
@@ -210,8 +210,3 @@
 ;;             (let ((filename (buffer-file-name (current-buffer))))
 ;;               (when (and filename (string= "trello" (file-name-extension filename)))
 ;;                 (org-trello-mode)))))
-
-
-
-
-

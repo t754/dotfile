@@ -4,10 +4,6 @@
 ;; 問い合わせを簡略化 yes/no を y/n
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; yasnippetを置いているフォルダにパスを通す
-;;(add-to-list 'load-path
-;;             (expand-file-name "~/.emacs.d/elisp/yasnippet"))
-
 (yas-global-mode 1)
 ;; ~/.emacs.d/にsnippetsというフォルダを作っておきましょう
 (setq yas-snippet-dirs '("~/.emacs.d/snippets") ;; 作成するスニペットはここに入る
@@ -35,8 +31,9 @@
 ;;(custom-set-variables '(yas/prompt-functions '(my-yas/prompt)))
 (custom-set-variables '(yas-trigger-key "TAB"))
 
+(defalias 'yas--template-file 'yas--template-get-file)
 
-(setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-dropdown-prompt yas-completing-prompt  yas-no-prompt))
+(setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-dropdown-prompt yas-completing-prompt yas-no-prompt))
 
 ;;(define-key yas-minor-mode-map (kbd "TAB") nil)
 ;;(define-key yas-minor-mode-map (kbd "C-;") 'yas-expand)
@@ -46,14 +43,4 @@
            ("C-c i i" . helm-yas-complete);; 既存スニペットを挿入する
            ;; ("C-c i i" . yas-insert-snippet);; 既存スニペットを挿入する
            ("C-c i n" . yas-new-snippet);; 新規スニペットを作成するバッファを用意する
-           ("C-c i v" . yas-visit-snippet-file);; 既存スニペットを閲覧・編集する
-           )
-
-
-   ;; (add-hook 'org-mode-hook
-   ;;                  (lambda ()
-   ;;                    (make-variable-buffer-local 'yas/trigger-key)
-   ;;                    (setq yas/trigger-key [tab])
-   ;;                    (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-   ;;                    (define-key yas/keymap [tab] 'yas/next-field)))
-
+           ("C-c i v" . yas-visit-snippet-file));; 既存スニペットを閲覧・編集する
