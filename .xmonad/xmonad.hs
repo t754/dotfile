@@ -31,7 +31,7 @@ import XMonad.Hooks.DynamicLog
 
 myterm::String
 -- myterm = "urxvt256c-ml"
-myterm = "st -f \"Hack:size=16\""
+myterm = "st -f \"Inconsolata:size=16\""
 -- myterm = "st -f \"RictyDiminished-Regular-Powerline:size=16\""
 -- myterm = "urxvt256c-ml -e bash -c \"tmux -q has-session && exec tmux attach-session -d || exec tmux new-session \""
 -- myterm = "urxvt256c-ml -e bash -c \"tmux  new-session \""
