@@ -19,6 +19,7 @@ Xft.dpi: 96
 
 ! URxvt*termName:                         screen-256color
 URxvt*termName:  xterm-256color
+URxvt*iso14755: False
 ! URxvt*geometry:                         110x40
 ! URxvt*chdir:                          string
 ! URxvt*reverseVideo:                   boolean
@@ -93,7 +94,7 @@ URxvt*pointerColor:                     2
 ! /usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
 ! URxvt*font:                               xft:Source Code Pro for Powerline:size=14:antialias=true
 ! URxvt*imfont:                         xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
-URxvt*font:                             xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
+URxvt*font:                             xft:monospace:size=14:antialias=true
 ! ,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
 ! URxvt*boldfont:                           xft:RictyDiscord4Powerline:Bold:pixelsize=14:antialias=true
 ! ! ,xft:Inconsolate-g for Powerline:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
@@ -196,6 +197,8 @@ URxvt.url-select.underline:             true
 ! # The default ones are:
 ! URxvt.clipboard.copycmd:  xsel -ib
 ! URxvt.clipboard.pastecmd: xsel -ob
+URxvt.inputMethod: ibus
+URxvt.preeditType: OverTheSpot
 
 
 dzen2.font: xft:Droid Sans Mono:size=8:antialias=true
