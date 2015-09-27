@@ -44,5 +44,5 @@ mkdir -p ${HOME}/bin
 curl https://linux.dropbox.com/packages/dropbox.py -o "${HOME}/bin/dropbox"
 chmod +x "${HOME}/bin/dropbox"
 
-mkdir -p ${HOME}/.config/fontconfig
-ln -s ${PWD}/fonts.conf ${HOME}/.config/fontconfig
+mkdir -p ${HOME}/.config/fontconfig/
+ln -s ${PWD}/conf.d ${HOME}/.config/fontconfig
