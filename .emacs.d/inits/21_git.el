@@ -1,20 +1,7 @@
 (global-git-commit-mode +1)
 (require 'magit)
 
-;; (require 'git-gutter)
-;;;; (require 'git-gutter-fringe)
-;;;; (setq git-gutter-fr:side 'right-fringe)
-;;
-(custom-set-variables
- '(git-gutter:modified-sign "X") ;; two space
- '(git-gutter:added-sign "A")    ;; multiple character is OK
- '(git-gutter:deleted-sign "D")
- '(git-gutter:unchanged-sign nil)
- '(git-gutter:update-interval 2)
- '(git-gutter:window-width 1)
- '(git-gutter:lighter "_GG")
- '(git-gutter:handled-backends '(git hg)))
-
+(require 'git-gutter)
 
 (bind-keys :map global-map
              ("C-x C-g" . git-gutter:toggle)

@@ -4,7 +4,18 @@
       (url-retrieve-synchronously
        "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
     (goto-char (point-max))
-    (eval-print-last-sexp)))
+    (eval-print-last-sexp))
+  (require 'package)
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                          ("melpa" . "http://melpa.milkbox.net/packages/")
+                          ("ELPA" . "http://tromey.com/elpa/" )
+                          ("org" . "http://orgmode.org/elpa/")
+                          ))
+  (package-initialize)
+  (require 'el-get)
+  (el-get 'sync)
+  (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes"))
 ;; setup
 (el-get-bundle emacs-jp/init-loader)
 (el-get-bundle purcell/exec-path-from-shell)
@@ -125,5 +136,6 @@
 
 (el-get-bundle search-web :type github :pkgname "tomoya/search-web.el")
 (el-get-bundle smex)
+(el-get-bundle ido-vertical-mode)
 
 ;; (el-get-bundle direx)

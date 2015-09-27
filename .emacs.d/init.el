@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq debug-on-error nil)
 ;;reload
 (global-set-key [f12] 'eval-buffer)
@@ -6,13 +13,6 @@
 (unless (server-running-p)
   (server-start))
 ;;package
- (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                          ("melpa" . "http://melpa.milkbox.net/packages/")
-                          ("ELPA" . "http://tromey.com/elpa/" )
-                          ("org" . "http://orgmode.org/elpa/")
-                          ))
-   (package-initialize)
 
 ;; (require 'cask "~/.cask/cask.el")
 ;; (cask-initialize)
@@ -64,7 +64,9 @@
      ("" "svg" nil))))
  '(package-selected-packages
    (quote
-    (mozc yascroll package-build shut-up epl git commander f dash s)))
+    (robe mozc yascroll package-build shut-up epl git commander f dash s)))
+ '(search-web-default-browser (quote eww-browse-url))
+ '(search-web-in-emacs-browser (quote eww-browse-url))
  '(tab-width 4)
  '(yas-trigger-key "TAB"))
 
