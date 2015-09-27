@@ -98,6 +98,13 @@
 (setq-default save-place t)
 (setq save-place-file (concat user-emacs-directory "saved-places"))
 
+;;
+;; 初回起動が遅いのでキャッシュを作成(更新は C-u を付けて woman を呼ぶ)
+(setq woman-cache-filename (expand-file-name "~/.emacs.d/woman_cache.el"))
+;; 新たにフレームは作らなくて良い
+(setq woman-use-own-frame nil)
+
+
 ;;; 右から左に読む言語に対応させないことで描画高速化
 (setq-default bidi-display-reordering nil)
 ;;

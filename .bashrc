@@ -25,7 +25,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m'
 if type src-hilite-lesspipe.sh  >/dev/null 2>&1 ; then
     export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
 fi
-export VISUAL="emacs"
+export VISUAL="emacsclient"
 export BROWSER="firefox"
 export TZ="Asia/Tokyo"
 export LC_MESSAGES="C"

@@ -1,5 +1,7 @@
 ;;; dired を使って、一気にファイルの coding system (漢字) を変換する
 (require 'dired-aux)
+(ffap-bindings)
+
 (add-hook 'dired-mode-hook
           (lambda ()
             (define-key (current-local-map) "T"
