@@ -24,7 +24,6 @@
   (el-get-bundle elpa:mozc))
 
 
-
 (el-get-bundle ac-cider)
 (el-get-bundle ac-emoji)
 (el-get-bundle ac-helm)
@@ -38,7 +37,6 @@
 (el-get-bundle auto-complete-c-headers)
 (el-get-bundle bm)
 (el-get-bundle c-eldoc)
-;; (el-get-bundle cask)
 (el-get-bundle cider :type github :pkgname "clojure-emacs/cider")
 (el-get-bundle clj-refactor)
 (el-get-bundle clojure-cheatsheet)
@@ -101,10 +99,8 @@
 (el-get-bundle minimap)
 (el-get-bundle multiple-cursors)
 (el-get-bundle org-plus-contrib)
-;; (el-get-bundle org-toodledo" :git "https://github.com/myuhe/org-toodledo.git)
 (el-get-bundle org-trello)
 (el-get-bundle ox-textile)
-;; (el-get-bundle pallet)
 (el-get-bundle popwin)
 (el-get-bundle powerline)
 (el-get-bundle projectile-rails)
@@ -113,8 +109,6 @@
 (el-get-bundle rbenv)
 (el-get-bundle robe)
 (el-get-bundle rubocop)
-;; (el-get-bundle sclang-extensions)
-;; (el-get-bundle sclang-snippets)
 (el-get-bundle shut-up)
 (el-get-bundle slamhound)
 (el-get-bundle slime)
@@ -129,13 +123,9 @@
 (el-get-bundle yascroll)
 (el-get-bundle yasnippet)
 
-;; (el-get-bundle ace-isearch)
 (el-get-bundle avy)
 (el-get-bundle fold-dwim)
 (el-get-bundle org-mode)
-
 (el-get-bundle search-web :type github :pkgname "tomoya/search-web.el")
 (el-get-bundle smex)
 (el-get-bundle ido-vertical-mode)
-
-;; (el-get-bundle direx)
