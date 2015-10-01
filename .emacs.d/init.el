@@ -9,16 +9,16 @@
 ;;reload
 (global-set-key [f12] 'eval-buffer)
 
-(server-start)
-(unless (server-running-p)
-  (server-start))
+;; (server-start)
+;; (unless (server-running-p)
+;;   (server-start))
 ;;package
 
 ;; (require 'cask "~/.cask/cask.el")
 ;; (cask-initialize)
 ;; (require 'pallet)
 ;; (pallet-mode t)
-(load (concat user-emacs-directory "el-gets.el"))
+(load (concat user-emacs-directory "init-el-gets.el"))
 
 ;;inits -- start-els
 (require 'init-loader)
@@ -62,9 +62,10 @@
      ("" "hyperref" nil)
      "\\tolerance=1000"
      ("" "svg" nil))))
+ '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
-    (robe mozc yascroll package-build shut-up epl git commander f dash s)))
+    (mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
  '(search-web-default-browser (quote eww-browse-url))
  '(search-web-in-emacs-browser (quote eww-browse-url))
  '(tab-width 4)

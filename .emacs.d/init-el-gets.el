@@ -1,70 +1,68 @@
-(add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-(require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")
-                         ("ELPA" . "http://tromey.com/elpa/" )
-                         ("org" . "http://orgmode.org/elpa/")
-                         ))
-(package-initialize)
-(require 'el-get)
-(el-get 'sync)
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-;; setup
-(el-get-bundle emacs-jp/init-loader)
-(el-get-bundle purcell/exec-path-from-shell)
-;; Input method
-(when (executable-find "mozc_emacs_helper")
-  (el-get-bundle elpa:mozc))
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-(setq my/bundle-list
-	  '(ac-cider
-		ac-emoji
+(unless (require 'el-get nil 'noerror)
+  (require 'package)
+
+  (setq package-archives '(("melpa" . "http://melpa.org/packages/")
+			   ("gnu" . "http://elpa.gnu.org/packages/")
+			   ("marmalade" . "http://marmalade-repo.org/packages/")
+			   ("ELPA" . "http://tromey.com/elpa/" )
+			   ("org" . "http://orgmode.org/elpa/")
+			   ))
+
+  (package-refresh-contents)
+  (package-initialize)
+  (package-install 'el-get)
+  (require 'el-get))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+
+
+
+		;; melpa:ac-emoji
+(defvar my/el-list
+  '(
+
+    ac-cider
 		ac-helm
 		ac-math
 		ac-slime
 		ace-isearch
 		actionscript-mode
 		align-cljlet
-		all-ext
+;;		all-ext
 		auto-complete
 		auto-complete-c-headers
 		bm
 		c-eldoc
-		(cider :type github :pkgname "clojure-emacs/cider")
+
 		clj-refactor
-		clojure-cheatsheet
+
 		clojure-mode
-		clojure-mode-extra-font-locking
+;;		clojure-mode-extra-font-locking
 		clojure-snippets
-		codic
+;;
 		color-theme
-		ctags-update
+;;		ctags-update
 		dockerfile-mode
 		drag-stuff
-		eldoc-extension
+;;		eldoc-extension
 		emmet-mode
 		epl
-		exec-path-from-shell
+
 		f
 		flycheck
 		flycheck-cask
-		flycheck-clojure
+;;		flycheck-clojure
 		flycheck-color-mode-line
 		flymake-cursor
-		flymake-haskell-multi
-		flymake-python-pyflakes
-		fold-dwim-org
-		git
+;;		flymake-haskell-multi
+;;		flymake-python-pyflakes
+;;		fold-dwim-org
+;;		git
 		git-commit-mode
 		git-gutter
-		gnuplot
+;;		gnuplot
 		go-autocomplete
 		go-eldoc
 		go-mode
@@ -72,22 +70,22 @@
 		haskell-mode
 		helm
 		helm-ag
-		helm-bm
+;;		helm-bm
 		helm-c-yasnippet
 		helm-descbinds
-		helm-emmet
+;;		helm-emmet
 		helm-gtags
-		helm-projectile
+;;		helm-projectile
 		helm-rails
 		helm-robe
 		helm-swoop
 		highlight-indentation
 		htmlize
-		http-post-simple
+;;		http-post-simple
 		idle-highlight-mode
-		inf-clojure
+;;		inf-clojure
 		inf-ruby
-		init-loader
+
 		jedi
 		js2-mode
 		js2-refactor
@@ -98,26 +96,26 @@
 		midje-mode
 		minimap
 		multiple-cursors
-		org-plus-contrib
-		org-trello
-		ox-textile
+;;		org-plus-contrib
+;;		org-trello
+;;		ox-textile
 		popwin
 		powerline
 		projectile-rails
 		quickrun
-		rainbow-delimiters
+
 		rbenv
-		robe
+;;		robe
 		rubocop
-		shut-up
-		slamhound
+;;		shut-up
+;;		slamhound
 		slime
 		smartparens
 		smartrep
 		undo-tree
 		use-package
 		visual-regexp-steroids
-		web-beautify
+;;		web-beautify
 		web-mode
 		yaml-mode
 		yascroll
@@ -125,14 +123,40 @@
 		avy
 		fold-dwim
 		org-mode
-		(search-web :type github :pkgname "tomoya/search-web.el")
 		smex
 		ido-vertical-mode
-        mykie))
+;;
+		)
+	  "A list of packages to install from el-get at launch.")
+
+(el-get 'sync my/el-list)
+
+;; ;; Input method
+;; (when (executable-find "mozc_emacs_helper")
+;;   (el-get-bundle elpa:mozc))
+
+   ;;
+		;; (cider :type github :pkgname "clojure-emacs/cider")		;;clojure-cheatsheet
+		;;
 ;; (el-get-bundle xxx)
+;; (el-get-bundle melpa:helm-bm)
+(defvar my/bundle-list '(
+			 emacs-jp/init-loader
+			 purcell/exec-path-from-shell
+             purcell/flymake-haskell-multi
+             (search-web :type github :pkgname "tomoya/search-web.el")
+             yasuyk/web-beautify
+             purcell/flymake-easy
+			 syohex/emacs-codic
+             (yuutayamada/mykie-el :load-path "lisp")
+             ;; yasuyk/helm-bm
+			 )
+  "A list to install for el-get-bundle ")
 
 
-(dolist (x my/bundle-list)
-  (cond
-   ((listp x) (eval `(el-get-bundle ,@x)))
-   (t         (eval `(el-get-bundle ,x)))))
+
+
+ (dolist (x my/bundle-list)
+   (cond
+    ((listp x) (eval `(el-get-bundle ,@x)))
+    (t         (eval `(el-get-bundle ,x)))))
