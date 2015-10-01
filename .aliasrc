@@ -89,7 +89,7 @@ alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 dstop() { docker stop $(docker ps -a -q);}
 
 # Remove all containers
-drm() { docker rm $(docker ps -a -q); }
+drm() { docker rm $(docker ps -aq --filter='status=exited'); }
 
 
 # Remove all images
