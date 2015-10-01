@@ -1,23 +1,25 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;; (require 'package)
+
+;; (setq package-archives '(("melpa" .  "http://melpa.org/packages/")
+;; 			   ("gnu" . "http://elpa.gnu.org/packages/")
+;; 			   ("marmalade" . "http://marmalade-repo.org/packages/")
+;; 			   ("ELPA" . "http://tromey.com/elpa/" )
+;; 			   ("org" . "http://orgmode.org/elpa/")
+;; 			   ))
+
+;; (package-refresh-contents)
+;; (package-initialize)
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (unless (require 'el-get nil 'noerror)
-  (require 'package)
-
-  (setq package-archives '(("melpa" . "http://melpa.org/packages/")
-			   ("gnu" . "http://elpa.gnu.org/packages/")
-			   ("marmalade" . "http://marmalade-repo.org/packages/")
-			   ("ELPA" . "http://tromey.com/elpa/" )
-			   ("org" . "http://orgmode.org/elpa/")
-			   ))
-
-  (package-refresh-contents)
-  (package-initialize)
-  (package-install 'el-get)
-  (require 'el-get))
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-
-
 
 		;; melpa:ac-emoji
 (defvar my/el-list
@@ -71,7 +73,7 @@
 		helm
 		helm-ag
 ;;		helm-bm
-		helm-c-yasnippet
+		
 		helm-descbinds
 ;;		helm-emmet
 		helm-gtags
@@ -129,7 +131,7 @@
 		)
 	  "A list of packages to install from el-get at launch.")
 
-(el-get 'sync my/el-list)
+
 
 ;; ;; Input method
 ;; (when (executable-find "mozc_emacs_helper")
@@ -147,7 +149,7 @@
              (search-web :type github :pkgname "tomoya/search-web.el")
              yasuyk/web-beautify
              purcell/flymake-easy
-			 syohex/emacs-codic
+             (emacs-codic :type github :pkgname "syohex/emacs-codic" )
              (yuutayamada/mykie-el :load-path "lisp")
              ;; yasuyk/helm-bm
 			 )
@@ -160,3 +162,4 @@
    (cond
     ((listp x) (eval `(el-get-bundle ,@x)))
     (t         (eval `(el-get-bundle ,x)))))
+(el-get 'sync my/el-list)
