@@ -1,5 +1,7 @@
 ;;; dired を使って、一気にファイルの coding system (漢字) を変換する
 (require 'dired-aux)
+(ffap-bindings)
+
 (add-hook 'dired-mode-hook
           (lambda ()
             (define-key (current-local-map) "T"
@@ -38,7 +40,7 @@
   (setq dired-file-coding-system coding-system)
   (dired-map-over-marks-check
    (function dired-convert-coding-system) arg 'convert-coding-system t))
-	
+
 (setq dired-default-file-coding-system 'utf-8)
 (defvar my-dired-before-buffer nil)
 (defadvice dired-advertised-find-file
@@ -82,3 +84,5 @@
   "In dired, open the file named on this line."
   (interactive))
 (define-key dired-mode-map "o" 'dired-open-file)
+
+(setq dired-dwim-target t)

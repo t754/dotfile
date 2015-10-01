@@ -3,8 +3,8 @@
 # key: dot2
 # --
 #+name: bb_skip
-#+begin_src sh :var data="" :results output :export none 
-   extractbb $(echo "$data" | awk -F ":" '{gsub("\]*","",$${0}2);print($${0}2)}') 
+#+begin_src sh :var data="" :results output :export none
+   extractbb $(echo "$data" | awk -F ":" '{gsub("\]*","",$${0}2);print($${0}2)}')
    echo "$data"
 #+end_src
 

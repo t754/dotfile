@@ -19,6 +19,7 @@ Xft.dpi: 96
 
 ! URxvt*termName:                         screen-256color
 URxvt*termName:  xterm-256color
+URxvt*iso14755: False
 ! URxvt*geometry:                         110x40
 ! URxvt*chdir:                          string
 ! URxvt*reverseVideo:                   boolean
@@ -26,7 +27,7 @@ URxvt*loginShell:                       ture
 ! URxvt*jumpScroll:                     boolean
 ! URxvt*skipScroll:                     boolean
 ! URxvt*pastableTabs:                   boolean
-URxvt*scrollstyle:                     plain 
+URxvt*scrollstyle:                     plain
 URxvt*scrollBar:                        true
 ! Urxvt*scrollBar_right:                  true
 ! URxvt*scrollBar_floating:             boolean
@@ -91,11 +92,11 @@ URxvt*pointerColor:                     2
 ! URxvt*borderColor:                    color
 ! URxvt*iconFile:                         /usr/share/icons/Adwaita/96x96/apps/utilities-terminal-symbolic.symbolic.png
 ! /usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
-! URxvt*font:								xft:Source Code Pro for Powerline:size=14:antialias=true
-! URxvt*imfont:		                    xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
-URxvt*font:		                        xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
+! URxvt*font:                               xft:Source Code Pro for Powerline:size=14:antialias=true
+! URxvt*imfont:                         xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
+URxvt*font:                             xft:monospace:size=14:antialias=true
 ! ,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
-! URxvt*boldfont:		                    xft:RictyDiscord4Powerline:Bold:pixelsize=14:antialias=true
+! URxvt*boldfont:                           xft:RictyDiscord4Powerline:Bold:pixelsize=14:antialias=true
 ! ! ,xft:Inconsolate-g for Powerline:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
 ! ! URxvt*font: xft:Android Emoji:size=14:antialias=true
 ! URxvt.italicFont:        xft:Ricty:italic:size=14:antialiase=true
@@ -103,15 +104,15 @@ URxvt*font:		                        xft:Ricty Discord4Powerline:Regular:size=14
 !URxvt*boldFont:                        xft:Inconsolate-g for Powerline:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
 
 
-! URxvt*font:								xft:Ricty Discord for Powerline for Powerline:size=14:antialias=true
+! URxvt*font:                               xft:Ricty Discord for Powerline for Powerline:size=14:antialias=true
 ! URxvt*font:                            xft:RictyDiscord-Regular2-Powerline for Powerline-BoldForPowerline:size=14:antialias=true
-! URxvt*font:                            	 xft:unk:size=14:antialias=true
+! URxvt*font:                                xft:unk:size=14:antialias=true
 
 ! URxvt*italicFont:                     xft:RictyDiscord-Regular-Powerline
 ! URxvt*boldItalicFont:                 xft:RictyDiscord-Regular-Powerline
 ! URxvt*intensityStyles:                boolean
 ! URxvt*inputMethod:                    name
-!URxvt*preeditType:  					OverTheSpot
+!URxvt*preeditType:                     OverTheSpot
 ! URxvt*imLocale:                       string
 ! URxvt*imFont:                         fontname
 ! URxvt*title:                          string
@@ -146,12 +147,12 @@ URxvt*iso14755:                         false
 URxvt*iso14755_52:                      false
 ! URxvt*xrm:                            string
 ! URxvt*keysym.sym:                     keysym
-! URxvt.keysym.C-S-Up:                      perl:font-size:increase 
-! URxvt.keysym.C-S-Down:                    perl:font-size:decrease 
+! URxvt.keysym.C-S-Up:                      perl:font-size:increase
+! URxvt.keysym.C-S-Down:                    perl:font-size:decrease
 URxvt.keysym.C-S-Up:                    perl:font-size:incglobal
 URxvt.keysym.C-S-Down:                  perl:font-size:decglobal
 URxvt.keysym.M-u:                       perl:url-select:select_next
-URxvt.keysym.M-Escape: 					perl:keyboard-select:activate
+URxvt.keysym.M-Escape:                  perl:keyboard-select:activate
 URxvt.keysym.M-s:                       perl:keyboard-select:search
 ! URxvt.keysym.M-c:                       perl:clipboard:copy
 ! URxvt.keysym.M-w:                       perl:clipboard:copy
@@ -196,6 +197,8 @@ URxvt.url-select.underline:             true
 ! # The default ones are:
 ! URxvt.clipboard.copycmd:  xsel -ib
 ! URxvt.clipboard.pastecmd: xsel -ob
+URxvt.inputMethod: ibus
+URxvt.preeditType: OverTheSpot
 
 
 dzen2.font: xft:Droid Sans Mono:size=8:antialias=true
@@ -204,3 +207,7 @@ dzen2.font: xft:Droid Sans Mono:size=8:antialias=true
 *VT100.colorBD:         red
 *VT100.colorULMode:     true
 *VT100.colorUL:         cyan
+
+! Xft.embolden: true
+Emacs.FontBackend: xft
+Emacs.font: Monospace-12

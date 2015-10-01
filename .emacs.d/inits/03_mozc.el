@@ -1,12 +1,9 @@
-
-
-
 (when  (require 'mozc nil t)
 
   ;;(setq mozc-candidate-style 'overlay)
   (global-set-key (kbd "C-\\") 'toggle-input-method)
   ;; (bind-key (kbd "C-h") 'DEL mozc-mode-map)2
-  
+
   (set-buffer-file-coding-system 'utf-8)
   (set-buffer-file-coding-system 'utf-8)
   (set-clipboard-coding-system 'utf-8)
@@ -15,7 +12,7 @@
   (set-language-environment "Japanese")
   (set-terminal-coding-system 'utf-8)
   (prefer-coding-system 'utf-8-unix)
-  
+
   (setq default-buffer-file-coding-system 'utf-8
         mozc-color "PowderBlue"
         default-input-method "japanese-mozc"
@@ -24,7 +21,7 @@
   ;; (if (featurep 'key-chord)
   ;;   (defadvice toggle-input-method (after my-toggle-input-method activate)
   ;;     (mozc-change-cursor-color)))
-  
+
   )
 
 ;; helm で候補のアクションを表示する際に IME を OFF にする
@@ -49,5 +46,3 @@
 ;; (defvar my-default-cursor-color)
 ;; (setq my-default-cursor-color (cdr (assoc 'cursor-color default-frame-alist)))
 ;; (add-hook 'input-method-activate-hook 'mozc-change-cursor-color)
-
-

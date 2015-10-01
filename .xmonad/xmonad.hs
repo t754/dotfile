@@ -19,18 +19,20 @@ import qualified Data.Map        as M
 
 -- import qualified Data.Map as M
 
-import XMonad.Hooks.EwmhDesktops 
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.SetWMName
 -- import Data.Ratio ((%))
 import XMonad.Layout.ToggleLayouts
 -- import XMonad.Layout.Minimize
 -- import qualified Data.Map as M
 -- import XMonad.Actions.CopyWindow
-
+import XMonad.Hooks.DynamicLog
 -- import XMonad.Layout.SimplestFloat
 
 myterm::String
-myterm = "urxvt256c-ml"
+-- myterm = "urxvt256c-ml"
+myterm = "st -f \"Inconsolata:size=16\""
+-- myterm = "st -f \"RictyDiminished-Regular-Powerline:size=16\""
 -- myterm = "urxvt256c-ml -e bash -c \"tmux -q has-session && exec tmux attach-session -d || exec tmux new-session \""
 -- myterm = "urxvt256c-ml -e bash -c \"tmux  new-session \""
 main::IO()
@@ -43,15 +45,16 @@ myManageHook = composeAll
     , className =? "Xfrun4" --> doFloat
     , className =? "Xfce4-appfinder" --> doFloat
     , className =? "XClock" --> doFloat
+    , className =? "MPlayer" --> doFloat
     -- , className =? "Xfce4-panel" --> doIgnore
     --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
-    ] 
+    ]
   --- where copyToWss ids win = map (copyWindow win) ids
--- myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
+myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
 
 
 
-myLayout = 
+myLayout =
     toggleLayouts Full
     $ avoidStruts
     $ smartBorders
@@ -60,10 +63,10 @@ myLayout =
     -- ||| simplestFloat
     ||| Full
     where
-      -- skype = And (ClassName "Skype") (Role "")       
+      -- skype = And (ClassName "Skype") (Role "")
       tall = ResizableTall 1 (3/100) (7/10) []
 
-    
+
 
 
 myManageHookShift = composeAll
@@ -74,7 +77,7 @@ myManageHookShift = composeAll
      , className =? "Thunderbird"   --> viewShift "5"
      , className =? "VirtualBox"   --> viewShift "3"
      ]
-  where viewShift = doF . liftM2 (.) W.view W.shift     
+  where viewShift = doF . liftM2 (.) W.view W.shift
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -104,22 +107,27 @@ main = xmonad $ xfceConfig
     , borderWidth        = 3
     , manageHook         = myManageHook <+> myManageHookShift <+> manageHook xfceConfig
     , handleEventHook    = ewmhDesktopsEventHook <+> fullscreenEventHook
-    , startupHook        = ewmhDesktopsStartup <+> setWMName "LG3D"
-    -- , workspaces         = myWorkspaces
+    , startupHook        = startupHook xfceConfig
+                         >> setWMName "LG3D" -- Java app focus fix
     , mouseBindings      = myMouseBindings
      }
     `additionalKeysP`
     [ ("M-S-r"   , restart "xmonad" True)
+    , ("M-C-q"   , spawn "setxkbmap && xmodmap ~/.xmodmap && xdotool mousemove 0 0")
+    , ("M-q"     , spawn "xdotool mousemove 0 0")
+
     , ("M-S-q"   , spawn "xfce4-session-logout")
     , ("M-p"     , spawn "xfce4-appfinder")
-    , ("M-S-f"   , spawn "pidof firefox || firefox")  
+    , ("M-S-f"   , spawn "pidof firefox || firefox")
+    , ("M-C-S-e" , spawn "emacsclient -c -n")
     , ("M-f"     , sendMessage  ToggleLayout)
     , ("M-b"     , sendMessage   ToggleStruts)
     , ("M-S-h"   , sendMessage MirrorShrink)
     , ("M-S-l"   , sendMessage MirrorExpand)
     , ("M-S-z"   , spawn "xscreensaver-command -lock")
+    , ("M-S-z"   , spawn "xscreensaver-command -lock")
     -- , ("M-S-t"   , spawn "xclock -chime -update 1 -geometry $(xdpyinfo | grep -B1 resolution | gawk -v SS=400 'BEGIN{FS=\"[ x]+\"} (NR==1){print SS\"x\"SS\"+\"$3/2-(SS/2)\"+\"$4/2-(SS/2)}')")
-    , ("M-S-t" , spawn "xclock -chime -update 1")
+    , ("M-S-t"   , spawn "notify-send \"$(ruby ~/bin/toast-alc.rb 2>&1)\"")
+    -- , ("M-S-t"   , spawn "xclock -chime -update 1")
     , ("M-g"     , spawn "xdotool mousemove 0 0")
     ]
- 

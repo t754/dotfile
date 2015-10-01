@@ -19,24 +19,14 @@
     ("*"        . 'mc/mark-all-like-this)
     ("d"        . 'mc/mark-all-like-this-dwim)
     ("I"        . 'my/mc/insert-numbers)
+    ("N"        . 'my/mc/insert-numbers)
     ("i"        . 'mc/insert-numbers)
     ("o"        . 'mc/sort-regions)
     ("O"        . 'mc/reverse-regions)))
+;;
 
-;; 
 (defvar my/mc/counter 0)
 (defvar my/mc/format-list nil)
-
-;; "\"tes %d %d\" i (% i 2)"
-;; ↓
-;; (format "tes %d %d" my/mc/counter (% my/mc/counter 2))
-;; できた
-;; (defun my/mc/format-revease-loop (sss lis)
-;;   (let ((MMM (read-from-string sss)))
-;;     (cond ((< (cdr MMM) (length sss))
-;;            (my/mc/format-revease-loop  (substring sss (cdr MMM)) (cons (car MMM) lis)))
-;;           (t (cons (car MMM) lis)))))
-
 (defun my/mc/insert-numbers (arg)
   "Insert increasing numbers for each cursor, starting at 0 or ARG."
   (interactive "P")
@@ -45,7 +35,6 @@
         (car (read-from-string (read-from-minibuffer "例:i=[0,1,,]::(% i 2):" "i"))))
   (mc/for-each-cursor-ordered
    (mc/execute-command-for-fake-cursor 'my/mc--insert-number-and-increase cursor)))
-
 (defun my/mc--insert-number-and-increase ()
   (interactive)
   (insert (format "%d" ((lambda (i) (eval my/mc/format-list)) my/mc/counter)))
@@ -69,13 +58,3 @@
 ;;     ("M-p"      . 'mc/mark-previous-symbol-like-this)
 ;;     ("M-n"      . 'mc/mark-next-symbol-like-this)
 ;;     ("*"        . 'mc/mark-all-like-this)))
-
-
-;; (require 'multiple-cursors)
-;; (global-set-key (kbd "C-c RET") 'mc/edit-lines)
-;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-;; (global-set-key (kbd "C-*") 'mc/mark-all-like-this)
-
-
-

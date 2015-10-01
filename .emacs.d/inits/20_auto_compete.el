@@ -15,12 +15,12 @@
 
 
 ;;(setq ac-auto-start nil)
-;;勝手に初まらない;(setq ac-ignore-case 'smart)										
+;;勝手に初まらない;(setq ac-ignore-case 'smart)
 
 (with-eval-after-load "auto-complete"
   (setq ac-use-menu-map t
       ac-dwim nil  ; 空気読んでほしいをnil
-      ac-auto-start t 
+      ac-auto-start t
       ac-ignore-case t)
 
   (global-set-key (kbd "C-:") 'ac-complete-with-helm)

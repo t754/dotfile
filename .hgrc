@@ -1,5 +1,5 @@
 [ui]
-username = 
+username =
 merge = internal:merge
 editor = emacsclient
 [extensions]
@@ -17,7 +17,7 @@ mode = auto
 
 [pager]
 pager = LESS='FSRX' less
-attend = annotate, blame, cat, export, glog, log, qdiff 
+attend = annotate, blame, cat, export, glog, log, qdiff
 ignore = diff
 
 [extdiff]

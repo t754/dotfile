@@ -1,28 +1,29 @@
 [user]
-   name =
-   email =
+   name          =
+   email         =
 [color]
-    ui = true
-	diff = auto
-	status = auto
-	branch = auto
+    ui           = true
+    diff         = auto
+    status       = auto
+    branch       = auto
 [alias]
-	ch = checkout
-	ci = commit
-	br = branch
-	st = status
-	s = status -s -b
-	hint = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	l   = log --abbrev-commit --date=iso --graph --pretty=format:'%C(red)%h %C(yellow)%d%C(green)%cd %C(blue)%cn\n%C(reset)%s\n'
+    ch           = checkout
+    ci           = commit
+    br           = branch
+    st           = status
+    s            = status -s -b
+    hint         = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    l            = log --abbrev-commit --date=iso --graph --pretty=format:'%C(red)%h %C(yellow)%d%C(green)%cd %C(blue)%cn\n%C(reset)%s\n'
 [core]
     excludesfile = ~/.gitignore
-	pager = less -r
+    pager        = less -r
+    editor       = emacsclient -c
 [mergetool.ediff]
-    cmd = emacsclient -c --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\" 
+    cmd          = emacsclient -c --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
 [merge]
-	tool = ediff
+    tool         = ediff
 [ghq]
-    root = ~/.ghq
-    root = ~/.go/src
+    root         = ~/.ghq
+    root         = ~/.go/src
 [push]
-	default = simple
+    default      = simple

@@ -36,5 +36,5 @@ hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%
 
 bufferfile "/tmp/screen-exchange"
 bindkey -m ' ' eval 'stuff \040' 'writebuf'
-bindkey -m Y eval 'stuff Y' 'writebuf' 
-bindkey -m W eval 'stuff W' 'writebuf' 
+bindkey -m Y eval 'stuff Y' 'writebuf'
+bindkey -m W eval 'stuff W' 'writebuf'
