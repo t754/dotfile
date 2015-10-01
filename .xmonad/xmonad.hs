@@ -113,7 +113,9 @@ main = xmonad $ xfceConfig
      }
     `additionalKeysP`
     [ ("M-S-r"   , restart "xmonad" True)
-     ,("M-q"     , spawn "setxkbmap && xmodmap ~/.xmodmap")
+    , ("M-C-q"   , spawn "setxkbmap && xmodmap ~/.xmodmap && xdotool mousemove 0 0")
+    , ("M-q"     , spawn "xdotool mousemove 0 0")
+
     , ("M-S-q"   , spawn "xfce4-session-logout")
     , ("M-p"     , spawn "xfce4-appfinder")
     , ("M-S-f"   , spawn "pidof firefox || firefox")
@@ -125,6 +127,7 @@ main = xmonad $ xfceConfig
     , ("M-S-z"   , spawn "xscreensaver-command -lock")
     , ("M-S-z"   , spawn "xscreensaver-command -lock")
     -- , ("M-S-t"   , spawn "xclock -chime -update 1 -geometry $(xdpyinfo | grep -B1 resolution | gawk -v SS=400 'BEGIN{FS=\"[ x]+\"} (NR==1){print SS\"x\"SS\"+\"$3/2-(SS/2)\"+\"$4/2-(SS/2)}')")
-    , ("M-S-t" , spawn "xclock -chime -update 1")
+    , ("M-S-t"   , spawn "notify-send \"$(ruby ~/bin/toast-alc.rb 2>&1)\"")
+    -- , ("M-S-t"   , spawn "xclock -chime -update 1")
     , ("M-g"     , spawn "xdotool mousemove 0 0")
     ]
