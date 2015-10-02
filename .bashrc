@@ -194,7 +194,7 @@ fi
 
 function j() {
     if [ $# -eq 0 ] ; then
-        cd $(z | tac | awk "{print \$2}" | peco)
+        cd -- "$(z  | tac | awk '{for(i=2;i<NF;i++){printf("%s ",$i)}print $NF}' | peco)"
     else
         z $*
     fi
