@@ -21,115 +21,84 @@
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 
-		;; melpa:ac-emoji
+;; melpa:ac-emoji
 (defvar my/el-list
   '(
-
     ac-cider
-		ac-helm
-		ac-math
-		ac-slime
-		ace-isearch
-		actionscript-mode
-		align-cljlet
-;;		all-ext
-		auto-complete
-		auto-complete-c-headers
-		bm
-		c-eldoc
-
-		clj-refactor
-
-		clojure-mode
-;;		clojure-mode-extra-font-locking
-		clojure-snippets
-;;
-		color-theme
-;;		ctags-update
-		dockerfile-mode
-		drag-stuff
-;;		eldoc-extension
-		emmet-mode
-		epl
-
-		f
-		flycheck
-		flycheck-cask
-;;		flycheck-clojure
-		flycheck-color-mode-line
-		flymake-cursor
-;;		flymake-haskell-multi
-;;		flymake-python-pyflakes
-;;		fold-dwim-org
-;;		git
-		git-commit-mode
-		git-gutter
-;;		gnuplot
-		go-autocomplete
-		go-eldoc
-		go-mode
-		google-translate
-		haskell-mode
-		helm
-		helm-ag
-;;		helm-bm
-		
-		helm-descbinds
-;;		helm-emmet
-		helm-gtags
-;;		helm-projectile
-		helm-rails
-		helm-robe
-		helm-swoop
-		highlight-indentation
-		htmlize
-;;		http-post-simple
-		idle-highlight-mode
-;;		inf-clojure
-		inf-ruby
-
-		jedi
-		js2-mode
-		js2-refactor
-		json-reformat
-		lua-mode
-		magit
-		markdown-mode
-		midje-mode
-		minimap
-		multiple-cursors
-;;		org-plus-contrib
-;;		org-trello
-;;		ox-textile
-		popwin
-		powerline
-		projectile-rails
-		quickrun
-
-		rbenv
-;;		robe
-		rubocop
-;;		shut-up
-;;		slamhound
-		slime
-		smartparens
-		smartrep
-		undo-tree
-		use-package
-		visual-regexp-steroids
-;;		web-beautify
-		web-mode
-		yaml-mode
-		yascroll
-		yasnippet
-		avy
-		fold-dwim
-		org-mode
-		smex
-		ido-vertical-mode
-;;
-		)
-	  "A list of packages to install from el-get at launch.")
+    ac-helm
+    ac-math
+    ac-slime
+    ace-isearch
+    actionscript-mode
+    align-cljlet
+    auto-complete
+    auto-complete-c-headers
+    avy
+    bm
+    c-eldoc
+    clj-refactor
+    clojure-mode
+    clojure-snippets
+    color-theme
+    dockerfile-mode
+    drag-stuff
+    emmet-mode
+    epl
+    f
+    flycheck
+    flycheck-cask
+    flycheck-color-mode-line
+    flymake-cursor
+    fold-dwim
+    git-commit-mode
+    git-gutter
+    go-autocomplete
+    go-eldoc
+    go-mode
+    google-translate
+    haskell-mode
+    helm
+    helm-ag
+    helm-descbinds
+    helm-gtags
+    helm-rails
+    helm-robe
+    helm-swoop
+    highlight-indentation
+    htmlize
+    idle-highlight-mode
+    ido-vertical-mode
+    inf-ruby
+    jedi
+    js2-mode
+    js2-refactor
+    json-reformat
+    lua-mode
+    magit
+    markdown-mode
+    midje-mode
+    minimap
+    multiple-cursors
+    org-mode
+    popwin
+    powerline
+    projectile-rails
+    quickrun
+    rbenv
+    rubocop
+    slime
+    smartparens
+    smartrep
+    smex
+    undo-tree
+    use-package
+    visual-regexp-steroids
+    web-mode
+    yaml-mode
+    yascroll
+    yasnippet
+    )
+  "A list of packages to install from el-get at launch.")
 
 
 
@@ -137,29 +106,53 @@
 ;; (when (executable-find "mozc_emacs_helper")
 ;;   (el-get-bundle elpa:mozc))
 
-   ;;
-		;; (cider :type github :pkgname "clojure-emacs/cider")		;;clojure-cheatsheet
-		;;
+;;
+;; (cider :type github :pkgname "clojure-emacs/cider")		;;clojure-cheatsheet
+;;
 ;; (el-get-bundle xxx)
-;; (el-get-bundle melpa:helm-bm)
+
+;;		all-ext
+;;		clojure-mode-extra-font-locking
+;;		ctags-update
+;;		eldoc-extension
+;;		flycheck-clojure
+;;		flymake-haskell-multi
+;;		flymake-python-pyflakes
+;;		fold-dwim-org
+;;		git
+;;		gnuplot
+;;		helm-bm
+;;		helm-emmet
+;;		helm-projectile
+;;		http-post-simple
+;;		inf-clojure
+;;		org-plus-contrib
+;;		org-trello
+;;		ox-textile
+;;		robe
+;;		shut-up
+;;		slamhound
+;;		web-beautify
+
+
 (defvar my/bundle-list '(
-			 emacs-jp/init-loader
-			 purcell/exec-path-from-shell
-             purcell/flymake-haskell-multi
-             (search-web :type github :pkgname "tomoya/search-web.el")
-             yasuyk/web-beautify
-             purcell/flymake-easy
-             (emacs-codic :type github :pkgname "syohex/emacs-codic" )
-             (yuutayamada/mykie-el :load-path "lisp")
-             ;; yasuyk/helm-bm
-			 )
+                         emacs-jp/init-loader
+                         purcell/exec-path-from-shell
+                         purcell/flymake-haskell-multi
+                         (search-web :type github :pkgname "tomoya/search-web.el")
+                         yasuyk/web-beautify
+                         purcell/flymake-easy
+                         (emacs-codic :type github :pkgname "syohex/emacs-codic" )
+                         (yuutayamada/mykie-el :load-path "lisp")
+                         ;; yasuyk/helm-bm
+                         )
   "A list to install for el-get-bundle ")
 
 
 
 
- (dolist (x my/bundle-list)
-   (cond
-    ((listp x) (eval `(el-get-bundle ,@x)))
-    (t         (eval `(el-get-bundle ,x)))))
+(dolist (x my/bundle-list)
+  (cond
+   ((listp x) (eval `(el-get-bundle ,@x)))
+   (t         (eval `(el-get-bundle ,x)))))
 (el-get 'sync my/el-list)
