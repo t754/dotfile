@@ -17,7 +17,7 @@
   "colorrrrrrtheeeemeee")
 
 (custom-theme-set-faces 'my/color-theme-calm-forest
-                        '(default ((t (:stipple nil :background "gray12" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "Ricty Discord4Powerline"))))
+                        '(default ((t (:stipple nil :background "gray12" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "Ricty Discord"))))
                         '(bold ((t (:weight bold :height 0.8))))
                         '(italic ((t (:slant italic))))
                         '(bold-italic ((t (:slant italic :weight bold))))
@@ -376,7 +376,7 @@
                         '(speedbar-directory-face ((t (:foreground "light blue"))))
                         '(speedbar-button-face ((t (:foreground "green3"))))
                         '(show-paren-mismatch-face ((t (:background "purple" :foreground "white"))))
-                        '(show-paren-match-face ((t (:background "turquoise"))))
+                        '(show-paren-match-face ((t (:background "grey30"))))
                         '(senator-read-only-face ((t (:background "#664444"))))
                         '(senator-momentary-highlight-face ((t (:background "gray30"))))
                         '(senator-intangible-face ((t (:foreground "gray75"))))
@@ -449,7 +449,6 @@
 (provide-theme 'my/color-theme-calm-forest)
 
 (show-paren-mode 1)
-(setq show-paren-delay 0.1
+(setq show-paren-delay 0.2
       show-paren-style 'expression)
-(set-face-background 'show-paren-match-face "grey30")
 (set-face-underline-p 'show-paren-match-face "red")
