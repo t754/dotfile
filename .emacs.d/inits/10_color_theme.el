@@ -16,6 +16,11 @@
 (deftheme my/color-theme-calm-forest
   "colorrrrrrtheeeemeee")
 
+(show-paren-mode 1)
+(setq show-paren-delay 0.2
+      show-paren-style 'expression)
+(set-face-underline-p 'show-paren-match-face "red")
+
 (custom-theme-set-faces 'my/color-theme-calm-forest
                         '(default ((t (:stipple nil :background "gray12" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "Ricty Discord"))))
                         '(bold ((t (:weight bold :height 0.8))))
@@ -445,10 +450,3 @@
                         '(Info-title-3-face ((t (:weight bold :height 1.2 :family "helv"))))
                         '(Info-title-2-face ((t (:weight bold :height 1.44 :family "helv"))))
                         '(Info-title-1-face ((t (:weight bold :height 1.728 :family "helv")))))
-
-(provide-theme 'my/color-theme-calm-forest)
-
-(show-paren-mode 1)
-(setq show-paren-delay 0.2
-      show-paren-style 'expression)
-(set-face-underline-p 'show-paren-match-face "red")
