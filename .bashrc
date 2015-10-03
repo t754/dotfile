@@ -194,7 +194,9 @@ fi
 
 function j() {
     if [ $# -eq 0 ] ; then
-        cd -- "$(z  | tac | awk '{for(i=2;i<NF;i++){printf("%s ",$i)}print $NF}' | peco)"
+        local cddd="$(z  | tac | awk '{for(i=2;i<NF;i++){printf("%s ",$i)}print $NF}'  | peco)"
+        echo cd "$cddd"
+        cd -- "$cddd"
     else
         z $*
     fi
@@ -219,7 +221,7 @@ if [ "x${WINDOWID}" != "x" ] ; then
         if [ $(hostname) = "localhost.localdomain" ]; then
             eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit2 id_rsa.zt)
         else
-            eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit id_rsa)
+            eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit)
         fi
     fi
 fi
