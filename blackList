@@ -13,3 +13,4 @@ golist
 setup.sh
 default.sh
 conf.d
+rc.lua

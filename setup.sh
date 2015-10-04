@@ -46,3 +46,6 @@ chmod +x "${HOME}/bin/dropbox"
 
 mkdir -p ${HOME}/.config/fontconfig/
 ln -s ${PWD}/conf.d ${HOME}/.config/fontconfig
+
+mkdir -p ${HOME}/.config/awesome
+ln -s ${PWD}/rc.lua ${HOME}/.config/awesome
