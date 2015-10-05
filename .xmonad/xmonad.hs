@@ -46,6 +46,8 @@ myManageHook = composeAll
     , className =? "Xfce4-appfinder" --> doFloat
     , className =? "XClock" --> doFloat
     , className =? "MPlayer" --> doFloat
+    , className =? "ij-ImageJ" --> doFloat
+    , className =? "fiji-Main" --> doFloat
     -- , className =? "Xfce4-panel" --> doIgnore
     --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
     ]
@@ -112,7 +114,7 @@ main = xmonad $ xfceConfig
     , mouseBindings      = myMouseBindings
      }
     `additionalKeysP`
-    [ ("M-S-r"   , restart "xmonad" True)
+    [ ("M-C-r"   , restart "xmonad" True)
     , ("M-C-q"   , spawn "setxkbmap && xmodmap ~/.xmodmap && xdotool mousemove 0 0")
     , ("M-q"     , spawn "xdotool mousemove 0 0")
 
