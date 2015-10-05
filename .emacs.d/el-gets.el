@@ -80,6 +80,7 @@
     minimap
     multiple-cursors
     org-mode
+    popup
     popwin
     powerline
     projectile-rails
