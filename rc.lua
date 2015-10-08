@@ -125,8 +125,8 @@ wallpaperList = listshuffle(scanDir( os.getenv("HOME").."/.wallpaper/OK/"))
 gears.wallpaper.maximized(wallpaperList[math.random(1, #wallpaperList)], s, true)
 
 -- Apply a random wallpaper every changeTime seconds.
-changeTime = 60
-listIte = 0
+local changeTime = 50
+local listIte = 0
 wallpaperTimer = timer { timeout = changeTime }
 wallpaperTimer:connect_signal("timeout",
                               function()
@@ -135,7 +135,10 @@ wallpaperTimer:connect_signal("timeout",
                                     listIte = 1
                                     wallpaperList = listshuffle(wallpaperList)
                                  end
-                                 gears.wallpaper.maximized(wallpaperList[listIte], s, true)
+                                 for s = 1, screen.count() do
+                                    gears.wallpaper.maximized(wallpaperList[listIte], s, true)
+                                 end
+                                 -- gears.wallpaper.maximized(wallpaperList[listIte], s, true)
                                  -- stop the timer (we don't need multiple instances running at the same time)
                                  wallpaperTimer:stop()
                                  --restart the timer
@@ -730,6 +733,8 @@ awful.rules.rules = {
    { rule = { class = "gimp" },
    	 properties = { floating = true } },
    { rule = { instance = "gvolwheel" },
+   	 properties = { floating = true } },
+   { rule = { instance = "fiji-Main" },
    	 properties = { floating = true } },
    -- Set Firefox to always map on tags number 2 of screen 1.
    { rule = { class = "Firefox" },
