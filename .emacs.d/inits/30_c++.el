@@ -6,3 +6,5 @@
 
 (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
 (add-hook 'c-mode-hook 'my:ac-c-headers-init)
+
+;; TODO:: irony mode いれたい

@@ -146,6 +146,7 @@
                          (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                          (yuutayamada/mykie-el :load-path "lisp")
                          ;; yasuyk/helm-bm
+                         purcell/flymake-python-pyflakes
                          )
   "A list to install for el-get-bundle ")
 

@@ -90,4 +90,3 @@
 ;;(set-face-background 'whitespace-space "DarkSlateGray")
 ;;(set-face-foreground 'whitespace-tab "LightSlateGray")
 ;;(set-face-background 'whitespace-tab "DarkSlateGray")
-
