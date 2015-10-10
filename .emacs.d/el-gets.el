@@ -49,6 +49,7 @@
     flycheck-cask
     flycheck-color-mode-line
     flymake-cursor
+    flymake-lua
     fold-dwim
     git-commit-mode
     git-gutter
@@ -90,6 +91,7 @@
     smartparens
     smartrep
     smex
+    switch-window
     undo-tree
     use-package
     visual-regexp-steroids
@@ -144,13 +146,12 @@
                          purcell/flymake-easy
                          (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                          (yuutayamada/mykie-el :load-path "lisp")
-                         ;; yasuyk/helm-bm
                          )
   "A list to install for el-get-bundle ")
 
 
 
-
+;; (add-to-list 'my/el-list ' )
 (dolist (x my/bundle-list)
   (cond
    ((listp x) (eval `(el-get-bundle ,@x)))

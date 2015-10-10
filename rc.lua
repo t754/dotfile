@@ -13,10 +13,13 @@ local menubar = require("menubar")
 local vicious = require("vicious")
 -- MPD
 local awesompd = require("awesompd/awesompd")
---
+-- revelation
 local revelation=require("revelation")
 
 -- local volume  =require("volume")
+
+-- Run or raise
+local ror = require("aweror")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -165,7 +168,7 @@ wallpaperTimer:start()
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
-tagsnames={ "work", " www", " doc"," kee", "  vm"," chat"}
+tagsnames={ "📝", "🌐", "📃","🔑", "💻","🎵"}
 for s = 1, screen.count() do
    -- Each screen has its own tag table.
    tags[s] = awful.tag(tagsnames, s, layouts[1])
@@ -299,6 +302,7 @@ local alsawidget = {
          bar_size = 20 -- adjust to fit your font if the bar doesn't fit
       }
 }
+
 -- widget
 alsawidget.bar = awful.widget.progressbar ()
 alsawidget.bar:set_width (8)
@@ -328,12 +332,11 @@ alsawidget.tooltip = awful.tooltip ({ objects = { alsawidget.bar } })
 alsawidget._current_level = 0
 alsawidget._muted = false
 function alsawidget:notify ()
-   local preset =
-      {
-         height = 75,
-         width = 300,
-         font = alsawidget.notifications.font
-      }
+   local preset =  {
+      height = 75,
+      width = 300,
+      font = alsawidget.notifications.font
+   }
    local i = 1;
    while alsawidget.notifications.icons[i + 1] ~= nil
    do
@@ -504,27 +507,6 @@ for s = 1, screen.count() do
    -- Create the wibox
    mywibox[s] = awful.wibox({ position = "top", screen = s ,height = 40})
 
-
-   -- screen[s]:connect_signal("tag::history::update", function()
-
-   --                             local wp_path = "/home/tama/.config/awesome/wallpaper/"
-   --                             local b=1
-   --                             for m in ipairs(tagsnames)
-   --                             do
-   --                                -- naughty.notify({ title = m, text = tagsnames[m], timeout = 0 })
-   --                                if (awful.tag.selected(s).name == tagsnames[m]) then
-
-   --                                   break
-   --                                end
-   --                                b=b+1
-   --                             end
-   --                             gears.wallpaper.maximized(wp_path .. b .. ".jpg", s, true)
-   --                         end)
-
-
-
-
-
    local left_layout = wibox.layout.fixed.horizontal()
    left_layout:add(mylauncher)
    left_layout:add(mytaglist[s])
@@ -572,9 +554,9 @@ root.buttons(awful.util.table.join(
 -- }}}
 
 -- {{{ Key bindings
-
 globalkeys = awful.util.table.join(
    -- add
+
    awful.key({ modkey,           }, "e",      revelation),
    awful.key({                   }, "Print", function () awful.util.spawn("scrot -e    'mv $f ~/Pictures/screenshot/  2>/dev/null'") end),
    awful.key({ modkey            }, "Print", function () awful.util.spawn("scrot -u -e 'mv $f ~/Pictures/screenshot/  2>/dev/null'") end),
@@ -666,7 +648,7 @@ clientkeys = awful.util.table.join(
    -- end)
 
 )
-
+globalkeys = awful.util.table.join(globalkeys, ror.genkeys(modkey))
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
@@ -732,7 +714,7 @@ awful.rules.rules = {
 
    { rule = { class = "gimp" },
    	 properties = { floating = true } },
-   { rule = { instance = "gvolwheel" },
+   { rule = { instance = "pavucontrol" },
    	 properties = { floating = true } },
    { rule = { instance = "fiji-Main" },
    	 properties = { floating = true } },
@@ -845,8 +827,7 @@ function run_once(prg)
 end
 
 do
-   local cmds =
-	  {
+   local cmds ={
 		 -- "firefox",
          -- "mpd",
 		 -- "emacs",
@@ -862,31 +843,6 @@ do
 	  run_once(i)
    end
 end
-
-
-
--- for s = 1, screen.count() do
-
--- tags:connect_signal(
---    "property::selected", function (tag)
---       if not tag.selected then return end
-
---       awful.util.spawn(wallpaper_cmd)
---                       end)
-
--- end
-
--- for s = 1, screen.count() do
---    gears.wallpaper.maximized(wp_path .. s .. ".jpg", s, true)
--- end
-
--- function dbg(vars)
---     local text = ""
---     for i=1, #vars do text = text .. vars[i] .. " | " end
---     naughty.notify({ text = text, timeout = 0 })
--- end
-
-
 
 client.connect_signal("focus",
                       function(c)
