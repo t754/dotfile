@@ -38,7 +38,7 @@ shopt -s histappend
 # ${PROMPT_COMMAND:$PROMPT_COMMAND$'\n'}
 export PROMPT_COMMAND=" history -a; history -c; history -r;"
 
-export HISTIGNORE="fg*:bg*:history*:rm*:ls*"
+export HISTIGNORE="fg*:bg*:history*:rm*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 
 # export COLORTERM="mlterm"

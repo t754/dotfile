@@ -110,8 +110,9 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c <right>" . windmove-right)
  ("C-c <up>"    . windmove-up)
  ("C-c C-r"   . window-resizer)
+ ("C-x o" . switch-window)
  )
-
+(setq switch-window-shortcut-style 'qwerty)
 
 (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 
