@@ -62,45 +62,22 @@
   ;;              '(concat ".*" family-name ".*") . (/ alphabet-size 100.0))
 
 
-(cond
- ( (equal system-name "utrtamako" )
-   ;; (setq default-frame-alist '((font . "Source Han Code JP")))
-   ;; (set-frame-font "Source Han Code JP-16")
-   (setq default-frame-alist '((font . "Ricty Discord4Powerline:pixelsize=16")))
-   (set-frame-font "Ricty Discord4Powerline:pixelsize=16")
-   )
- ((equal system-name "zenlap.zendomain" )
-  (setq default-frame-alist '((font . "Migu 1m")))
-  (set-frame-font "Migu 1m-18")
-  ;; (set-face-attribute 'default nil
-  ;;        :family "Ricty"
-  ;;        :height 120)
 
-  (set-face-attribute 'default nil
-                      :family "Migu 1m"
-                      :height 150)
+(defun my/font-size ()
+  (cond
+   ((equal system-name "utrtamako") 14)
+   ((some (lambda (strs) (equal system-name strs))
+          '("localhost.localdomain"
+            "localhost.homenetwork"
+            "localhostss")) 12)))
 
-  ;;  (set-fontset-font (frame-parameter nil 'font)
-  ;;                  'japanese-jisx0208
-  ;;                  (cons "Migu 1m" "iso10646-1"))
-  ;;  (set-fontset-font (frame-parameter nil 'font)
-  ;;                  'japanese-jisx0212
-  ;;                  (cons "Migu 1m" "iso10646-1"))
-  ;;  (set-fontset-font (frame-parameter nil 'font)
-  ;;                  'katakana-jisx0201
-  ;;                  (cons "Migu 1m" "iso10646-1"))
-  )
 
- ((some (lambda (strs) (equal system-name strs))
-        '("localhost.localdomain"
-          "localhost.homenetwork"
-          "localhostss"))
-  (set-fontset-font
-   t 'symbol
-   (font-spec :family "Symbola") nil 'prepend)
+(set-fontset-font
+   "fontset-default" 'symbol
+   (font-spec :family "Noto Emoji") nil 'prepend)
 
-  (let* ((m-font "Ricty")
-         (m-size 12)
+(let* ((m-font "Ricty")
+         (m-size (my/font-size))
          (m-fontsize (string-join (list m-font "-" (int-to-string m-size)))))
     (set-frame-font   m-fontsize)
     (set-default-font m-fontsize)
@@ -118,9 +95,7 @@
      '(bold ((t (:weight bold :height 0.8))))
      '(git-gutter:added    ((t (:weight bold :height 0.8 :foreground "green"))))
      '(git-gutter:deleted  ((t (:weight bold :height 0.8 :foreground "red"))))
-     '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta"))))) )))
-
-
+     '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta"))))))
 
 
 
