@@ -111,7 +111,8 @@ function parse_git_branch() {
 ulimit -c 4096
 
 export PYTHONSTARTUP=$HOME/.pythonrc.py
-
+# export PYTHONPATH=/usr/local/lib/python3.4/site-packages/
+# PYTHONPATH=/usr/local/lib/python2.7/site-packages/
 
 function colors() {
     local fgc bgc vals seq0

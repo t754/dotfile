@@ -65,7 +65,7 @@
  '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
-    (mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
+    (inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
  '(search-web-default-browser (quote eww-browse-url))
  '(search-web-in-emacs-browser (quote eww-browse-url))
  '(tab-width 4)

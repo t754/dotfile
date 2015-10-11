@@ -1,18 +1,10 @@
-(add-hook 'c++-mode-hook
-          (lambda ()
-            ;; (define-key c++-mode-map(kbd "C-c d") 'my-insert-printf-debug)
-            (flymake-mode t)
-            ;; (define-key c-mode-map(kbd "C-c p") 'smart-compile)
-            (setq-default tab-width 4 indent-tabs-mode t)
-            ;; (setq tab-width 4)
-            ))
+(defun my:ac-c-headers-init ()
+  (require 'auto-complete-c-headers)
+  (flymake-mode t)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (setq-default tab-width 4 indent-tabs-mode t))
 
+(add-hook 'c++-mode-hook 'my:ac-c-headers-init)
+(add-hook 'c-mode-hook 'my:ac-c-headers-init)
 
-
-
-
-
-
-
-
-
+;; TODO:: irony mode いれたい

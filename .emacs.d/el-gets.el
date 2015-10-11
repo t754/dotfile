@@ -81,6 +81,7 @@
     minimap
     multiple-cursors
     org-mode
+    popup
     popwin
     powerline
     projectile-rails
@@ -146,6 +147,7 @@
                          purcell/flymake-easy
                          (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                          (yuutayamada/mykie-el :load-path "lisp")
+                         purcell/flymake-python-pyflakes
                          )
   "A list to install for el-get-bundle ")
 
