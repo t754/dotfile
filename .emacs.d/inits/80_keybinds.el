@@ -29,7 +29,7 @@
 (defun other-window-or-split ()
   (interactive)
   (when (one-window-p) (split-window-horizontally))
-  (other-window 1))
+  (switch-window))
 
 ;; \C-aでインデントを飛ばした行頭に移動
 (defun beginning-of-indented-line (current-point)
@@ -110,7 +110,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c <right>" . windmove-right)
  ("C-c <up>"    . windmove-up)
  ("C-c C-r"   . window-resizer)
- ("C-x o" . switch-window)
+ ("C-x o"     . switch-window)
  )
 (setq switch-window-shortcut-style 'qwerty)
 
