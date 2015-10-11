@@ -4,30 +4,15 @@ import XMonad.Layout.NoBorders
 import XMonad.Hooks.ManageDocks
 import XMonad.Config.Xfce
 import XMonad.Layout.ResizableTile
--- import XMonad.Layout
--- import XMonad.Layout.Magnifier
--- import XMonad.Layout.Mosaic
--- import XMonad.Layout.Tabbed
--- import XMonad.Layout.Grid
--- import XMonad.Layout.IM
--- import XMonad.Layout.WindowNavigation
--- import XMonad.Layout.Gaps
--- import qualified XMonad.Layout.Fullscreen as FS
 import Control.Monad (liftM2)          -- myManageHookShift
 import qualified XMonad.StackSet as W  -- myManageHookShift
 import qualified Data.Map        as M
-
--- import qualified Data.Map as M
-
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.SetWMName
--- import Data.Ratio ((%))
 import XMonad.Layout.ToggleLayouts
--- import XMonad.Layout.Minimize
--- import qualified Data.Map as M
--- import XMonad.Actions.CopyWindow
 import XMonad.Hooks.DynamicLog
--- import XMonad.Layout.SimplestFloat
+import XMonad.Actions.WindowGo
+import XMonad.Util.Run
 
 myterm::String
 -- myterm = "urxvt256c-ml"
@@ -117,19 +102,18 @@ main = xmonad $ xfceConfig
     [ ("M-C-r"   , restart "xmonad" True)
     , ("M-C-q"   , spawn "setxkbmap && xmodmap ~/.xmodmap && xdotool mousemove 0 0")
     , ("M-q"     , spawn "xdotool mousemove 0 0")
-
     , ("M-S-q"   , spawn "xfce4-session-logout")
     , ("M-p"     , spawn "xfce4-appfinder")
-    , ("M-S-f"   , spawn "pidof firefox || firefox")
-    , ("M-C-S-e" , spawn "emacsclient -c -n")
+
     , ("M-f"     , sendMessage  ToggleLayout)
     , ("M-b"     , sendMessage   ToggleStruts)
     , ("M-S-h"   , sendMessage MirrorShrink)
     , ("M-S-l"   , sendMessage MirrorExpand)
-    , ("M-S-z"   , spawn "xscreensaver-command -lock")
-    , ("M-S-z"   , spawn "xscreensaver-command -lock")
-    -- , ("M-S-t"   , spawn "xclock -chime -update 1 -geometry $(xdpyinfo | grep -B1 resolution | gawk -v SS=400 'BEGIN{FS=\"[ x]+\"} (NR==1){print SS\"x\"SS\"+\"$3/2-(SS/2)\"+\"$4/2-(SS/2)}')")
+    , ("M-C-S-z" , spawn      "xscreensaver-command -lock")
+    , ("M-C-S-f" , runOrRaise "firefox" (className =? "Firefox"))
+    , ("M-C-S-h" , (raiseMaybe . unsafeSpawn) (myterm ++ " -t htopTerm -e htop") (title =? "htopTerm"))
+    , ("M-C-S-e" , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
     , ("M-S-t"   , spawn "notify-send \"$(ruby ~/bin/toast-alc.rb 2>&1)\"")
-    -- , ("M-S-t"   , spawn "xclock -chime -update 1")
     , ("M-g"     , spawn "xdotool mousemove 0 0")
     ]
+-- , ("M-S-t"   , spawn "xclock -chime -update 1 -geometry $(xdpyinfo | grep -B1 resolution | gawk -v SS=400 'BEGIN{FS=\"[ x]+\"} (NR==1){print SS\"x\"SS\"+\"$3/2-(SS/2)\"+\"$4/2-(SS/2)}')")
