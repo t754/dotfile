@@ -81,6 +81,12 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
     (error "The buffer has been modified")))
 
 
+(defun my/kill-line (arg)
+  (interactive "p")
+  (case arg
+    (4 (delete-horizontal-space))
+    (16 (kill-line 0))
+    (t (kill-line))))
 
 (unbind-key "C-z")
 
@@ -110,7 +116,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c <right>" . windmove-right)
  ("C-c <up>"    . windmove-up)
  ("C-c C-r"   . window-resizer)
- ("C-x o"     . switch-window)
+ ("C-k"       . my/kill-line)
  )
 (setq switch-window-shortcut-style 'qwerty)
 
