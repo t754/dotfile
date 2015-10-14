@@ -43,6 +43,7 @@
         drag-stuff
         emmet-mode
         epl
+        expand-region
         f
         flycheck
         flycheck-cask
