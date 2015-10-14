@@ -36,7 +36,7 @@
  '(git-gutter:added-sign "A")
  '(git-gutter:deleted-sign "D")
  '(git-gutter:handled-backends (quote (git hg)))
- '(git-gutter:lighter "_GG")
+ '(git-gutter:lighter "GG")
  '(git-gutter:modified-sign "X")
  '(git-gutter:unchanged-sign nil)
  '(git-gutter:update-interval 2)

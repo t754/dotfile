@@ -154,9 +154,6 @@
    ((listp x) (eval `(el-get-bundle ,@x)))
    (t         (eval `(el-get-bundle ,x)))))
 (el-get 'sync my/el-list)
-(require 'f)
-
-
 
 ;; Local Variables:
 ;; eval: (progn (beginning-of-buffer)(let (mbegin mend)(while (re-search-forward ";;##(" nil t)(forward-line 1)(setq mbegin (point))(re-search-forward ";;##)" nil t)(forward-line 0)(setq mend (point))(sort-lines nil mbegin mend))))
