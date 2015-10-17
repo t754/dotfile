@@ -26,8 +26,7 @@
  (global-linum-mode t))
  ;; (line-number-mode t)
  ;; (column-number-mode t)
-
-
+(beacon-mode 1)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;ハイパーリンク (cygwinの場合)
 

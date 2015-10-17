@@ -125,3 +125,4 @@ wget-log*
 *.exe
 *.out
 *.app
+/.emacs.d/woman_cache.el

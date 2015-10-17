@@ -138,6 +138,7 @@
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
+                           Malabarba/beacon
                            bmag/imenu-list
                            emacs-jp/init-loader
                            purcell/exec-path-from-shell
