@@ -220,7 +220,7 @@ function man() {
 if [ "x${WINDOWID}" != "x" ] ; then
     if [ -x "`which keychain`" ]; then
         if [ $(hostname) = "localhost.localdomain" ]; then
-            eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit2 id_rsa.zt)
+            eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit2 id_rsa.zt2)
         else
             eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit)
         fi
