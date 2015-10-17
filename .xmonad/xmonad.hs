@@ -111,6 +111,7 @@ main = xmonad $ xfceConfig
     , ("M-S-l"   , sendMessage MirrorExpand)
     , ("M-C-S-z" , spawn      "xscreensaver-command -lock")
     , ("M-C-S-f" , runOrRaise "firefox" (className =? "Firefox"))
+    , ("M-C-S-d" , runOrRaise "evince" (className =? "Evince"))
     , ("M-C-S-h" , (raiseMaybe . unsafeSpawn) (myterm ++ " -t htopTerm -e htop") (title =? "htopTerm"))
     , ("M-C-S-e" , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
     , ("M-S-t"   , spawn "notify-send \"$(ruby ~/bin/toast-alc.rb 2>&1)\"")

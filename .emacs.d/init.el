@@ -36,7 +36,7 @@
  '(git-gutter:added-sign "A")
  '(git-gutter:deleted-sign "D")
  '(git-gutter:handled-backends (quote (git hg)))
- '(git-gutter:lighter "_GG")
+ '(git-gutter:lighter "GG")
  '(git-gutter:modified-sign "X")
  '(git-gutter:unchanged-sign nil)
  '(git-gutter:update-interval 2)
@@ -66,6 +66,22 @@
  '(package-selected-packages
    (quote
     (inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
+ '(safe-local-variable-values
+   (quote
+    ((eval progn
+           (beginning-of-buffer)
+           (let
+               (mbegin mend)
+             (while
+                 (re-search-forward ";;##(" nil t)
+               (forward-line 1)
+               (setq mbegin
+                     (point))
+               (re-search-forward ";;##)" nil t)
+               (forward-line 0)
+               (setq mend
+                     (point))
+               (sort-lines nil mbegin mend)))))))
  '(search-web-default-browser (quote eww-browse-url))
  '(search-web-in-emacs-browser (quote eww-browse-url))
  '(tab-width 4)

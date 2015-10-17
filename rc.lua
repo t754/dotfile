@@ -14,10 +14,7 @@ local vicious = require("vicious")
 -- MPD
 local awesompd = require("awesompd/awesompd")
 -- revelation
-local revelation=require("revelation")
-
--- local volume  =require("volume")
-
+local revelation = require("revelation")
 -- Run or raise
 local ror = require("aweror")
 
@@ -113,7 +110,7 @@ local layouts = {
 -- {{{ randam wallpaper
 -- Get the list of files from a directory. Must be all images or folders and non-empty.
 function scanDir(directory)
-   local i, fileList, popen = 0, {}, io.popen
+   local i,fileList,popen = 0, {}, io.popen
    for filename in popen([[find "]] ..directory.. [[" -type f]]):lines() do
       i = i + 1
       fileList[i] = filename
@@ -123,7 +120,7 @@ end
 
 
 function listshuffle(array)
-   local n, random, j = #array, math.random
+   local n,random,j = #array, math.random
    for i=1, n do
       j,k = random(n), random(n)
       array[j],array[k] = array[k],array[j]
@@ -734,7 +731,7 @@ awful.rules.rules = {
 -- }}}
 
 -- {{{ Signals
--- Signal function to execute when a new client appears.
+-- Signal functionto execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
 						 -- Enable sloppy focus
 						 c:connect_signal("mouse::enter", function(c)

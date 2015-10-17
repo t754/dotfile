@@ -11,7 +11,9 @@
       delete-old-versions             t ; 確認せずに古いものを消す。
       vc-make-backup-files            nil ;; バージョン管理下のファイルもバックアップを作る。leの保存`場所を指定。
       auto-save-file-name-transforms  `((".*" ,(expand-file-name "~/.backup") t)) ;;create backup file in ~/.buckup
-      create-lockfiles                nil)
+      create-lockfiles                nil
+      delete-selection-mode t) ;
+(electric-indent-mode -1)      ;C-j がインデントつく
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq linum-delay t)
