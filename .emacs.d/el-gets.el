@@ -27,7 +27,6 @@
         ac-helm
         ac-math
         ac-slime
-        ace-isearch
         actionscript-mode
         align-cljlet
         auto-complete
@@ -139,6 +138,7 @@
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
+                           bmag/imenu-list
                            emacs-jp/init-loader
                            purcell/exec-path-from-shell
                            purcell/flymake-easy
@@ -149,7 +149,7 @@
                            ))
 
 
-
+(el-get-emacswiki-refresh)
 (dolist (x my/bundle-list)
   (cond
    ((listp x) (eval `(el-get-bundle ,@x)))
