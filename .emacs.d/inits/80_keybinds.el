@@ -98,6 +98,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-x r b"   . helm-filtered-bookmarks)
  ("C-x C-b"   . helm-for-files)
  ("C-<f6>"    . helm-ls-git-ls)
+ ("C-'"       . imenu-list-minor-mode)
  ("C-x C-r"   . helm-recentf)
  ("M-r"       . helm-resume)
  ("M-y"       . helm-show-kill-ring)
@@ -118,6 +119,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c C-r"   . window-resizer)
  ("C-k"       . my/kill-line)
  )
+
 (setq switch-window-shortcut-style 'qwerty)
 
 (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
