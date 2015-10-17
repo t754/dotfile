@@ -21,6 +21,11 @@ local revelation=require("revelation")
 -- Run or raise
 local ror = require("aweror")
 
+
+naughty.config.presets.normal.opacity = 0.7
+naughty.config.presets.low.opacity = 0.7
+naughty.config.presets.critical.opacity = 0.7
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -48,17 +53,21 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/sky/theme.lua")
+-- beautiful.init("/usr/share/awesome/themes/sky/theme.lua")
+beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 revelation.init()
 -- ------------ --
 -- テーマの改造 --
 -- ------------ --
-awesome.font          = "Ricty Discord 18"
-theme.font          = "Ricty Discord 18"
-
+myfont = "Ricty 18"
+awesome.font          = myfont
+theme.font          = myfont
+beautiful.font          = myfont
+naughty.config.defaults.font = myfont
 theme.menu_height           = 32
 theme.menu_width            = 200
-menubar.font          = "Ricty Discord 18"
+
+menubar.font          = "Ricty 18"
 menubar.cache_entries = true
 menubar.show_categories = true
 -- menubar.app_folders = {  os.getenv("HOME") .. "/.local/share/applicarions/"}
@@ -101,7 +110,6 @@ local layouts = {
    awful.layout.suit.max,
 }
 -- }}}
-
 -- {{{ randam wallpaper
 -- Get the list of files from a directory. Must be all images or folders and non-empty.
 function scanDir(directory)
@@ -195,17 +203,6 @@ mymainmenu = awful.menu(
         { "Applications", xdgmenu },
         { "open terminal", terminal }
    }
-
-     -- items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-     --   							{ "[WEB]","firefox"},
-     --   							{ "[Editor]","emacs"},
-     --   							{ "[動画]","vlc"},
-     --   							{ "[画像]","geeqie"},
-     --   							{ "[画像編集]","gimp"},
-     --   							{ "[3Dモデリング]","blender"},
-     --   							{ "[Terminal]", terminal },
-     --   							{ "[Etc...]",myEtcMenu}
-     --}
 })
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
@@ -225,7 +222,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 datewidget = wibox.widget.textbox()
 
 datewidget:set_font("Ricty bold 24")
--- <Ricty Discord4Powerline> 32")
+-- <Ricty Discord4Powerline> 32"
 
 cputempwidget = wibox.widget.textbox()
 cputempwidget:set_font("Ricty 16")
@@ -443,7 +440,9 @@ mywibox = {}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
+
 mytaglist.buttons = awful.util.table.join(
+
    awful.button({ }, 1, awful.tag.viewonly),
    awful.button({ modkey }, 1, awful.client.movetotag),
    awful.button({ }, 3, awful.tag.viewtoggle),
@@ -670,7 +669,7 @@ for i = 1, 9 do
                                             if tag then
                                                awful.tag.viewtoggle(tag)
                                             end
-   end),
+                                      end),
 									  awful.key({ modkey, "Shift" }, "#" .. i + 9,
                                          function ()
                                             local tag = awful.tag.gettags(client.focus.screen)[i]
@@ -701,7 +700,7 @@ awful.rules.rules = {
    -- All clients will match this rule.
    { rule = { },
 	 properties = { border_width = beautiful.border_width,
-					border_color = beautiful.border_normal,
+                    border_color =  beautiful.border_normal,
 					focus = awful.client.focus.filter,
 					keys = clientkeys,
 					buttons = clientbuttons } },
@@ -805,8 +804,7 @@ client.connect_signal("manage", function (c, startup)
 						 end
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
 -- }}}
 
 -- os.execute("firefox &")
@@ -828,16 +826,16 @@ end
 
 do
    local cmds ={
-		 -- "firefox",
-         -- "mpd",
-		 -- "emacs",
-		 -- terminal,
-         -- "dropbox.py start",
-         "keepassx",
-		 -- "emacsclient -c"
-		 -- "redshift",
-		 -- "clipit",
-	  }
+      -- "firefox",
+      -- "mpd",
+      -- "emacs",
+      -- terminal,
+      -- "dropbox.py start",
+      "keepassx",
+      -- "emacsclient -c"
+      -- "redshift",
+      -- "clipit",
+   }
 
    for _,i in pairs(cmds) do
 	  run_once(i)
@@ -846,13 +844,11 @@ end
 
 client.connect_signal("focus",
                       function(c)
-                         c.border_color = beautiful.border_focus
+                         c.border_color = "#daa520"
                          c.opacity = 1
-                      end
-)
+                      end)
 client.connect_signal("unfocus",
                       function(c)
                          c.border_color = beautiful.border_normal
                          c.opacity = 0.7
-                      end
-)
+                      end)
