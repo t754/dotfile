@@ -450,3 +450,46 @@
                         '(Info-title-3-face ((t (:weight bold :height 1.2 :family "helv"))))
                         '(Info-title-2-face ((t (:weight bold :height 1.44 :family "helv"))))
                         '(Info-title-1-face ((t (:weight bold :height 1.728 :family "helv")))))
+(require 'color)
+
+(defun xah-syntax-color-hsl ()
+  "Syntax color CSS's HSL color spec ⁖ 「hsl(0,90%,41%)」 in current buffer.
+URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
+Version 2015-06-11"
+  (interactive)
+  (font-lock-add-keywords
+   nil
+   '(("hsl( *\\([0-9]\\{1,3\\}\\) *, *\\([0-9]\\{1,3\\}\\)% *, *\\([0-9]\\{1,3\\}\\)% *)"
+      (0 (put-text-property
+          (+ (match-beginning 0) 3)
+          (match-end 0)
+          'face
+          (list
+           :background
+           (concat
+            "#"
+            (mapconcat
+             'identity
+             (mapcar
+              (lambda (x) (format "%02x" (round (* x 255))))
+              (color-hsl-to-rgb
+               (/ (string-to-number (match-string-no-properties 1)) 360.0)
+               (/ (string-to-number (match-string-no-properties 2)) 100.0)
+               (/ (string-to-number (match-string-no-properties 3)) 100.0)))
+             "" )) ;  "#00aa00"
+           ))))))
+  (font-lock-fontify-buffer))
+
+(defun xah-syntax-color-hex ()
+  "Syntax color text of the form 「#ff1100」 in current buffer.
+URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
+Version 2015-06-11"
+  (interactive)
+  (font-lock-add-keywords
+   nil
+   '(("#[abcdefABCDEF[:digit:]]\\{6\\}"
+      (0 (put-text-property
+          (match-beginning 0)
+          (match-end 0)
+          'face (list :background (match-string-no-properties 0)))))))
+  (font-lock-fontify-buffer))

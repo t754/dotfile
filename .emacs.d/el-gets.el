@@ -39,7 +39,6 @@
     clj-refactor
     clojure-mode
     clojure-snippets
-    color-theme
     dockerfile-mode
     drag-stuff
     emmet-mode
