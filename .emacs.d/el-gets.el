@@ -73,6 +73,7 @@
         js2-mode
         js2-refactor
         json-reformat
+        key-chord
         lua-mode
         magit
         markdown-mode
@@ -136,8 +137,10 @@
 (setq my/bundle-list     '(
                            ;;##(
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
+                           ;;(m0smith/malabar-mode :load-path)
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
+                           ;; (alexott/cedet :branch "devel" :build ("'make all'"))
                            Malabarba/beacon
                            bmag/imenu-list
                            emacs-jp/init-loader
