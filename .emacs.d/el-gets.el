@@ -137,13 +137,14 @@
 (setq my/bundle-list     '(
                            ;;##(
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
-                           ;;(m0smith/malabar-mode :load-path)
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
-                           ;; (alexott/cedet :branch "devel" :build ("'make all'"))
+                           ;;(alexott/cedet :branch "devel" :build ("'make all'"))
+                           ;;(m0smith/malabar-mode :load-path)
                            Malabarba/beacon
                            bmag/imenu-list
                            emacs-jp/init-loader
+                           jcpetkovich/shrink-whitespace.el
                            purcell/exec-path-from-shell
                            purcell/flymake-easy
                            purcell/flymake-haskell-multi

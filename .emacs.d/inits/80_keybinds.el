@@ -1,24 +1,3 @@
-                                        ;C-hで バックスペース
-;;C-m 改行&インデント
-;;(global-set-key (kbd "C-m") 'newline-and-indent)
-;;goto-line
-;; (global-set-key (kbd "C-c g") 'goto-line)
-
-;;smart-compile
-;; (global-set-key (kbd "C-c p") 'smart-compile)
-;; (define-key mode-specific-map (kbd "C-c p") 'compile)
-;; (define-key mode-specific-map "e" 'next-error)
-
-(defun kill-whitespace ()
-          "Kill the whitespace between two non-whitespace characters"
-          (interactive "*")
-          (save-excursion
-            (save-restriction
-              (save-match-data
-                (progn
-                  (re-search-backward "[^ \t\r\n]" nil t)
-                  (re-search-forward "[ \t\r\n]+" nil t)
-                  (replace-match "" nil nil))))))
 (defun push-mark-no-activate ()
   "Pushes `point' to `mark-ring' and does not activate the region
    Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
@@ -95,14 +74,13 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-x C-z"   . helm-M-x)
  ("C-x M-x"   . helm-M-x)
  ("C-x b"     . helm-buffers-list)
- ;; ("C-x r b"   . helm-filtered-bookmarks)
  ("C-x C-b"   . helm-for-files)
  ("C-<f6>"    . helm-ls-git-ls)
  ("C-'"       . imenu-list-minor-mode)
  ("C-x C-r"   . helm-recentf)
  ("M-r"       . helm-resume)
  ("M-y"       . helm-show-kill-ring)
- ("M-\\"      . kill-whitespace)
+ ("M-\\"      . shrink-whitespace)
  ("C-M-t"     . mc/mark-all-in-region)
  ("C-c m"     . minimap-toggle)
  ("C-x C-c"   . my-save-buffers-kill-emacs)
