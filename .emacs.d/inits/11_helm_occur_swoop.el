@@ -40,6 +40,6 @@
 (bind-key   "C-c C-a" 'all-from-helm-occur helm-map) ;; helm-occurからall-extに受け渡し
 (bind-keys*
  ("M-o"     . myfix-helm-occur)             ;; helm-occurの起動
- ("M-i"     . avy-goto-char)
+ ;; ("M-i"     . avy-goto-char)
  ("C-M-o"   . helm-ag))
 ;; M-n で現在地にある文字を入力
