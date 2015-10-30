@@ -13,6 +13,7 @@ import XMonad.Layout.ToggleLayouts
 import XMonad.Hooks.DynamicLog
 import XMonad.Actions.WindowGo
 import XMonad.Util.Run
+import XMonad.Actions.UpdatePointer
 
 myterm::String
 -- myterm = "urxvt256c-ml"
@@ -54,7 +55,7 @@ myManageHookShift = composeAll
      , className =? "Keepassx"    --> viewShift "4"
      , className =? "Thunderbird" --> viewShift "5"
      , className =? "VirtualBox"  --> viewShift "3"
-     , className =? "Spotify"     --> viewShift "7"
+     , className =? "Spotify"     --> viewShift "9"
      ]
   where viewShift = doF . liftM2 (.) W.view W.shift
 
@@ -67,7 +68,10 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
   ,((modMask, button3),(\w -> focus w >> mouseResizeWindow w))
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
   ]
-
+myLogHook = do
+  -- dynamicLogWithPP xmobarPP
+  updatePointer (Relative 0.5 0.5)
+  logHook xfceConfig
 
 main = xmonad $ xfceConfig
     { layoutHook         = myLayout
@@ -80,7 +84,9 @@ main = xmonad $ xfceConfig
     , startupHook        = startupHook xfceConfig
                          >> setWMName "LG3D" -- Java app focus fix
     , mouseBindings      = myMouseBindings
-     }
+    , -- logHook = updatePointer (Relative 0.5 0.5)
+      logHook = myLogHook
+    }
     `additionalKeysP`
     [ ("M-C-r"   , restart "xmonad" True)
     , ("M-C-q"   , spawn "setxkbmap && xmodmap ~/.xmodmap && xdotool mousemove 0 0")
