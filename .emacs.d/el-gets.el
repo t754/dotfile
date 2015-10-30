@@ -149,6 +149,7 @@
                            purcell/flymake-easy
                            purcell/flymake-haskell-multi
                            purcell/flymake-python-pyflakes
+                           senny/emacs-eclim
                            yasuyk/web-beautify
                            ;;##)
                            ))
