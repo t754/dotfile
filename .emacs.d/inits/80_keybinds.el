@@ -97,6 +97,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c C-r"   . window-resizer)
  ("C-k"       . my/kill-line)
  ("<f9>"      . menu-bar-mode)
+ ("M-i"       . ac-complete-with-helm)
  )
 
 (setq switch-window-shortcut-style 'qwerty)
