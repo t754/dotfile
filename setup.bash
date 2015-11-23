@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 function _myCheck(){
     type $1 || exit
 }
