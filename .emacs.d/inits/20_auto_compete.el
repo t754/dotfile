@@ -41,7 +41,3 @@
 
 
 (add-hook 'after-init-hook 'ac-config-default)
-
-
-
-

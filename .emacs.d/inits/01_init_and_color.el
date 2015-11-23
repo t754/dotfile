@@ -23,11 +23,12 @@
 
 ;; 行番号をデフォルトで表示
 (when (require 'linum nil t)
- (global-linum-mode t))
- ;; (line-number-mode t)
- ;; (column-number-mode t)
+ (global-linum-mode 1))
+ ;; (setq linum-format "%d"))
 
-
+;;
+(mouse-wheel-mode -1)
+(beacon-mode 1)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;ハイパーリンク (cygwinの場合)
 

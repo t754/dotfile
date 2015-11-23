@@ -85,6 +85,7 @@
  '(search-web-default-browser (quote eww-browse-url))
  '(search-web-in-emacs-browser (quote eww-browse-url))
  '(tab-width 4)
+ '(undo-tree-mode-lighter " U🌳")
  '(yas-trigger-key "TAB"))
 
 (put 'upcase-region 'disabled nil)
