@@ -13,7 +13,7 @@
   (add-hook 'go-mode-hook 'go-eldoc-setup)
 
   (add-hook 'before-save-hook 'gofmt-before-save)
-
+  (flymake-cursor-mode 1)
 
   ;; (add-hook 'go-mode-hook 'flycheck-mode)
 
