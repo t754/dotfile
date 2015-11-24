@@ -23,6 +23,7 @@
 (setq my/el-list
       '(
         ;;##(
+		clang-format
         ac-cider
         ac-helm
         ac-math
