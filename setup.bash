@@ -8,7 +8,7 @@ _myCheck curl
 type ghq || go get github.com/motemen/ghq
 _myCheck ghq
 
-curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+# curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 
 b=$(comm -13 <(sort blackList) <(ls -a -1 | sort))
@@ -57,3 +57,4 @@ export -f _mkdir_ln
 paste -d " " <(find $(pwd) -name "@*"| awk '{print "'\''" $0 "'\''"}') \
              <( find . -name "@*" |  sed -e s@"./"@@ -e s/"@"// -e s."#"."/".g  -e 's/~/$/g' ) \
   | xargs -L 1 -I@ bash -c "_mkdir_ln @"
+find ~ -maxdepth 1 -type l -regex '.*/@.*' | xargs rm -v

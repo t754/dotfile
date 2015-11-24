@@ -10,7 +10,7 @@ README.md
 emacs.service
 ghqlist
 golist
-setup.sh
+setup.bash
 default.sh
 conf.d
 rc.lua
