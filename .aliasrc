@@ -87,17 +87,17 @@ alias dki="docker run -i -t -P"
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # Stop all containers
-dstop() { docker stop $(docker ps -a -q);}
+function dstop() { docker stop $(docker ps -a -q);}
 
 # Remove all containers
-drm() { docker rm $(docker ps -aq --filter='status=exited'); }
+function drm() { docker rm $(docker ps -aq --filter='status=exited'); }
 
 
 # Remove all images
-dri() { docker rmi $(docker images -q); }
+function dri() { docker rmi $(docker images -q); }
 
 # Dockerfile build, e.g., $dbu tcnksm/test
-dbu() { docker build -t=$1 .; }
+function dbu() { docker build -t=$1 .; }
 
 # Show all alias related docker
 # dalias(){ alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort;}
@@ -167,35 +167,35 @@ function docker-runtime-environment() {
 
 
 ############################################
-net_tools_deprecated_message () {
+function net_tools_deprecated_message () {
   echo -n 'net-tools コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
 }
 
-arp () {
+function arp () {
   net_tools_deprecated_message
   echo 'Use `ip n`'
 }
-ifconfig () {
+function ifconfig () {
   net_tools_deprecated_message
   echo 'Use `ip a`, `ip link`, `ip -s link`'
 }
-iptunnel () {
+function iptunnel () {
   net_tools_deprecated_message
   echo 'Use `ip tunnel`'
 }
-iwconfig () {
+function iwconfig () {
   echo -n 'iwconfig コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
   echo 'Use `iw`'
 }
-nameif () {
+function nameif () {
   net_tools_deprecated_message
   echo 'Use `ip link`, `ifrename`'
 }
-netstat () {
+function netstat () {
   net_tools_deprecated_message
   echo 'Use `ss`, `ip route` (for netstat -r), `ip -s link` (for netstat -i), `ip maddr` (for netstat -g)'
 }
-route () {
+function route () {
   net_tools_deprecated_message
   echo 'Use `ip r`'
 }
