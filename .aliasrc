@@ -665,3 +665,12 @@ else
     echo "you're currently not in a git repository"
 fi
 }
+
+
+### ------------------------------------------------
+### hg
+function hg_dirty() {
+    hg status --no-color 2> /dev/null \
+    | awk '$1 == "?" { print "?" } $1 != "?" { print "!" }' \
+    | sort | uniq | head -c1
+}
