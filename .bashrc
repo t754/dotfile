@@ -45,6 +45,8 @@ export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 if type rbenv >/dev/null 2>&1; then
     eval "$(rbenv init -)"
 fi
+[[ -e ~/.rbenv/completions/rbenv.bash ]] && source ~/.rbenv/completions/rbenv.bash
+
 export PYENV_ROOT="$HOME/.pyenv"
 
 [[ -x "$(which pyenv 2>/dev/null)" ]] && eval "$(pyenv init -)"
