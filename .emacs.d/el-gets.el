@@ -23,7 +23,6 @@
 (setq my/el-list
       '(
         ;;##(
-		clang-format
         ac-cider
         ac-helm
         ac-math
@@ -35,6 +34,7 @@
         avy
         bm
         c-eldoc
+        clang-format
         clj-refactor
         clojure-mode
         clojure-snippets
@@ -94,6 +94,7 @@
         smartrep
         smex
         switch-window
+        toml-mode
         undo-tree
         use-package
         visual-regexp-steroids
