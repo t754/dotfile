@@ -5,7 +5,7 @@
 
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
-[ -r $HOME/.aliasrc ] && . $HOME/.aliasrc
+[ -r "$HOME/.aliasrc" ] && . $HOME/.aliasrc
 # set -x
 export TERM="xterm-256color"
 export COLORTERM="mlterm"
@@ -59,10 +59,7 @@ stty stop undef
 export MANPATH=/usr/share/man/ja:
 export _Z_CMD=z
 [ -r ~/.ghq/github.com/rupa/z/z.sh ] && source ~/.ghq/github.com/rupa/z/z.sh
-
-
-
-[ -r $HOME/.tmuxinator/tmuxinator.bash ] && . $HOME/.tmuxinator/tmuxinator.bash
+[ -r $HOME/.tmuxinator/tmuxinator.bash ] && source $HOME/.tmuxinator/tmuxinator.bash
 
 
 
@@ -75,41 +72,9 @@ function parse_git_branch() {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
-
-# function extract() {
-#     local c e i
-#     (($#)) || return
-#     for i; do
-#         c=''
-#         e=1
-#         if [[ ! -r $i ]]; then
-#           echo "$0: file is unreadable: \`$i'" >&2
-#             continue
-#         fi
-#         case $i in
-#             *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz))))) c='tar xvf';; #
-#             *.7z)  c='7z x';;
-#             *.Z)   c='uncompress';;
-#             *.bz2) c='bunzip2';;
-#             *.exe) c='cabextract';;
-#             *.gz)  c='gunzip';;
-#             *.rar) c='unrar x';;
-#             *.xz)  c='unxz';;
-#             *.zip) c='unzip';;
-#             *.lzh) c='lha x';;
-#             *)     echo "$0: unrecognized file extension: \`$i'" >&2
-#             continue;;
-#         esac
-#         command $c "$i"
-#         e=$?
-#     done
-#     return $e
-# }
-
-
 ulimit -c 4096
+[ -f ~/.pythonrc.py ] && export PYTHONSTARTUP=$HOME/.pythonrc.py
 
-export PYTHONSTARTUP=$HOME/.pythonrc.py
 # export PYTHONPATH=/usr/local/lib/python3.4/site-packages/
 # PYTHONPATH=/usr/local/lib/python2.7/site-packages/
 

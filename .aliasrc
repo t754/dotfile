@@ -6,6 +6,7 @@ alias starte='emacs --daemon'
 alias e="emacsclient -c -n"
 alias et="emacsclient -t -n"
 alias enox="emacsclient"
+alias en="emacsclient"
 alias E='SUDO_EDITOR="emacsclient -c" sudo -e '
 alias Enox='SUDO_EDITOR="emacsclient " sudo -e '
 alias mv=' timeout 8 mv -iv'
@@ -191,5 +192,3 @@ function hg-peco() {
         cd $(dirname $selected_dir)
     fi
 }
-
-
