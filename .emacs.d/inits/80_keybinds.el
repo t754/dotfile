@@ -69,6 +69,8 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
 
 (unbind-key "C-z")
 
+(define-key global-map (kbd "C-k") 'my/kill-line) ;;mozc の時のカタカタ変換がきえるため
+
 (bind-keys*
  ("C-a"       . beginning-of-indented-line)
  ("C-x C-z"   . helm-M-x)
@@ -95,7 +97,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c <right>" . windmove-right)
  ("C-c <up>"    . windmove-up)
  ("C-c C-r"   . window-resizer)
- ("C-k"       . my/kill-line)
+ ;; ("C-k"       . my/kill-line)
  ("<f9>"      . menu-bar-mode)
  ("M-i"       . ac-complete-with-helm)
  )
