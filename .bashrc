@@ -63,48 +63,9 @@ export _Z_CMD=z
 
 
 
-
-function Cl() {
-    echo $@ | xsel --input --clipboard
-}
-
-function parse_git_branch() {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-
 ulimit -c 4096
 [ -f ~/.pythonrc.py ] && export PYTHONSTARTUP=$HOME/.pythonrc.py
 
-# export PYTHONPATH=/usr/local/lib/python3.4/site-packages/
-# PYTHONPATH=/usr/local/lib/python2.7/site-packages/
-
-function colors() {
-    local fgc bgc vals seq0
-
-    printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-    printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-    printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-    printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
-
-
-    # foreground colors
-    for fgc in {30..37}; do
-        # background colors
-        for bgc in {40..47}; do
-            fgc=${fgc#37} # white
-            bgc=${bgc#40} # black
-
-            vals="${fgc:+$fgc;}${bgc}"
-            vals=${vals%%;}
-
-            seq0="${vals:+\e[${vals}m}"
-            printf "  %-9s" "${seq0:-(default)}"
-            printf " ${seq0}TEXT\e[m"
-            printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-        done
-        echo; echo
-    done
-}
 
 
 # POWERLINE OLD
@@ -119,66 +80,11 @@ function _update_ps1() {
 PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 
 
-## POWERLINE new!!
-## export POWERLINE_BASH_CONTINUATION=1
-## export POWERLINE_BASH_SELECT=1
-## シンボル /usr/lib/python3.4/site-packages/powerline → ~/
-## source ~/powerline/bindings/bash/powerline.sh
-
 complete -cf sudo
 complete -cf man
 
-# function ipif() {
-#     if \grep -P "(([1-9]\d{0,2})\.){3}(?2)" <<< "$1"; then
-#   curl ipinfo.io/"$1"
-#     else
-#   ipawk=($(host "$1" | awk '/address/ { print $NF }'))
-#   curl ipinfo.io/${ipawk[1]}
-#     fi
-#     echo
-# }
 
 
-
-function peco-select-history () {
-    declare l=$(HISTTIMEFORMAT= history | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$READLINE_LINE")
-    READLINE_LINE="$l"
-    READLINE_POINT=${#l}
-}
-if [ -x "`which peco`" ]; then
-bind -x '"\C-r": peco-select-history'
-bind    '"\C-xr": reverse-search-history'
-fi
-
-if [ -x "`which ag`" ]; then
-function peco-ag () {
-    ag $@ | peco --query "$READLINE_LINE" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
-}
-
-fi
-
-function j() {
-    if [ $# -eq 0 ] ; then
-        local cddd="$(z  | tac | awk '{for(i=2;i<NF;i++){printf("%s ",$i)}print $NF}'  | peco)"
-        echo cd "$cddd"
-        cd -- "$cddd"
-    else
-        z $*
-    fi
-}
-function lll() {
-    ls -a1 $* |  peco
-}
-function man() {
-    env LESS_TERMCAP_mb=$'\E[01;31m' \
-    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-    LESS_TERMCAP_me=$'\E[0m' \
-    LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_so=$'\E[01;33;03;40m' \
-    LESS_TERMCAP_ue=$'\E[0m' \
-    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-    man "$@"
-}
 
 
 if [ "x${WINDOWID}" != "x" ] ; then

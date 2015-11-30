@@ -21,7 +21,6 @@
         [".xmodmap"],
         [".xmonad"],
         [".zshrc"],
-        ["powerline-shell.py"],
         [".config/awesome"],
         [".config/fontconfig/conf.d/"],
         [".config/systemd/user/emacs/emacs.service"],
