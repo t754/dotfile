@@ -4,10 +4,29 @@
   (interactive)
   (push-mark (point) t nil)
   (message "Pushed mark to ring"))
+(defun split-window-vertically-n (num_wins)
+  (interactive "p")
+  (if (= num_wins 2)
+      (split-window-vertically)
+    (progn
+      (split-window-vertically
+       (- (window-height) (/ (window-height) num_wins)))
+      (split-window-vertically-n (- num_wins 1)))))
+(defun split-window-horizontally-n (num_wins)
+  (interactive "p")
+  (if (= num_wins 2)
+      (split-window-horizontally)
+    (progn
+      (split-window-horizontally
+       (- (window-width) (/ (window-width) num_wins)))
+      (split-window-horizontally-n (- num_wins 1)))))
 
 (defun other-window-or-split ()
   (interactive)
-  (when (one-window-p) (split-window-horizontally))
+  (when (one-window-p)
+    (if (>= (window-body-width) 230)
+        (split-window-horizontally-n 3)
+      (split-window-horizontally)))
   (switch-window))
 
 ;; \C-aでインデントを飛ばした行頭に移動
@@ -29,8 +48,8 @@
 C-uをつけるとウィンドウを閉じる。"
   (interactive "p")
   (case arg
-    (4  (delete-other-windows))
-    (16 (delete-window))
+    (16  (delete-other-windows))
+    (4 (delete-window))
     (t  (other-window-or-split))))
 
 ;;;;C-x C-c で消すとき確認を問う
