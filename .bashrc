@@ -5,7 +5,6 @@
 
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
-[ -r "$HOME/.aliasrc" ] && . $HOME/.aliasrc
 # set -x
 export TERM="xterm-256color"
 export COLORTERM="mlterm"
@@ -64,6 +63,9 @@ if which ruby >/dev/null && which gem >/dev/null; then
 fi
 
 export PATH=$(echo $PATH":" | tr ":" "\0" |  xargs -0 -I% sh -c 'test -d "%" && echo -n "%:"' | sed 's/:$//')
+
+[ -r "$HOME/.aliasrc" ] && . $HOME/.aliasrc
+
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
 # SCREEN buffer

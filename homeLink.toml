@@ -32,11 +32,11 @@
          ["mkdir","-p","${HOME}/.go"],
     ]
     cmds =[
-         ["@install", "golang" , "-y"],
          ["go","get","github.com/motemen/ghq"],
          ["go","get","github.com/peco/peco/cmd/peco"],
          ["go","get","github.com/dougm/goflymake"],
          ["go","get","github.com/nsf/gocode"],
+         ["go","get","github.com/peco/migemogrep"],
     ]
 
 [tasks.ghq]
