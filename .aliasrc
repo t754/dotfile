@@ -227,9 +227,8 @@ function google() {
 }
 
 function ghq-peco() {
-    local selected_dir=$(ghq list -p | peco --query "$READLINE_LINE")
-    if [ -n "$selected_dir" ]; then
-        # BUFFER=
+    local selected_dir=$(ghq list -p | peco --query "$*")
+    if [ -d "$selected_dir" ]; then
         cd $selected_dir
     fi
 }
@@ -684,7 +683,7 @@ if $(command -v pygmentize &> /dev/null) ; then
   LESS_BIN=$(which less)
 
   # pigmentize cat and less outputs
-  function cat()
+  function pycat()
   {
       for var;
       do
@@ -692,7 +691,7 @@ if $(command -v pygmentize &> /dev/null) ; then
       done
   }
 
-  function less()
+  function pyless()
   {
       pygmentize -g $* | "$LESS_BIN" -R
   }
@@ -721,4 +720,24 @@ function pyedit() {
         echo "$EDITOR ${xpyc%.*}.py";
         $EDITOR "${xpyc%.*}.py";
     fi
+}
+
+
+function peco-run(){
+    function _peco_run(){       # clone dmenu_path
+        cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
+        if [ -d "$cachedir" ]; then
+	        cache=$cachedir/dmenu_run
+        else
+	        cache=$HOME/.dmenu_cache # if no xdg dir, fall back to dotfile in ~
+        fi
+        IFS=:
+        if stest -dqr -n "$cache" $PATH; then
+	        stest -flx $PATH | sort -u | tee "$cache"
+        else
+	        cat "$cache"
+        fi
+    }
+    local selected=$(_peco_run | peco | tail -1)
+    nohup ${selected} &
 }
