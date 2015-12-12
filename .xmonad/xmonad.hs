@@ -13,6 +13,7 @@ import XMonad.Layout.ToggleLayouts
 import XMonad.Hooks.DynamicLog
 import XMonad.Actions.WindowGo
 import XMonad.Util.Run
+import XMonad.Actions.UpdatePointer
 
 myterm::String
 -- myterm = "urxvt256c-ml"
@@ -34,7 +35,7 @@ myManageHook = composeAll
     --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
     ]
   --- where copyToWss ids win = map (copyWindow win) ids
-myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
+-- myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
 
 myLayout =
     toggleLayouts Full
@@ -54,7 +55,7 @@ myManageHookShift = composeAll
      , className =? "Keepassx"    --> viewShift "4"
      , className =? "Thunderbird" --> viewShift "5"
      , className =? "VirtualBox"  --> viewShift "3"
-     , className =? "Spotify"     --> viewShift "7"
+     , className =? "Spotify"     --> doF (W.shift "8")
      ]
   where viewShift = doF . liftM2 (.) W.view W.shift
 
@@ -67,7 +68,10 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
   ,((modMask, button3),(\w -> focus w >> mouseResizeWindow w))
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
   ]
-
+myLogHook = do
+  -- dynamicLogWithPP xmobarPP
+  updatePointer (Relative 0.5 0.5)
+  logHook xfceConfig
 
 main = xmonad $ xfceConfig
     { layoutHook         = myLayout
@@ -80,7 +84,9 @@ main = xmonad $ xfceConfig
     , startupHook        = startupHook xfceConfig
                          >> setWMName "LG3D" -- Java app focus fix
     , mouseBindings      = myMouseBindings
-     }
+    , -- logHook = updatePointer (Relative 0.5 0.5)
+      logHook = myLogHook
+    }
     `additionalKeysP`
     [ ("M-C-r"   , restart "xmonad" True)
     , ("M-C-q"   , spawn "setxkbmap && xmodmap ~/.xmodmap && xdotool mousemove 0 0")
@@ -94,10 +100,10 @@ main = xmonad $ xfceConfig
     , ("M-C-S-z" , spawn      "xscreensaver-command -lock")
     , ("M-C-S-f" , runOrRaise "firefox" (className =? "Firefox"))
     , ("M-C-S-d" , runOrRaise "evince" (className =? "Evince"))
-    , ("M-C-S-s" , runOrRaise "spotify" (className =? "Spotify"))
+    , ("M-C-S-w" , runOrRaise "spotify" (className =? "Spotify"))
     , ("M-C-S-h" , (raiseMaybe . unsafeSpawn) (myterm ++ " -t htopTerm -e htop") (title =? "htopTerm"))
     , ("M-C-S-e" , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
-    , ("M-S-t"   , spawn "notify-send \"$(ruby ~/bin/toast-alc.rb 2>&1)\"")
+    , ("M-S-t"   , spawn "xsel -p | xsel -ib  ; ~/bin/toast-alc-go")
     , ("M-g"     , spawn "xdotool mousemove 0 0")
     ]
 -- , ("M-S-t"   , spawn "xclock -chime -update 1 -geometry $(xdpyinfo | grep -B1 resolution | gawk -v SS=400 'BEGIN{FS=\"[ x]+\"} (NR==1){print SS\"x\"SS\"+\"$3/2-(SS/2)\"+\"$4/2-(SS/2)}')")

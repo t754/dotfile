@@ -34,6 +34,7 @@
         avy
         bm
         c-eldoc
+        clang-format
         clj-refactor
         clojure-mode
         clojure-snippets
@@ -93,6 +94,7 @@
         smartrep
         smex
         switch-window
+        toml-mode
         undo-tree
         use-package
         visual-regexp-steroids
@@ -149,6 +151,7 @@
                            purcell/flymake-easy
                            purcell/flymake-haskell-multi
                            purcell/flymake-python-pyflakes
+                           senny/emacs-eclim
                            yasuyk/web-beautify
                            ;;##)
                            ))

@@ -96,7 +96,7 @@
          ;;(plantuml . t)
          (latex . t))))
 ;; org-default-notes-fileのディレクトリ
-;; (setq org-directory "~/Dropbox/org/")
+(setq org-directory "~/Dropbox/org/")
 ;; (setq org-default-notes-file "notes.org")
 ;; (setq org-mobile-directory "~/Dropbox/mobileorg/")
 

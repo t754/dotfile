@@ -2,10 +2,12 @@
 alias ls='ls -x -v --color=auto'
 alias ll='ls -la'
 alias la='ls -a'
+alias l1='ls -1'
 alias starte='emacs --daemon'
 alias e="emacsclient -c -n"
 alias et="emacsclient -t -n"
 alias enox="emacsclient"
+alias en="emacsclient"
 alias E='SUDO_EDITOR="emacsclient -c" sudo -e '
 alias Enox='SUDO_EDITOR="emacsclient " sudo -e '
 alias mv=' timeout 8 mv -iv'
@@ -22,8 +24,7 @@ alias sudo="sudo "
 alias pgg='ps -Af | grep'
 alias xsels='xsel -ib < /tmp/screen-exchange'
 alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
-# alias kpclimy='kpcli --kdb="$HOME/Dropbox/database/NewDatabase.kdbx"'
-alias open="xdg-open"
+alias open="mimeopen"
 
 # coredump した場所
 
@@ -86,30 +87,77 @@ alias dki="docker run -i -t -P"
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # Stop all containers
-dstop() { docker stop $(docker ps -a -q);}
+function dstop() { docker stop $(docker ps -a -q);}
 
 # Remove all containers
-drm() { docker rm $(docker ps -aq --filter='status=exited'); }
+function drm() { docker rm $(docker ps -aq --filter='status=exited'); }
 
 
 # Remove all images
-dri() { docker rmi $(docker images -q); }
+function dri() { docker rmi $(docker images -q); }
 
 # Dockerfile build, e.g., $dbu tcnksm/test
-dbu() { docker build -t=$1 .; }
+function dbu() { docker build -t=$1 .; }
 
 # Show all alias related docker
 # dalias(){ alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort;}
-alias dalias='\grep -E -e "^alias.*docker" -e '\''\(\)\s+{.*docker'\'' $HOME/.aliasrc'
+alias dalias='\grep -E -e "^alias.*docker" -e '\''\(\)\s+{.*docker'\'' -e '\''function docker'\'' $HOME/.aliasrc'
 #
 
-docker-nsenter() {              #docker
-    declare container_id=$1
-    if [ -z "$container_id" ]; then
-        echo "Usage: docker_container <container_id>" >&2
-        return 1
-    fi
-    nsenter --mount --uts --ipc --net --pid --target $(docker inspect --format '{{.State.Pid}}' $container_id)
+function docker-remove-most-recent-container() {
+  docker ps -a | head -2 | tail -1 | awk '{print $NF}' | xargs docker rm
+}
+
+function docker-remove-most-recent-image() {
+  docker images | head -2 | tail -1 | awk '{print $3}' | xargs docker rmi
+}
+
+function docker-enter() {
+  # about 'enter the specified docker container using bash'
+  # group 'docker'
+  # param '1: Name of the container to enter'
+  # example 'docker-enter oracle-xe'
+  docker exec -it "$@" /bin/bash;
+}
+
+function docker-remove-images() {
+  # about 'attempt to remove images with supplied tags or all if no tags are supplied'
+  # group 'docker'
+  if [ -z "$1" ]; then
+    docker rmi $(docker images -q)
+  else
+    DOCKER_IMAGES=""
+    for IMAGE_ID in $@; do DOCKER_IMAGES="$DOCKER_IMAGES\|$IMAGE_ID"; done
+    # Find the image IDs for the supplied tags
+    ID_ARRAY=($(docker images | grep "${DOCKER_IMAGES:2}" | awk {'print $3'}))
+    # Strip out duplicate IDs before attempting to remove the image(s)
+    docker rmi $(echo ${ID_ARRAY[@]} | tr ' ' '\n' | sort -u | tr '\n' ' ')
+ fi
+}
+
+function docker-image-dependencies() {
+  # about 'attempt to create a Graphiz image of the supplied image ID dependencies'
+  # group 'docker'
+  if hash dot 2>/dev/null; then
+    OUT=$(mktemp -t docker-viz-XXXX.png)
+    docker images -viz | dot -Tpng > $OUT
+    case $OSTYPE in
+      linux*)
+        xdg-open $OUT
+        ;;
+      darwin*)
+        open $OUT
+        ;;
+    esac
+  else
+    >&2 echo "Can't show dependencies; Graphiz is not installed"
+  fi
+}
+
+function docker-runtime-environment() {
+  # about 'attempt to list the environmental variables of the supplied image ID'
+  # group 'docker'
+  docker run "$@" env
 }
 
 
@@ -119,35 +167,35 @@ docker-nsenter() {              #docker
 
 
 ############################################
-net_tools_deprecated_message () {
+function net_tools_deprecated_message () {
   echo -n 'net-tools コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
 }
 
-arp () {
+function arp () {
   net_tools_deprecated_message
   echo 'Use `ip n`'
 }
-ifconfig () {
+function ifconfig () {
   net_tools_deprecated_message
   echo 'Use `ip a`, `ip link`, `ip -s link`'
 }
-iptunnel () {
+function iptunnel () {
   net_tools_deprecated_message
   echo 'Use `ip tunnel`'
 }
-iwconfig () {
+function iwconfig () {
   echo -n 'iwconfig コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
   echo 'Use `iw`'
 }
-nameif () {
+function nameif () {
   net_tools_deprecated_message
   echo 'Use `ip link`, `ifrename`'
 }
-netstat () {
+function netstat () {
   net_tools_deprecated_message
   echo 'Use `ss`, `ip route` (for netstat -r), `ip -s link` (for netstat -i), `ip maddr` (for netstat -g)'
 }
-route () {
+function route () {
   net_tools_deprecated_message
   echo 'Use `ip r`'
 }
@@ -179,9 +227,8 @@ function google() {
 }
 
 function ghq-peco() {
-    local selected_dir=$(ghq list -p | peco --query "$READLINE_LINE")
-    if [ -n "$selected_dir" ]; then
-        # BUFFER=
+    local selected_dir=$(ghq list -p | peco --query "$*")
+    if [ -d "$selected_dir" ]; then
         cd $selected_dir
     fi
 }
@@ -193,3 +240,504 @@ function hg-peco() {
 }
 
 
+
+
+
+function parse_git_branch() {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+function colors() {
+    local fgc bgc vals seq0
+
+    printf "Color escapes are %s\n" '\e[${value};...;${value}m'
+    printf "Values 30..37 are \e[33mforeground colors\e[m\n"
+    printf "Values 40..47 are \e[43mbackground colors\e[m\n"
+    printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+
+    # foreground colors
+    for fgc in {30..37}; do
+        # background colors
+        for bgc in {40..47}; do
+            fgc=${fgc#37} # white
+            bgc=${bgc#40} # black
+
+            vals="${fgc:+$fgc;}${bgc}"
+            vals=${vals%%;}
+
+            seq0="${vals:+\e[${vals}m}"
+            printf "  %-9s" "${seq0:-(default)}"
+            printf " ${seq0}TEXT\e[m"
+            printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+        done
+        echo; echo
+    done
+}
+
+
+function peco-select-history () {
+    declare l=$(HISTTIMEFORMAT= history | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$READLINE_LINE")
+    READLINE_LINE="$l"
+    READLINE_POINT=${#l}
+}
+if [ -x "`which peco`" ]; then
+
+	function peco-ag () {
+		ag $@ | peco --query "$READLINE_LINE" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
+	}
+
+	bind -x '"\C-r": peco-select-history'
+	bind    '"\C-xr": reverse-search-history'
+fi
+
+
+function j() {
+    if [ $# -eq 0 ] ; then
+        local cddd="$(z  | tac | awk '{for(i=2;i<NF;i++){printf("%s ",$i)}print $NF}'  | peco)"
+        echo cd "$cddd"
+        cd -- "$cddd"
+    else
+        z $*
+    fi
+}
+function lll() {
+    ls -a1 $* |  peco
+}
+function man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[01;33;03;40m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
+
+
+function alias_completion {
+    local namespace="alias_completion"
+
+    # parse function based completion definitions, where capture group 2 => function and 3 => trigger
+    local compl_regex='complete( +[^ ]+)* -F ([^ ]+) ("[^"]+"|[^ ]+)'
+    # parse alias definitions, where capture group 1 => trigger, 2 => command, 3 => command arguments
+    local alias_regex="alias ([^=]+)='(\"[^\"]+\"|[^ ]+)(( +[^ ]+)*)'"
+
+    # create array of function completion triggers, keeping multi-word triggers together
+    eval "local completions=($(complete -p | sed -Ene "/$compl_regex/s//'\3'/p"))"
+    (( ${#completions[@]} == 0 )) && return 0
+
+    # create temporary file for wrapper functions and completions
+    rm -f "/tmp/${namespace}-*.tmp" # preliminary cleanup
+    local tmp_file; tmp_file="$(mktemp "/tmp/${namespace}-${RANDOM}XXX.tmp")" || return 1
+
+    local completion_loader; completion_loader="$(complete -p -D 2>/dev/null | sed -Ene 's/.* -F ([^ ]*).*/\1/p')"
+
+    # read in "<alias> '<aliased command>' '<command args>'" lines from defined aliases
+    local line; while read line; do
+        eval "local alias_tokens; alias_tokens=($line)" 2>/dev/null || continue # some alias arg patterns cause an eval parse error
+        local alias_name="${alias_tokens[0]}" alias_cmd="${alias_tokens[1]}" alias_args="${alias_tokens[2]# }"
+
+        # skip aliases to pipes, boolean control structures and other command lists
+        # (leveraging that eval errs out if $alias_args contains unquoted shell metacharacters)
+        eval "local alias_arg_words; alias_arg_words=($alias_args)" 2>/dev/null || continue
+        # avoid expanding wildcards
+        read -a alias_arg_words <<< "$alias_args"
+
+        # skip alias if there is no completion function triggered by the aliased command
+        if [[ ! " ${completions[*]} " =~ " $alias_cmd " ]]; then
+            if [[ -n "$completion_loader" ]]; then
+                # force loading of completions for the aliased command
+                eval "$completion_loader $alias_cmd"
+                # 124 means completion loader was successful
+                [[ $? -eq 124 ]] || continue
+                completions+=($alias_cmd)
+            else
+                continue
+            fi
+        fi
+        local new_completion="$(complete -p "$alias_cmd")"
+
+        # create a wrapper inserting the alias arguments if any
+        if [[ -n $alias_args ]]; then
+            local compl_func="${new_completion/#* -F /}"; compl_func="${compl_func%% *}"
+            # avoid recursive call loops by ignoring our own functions
+            if [[ "${compl_func#_$namespace::}" == $compl_func ]]; then
+                local compl_wrapper="_${namespace}::${alias_name}"
+                    echo "function $compl_wrapper {
+                        (( COMP_CWORD += ${#alias_arg_words[@]} ))
+                        COMP_WORDS=($alias_cmd $alias_args \${COMP_WORDS[@]:1})
+
+
+						                        (( COMP_POINT -= \${#COMP_LINE} ))
+                        COMP_LINE=\${COMP_LINE/$alias_name/$alias_cmd $alias_args}
+                        (( COMP_POINT += \${#COMP_LINE} ))
+                        $compl_func
+                    }" >> "$tmp_file"
+                    new_completion="${new_completion/ -F $compl_func / -F $compl_wrapper }"
+            fi
+        fi
+
+        # replace completion trigger by alias
+        new_completion="${new_completion% *} $alias_name"
+        echo "$new_completion" >> "$tmp_file"
+    done < <(alias -p | sed -Ene "s/$alias_regex/\1 '\2' '\3'/p")
+    source "$tmp_file" && rm -f "$tmp_file"
+}; alias_completion
+
+
+function ips ()
+{
+    if command -v ip &>/dev/null
+    then
+        ip addr | \grep -oP 'inet \K[\d.]+'
+    else
+        echo "You don't have ifconfig or ip command installed!"
+    fi
+}
+
+function down4me ()
+{
+    # example '$ down4me http://www.google.com'
+    curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
+}
+
+function myip ()
+{
+    res=$(curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+')
+    echo -e "Your public IP is: ${echo_bold_green} $res ${echo_normal}"
+}
+
+function mkcd ()
+{
+    mkdir -p -- "$*"
+    cd -- "$*"
+}
+
+
+# 最強man
+function explain () {
+  # about 'explain any bash command via mankier.com manpage API'
+  # param '1: Name of the command to explain'
+  # example '$ explain                # interactive mode. Type commands to explain in REPL'
+  # example '$ explain 'cmd -o | ...' # one quoted command to explain it.'
+  # group 'explain'
+
+  if [ "$#" -eq 0 ]; then
+    while read  -p "Command: " cmd; do
+      curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$cmd"
+    done
+    echo "Bye!"
+  elif [ "$#" -eq 1 ]; then
+    curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$1"
+  else
+    echo "Usage"
+    echo "explain                  interactive mode."
+    echo "explain 'cmd -o | ...'   one quoted command to explain it."
+  fi
+}
+
+
+function extract() {
+    local opt
+    local OPTIND=1
+    while getopts "hv" opt; do
+        case "$opt" in
+            h)
+                cat <<End-Of-Usage
+Usage: ${FUNCNAME[0]} [option] <archives>
+    options:
+        -h  show this message and exit
+        -v  verbosely list files processed
+End-Of-Usage
+                return
+                ;;
+            v)
+                local -r verbose='v'
+                ;;
+            ?)
+                extract -h >&2
+                return 1
+                ;;
+        esac
+    done
+    shift $((OPTIND-1))
+
+    [ $# -eq 0 ] && extract -h && return 1
+    while [ $# -gt 0 ]; do
+	    if [ -f "$1" ]; then
+		    case "$1" in
+                *.tar.bz2|*.tbz|*.tbz2) tar "x${verbose}jf" "$1" ;;
+                *.tar.gz|*.tgz) tar "x${verbose}zf" "$1" ;;
+                *.tar.xz) xz --decompress "$1"; set -- "$@" "${1:0:-3}" ;;
+                *.tar.Z) uncompress "$1"; set -- "$@" "${1:0:-2}" ;;
+                *.bz2) bunzip2 "$1" ;;
+                *.deb) dpkg-deb -x${verbose} "$1" "${1:0:-4}" ;;
+                *.pax.gz) gunzip "$1"; set -- "$@" "${1:0:-3}" ;;
+                *.gz) gunzip "$1" ;;
+                *.pax) pax -r -f "$1" ;;
+                *.pkg) pkgutil --expand "$1" "${1:0:-4}" ;;
+                *.rar) unrar x "$1" ;;
+                *.rpm) rpm2cpio "$1" | cpio -idm${verbose} ;;
+                *.tar) tar "x${verbose}f" "$1" ;;
+                *.txz) mv "$1" "${1:0:-4}.tar.xz"; set -- "$@" "${1:0:-4}.tar.xz" ;;
+                *.xz) xz --decompress "$1" ;;
+                *.zip|*.war|*.jar) unzip "$1" ;;
+                *.Z) uncompress "$1" ;;
+                *.7z) 7za x "$1" ;;
+                *) echo "'$1' cannot be extracted via extract" >&2;;
+		    esac
+        else
+		    echo "extract: '$1' is not a valid file" >&2
+	    fi
+        shift
+    done
+}
+### ----------------------------
+### git
+
+function git_remote {
+  echo "Running: git remote add origin ${GIT_HOSTING}:$1.git"
+  git remote add origin $GIT_HOSTING:$1.git
+}
+
+function git_first_push {
+  echo "Running: git push origin master:refs/heads/master"
+  git push origin master:refs/heads/master
+}
+
+function git_pub() {
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  echo "Publishing ${BRANCH} to remote origin"
+  git push -u origin $BRANCH
+}
+
+function git_revert() {
+  git reset $1
+  git reset --soft HEAD@{1}
+  git commit -m "Revert to ${1}"
+  git reset --hard
+}
+
+function git_rollback() {
+  function is_clean() {
+    if [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]]; then
+      echo "Your branch is dirty, please commit your changes"
+      kill -INT $$
+    fi
+  }
+
+  function commit_exists() {
+    git rev-list --quiet $1
+    status=$?
+    if [ $status -ne 0 ]; then
+      echo "Commit ${1} does not exist"
+      kill -INT $$
+    fi
+  }
+
+  function keep_changes() {
+    while true
+    do
+      read -p "Do you want to keep all changes from rolled back revisions in your working tree? [Y/N]" RESP
+      case $RESP
+      in
+      [yY])
+        echo "Rolling back to commit ${1} with unstaged changes"
+        git reset $1
+        break
+        ;;
+      [nN])
+        echo "Rolling back to commit ${1} with a clean working tree"
+        git reset --hard $1
+        break
+        ;;
+      *)
+        echo "Please enter Y or N"
+      esac
+    done
+  }
+
+  if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
+    is_clean
+    commit_exists $1
+
+    while true
+    do
+      read -p "WARNING: This will change your history and move the current HEAD back to commit ${1}, continue? [Y/N]" RESP
+      case $RESP
+        in
+        [yY])
+          keep_changes $1
+          break
+          ;;
+        [nN])
+          break
+          ;;
+        *)
+          echo "Please enter Y or N"
+      esac
+    done
+  else
+    echo "you're currently not in a git repository"
+  fi
+}
+
+function git_remove_missing_files() {
+  git ls-files -d -z | xargs -0 git update-index --remove
+}
+
+# Adds files to git's exclude file (same as .gitignore)
+function local-ignore() {
+  echo "$1" >> .git/info/exclude
+}
+
+# get a quick overview for your git repo
+function git_info() {
+    if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
+        # print informations
+        echo "git repo overview"
+        echo "-----------------"
+        echo
+
+        # print all remotes and thier details
+        for remote in $(git remote show); do
+            echo $remote:
+            git remote show $remote
+            echo
+        done
+
+        # print status of working repo
+        echo "status:"
+        if [ -n "$(git status -s 2> /dev/null)" ]; then
+            git status -s
+        else
+            echo "working directory is clean"
+        fi
+
+        # print at least 5 last log entries
+        echo
+        echo "log:"
+        git log -5 --oneline
+        echo
+
+    else
+        echo "you're currently not in a git repository"
+
+    fi
+}
+
+function git_stats {
+# awesome work from https://github.com/esc/git-stats
+# including some modifications
+
+if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
+    echo "Number of commits per author:"
+    git --no-pager shortlog -sn --all
+    AUTHORS=$( git shortlog -sn --all | cut -f2 | cut -f1 -d' ')
+    LOGOPTS=""
+    if [ "$1" == '-w' ]; then
+        LOGOPTS="$LOGOPTS -w"
+        shift
+    fi
+    if [ "$1" == '-M' ]; then
+        LOGOPTS="$LOGOPTS -M"
+        shift
+    fi
+    if [ "$1" == '-C' ]; then
+        LOGOPTS="$LOGOPTS -C --find-copies-harder"
+        shift
+    fi
+    for a in $AUTHORS
+    do
+        echo '-------------------'
+        echo "Statistics for: $a"
+        echo -n "Number of files changed: "
+        git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f3 | sort -iu | wc -l
+        echo -n "Number of lines added: "
+        git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f1 | awk '{s+=$1} END {print s}'
+        echo -n "Number of lines deleted: "
+        git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f2 | awk '{s+=$1} END {print s}'
+        echo -n "Number of merges: "
+        git log $LOGOPTS --all --merges --author=$a | grep -c '^commit'
+    done
+else
+    echo "you're currently not in a git repository"
+fi
+}
+
+
+### ------------------------------------------------
+### hg
+function hg_dirty() {
+    hg status --no-color 2> /dev/null \
+    | awk '$1 == "?" { print "?" } $1 != "?" { print "!" }' \
+    | sort | uniq | head -c1
+}
+
+
+### ------------------------------------
+### less-pretty-cat
+if $(command -v pygmentize &> /dev/null) ; then
+  # get the full paths to binaries
+  CAT_BIN=$(which cat)
+  LESS_BIN=$(which less)
+
+  # pigmentize cat and less outputs
+  function pycat()
+  {
+      for var;
+      do
+          pygmentize "$var" 2>/dev/null || "$CAT_BIN" "$var";
+      done
+  }
+
+  function pyless()
+  {
+      pygmentize -g $* | "$LESS_BIN" -R
+  }
+else
+	type pygmentize
+fi
+
+
+function pyedit() {
+    # about 'opens python module in your EDITOR'
+    # param '1: python module to open'
+    # example '$ pyedit requests'
+    # group 'python'
+
+    xpyc=`python -c "import sys; stdout = sys.stdout; sys.stdout = sys.stderr; import $1; stdout.write($1.__file__)"`
+
+    if [ "$xpyc" == "" ]; then
+        echo "Python module $1 not found"
+        return -1
+
+    elif [[ $xpyc == *__init__.py* ]]; then
+        xpydir=`dirname $xpyc`;
+        echo "$EDITOR $xpydir";
+        $EDITOR "$xpydir";
+    else
+        echo "$EDITOR ${xpyc%.*}.py";
+        $EDITOR "${xpyc%.*}.py";
+    fi
+}
+
+
+function peco-run(){
+    function _peco_run(){       # clone dmenu_path
+        cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
+        if [ -d "$cachedir" ]; then
+	        cache=$cachedir/dmenu_run
+        else
+	        cache=$HOME/.dmenu_cache # if no xdg dir, fall back to dotfile in ~
+        fi
+        IFS=:
+        if stest -dqr -n "$cache" $PATH; then
+	        stest -flx $PATH | sort -u | tee "$cache"
+        else
+	        cat "$cache"
+        fi
+    }
+    local selected=$(_peco_run | peco | tail -1)
+    nohup ${selected} &
+}
