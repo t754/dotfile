@@ -26,7 +26,7 @@
       (org-display-inline-images)
     (error nil)))
 
-
+(setq org-directory "~/Dropbox/org/")
 (setq org-startup-truncated                   nil
       org-hide-leading-stars                  t ;; 見出しの余分な*を消す
       org-return-follows-link                 t
@@ -96,7 +96,7 @@
          ;;(plantuml . t)
          (latex . t))))
 ;; org-default-notes-fileのディレクトリ
-(setq org-directory "~/Dropbox/org/")
+
 ;; (setq org-default-notes-file "notes.org")
 ;; (setq org-mobile-directory "~/Dropbox/mobileorg/")
 

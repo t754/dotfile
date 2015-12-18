@@ -16,7 +16,7 @@ alias rm=' timeout 3 rm -Iv --one-file-system'
 alias server_name='ssh -v -l USERNAME IP ADDRESS'
 alias du="du -h -c"
 alias df="df -h -T --total"
-alias grep="grep -i -n --color"
+# alias grep="grep -i -n --color"
 # sudo alias get
 alias sudo="sudo "
 
@@ -207,6 +207,14 @@ function cdd {
         cd "$dir"
     fi
 }
+
+function cddd {
+    local dir=$( locate -Ai  "$*" | \grep  -vE '~$' |  peco --query "$READLINE_LINE" )
+    if [ ! -z "$dir" ] ; then
+        cd "$dir"
+    fi
+}
+
 
 function peco-ssh() {
   local SSH=$(\grep "^\s*Host " ~/.ssh/config | sed s/"[\s ]*Host "// | \grep -v "^\*$" | sort | peco)

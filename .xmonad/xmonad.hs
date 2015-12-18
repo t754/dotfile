@@ -32,6 +32,7 @@ myManageHook = composeAll
     , className =? "MPlayer" --> doFloat
     , className =? "ij-ImageJ" --> doFloat
     , className =? "fiji-Main" --> doFloat
+    , className =? "Display.py" --> doFloat
     --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
     ]
   --- where copyToWss ids win = map (copyWindow win) ids
