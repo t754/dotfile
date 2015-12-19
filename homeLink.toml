@@ -22,8 +22,10 @@
         [".xmonad"],
         [".zshrc"],
         [".config/awesome"],
-        [".config/fontconfig/conf.d/"],
-        [".config/systemd/user/emacs/emacs.service"],
+        [".config/fontconfig/conf.d/"]
+    ]
+    cmds =[
+         ["cp", "$PWD/.config/systemd/user/emacs.service","$HOME/.config/systemd/user/"]
     ]
 
 [tasks.golang]
