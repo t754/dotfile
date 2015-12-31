@@ -749,3 +749,18 @@ function peco-run(){
     local selected=$(_peco_run | peco | tail -1)
     nohup ${selected} &
 }
+
+
+function alcw(){
+    if [ $# -eq 0 ]; then
+        return
+    fi
+    ag  --nonumbers  "^$*" ~/Dropbox/eijiroDIC/waeiji98.txt | peco --query "$*"
+}
+
+function alce(){
+    if [ $# -eq 0 ]; then
+        return
+    fi
+    ag -i --nonumbers  "^$*" ~/Dropbox/eijiroDIC/eijiro98.txt | peco --query "$*"
+}
