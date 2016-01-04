@@ -751,17 +751,21 @@ function peco-run(){
     nohup ${selected} &
 }
 
+function _alc(){
+    if [ $# -le 1 ] ; then
+       return
+    fi
+    local dicPath
+    dicPath=$1
+    shift
+    ag  --nonumbers "^$*" ${dicPath} | peco --query "$*" | sed 's/【/\n【/g'
+}
+
 
 function alcw(){
-    if [ $# -eq 0 ]; then
-        return
-    fi
-    ag  --nonumbers  "^$*" ~/Dropbox/eijiroDIC/waeiji98.txt | peco --query "$*"
+    _alc ~/Dropbox/eijiroDIC/waeiji98.txt "$*"
 }
 
 function alce(){
-    if [ $# -eq 0 ]; then
-        return
-    fi
-    ag -i --nonumbers  "^$*" ~/Dropbox/eijiroDIC/eijiro98.txt | peco --query "$*"
+    _alc ~/Dropbox/eijiroDIC/eijiro98.txt "$*"
 }
