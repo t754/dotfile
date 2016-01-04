@@ -2,3 +2,7 @@ set show-all-if-ambiguous on
 set show-all-if-unmodified on
 set bell-style visible
 set completion-ignore-case on
+$if Bash
+    space: magic-space
+    "\C-x\C-p": " | peco"
+$endif
