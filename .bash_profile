@@ -14,3 +14,10 @@ export PAGER="less"
 export BASH_ENV="$HOME/.bashrc"
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
+if [ -x "`which keychain`" ]; then
+    if [ $(hostname) = "localhost.localdomain" ]; then
+        eval $(keychain --eval --agents ssh id_rsa.bit2 id_rsa.zt2)
+    else
+        eval $(keychain --eval --agents ssh id_rsa.bit)
+    fi
+fi

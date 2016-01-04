@@ -1,7 +1,7 @@
 # ~/.bashrc
 # If not running interactively, don't do anything
 
-[[ $- != *i* ]] && return
+# [[ $- != *i* ]] && return
 
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
@@ -41,10 +41,10 @@ export HISTIGNORE="fg*:bg*:history*:rm*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 
 # export COLORTERM="mlterm"
-if type rbenv >/dev/null 2>&1; then
-    eval "$(rbenv init -)"
-fi
-[[ -e ~/.rbenv/completions/rbenv.bash ]] && source ~/.rbenv/completions/rbenv.bash
+# if type rbenv >/dev/null 2>&1; then
+#     eval "$(rbenv init -)"
+# fi
+# [[ -e ~/.rbenv/completions/rbenv.bash ]] && source ~/.rbenv/completions/rbenv.bash
 
 export PYENV_ROOT="$HOME/.pyenv"
 
@@ -57,10 +57,10 @@ export GOPATH="$HOME/.go"
 
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
 export PATH="$HOME/bin:$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:$GOPATH/bin:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
-if which ruby >/dev/null && which gem >/dev/null; then
-  # gem install --user-install
-  export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
-fi
+# if which ruby >/dev/null && which gem >/dev/null; then
+#   gem install --user-install
+#   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
+# fi
 
 export PATH=$(echo $PATH":" | tr ":" "\0" |  xargs -0 -I% sh -c 'test -d "%" && echo -n "%:"' | sed 's/:$//')
 
@@ -98,20 +98,6 @@ PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 
 complete -cf sudo
 complete -cf man
-
-
-
-
-
-if [ "x${WINDOWID}" != "x" ] ; then
-    if [ -x "`which keychain`" ]; then
-        if [ $(hostname) = "localhost.localdomain" ]; then
-            eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit2 id_rsa.zt2)
-        else
-            eval $(keychain --eval --nogui -Q -q --agents ssh id_rsa.bit)
-        fi
-    fi
-fi
 
 function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
 trap EC ERR
