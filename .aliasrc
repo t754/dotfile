@@ -287,14 +287,15 @@ function peco-select-history () {
     READLINE_LINE="$l"
     READLINE_POINT=${#l}
 }
-if [ -x "`which peco`" ]; then
+if [ -x "$(which peco)" ]; then
 
 	function peco-ag () {
 		ag $@ | peco --query "$READLINE_LINE" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
 	}
-
-	bind -x '"\C-r": peco-select-history'
-	bind    '"\C-xr": reverse-search-history'
+    if [[ "$-" = *i* ]] ; then
+	    bind -x '"\C-r": peco-select-history'
+	    bind    '"\C-xr": reverse-search-history'
+    fi
 fi
 
 
