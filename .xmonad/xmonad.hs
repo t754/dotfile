@@ -105,7 +105,10 @@ main = xmonad $ xfceConfig
     , ("M-C-S-h" , (raiseMaybe . unsafeSpawn) (myterm ++ " -t htopTerm -e htop") (title =? "htopTerm"))
     , ("M-C-S-e" , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
     , ("M-S-t"   , spawn "xsel -p | xsel -ib  ; ~/bin/toast-alc-go")
-    , ("M-C-S-t" , spawn "~/bin/alc.sh")
+    , ("M-C-S-t" , (raiseMaybe. unsafeSpawn)
+                   (myterm ++ " -t dictTerm -f \"Inconsolata:size=16\" -e bash -c \"unset WINDOWID ; source ~/.bashrc && alce $(xsel -p) 2>&1 && sleep 4\"")
+                   (title =? "dictTerm"))
+      --
       -- notify-send "$(ag -i --nonumbers -w "^$(xsel -p)" ~/Dropbox/eijiroDIC/eijiro98.txt | head -10 | sed -e 's.///.\n\t.g' -e 's/¥/\n\t/g')"
 
     , ("M-g"     , spawn "xdotool mousemove 0 0")
