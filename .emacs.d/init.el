@@ -42,6 +42,8 @@
  '(git-gutter:update-interval 2)
  '(git-gutter:window-width 1)
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
+ '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
+ '(help-at-pt-timer-delay 0.9)
  '(mozc-leim-title "も")
  '(org-latex-default-packages-alist
    (quote
