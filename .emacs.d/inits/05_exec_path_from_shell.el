@@ -1,4 +1,5 @@
 (let ((envs '("MANPATH" "PATH" "GOROOT" "GOPATH" )))
+  (setenv "_MY_EMACS" "T")
   (exec-path-from-shell-copy-envs envs))
 ;; (exec-path-from-shell-initialize)
 (setq eshell-prompt-function
