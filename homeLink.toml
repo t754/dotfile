@@ -15,6 +15,7 @@
         [".emacs.d"],
         [".latexmkrc"],
         [".gitignore"],
+        [".gitconfig"],
         [".hgrc"],
         [".inputrc"],
         [".screenrc"],
