@@ -9,7 +9,7 @@
 ;; (require 'ox-bibtex)
 ;; (require 'ox-ascii)
 ;; (require 'ox-beamer)
- (require 'ox-md)
+(require 'ox-md)
 (when (require 'org-crypt nil t)
   ;; org-encrypt-entries の影響を受けるタグを指定
   ;; 自動保存の確認を無効に
@@ -132,50 +132,54 @@
         org-beamer-frame-default-options        "fragile"
         org-latex-default-class                 "jarticle"
         org-latex-classes     `(("jarticle"
-           ,(case latex
-              ('luatex "\\documentclass{ltjsarticle}\n")
-              ('xetex  "\\documentclass[a4paper]{bxjsarticle}\n")
-              ('euptex "\\documentclass[a4j,uplatex]{jarticle}\n")
-              (t       "\\documentclass[dvipdfmx]{jarticle}"))
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-           )
-          ("report"
-           ,(case latex
-              ('luatex "\\documentclass{ltjsarticle}\n")
-              ('xetex  "\\documentclass[a4paper]{bxjsreport}\n")
-              ('euptex "\\documentclass[11pt,report,uplatex]{jsbook}\n")
-              (t       "\\documentclass[11pt]{article}"))
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-          ("book"
-           ,(case latex
-              ('luatex "\\documentclass{ltjsarticle}\n")
-              ('xetex  "\\documentclass[9pt,a4paper]{bxjsreport}\n")
-              ('euptex "\\documentclass[9pt,a5j,uplatex]{jsbook}\n")
-              (t       "\\documentclass[11pt]{book}"))
-           ("\\part{%s}" . "\\part*{%s}")
-           ("\\chapter{%s}" . "\\chapter*{%s}")
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-          ("beamer"
-           ,(concat
-             (case latex
-               ('xetex
-                "\\documentclass[compress,xdvipdfmx]{beamer}\n")
-               (t "\\documentclass[compress,dvipdfmx]{beamer}\n"))
-             "\\usetheme{AnnArbor}\n"
-             "\\setbeamertemplate{navigation symbols}{}\n"
-             "[NO-PACKAGES]\n"
-             "\\usepackage{graphicx}\n")
-           org-beamer-sectioning))))
+                                 ,(case latex
+                                    ('luatex "\\documentclass{ltjsarticle}\n")
+                                    ('xetex  "\\documentclass[a4paper]{bxjsarticle}\n")
+                                    ('euptex "\\documentclass[a4j,uplatex]{jarticle}\n")
+                                    (t       "\\documentclass[dvipdfmx]{jarticle}"))
+                                 ("\\section{%s}" . "\\section*{%s}")
+                                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                                 )
+                                ("jreport"
+                                 ,(case latex
+                                    ('luatex "\\documentclass{ltjsarticle}\n")
+                                    ('xetex  "\\documentclass[a4paper]{bxjsreport}\n")
+                                    ('euptex "\\documentclass[11pt,report,uplatex]{jsbook}\n")
+                                    (t       "\\documentclass[11pt,dvipdfmx]{jreport}"))
+                                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                                 ("\\section{%s}" . "\\section*{%s}")
+                                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                                 )
+                                ("jbook"
+                                 ,(case latex
+                                    ('luatex "\\documentclass{ltjsarticle}\n")
+                                    ('xetex  "\\documentclass[9pt,a4paper]{bxjsreport}\n")
+                                    ('euptex "\\documentclass[9pt,a5j,uplatex]{jsbook}\n")
+                                    (t       "\\documentclass[11pt,dvipdfmx]{jbook}"))
+                                 ("\\part{%s}" . "\\part*{%s}")
+                                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                                 ("\\section{%s}" . "\\section*{%s}")
+                                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+                                ("beamer"
+                                 ,(concat
+                                   (case latex
+                                     ('xetex
+                                      "\\documentclass[compress,xdvipdfmx]{beamer}\n")
+                                     (t "\\documentclass[compress,dvipdfmx]{beamer}\n"))
+                                   "\\usetheme{AnnArbor}\n"
+                                   "\\setbeamertemplate{navigation symbols}{}\n"
+                                   "[NO-PACKAGES]\n"
+                                   "\\usepackage{graphicx}\n")
+                                 org-beamer-sectioning))))
 
 ;;;------------------------------------------------------------------
 ;;;; org-trello
