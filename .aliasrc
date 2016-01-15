@@ -758,7 +758,7 @@ function _alc(){
     local dicPath
     dicPath=$1
     shift
-    ag  --nonumbers "^$*" ${dicPath} | peco --query "$*" | sed -e 's/【/\n【/g' -e 's/●/\n* /g' -e 's@/// @\n* @'
+    ag  --nonumbers "^$*" ${dicPath} | peco --initial-filter CaseSensitive --query "$*" | sed -e 's/[●¥]/\n/g' -e 's@/// @\n\n@' -e 's/◆/ ◆ /g'
 }
 
 
