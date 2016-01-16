@@ -156,6 +156,19 @@
                                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
                                  )
+								("jsreport"
+                                 ,(case latex
+                                    ('luatex "\\documentclass{ltjsarticle}\n")
+                                    ('xetex  "\\documentclass[a4paper]{bxjsreport}\n")
+                                    ('euptex "\\documentclass[11pt,report,uplatex]{jsreport}\n")
+                                    (t       "\\documentclass[11pt,dvipdfmx]{jsreport}"))
+                                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                                 ("\\section{%s}" . "\\section*{%s}")
+                                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                                 )
                                 ("jbook"
                                  ,(case latex
                                     ('luatex "\\documentclass{ltjsarticle}\n")
