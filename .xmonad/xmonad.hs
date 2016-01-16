@@ -14,7 +14,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Actions.WindowGo
 import XMonad.Util.Run
 import XMonad.Actions.UpdatePointer
-
+import XMonad.Actions.CopyWindow
 myterm::String
 -- myterm = "urxvt256c-ml"
 myterm = "st -f \"Inconsolata:size=16\""
@@ -85,8 +85,7 @@ main = xmonad $ xfceConfig
     , startupHook        = startupHook xfceConfig
                          >> setWMName "LG3D" -- Java app focus fix
     , mouseBindings      = myMouseBindings
-    , -- logHook = updatePointer (Relative 0.5 0.5)
-      logHook = myLogHook
+    , logHook = myLogHook
     }
     `additionalKeysP`
     [ ("M-C-r"   , restart "xmonad" True)
@@ -100,18 +99,17 @@ main = xmonad $ xfceConfig
     , ("M-S-l"   , sendMessage MirrorExpand)
     , ("M-C-S-z" , spawn      "xscreensaver-command -lock")
     , ("M-C-S-f" , runOrRaise "firefox" (className =? "Firefox"))
+    , ("M-C-f"   , runOrRaise "firefox" (className =? "Firefox"))
     , ("M-C-S-d" , runOrRaise "evince" (className =? "Evince"))
     , ("M-C-S-w" , runOrRaise "spotify" (className =? "Spotify"))
     , ("M-C-S-h" , (raiseMaybe . unsafeSpawn) (myterm ++ " -t htopTerm -e htop") (title =? "htopTerm"))
     , ("M-C-S-e" , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
+    , ("M-C-e"   , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
     , ("M-e"     , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
-    , ("M-S-t"   , spawn "xsel -p | xsel -ib  ; ~/bin/toast-alc-go")
-    , ("M-t"     , (raiseMaybe. unsafeSpawn)
-                   ("st -t dictTerm -f \"Inconsolata:size=16\" -e bash -c 'notify-send  \"$(xsel -p)\" \"$(alce $(xsel -p) 2>&1)\"'")
+    , ("M-S-t"   , (raiseMaybe. unsafeSpawn)
+                   ("st -t dictTerm -f \"Inconsolata:size=16\" -e bash -c 'alce $(xsel -p) 2>&1 | less'")
                    (title =? "dictTerm"))
-      --
-      -- notify-send "$(ag -i --nonumbers -w "^$(xsel -p)" ~/Dropbox/eijiroDIC/eijiro98.txt | head -10 | sed -e 's.///.\n\t.g' -e 's/¥/\n\t/g')"
-
+    , ("M-v"     , windows copyToAll)
+    , ("M-S-v"   , killAllOtherCopies)
     , ("M-g"     , spawn "xdotool mousemove 0 0")
     ]
--- , ("M-S-t"   , spawn "xclock -chime -update 1 -geometry $(xdpyinfo | grep -B1 resolution | gawk -v SS=400 'BEGIN{FS=\"[ x]+\"} (NR==1){print SS\"x\"SS\"+\"$3/2-(SS/2)\"+\"$4/2-(SS/2)}')")
