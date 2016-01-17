@@ -11,7 +11,6 @@ export PAGER="less"
 # if [ -n ${DISPLAY} ] ; then
 #     export DISPLAY=:0.0
 # fi
-export BASH_ENV="$HOME/.bashrc"
 
 # set -x
 export TERM="xterm-256color"
@@ -82,7 +81,7 @@ stty stop undef
 export MANPATH=/usr/share/man/ja:
 export _Z_CMD=z
 
-
+export BASH_ENV="$HOME/.bashrc"
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 
