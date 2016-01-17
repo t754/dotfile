@@ -16,7 +16,7 @@ alias rm=' timeout 3 rm -Iv --one-file-system'
 alias server_name='ssh -v -l USERNAME IP ADDRESS'
 alias du="du -h -c"
 alias df="df -h -T --total"
-alias grep="grep -i -n --color"
+# alias grep="grep -i -n --color"
 # sudo alias get
 alias sudo="sudo "
 
@@ -208,6 +208,14 @@ function cdd {
     fi
 }
 
+function cddd {
+    local dir=$( locate -Ai  "$*" | \grep  -vE '~$' |  peco --query "$READLINE_LINE" )
+    if [ ! -z "$dir" ] ; then
+        cd "$dir"
+    fi
+}
+
+
 function peco-ssh() {
   local SSH=$(\grep "^\s*Host " ~/.ssh/config | sed s/"[\s ]*Host "// | \grep -v "^\*$" | sort | peco)
   ssh $SSH
@@ -279,14 +287,15 @@ function peco-select-history () {
     READLINE_LINE="$l"
     READLINE_POINT=${#l}
 }
-if [ -x "`which peco`" ]; then
+if [ -x "$(which peco)" ]; then
 
 	function peco-ag () {
 		ag $@ | peco --query "$READLINE_LINE" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
 	}
-
-	bind -x '"\C-r": peco-select-history'
-	bind    '"\C-xr": reverse-search-history'
+    if [[ "$-" = *i* ]] ; then
+	    bind -x '"\C-r": peco-select-history'
+	    bind    '"\C-xr": reverse-search-history'
+    fi
 fi
 
 
@@ -740,4 +749,23 @@ function peco-run(){
     }
     local selected=$(_peco_run | peco | tail -1)
     nohup ${selected} &
+}
+
+function _alc(){
+    if [ $# -le 1 ] ; then
+       return
+    fi
+    local dicPath
+    dicPath=$1
+    shift
+    ag  --nonumbers "^$*" ${dicPath} | peco --initial-filter CaseSensitive --query "$*" | sed -e 's/[●¥]/\n/g' -e 's@/// @\n\n@' -e 's/◆/ ◆ /g'
+}
+
+
+function alcw(){
+    _alc ~/Dropbox/eijiroDIC/waeiji98.txt "$*"
+}
+
+function alce(){
+    _alc ~/Dropbox/eijiroDIC/eijiro98.txt "$*"
 }

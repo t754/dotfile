@@ -1,23 +1,28 @@
-(defun my:ac-c-headers-init ()
-  (require 'auto-complete-c-headers)
-  (flymake-mode t)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
-  (setq-default tab-width 4 indent-tabs-mode t))
-;; (local-set-key clang-format-region)
-;; (bind-keys :map c++-mode-map
-;;              ("M-S-i" . ac-previous))
-(add-hook 'c++-mode-hook 'my:ac-c-headers-init)
-(add-hook 'c-mode-hook 'my:ac-c-headers-init)
+(eval-after-load "irony"
+  '(progn
+     (custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
+     (add-to-list 'company-backends 'company-irony)
+     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+     (add-hook 'c-mode-common-hook 'irony-mode)))
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+(eval-after-load "flycheck"
+  '(progn
+     (when (locate-library "flycheck-irony")
+       (flycheck-irony-setup)
+       ;;(flycheck-add-next-checker 'irony '(warning . c/c++-googlelint))
+)))
 
-(defun clang-format-before-save ()
-  "Add this to .emacs to clang-format on save
- (add-hook 'before-save-hook 'clang-format-before-save)."
-  (interactive)
-  (when (eq major-mode 'c++-mode) (clang-format-buffer)))
 
-(with-eval-after-load 'c++-mode
-  (require 'clang-format)
-  (add-hook 'before-save-hook 'clang-format-before-save)
-  ;; (add-hook 'go-mode-hook 'flycheck-mode)
-  )
-;; TODO:: irony mode いれたい
+;; rtag
+;; (custom-set-variables '(rtags-use-helm t))
+;; git clone --recursive ‌https://github.com/Andersbakken/rtags.git
+;; cd rtags
+;; cmake .
+;; make
+;; sudo make install

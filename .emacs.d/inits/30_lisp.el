@@ -3,8 +3,8 @@
 ;; (require 'ac-slime)
 
 
-(with-eval-after-load "auto-complete"
-  (add-to-list 'ac-modes 'slime-repl-mode))
+;; (with-eval-after-load "auto-complete"
+;;   (add-to-list 'ac-modes 'slime-repl-mode))
 (with-eval-after-load "slime"
   (slime-setup '(slime-repl slime-fancy slime-banner))
   (add-hook 'slime-mode-hook 'set-up-slime-ac)

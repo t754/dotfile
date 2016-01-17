@@ -42,6 +42,8 @@
  '(git-gutter:update-interval 2)
  '(git-gutter:window-width 1)
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
+ '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
+ '(help-at-pt-timer-delay 0.9)
  '(mozc-leim-title "も")
  '(org-latex-default-packages-alist
    (quote
@@ -55,13 +57,36 @@
      ("" "rotating" nil)
      ("normalem" "ulem" t)
      ("" "amsmath" t)
+     "\\let\\equation\\gather
+\\let\\endequation\\endgather"
      ("" "textcomp" t)
      ("" "marvosym" t)
      ("" "wasysym" t)
      ("" "amssymb" t)
-     ("" "hyperref" nil)
-     "\\tolerance=1000"
+     "\\ifx\\kanjiskip\\undefined\\else
+  \\usepackage{atbegshi}
+  \\ifx\\ucs\\undefined
+    \\ifnum 42146=\\euc\"A4A2
+      \\AtBeginShipoutFirst{\\special{pdf:tounicode EUC-UCS2}}
+    \\else
+      \\AtBeginShipoutFirst{\\special{pdf:tounicode 90ms-RKSJ-UCS2}}
+    \\fi
+  \\else
+    \\AtBeginShipoutFirst{\\special{pdf:tounicode UTF8-UCS2}}
+  \\fi
+  \\usepackage[dvipdfmx]{hyperref}
+\\fi" "\\tolerance=1000"
      ("" "svg" nil))))
+ '(org-latex-hyperref-template
+   "\\hypersetup{
+ pdfauthor={%a},
+ hidelinks,
+ pdftitle={%t},
+ pdfkeywords={%k},
+ pdfsubject={%d},
+ pdfcreator={%c},
+ pdflang={%L}}
+")
  '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote

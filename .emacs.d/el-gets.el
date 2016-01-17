@@ -23,14 +23,8 @@
 (setq my/el-list
       '(
         ;;##(
-        ac-cider
-        ac-helm
-        ac-math
-        ac-slime
         actionscript-mode
         align-cljlet
-        auto-complete
-        auto-complete-c-headers
         avy
         bm
         c-eldoc
@@ -39,6 +33,7 @@
         clojure-mode
         clojure-snippets
         color-theme
+        company-quickhelp
         dockerfile-mode
         drag-stuff
         emmet-mode
@@ -48,12 +43,12 @@
         flycheck
         flycheck-cask
         flycheck-color-mode-line
+        flycheck-irony
         flymake-cursor
         flymake-lua
         fold-dwim
         git-commit-mode
         git-gutter
-        go-autocomplete
         go-eldoc
         go-mode
         google-translate
@@ -70,6 +65,7 @@
         idle-highlight-mode
         ido-vertical-mode
         inf-ruby
+        irony-mode
         jedi
         js2-mode
         js2-refactor
@@ -145,6 +141,7 @@
                            ;;(m0smith/malabar-mode :load-path)
                            Malabarba/beacon
                            bmag/imenu-list
+                           company-mode/company-mode
                            emacs-jp/init-loader
                            jcpetkovich/shrink-whitespace.el
                            purcell/exec-path-from-shell

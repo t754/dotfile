@@ -3,33 +3,12 @@
 
 ;; 問い合わせを簡略化 yes/no を y/n
 (fset 'yes-or-no-p 'y-or-n-p)
-
 (yas-global-mode 1)
-;; ~/.emacs.d/にsnippetsというフォルダを作っておきましょう
-(setq yas-snippet-dirs '("~/.emacs.d/snippets") ;; 作成するスニペットはここに入る
-      )
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+(define-key yas-minor-mode-map (kbd "SPC") 'yas/expand)
+(yas-reload-all)
+(add-hook 'prog-mode-hook #'yas-minor-mode)
 
-;;(setq yas-wrap-around-region nil)
-;;(setq )
- ;;; 単語展開キーバインド (ver8.0から明記しないと機能しない)
- ;;; (setqだとtermなどで干渉問題ありでした)
- ;;; もちろんTAB以外でもOK 例えば "C-;"とか
-;; (defun my-yas/prompt (prompt choices &optional display-fn)
-;;   (let* ((names (loop for choice in choices
-;;                       collect (or (and display-fn (funcall display-fn choice))
-;;                                   coice)))
-;;          (selected (helm-other-buffer
-;;                     `(((name . ,(format "%s" prompt))
-;;                        (candidates . names)
-;;                        (action . (("Insert snippet" . (lambda (arg) arg))))))
-;;                     "*helm yas/prompt*")))
-;;     (if selected
-;;         (let ((n (position selected names :test 'equal)))
-;;           (nth n choices))
-;;       (signal 'quit "user quit!"))))
-
-;;(custom-set-variables '(yas/prompt-functions '(my-yas/prompt)))
-(custom-set-variables '(yas-trigger-key "TAB"))
 
 (defalias 'yas--template-file 'yas--template-get-file)
 

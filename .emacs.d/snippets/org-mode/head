@@ -6,9 +6,8 @@
 #+AUTHOR: 名越 琢真
 #+EMAIL:
 #+DATE: \today 提出
-#+OPTIONS: toc:nil num:t author:t creator:nil timestamp:nil \n:nil ^:nil -:t ::t
+#+OPTIONS: toc:nil timestamp:nil
 #+LANGUAGE: ja
 #+LATEX_CLASS: jarticle
 #+LATEX_CLASS_OPTIONS: [a4j,dvipdfmx]
 $0
-
