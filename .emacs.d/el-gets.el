@@ -153,9 +153,10 @@
                            purcell/flymake-python-pyflakes
                            senny/emacs-eclim
                            yasuyk/web-beautify
+                           zonuexe/emoji-fontset.el
+                           ShingoFukuyama/emacs-emoji-cheat-sheet
                            ;;##)
                            ))
-
 
 (el-get-emacswiki-refresh)
 (dolist (x my/bundle-list)

@@ -65,7 +65,7 @@
 
 (defun my/font-size ()
   (cond
-   ((equal system-name "utrtamako") 14)
+   ((equal system-name "utrtamako") 16)
    ((some (lambda (strs) (equal system-name strs))
           '("localhost.localdomain"
             "localhost.homenetwork"
@@ -85,7 +85,7 @@
                         :family m-font
                         :height (* m-size 10))
     (setq default-frame-alist `((font . ,m-font)))
-    (my/font-set m-font (* m-size 10))
+    (my/font-set m-font (* m-size 100))
 
     (custom-set-faces
      ;; custom-set-faces was added by Custom.
@@ -96,6 +96,9 @@
      '(git-gutter:added    ((t (:weight bold :height 0.8 :foreground "green"))))
      '(git-gutter:deleted  ((t (:weight bold :height 0.8 :foreground "red"))))
      '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta"))))))
+(use-package emoji-fontset
+  :config
+  (emoji-fontset-enable "NotoEmoji"))
 
 
 

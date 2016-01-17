@@ -15,8 +15,8 @@
   '(("n"      . 'git-gutter:next-hunk)
     ("p"      . 'git-gutter:previous-hunk)))
 
-(global-git-gutter-mode t)
-(git-gutter:linum-setup)
+;; (global-git-gutter-mode t)
+
 
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;

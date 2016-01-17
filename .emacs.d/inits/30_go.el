@@ -6,7 +6,7 @@
 
 
 (with-eval-after-load 'go-mode
-  (add-to-list 'load-path "/home/ztama/.go/src/github.com/dougm/goflymake/")
+  (add-to-list 'load-path "~/.go/src/github.com/dougm/goflymake")
   (require 'go-flymake)
   (require 'go-autocomplete)
   (setq gofmt-command "goimports")
