@@ -31,6 +31,7 @@
       org-hide-leading-stars                  t ;; 見出しの余分な*を消す
       org-return-follows-link                 t
       org-enforce-todo-dependencies           t
+      org-use-speed-commands                  t ;;
       org-log-done                            'time ;; DONEの時刻を記録
       org-todo-keywords                       '((sequence "INBOX(i)" "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)"));; TODO状態
       org-agenda-files                        (list org-directory) ;; アジェンダ表示の対象ファイル
@@ -124,7 +125,7 @@
   (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
   (setq latex 'platex
         org-latex-image-default-width           ".45\\linewidth"
-        org-ditaa-jar-path                      "~/.emacs.d/jditaa.jar"
+        org-ditaa-jar-path                      "~/.emacs.d/ditaa.jar"
         org-export-latex-date-format            "%Y-%m-%d"
         org-latex-create-formula-image-program  'imagemagick
         org-latex-pdf-process                   '("latexmk -C %f && latexmk  %f")
