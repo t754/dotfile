@@ -6,6 +6,7 @@
 [ -r "$HOME/.aliasrc" ] && . $HOME/.aliasrc
 [ -r ~/.ghq/github.com/rupa/z/z.sh ] && source ~/.ghq/github.com/rupa/z/z.sh
 [ -r $HOME/.tmuxinator/tmuxinator.bash ] && source $HOME/.tmuxinator/tmuxinator.bash
+[ -r $HOME/.bashrc.local.bash ] && source $HOME/.bashrc.local.bash
 
 ulimit -c 4096
 
