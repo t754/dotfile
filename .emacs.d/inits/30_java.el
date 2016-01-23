@@ -10,10 +10,10 @@
   (setq help-at-pt-display-when-idle t
         help-at-pt-timer-delay 0.1)
   (help-at-pt-set-timer)
-  (require 'auto-complete-config)
-  (ac-config-default)
+  ;; (require 'auto-complete-config)
+  ;; (ac-config-default)
   (require 'ac-emacs-eclim-source)
-  (ac-emacs-eclim-config)
+  ;; (ac-emacs-eclim-config)
   (define-key eclim-mode-map (kbd "C-c C-e l") 'eclim-java-find-references)
   (global-eclim-mode)
   )

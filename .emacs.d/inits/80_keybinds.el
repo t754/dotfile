@@ -118,7 +118,6 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c C-r"   . window-resizer)
  ;; ("C-k"       . my/kill-line)
  ("<f9>"      . menu-bar-mode)
- ("M-i"       . ac-complete-with-helm)
  )
 
 (setq switch-window-shortcut-style 'qwerty)
@@ -128,3 +127,12 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
 (bind-keys :map goto-map ("M-d" . toggle-cleanup-spaces))
 
 (bind-key "C-x @ C" 'event-apply-control-shift-modifier function-key-map)
+
+(use-package emoji-cheat-sheet-plus
+    :defer t
+    :init
+    (progn
+      ;; enabled emoji in buffer
+      (add-hook 'org-mode-hook 'emoji-cheat-sheet-plus-display-mode)
+      ;; insert emoji with helm
+      (global-set-key (kbd "C-c C-x C-e") 'emoji-cheat-sheet-plus-insert)))

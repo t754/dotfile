@@ -8,7 +8,6 @@
 (with-eval-after-load 'go-mode
   (add-to-list 'load-path "~/.go/src/github.com/dougm/goflymake")
   (require 'go-flymake)
-  (require 'go-autocomplete)
   (setq gofmt-command "goimports")
   (add-hook 'go-mode-hook 'go-eldoc-setup)
 
