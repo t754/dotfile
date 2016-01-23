@@ -32,7 +32,10 @@
         clj-refactor
         clojure-mode
         clojure-snippets
+        cmake-ide
+        cmake-mode
         color-theme
+        company-irony
         company-quickhelp
         dockerfile-mode
         drag-stuff
@@ -65,12 +68,14 @@
         idle-highlight-mode
         ido-vertical-mode
         inf-ruby
+        irony-eldoc
         irony-mode
         jedi
         js2-mode
         js2-refactor
         json-reformat
         key-chord
+        levenshtein
         lua-mode
         magit
         markdown-mode
@@ -140,6 +145,7 @@
                            ;;(alexott/cedet :branch "devel" :build ("'make all'"))
                            ;;(m0smith/malabar-mode :load-path)
                            Malabarba/beacon
+                           ShingoFukuyama/emacs-emoji-cheat-sheet
                            bmag/imenu-list
                            company-mode/company-mode
                            emacs-jp/init-loader
@@ -151,7 +157,6 @@
                            senny/emacs-eclim
                            yasuyk/web-beautify
                            zonuexe/emoji-fontset.el
-                           ShingoFukuyama/emacs-emoji-cheat-sheet
                            ;;##)
                            ))
 
