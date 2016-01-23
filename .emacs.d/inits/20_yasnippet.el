@@ -5,7 +5,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (yas-global-mode 1)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
-(define-key yas-minor-mode-map (kbd "SPC") 'yas/expand)
+(define-key yas-minor-mode-map (kbd "S-TAB") 'yas/expand)
 (yas-reload-all)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
 
