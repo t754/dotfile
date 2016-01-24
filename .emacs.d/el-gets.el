@@ -25,6 +25,7 @@
         ;;##(
         actionscript-mode
         align-cljlet
+        auto-complete
         avy
         bm
         c-eldoc
@@ -36,10 +37,12 @@
         cmake-mode
         color-theme
         company-irony
+        company-jedi
         company-quickhelp
         dockerfile-mode
         drag-stuff
         emmet-mode
+        epc
         epl
         expand-region
         f
