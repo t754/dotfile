@@ -82,6 +82,7 @@
      {"avidemux (Qt)", "avidemux2_qt4", "/usr/share/pixmaps/avidemux.png" },
      {"gMTP", "gmtp", "/usr/share/pixmaps/gmtpicon.png" },
      {"gPodder", "/usr/bin/gpodder", "/usr/share/icons/hicolor/16x16/apps/gpodder.png" },
+     {"mpv Media Player", "mpv --profile=pseudo-gui -- ", "/usr/share/icons/hicolor/16x16/apps/mpv.png" },
  }
 
  local menu727833b275177ddaebd56d43095ec5a8 = {
