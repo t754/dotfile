@@ -125,5 +125,3 @@ wget-log*
 *.exe
 *.out
 *.app
-/.emacs.d/woman_cache.el
-/.emacs.d/snippets/org-mode/mailTemp
