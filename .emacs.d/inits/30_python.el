@@ -1,7 +1,5 @@
 ;; (require 'smartrep)
 ;; (smartrep-define-key
-;;     global-map "M-g" '(("M-n" . 'flymake-goto-next-error)
-;;                        ("M-p" . 'flymake-goto-prev-error)))
 ;; (define-key python-mode-map (kbd "C-c f") 'flymake-goto-next-error)
 (defun python-mode-hooks ()
   (highlight-indentation-mode)
@@ -9,6 +7,7 @@
   (flymake-python-pyflakes-load)
   (auto-complete-mode)
   (company-mode -1)
+  (key-chord-mode 1)
   (jedi:setup)
   ;; (whitespace-mode)
   (setq jedi:setup-keys t
@@ -23,7 +22,15 @@
 			 ("M-<left>"  . python-indent-shift-left)
 			 ("C-c h"     . python-indent-shift-left)
 			 ("M-<right>" . python-indent-shift-right)
-			 ("C-c l"     . python-indent-shift-right))
+			 ("C-c l"     . python-indent-shift-right)
+			 ("M-C-i"     . jedi:complete)
+             ("C-c f"     . python-pep8)
+			 ("C-c C-f"   . py-autopep8))
+
+  (bind-keys :map goto-map				;M-g M-{n,p}
+			 ("M-n" . flymake-goto-next-error)
+			 ("M-p" . flymake-goto-prev-error))
+
   (add-hook 'python-mode-hook 'python-mode-hooks))
 ;; (require 'flymake-python-pyflakes)
 ;; (require 'highlight-indentation)
