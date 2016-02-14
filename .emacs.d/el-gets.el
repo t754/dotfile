@@ -41,6 +41,7 @@
         company-quickhelp
         dockerfile-mode
         drag-stuff
+        elisp-format
         emmet-mode
         epc
         epl
@@ -83,15 +84,20 @@
         magit
         markdown-mode
         midje-mode
+        migemo
         minimap
         multiple-cursors
         org-mode
         popup
         popwin
+        pos-tip
         powerline
         projectile-rails
+        py-autopep8
+        python-pep8
         quickrun
         rbenv
+        recentf-ext
         rubocop
         slime
         smartparens
@@ -151,6 +157,8 @@
                            ShingoFukuyama/emacs-emoji-cheat-sheet
                            bmag/imenu-list
                            company-mode/company-mode
+                           emacs-helm/helm-w3m
+                           emacs-jp/helm-migemo
                            emacs-jp/init-loader
                            jcpetkovich/shrink-whitespace.el
                            purcell/exec-path-from-shell
