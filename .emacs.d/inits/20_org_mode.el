@@ -123,12 +123,14 @@
 (require 'ox-bibtex)
 (with-eval-after-load "ox-latex"
   (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
+  (when (eq system-type 'gnu/linux)
+	(setq org-latex-preview-ltxpng-directory  "/tmp/ltxpng/"))
   (setq latex 'platex
         org-latex-image-default-width           ".45\\linewidth"
         org-ditaa-jar-path                      "~/.emacs.d/ditaa.jar"
         org-export-latex-date-format            "%Y-%m-%d"
+		org-latex-pdf-process                   '("latexmk %f")
         org-latex-create-formula-image-program  'imagemagick
-        org-latex-pdf-process                   '("latexmk -C %f && latexmk  %f")
         org-file-apps                           '(("pdf" . "evince %s"));; Viewerの設定(evince)
         org-beamer-frame-default-options        "fragile"
         org-latex-default-class                 "jarticle"
