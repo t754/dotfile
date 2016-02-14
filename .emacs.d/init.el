@@ -33,6 +33,20 @@
  '(ac-delay 0.4)
  '(ace-isearch-input-idle-delay 1)
  '(ace-isearch-input-length 5)
+ '(flycheck-display-errors-delay 0.5)
+ '(flycheck-display-errors-function
+   (lambda
+     (errors)
+     (let
+         ((messages
+           (mapcar
+            (function flycheck-error-message)
+            errors)))
+       (popup-tip
+        (mapconcat
+         (quote identity)
+         messages "
+")))))
  '(git-gutter:added-sign "A")
  '(git-gutter:deleted-sign "D")
  '(git-gutter:handled-backends (quote (git hg)))
@@ -44,6 +58,7 @@
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.9)
+ '(irony-additional-clang-options (quote ("-std=c++11")))
  '(mozc-leim-title "も")
  '(org-latex-default-packages-alist
    (quote
@@ -90,7 +105,7 @@
  '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
-    (inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
+    (company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
  '(safe-local-variable-values
    (quote
     ((eval progn
@@ -122,4 +137,5 @@
  '(bold ((t (:weight bold :height 0.8))))
  '(git-gutter:added ((t (:weight bold :height 0.8 :foreground "green"))))
  '(git-gutter:deleted ((t (:weight bold :height 0.8 :foreground "red"))))
- '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta")))))
+ '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta"))))
+ '(popup-tip-face ((t (:background "olive drab" :foreground "black" :weight normal :height 0.9)))))
