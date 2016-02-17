@@ -88,6 +88,7 @@
         minimap
         multiple-cursors
         org-mode
+        org-trello
         popup
         popwin
         pos-tip

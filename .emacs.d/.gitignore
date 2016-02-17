@@ -26,3 +26,4 @@ irony/
 woman_cache.el
 snippets/org-mode/mailTemp
 inits/grass.el
+.trello/
