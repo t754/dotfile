@@ -15,6 +15,7 @@ import XMonad.Actions.WindowGo
 import XMonad.Util.Run
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.CopyWindow
+import Data.Char
 myterm::String
 -- myterm = "urxvt256c-ml"
 myterm = "st -f \"Inconsolata:size=16\""
@@ -26,11 +27,12 @@ myManageHook::ManageHook
 myManageHook = composeAll . concat $
     [ [className =? c --> doFloat  | c<-myfloat]
     , [className =? c --> doIgnore | c<-myignore]
+    , [title     =? t --> doFloat  | t<-myfloatTitle]
     --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
     ]
     where myfloat = ["Vncviewer","Xfrun4","Xfce4-appfinder","MPlayer","Display.py"]
           myignore = ["Xfce4-notifyd","Wrapper-1.0"]
-
+          myfloatTitle = (map ("Figure " ++) (map (\x -> [x]) (map (intToDigit) [1..9])))
 
   --- where copyToWss ids win = map (copyWindow win) ids
 -- myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
