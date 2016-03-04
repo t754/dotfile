@@ -78,6 +78,7 @@
      ("" "marvosym" t)
      ("" "wasysym" t)
      ("" "amssymb" t)
+	 ("" "url" t)
      "\\ifx\\kanjiskip\\undefined\\else
   \\usepackage{atbegshi}
   \\ifx\\ucs\\undefined

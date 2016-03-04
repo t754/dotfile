@@ -121,6 +121,8 @@
 
 
 (require 'ox-bibtex)
+(require 'ox-odt)
+
 (with-eval-after-load "ox-latex"
   (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
   (when (eq system-type 'gnu/linux)
