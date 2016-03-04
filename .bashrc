@@ -15,8 +15,11 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 else
     export POWERSHELL_MODE="patched"
 fi
+
+export powerlineShellPath="$(ghq list -p | grep 'milkbikis/powerline-shell')"
+export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=3 --mode ${POWERSHELL_MODE} --shell bash"
 function _update_ps1() {
-    export PS1="$(python2 ${HOME}/dotfile/powerline-shell.py --mode ${POWERSHELL_MODE} --shell bash $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
+    export PS1="$(${powerlineShellPath}/powerline-shell.py ${powerlineArgopt} $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
 }
 export PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
 
