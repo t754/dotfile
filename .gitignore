@@ -125,3 +125,4 @@ wget-log*
 *.exe
 *.out
 *.app
+powerline-shell.py
