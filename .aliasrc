@@ -25,7 +25,7 @@ alias pgg='ps -Af | grep'
 alias xsels='xsel -ib < /tmp/screen-exchange'
 alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
 alias open="mimeopen"
-
+alias o="open"
 # coredump した場所
 
 alias core="sudo systemd-coredumpctl list | tail"
@@ -301,7 +301,7 @@ function j() {
     fi
 }
 function lll() {
-    ls -a1 $* |  peco
+    ls -a1l $* | tail -n +2 | awk '{print $9}' | peco
 }
 function man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
