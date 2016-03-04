@@ -58,6 +58,7 @@
                                (helm-candidates-in-buffer (helm-get-current-source)))))
                      (volatile) (match identity)))
          source))))
+(setq ibus-isearch-cursor-type 'hollow)
 
 ;; (require 'helm-w3m) ; 情報源の定義元をrequire
 ;; (push '(migemo) helm-source-w3m-bookmarks)
