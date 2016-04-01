@@ -1,24 +1,26 @@
-import XMonad
-import XMonad.Util.EZConfig
-import XMonad.Layout.NoBorders
-import XMonad.Hooks.ManageDocks
-import XMonad.Config.Xfce
-import XMonad.Layout.ResizableTile
-import Control.Monad (liftM2)          -- myManageHookShift
-import qualified XMonad.StackSet as W  -- myManageHookShift
-import qualified Data.Map        as M
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.SetWMName
-import XMonad.Layout.ToggleLayouts
-import XMonad.Hooks.DynamicLog
-import XMonad.Actions.WindowGo
-import XMonad.Util.Run
-import XMonad.Actions.UpdatePointer
-import XMonad.Actions.CopyWindow
-import Data.Char
+import           Control.Monad (liftM2)
+import           Data.Char
+import qualified Data.Map as M
+import           XMonad
+import           XMonad.Actions.CopyWindow
+import           XMonad.Actions.UpdatePointer
+import           XMonad.Actions.WindowGo
+import           XMonad.Config.Xfce
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.EwmhDesktops
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.SetWMName
+import           XMonad.Layout.NoBorders
+import           XMonad.Layout.ResizableTile
+import           XMonad.Layout.ToggleLayouts
+import qualified XMonad.StackSet as W
+import           XMonad.Util.EZConfig
+import           XMonad.Util.Run
+
 myterm::String
 -- myterm = "urxvt256c-ml"
-myterm = "st -f \"Inconsolata:size=16\""
+myterm = "xfce4-terminal"
+-- myterm = "st -f \"Inconsolata:size=16\""
 
 
 main::IO()
