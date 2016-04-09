@@ -19,7 +19,7 @@ alias df="df -h -T --total"
 # alias grep="grep -i -n --color"
 # sudo alias get
 alias sudo="sudo "
-
+alias tmux="tmux -2"
 # alias bee='for i in {1..5}; do aplay -D plughw:1,7 ~/beep.wav; done'
 alias pgg='ps -Af | grep'
 alias xsels='xsel -ib < /tmp/screen-exchange'
@@ -301,7 +301,7 @@ function j() {
     fi
 }
 function lll() {
-    ls -a1l $* | tail -n +2 | awk '{print $9}' | peco
+    ls -a1t | tail -n +3 | peco
 }
 function man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \

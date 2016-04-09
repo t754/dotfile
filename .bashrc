@@ -17,7 +17,7 @@ else
 fi
 
 export powerlineShellPath="$(ghq list -p | grep 'milkbikis/powerline-shell')"
-export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=3 --mode ${POWERSHELL_MODE} --shell bash"
+export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 --mode ${POWERSHELL_MODE} --shell bash"
 function _update_ps1() {
     export PS1="$(${powerlineShellPath}/powerline-shell.py ${powerlineArgopt} $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
 }
