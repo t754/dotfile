@@ -25,7 +25,7 @@
   (condition-case nil
       (org-display-inline-images)
     (error nil)))
-
+;; (setq org-log-reschedule  'time)
 (setq org-directory "~/Dropbox/org/")
 (setq org-startup-truncated                   nil
       org-hide-leading-stars                  t ;; 見出しの余分な*を消す
@@ -33,13 +33,14 @@
       org-enforce-todo-dependencies           t
       org-use-speed-commands                  t ;;
       org-log-done                            'time ;; DONEの時刻を記録
-      org-todo-keywords                       '((sequence "INBOX(i)" "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)"));; TODO状態
+
+      ;; org-todo-keywords                       '((sequence "TODO(t)" "DELEGATED(g)" "SOMEDAY(s)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)" "REFERENCE(r)"));; TODO状態
       org-agenda-files                        (list org-directory) ;; アジェンダ表示の対象ファイル
       hl-line-face                            'underline
       calendar-holidays                       nil ;; 標準の祝日を利用しない
       org-alphabetical-lists                  t
       org-tag-alist                           '(("@OFFICE" . ?o) ("@HOME" . ?h) ("NOTE" . ?s))
-
+      org-lowest-priority 68 ;; ← D (A...D)
 
       org-export-latex-coding-system          'utf-8-unix
       org-export-with-sub-superscripts        nil
