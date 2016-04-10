@@ -4,8 +4,9 @@
 ;; (global-set-key "\C-cT" 'google-translate-query-translate)
 (bind-keys*
  ("C-c t"       .   google-translate-smooth-translate)
- ("C-c C-t"     .   my/codic)
- ("C-c T"       .   search-web-dwim))
+ ("C-c C-S-t"     .   my/codic))
+ ;; ("C-c T"       .   search-web-dwim)
+
 (defun my/codic ()
   (interactive)
   (let ((my/codic-word
