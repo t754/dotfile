@@ -65,7 +65,7 @@ fi
 export GOPATH="$HOME/.go"
 
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
-export PATH="$HOME/bin:$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:$GOPATH/bin:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
+export PATH="$HOME/bin:$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:$GOPATH/bin:$HOME/.rbenv/bin:/usr/bin/vendor_perl:/usr/bin/core_perl/"
 if which ruby >/dev/null && which gem >/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
