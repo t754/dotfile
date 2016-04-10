@@ -9,9 +9,9 @@
 ;;reload
 (global-set-key [f12] 'eval-buffer)
 
- (server-start)
- (unless (server-running-p)
-   (server-start))
+(server-start)
+(unless (server-running-p)
+  (server-start))
 ;;package
 
 ;; (require 'cask "~/.cask/cask.el")
@@ -37,16 +37,14 @@
  '(flycheck-display-errors-function
    (lambda
      (errors)
-     (let
-         ((messages
-           (mapcar
-            (function flycheck-error-message)
-            errors)))
+     (let ((messages
+            (mapcar
+             (function flycheck-error-message)
+             errors)))
        (popup-tip
         (mapconcat
          (quote identity)
-         messages "
-")))))
+         messages "")))))
  '(git-gutter:added-sign "A")
  '(git-gutter:deleted-sign "D")
  '(git-gutter:handled-backends (quote (git hg)))
@@ -78,7 +76,8 @@
      ("" "marvosym" t)
      ("" "wasysym" t)
      ("" "amssymb" t)
-	 ("" "url" t)
+     ("" "svg" nil)
+     ("" "url" t)
      "\\ifx\\kanjiskip\\undefined\\else
   \\usepackage{atbegshi}
   \\ifx\\ucs\\undefined
@@ -91,8 +90,7 @@
     \\AtBeginShipoutFirst{\\special{pdf:tounicode UTF8-UCS2}}
   \\fi
   \\usepackage[dvipdfmx]{hyperref}
-\\fi" "\\tolerance=1000"
-     ("" "svg" nil))))
+\\fi" "\\tolerance=1000")))
  '(org-latex-hyperref-template
    "\\hypersetup{
  pdfauthor={%a},
@@ -101,9 +99,7 @@
  pdfkeywords={%k},
  pdfsubject={%d},
  pdfcreator={%c},
- pdflang={%L}}
-")
- '(org-trello-current-prefix-keybinding "C-c o")
+ pdflang={%L}}")
  '(package-selected-packages
    (quote
     (company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
@@ -128,8 +124,6 @@
  '(tab-width 4)
  '(undo-tree-mode-lighter " U🌳")
  '(yas-trigger-key "TAB"))
-
-(put 'upcase-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -140,3 +134,6 @@
  '(git-gutter:deleted ((t (:weight bold :height 0.8 :foreground "red"))))
  '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta"))))
  '(popup-tip-face ((t (:background "olive drab" :foreground "black" :weight normal :height 0.9)))))
+
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
