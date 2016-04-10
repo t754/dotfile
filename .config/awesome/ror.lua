@@ -12,11 +12,11 @@
 -- for browsers, or the file name for emacs).
 
 table5={
-   ["Control-Shift-e"]={"emacsclient -a emacs -n -c","Emacs"},
-   ["Control-Shift-f"]={"firefox","Firefox"},
-   ["Control-g"]={"firefox -new-window 'http://mail.google.com/mail/'","Gmail","name"},
-   ["Control-Shift-t"]={"st -f 'Inconsolata:size=16' -c htopTerm -e htop","htopTerm","instance"},
-   ["Control-Shift-s"]={"Spotify","Spotify"}
+   ["d"]={"emacsclient -a emacs -n -c","Emacs"},
+   ["C-f"]={"firefox","Firefox"},
+   ["C-g"]={"firefox -new-window 'http://mail.google.com/mail/'","Gmail","name"},
+   ["C-S-t"]={"st -f 'Inconsolata:size=16' -c htopTerm -e htop","htopTerm","instance"},
+   ["C-S-s"]={"Spotify","Spotify"}
    -- ["Control-z"]={"google-chrome --app=http://www.rdio.com","www.rdio.com", "instance"},
    -- ["v"]={"firefox -new-window 'http://www.evernote.com/Home.action?login=true#v=l&so=mn'","Evernote", "name"},
       -- ["x"]={"xterm","xterm", "instance"},

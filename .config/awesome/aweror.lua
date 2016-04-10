@@ -88,18 +88,50 @@ function genfun(t3)
    end
 end
 
+
+-- function aweror.genkeys(mod1)
+--   rorkeys = awful.util.table.join()
+--   for i,v in pairs(allt1) do
+--     modifier=""
+--     if i:len() > 1 then
+--       modifier=i:sub(1, i:find("-")-1)
+--       i=i:sub(-1,-1)
+--     end
+--     rorkeys = awful.util.table.join(rorkeys,
+--       awful.key({ mod1, modifier}, i, genfun(v)))
+--   end
+--   return rorkeys
+-- end
 function aweror.genkeys(mod1)
   rorkeys = awful.util.table.join()
-  for i,v in pairs(allt1) do
-    modifier=""
-    if i:len() > 1 then
-      modifier=i:sub(1, i:find("-")-1)
-      i=i:sub(-1,-1)
-    end
-    rorkeys = awful.util.table.join(rorkeys,
-      awful.key({ mod1, modifier}, i, genfun(v)))
+  local vvv = es2ak(allt1,mod1)
+  for k,v in pairs(vvv) do
+     rorkeys = awful.util.table.join(rorkeys,
+                                     awful.key(v.mask, v.key, genfun(v.func),v.func[2]))
   end
   return rorkeys
+end
+function es2ak(tbl,mod)
+   local ans ={}
+   for k,v in pairs(tbl) do
+      local keys = {}
+      local mask = {}
+      local key = ""
+      for i in string.gmatch(k,"[^-]+") do
+         if i == "C" then
+            table.insert(mask , "Control")
+         elseif i == "S" then
+            table.insert(mask , "Shift")
+         end
+         key=i
+      end
+      table.insert(mask , mod)
+      keys["key"] = key
+      keys["mask"] = mask
+      keys["func"] = v
+      table.insert(ans,keys)
+   end
+   return ans
 end
 
 return aweror

@@ -654,8 +654,10 @@ clientkeys = awful.util.table.join(
 			nil,
 			awful.util.getdir("cache") .. "/history_eval")
    end,"debug dump"),
+   keydoc.group("ROR"),
    ror.genkeys(modkey),          -- ROR
-   awful.key({ modkey, }, "F1", keydoc.display)
+   keydoc.group("movv"),
+   awful.key({ modkey, }, "F1", function() awful.util.spawn( terminal .. " -e less -R -- ".. keydoc.display()  )end)
 )
 
 
@@ -682,7 +684,7 @@ for i = 1, 9 do
             end
       end,"view mix tag (num)"),
       awful.key({ modkey, "Shift" }, "#" .. i + 9,
-         function ()
+             function ()
             local tag = awful.tag.gettags(client.focus.screen)[i]
             if client.focus and tag then
                awful.client.movetotag(tag)
