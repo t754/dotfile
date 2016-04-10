@@ -18,8 +18,8 @@ Xft.dpi: 96
 ! Using Xft
 
 ! URxvt*termName:                         screen-256color
-URxvt*termName:  xterm-256color
-URxvt*iso14755: False
+URxvt*termName:  rxvt-unicode-256color
+! URxvt*iso14755: False
 ! URxvt*geometry:                         110x40
 ! URxvt*chdir:                          string
 ! URxvt*reverseVideo:                   boolean
@@ -28,7 +28,8 @@ URxvt*loginShell:                       ture
 ! URxvt*skipScroll:                     boolean
 ! URxvt*pastableTabs:                   boolean
 URxvt*scrollstyle:                     plain
-URxvt*scrollBar:                        true
+URxvt*scrollBar:                        false
+URxvt.letterSpace: true
 ! Urxvt*scrollBar_right:                  true
 ! URxvt*scrollBar_floating:             boolean
 ! URxvt*scrollBar_align:                mode
@@ -94,7 +95,10 @@ URxvt*pointerColor:                     2
 ! /usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
 ! URxvt*font:                               xft:Source Code Pro for Powerline:size=14:antialias=true
 ! URxvt*imfont:                         xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
-URxvt*font:                             xft:monospace:size=14:antialias=true
+URxvt*.font:                            xft:Inconsolata\ for\ Powerline:pixelsize=14,
+xft:Noto\ Emoji:pixelsize=14:antialias=true,\
+xft:Noto\ Sans\ Lisu:pixelsize=14,\
+xft:FontAwesome:size=14:pixelantialias=true
 ! ,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
 ! URxvt*boldfont:                           xft:RictyDiscord4Powerline:Bold:pixelsize=14:antialias=true
 ! ! ,xft:Inconsolate-g for Powerline:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
@@ -128,7 +132,6 @@ URxvt*depth:                            24
 ! URxvt*internalBorder:                 number
 ! URxvt*borderLess:                     boolean
 ! URxvt*lineSpace:                      number
-URxvt*letterSpace:                      -1
 ! URxvt*skipBuiltinGlyphs:              boolean
 ! URxvt*pointerBlankDelay:              number
 ! URxvt*backspacekey:                   string
