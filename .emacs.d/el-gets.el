@@ -100,7 +100,9 @@
         rbenv
         recentf-ext
         rubocop
+        scheme-complete
         slime
+        slime-company
         smartparens
         smartrep
         smex
@@ -145,7 +147,10 @@
 ;;		slamhound
 ;;		web-beautify
 ;; melpa:ac-emoji
-;;
+;; (flymake-chicken :url "http://code.call-cc.org/cgi-bin/gitweb.cgi?p=chicken-core.git;a=blob_plain;f=misc/flymake-chicken.el")
+;; (chicken :url "http://code.call-cc.org/cgi-bin/gitweb.cgi?p=chicken-core.git;a=blob_plain;f=misc/chicken.el")
+;; cj2tszk/swank-gauche
+;; dleslie/chicken-scheme.el
 (defvar my/bundle-list '() "A list to install for el-get-bundle ")
 (setq my/bundle-list     '(
                            ;;##(
