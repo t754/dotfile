@@ -1,7 +1,4 @@
 (with-eval-after-load "slime"
-  (slime-setup '(slime-repl slime-fancy slime-banner))
-  (add-hook 'slime-mode-hook 'set-up-slime-ac)
-  (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
   (require 'slime-autoloads)
   (slime-setup '(slime-repl slime-fancy slime-banner slime-company))
   ;; (add-hook 'slime-mode-hook 'set-up-slime-ac)
