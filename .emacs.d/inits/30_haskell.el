@@ -1,59 +1,41 @@
 ;;  (require 'haskell-mode-autoloads)
 (require 'haskell-mode)
-(require 'flymake-haskell-multi) ;; not needed if installed via package
-(custom-set-variables
- '(haskell-mode-hook '(turn-on-haskell-indentation)))
-(add-hook 'haskell-mode-hook
-          '(lambda ()
-             (setq flycheck-checker 'haskell-hlint)
-             (setq flycheck-disabled-checkers '(haskell-ghc))
-             (flycheck-mode 1)))
+(add-hook 'haskell-mode-hook 'haskell-mode-hooks)
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(add-hook 'haskell-mode-hook 'font-lock-mode)
-(add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
-(add-hook 'haskell-mode-hook 'flymake-haskell-multi-load)
-;;(add-hook 'haskell-mode-hook 'company-mode)
+(defun haskell-mode-hooks ()
+  (turn-on-haskell-unicode-input-method)
+  (imenu-add-menubar-index)
+  (haskell-indent-mode))
+(with-eval-after-load 'haskell
+  (bind-keys :map haskell-mode-map
+             ("<f8>" . haskell-navigate-imports)
+             ("C-c C-c" . haskell-compile)
+             ("C-x C-d" . nil)
+             ("C-c C-z" . haskell-interactive-switch)
+             ("C-c C-l" . haskell-process-load-file)
+             ("C-c C-b" . haskell-interactive-switch)
+             ("C-c C-t" . haskell-process-do-type)
+             ("C-c C-i" . haskell-process-do-info)
+             ("C-c M-." . nil)
+             ("C-c C-d" . nil)))
 
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;; (require 'haskell-cabal)
-;; (autoload 'ghc-init "ghc" nil t)
-;; (add-to-list 'exec-path (concat (getenv "HOME") "/.cabal/bin"))
-;; (add-to-list 'auto-mode-alist '("\\.hs$".haskell-mode))
- ;;(add-hook 'haskell-mode-hook (lambda () (ghc-init) ))
-;; (load "haskell-site-file")
+(with-eval-after-load 'haskell-cabal
+  (bind-keys :map haskell-cabal-mode-map
+             ("C-c C-c" . haskell-compile)))
 
-
-;; (defun flymake-get-Haskell-cmdline (source base-dir)
-;;   (list "ghc"
-;;         (list "--make" "-fbyte-code"
-;;               (concat "-i"base-dir)
-;;               source)))
-;; (defvar multiline-flymake-mode nil)
-;; (defvar flymake-split-output-multiline nil)
-;; (defadvice flymake-split-output
-;;   (around flymake-split-output-multiline activate protect)
-;;   (if multiline-flymake-mode
-;;       (let ((flymake-split-output-multiline t))
-;;         ad-do-it)
-;;     ad-do-it))
-;; (defadvice flymake-split-string
-;;   (before flymake-split-string-multiline activate)
-;;   (when flymake-split-output-multiline
-;;     (ad-set-arg 1 "^\\s *$")))
+(with-eval-after-load 'interactive-haskell-mode
+  (bind-keys :map interactive-haskell-mode-map
+             ("M-." . haskell-mode-goto-loc)
+             ("C-c C-t" . haskell-mode-show-type-at)))
 
 
-;; (add-hook
-;;  'haskell-mode-hook
-;;  '(lambda ()
-;;     (add-to-list 'flymake-allowed-file-name-masks
-;;                  '("\\.l?hs$" flymake-Haskell-init flymake-simple-java-cleanup))
-;;     (add-to-list 'flymake-err-line-patterns
-;;                  '("^\\(.+\\.l?hs\\):\\([0-9]+\\):\\([0-9]+\\):\\(\\(?:.\\|\\W\\)+\\)"
-;;                    1 2 3 4))
-;;     (set (make-local-variable 'multiline-flymake-mode) t)
-;;     (if (not (null buffer-file-name)) (flymake-mode))
-;;     ))
-;; (autoload ghc-init "ghc" nil t)
-
+;; ‘C-c C-z’
+;;      is bound to ‘switch-to-haskell’
+;; ‘C-c C-b’
+;;      is bound to ‘switch-to-haskell’
+;; ‘C-c C-l’
+;;      is bound to ‘inferior-haskell-load-file’
+;; ‘C-c C-t’
+;;      is bound to ‘inferior-haskell-type’
+;; ‘C-c C-i’
+;;      is bound to ‘inferior-haskell-info’

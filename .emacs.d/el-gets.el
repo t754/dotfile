@@ -25,6 +25,7 @@
         ;;##(
         actionscript-mode
         align-cljlet
+        auto-complete
         avy
         bm
         c-eldoc
@@ -36,10 +37,13 @@
         cmake-mode
         color-theme
         company-irony
+        company-jedi
         company-quickhelp
         dockerfile-mode
         drag-stuff
+        elisp-format
         emmet-mode
+        epc
         epl
         expand-region
         f
@@ -80,17 +84,25 @@
         magit
         markdown-mode
         midje-mode
+        migemo
         minimap
         multiple-cursors
         org-mode
+        org-trello
         popup
         popwin
+        pos-tip
         powerline
         projectile-rails
+        py-autopep8
+        python-pep8
         quickrun
         rbenv
+        recentf-ext
         rubocop
+        scheme-complete
         slime
+        slime-company
         smartparens
         smartrep
         smex
@@ -135,7 +147,10 @@
 ;;		slamhound
 ;;		web-beautify
 ;; melpa:ac-emoji
-;;
+;; (flymake-chicken :url "http://code.call-cc.org/cgi-bin/gitweb.cgi?p=chicken-core.git;a=blob_plain;f=misc/flymake-chicken.el")
+;; (chicken :url "http://code.call-cc.org/cgi-bin/gitweb.cgi?p=chicken-core.git;a=blob_plain;f=misc/chicken.el")
+;; cj2tszk/swank-gauche
+;; dleslie/chicken-scheme.el
 (defvar my/bundle-list '() "A list to install for el-get-bundle ")
 (setq my/bundle-list     '(
                            ;;##(
@@ -148,6 +163,8 @@
                            ShingoFukuyama/emacs-emoji-cheat-sheet
                            bmag/imenu-list
                            company-mode/company-mode
+                           emacs-helm/helm-w3m
+                           emacs-jp/helm-migemo
                            emacs-jp/init-loader
                            jcpetkovich/shrink-whitespace.el
                            purcell/exec-path-from-shell

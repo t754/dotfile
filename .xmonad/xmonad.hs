@@ -1,40 +1,41 @@
-import XMonad
-import XMonad.Util.EZConfig
-import XMonad.Layout.NoBorders
-import XMonad.Hooks.ManageDocks
-import XMonad.Config.Xfce
-import XMonad.Layout.ResizableTile
-import Control.Monad (liftM2)          -- myManageHookShift
-import qualified XMonad.StackSet as W  -- myManageHookShift
-import qualified Data.Map        as M
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.SetWMName
-import XMonad.Layout.ToggleLayouts
-import XMonad.Hooks.DynamicLog
-import XMonad.Actions.WindowGo
-import XMonad.Util.Run
-import XMonad.Actions.UpdatePointer
-import XMonad.Actions.CopyWindow
+import           Control.Monad (liftM2)
+import           Data.Char
+import qualified Data.Map as M
+import           XMonad
+import           XMonad.Actions.CopyWindow
+import           XMonad.Actions.UpdatePointer
+import           XMonad.Actions.WindowGo
+import           XMonad.Config.Xfce
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.EwmhDesktops
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.SetWMName
+import           XMonad.Layout.NoBorders
+import           XMonad.Layout.ResizableTile
+import           XMonad.Layout.ToggleLayouts
+import qualified XMonad.StackSet as W
+import           XMonad.Util.EZConfig
+import           XMonad.Util.Run
+
 myterm::String
 -- myterm = "urxvt256c-ml"
-myterm = "st -f \"Inconsolata:size=16\""
+myterm = "xfce4-terminal"
+-- myterm = "st -f \"Inconsolata:size=16\""
 
 
 main::IO()
 myManageHook::ManageHook
 
-myManageHook = composeAll
-    [ className =? "Vncviewer" --> doFloat
-    , className =? "Xfce4-notifyd" --> doIgnore
-    , className =? "Xfrun4" --> doFloat
-    , className =? "Xfce4-appfinder" --> doFloat
-    , className =? "XClock" --> doFloat
-    , className =? "MPlayer" --> doFloat
-    , className =? "ij-ImageJ" --> doFloat
-    , className =? "fiji-Main" --> doFloat
-    , className =? "Display.py" --> doFloat
+myManageHook = composeAll . concat $
+    [ [className =? c --> doFloat  | c<-myfloat]
+    , [className =? c --> doIgnore | c<-myignore]
+    , [title     =? t --> doFloat  | t<-myfloatTitle]
     --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
     ]
+    where myfloat = ["Vncviewer","Xfrun4","Xfce4-appfinder","MPlayer","Display.py"]
+          myignore = ["Xfce4-notifyd","Wrapper-1.0"]
+          myfloatTitle = (map ("Figure " ++) (map (\x -> [x]) (map (intToDigit) [1..9])))
+
   --- where copyToWss ids win = map (copyWindow win) ids
 -- myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
 
@@ -57,6 +58,7 @@ myManageHookShift = composeAll
      , className =? "Thunderbird" --> viewShift "5"
      , className =? "VirtualBox"  --> viewShift "3"
      , className =? "Spotify"     --> doF (W.shift "8")
+     , className =? "Steam"       --> viewShift "7"
      ]
   where viewShift = doF . liftM2 (.) W.view W.shift
 
@@ -103,9 +105,7 @@ main = xmonad $ xfceConfig
     , ("M-C-S-d" , runOrRaise "evince" (className =? "Evince"))
     , ("M-C-S-w" , runOrRaise "spotify" (className =? "Spotify"))
     , ("M-C-S-h" , (raiseMaybe . unsafeSpawn) (myterm ++ " -t htopTerm -e htop") (title =? "htopTerm"))
-    , ("M-C-S-e" , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
-    , ("M-C-e"   , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
-    , ("M-e"     , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
+    , ("M-d"     , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
     , ("M-S-t"   , (raiseMaybe. unsafeSpawn)
                    ("st -t dictTerm -f \"Inconsolata:size=16\" -e bash -c 'alce $(xsel -p) 2>&1 | less'")
                    (title =? "dictTerm"))

@@ -48,8 +48,8 @@
 C-uをつけるとウィンドウを閉じる。"
   (interactive "p")
   (case arg
-    (16  (delete-other-windows))
-    (4 (delete-window))
+    (16 (delete-window))
+    (4  (other-window 1))
     (t  (other-window-or-split))))
 
 ;;;;C-x C-c で消すとき確認を問う
@@ -117,14 +117,16 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ("C-c <up>"    . windmove-up)
  ("C-c C-r"   . window-resizer)
  ;; ("C-k"       . my/kill-line)
- ("<f9>"      . menu-bar-mode)
- )
+ ("<f9>"      . menu-bar-mode))
 
 (setq switch-window-shortcut-style 'qwerty)
 
 (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 
-(bind-keys :map goto-map ("M-d" . toggle-cleanup-spaces))
+(bind-keys :map goto-map
+		   ("M-d" . toggle-cleanup-spaces)
+		   ("f" . avy-goto-char)
+		   ("M-f" . avy-goto-char))
 
 (bind-key "C-x @ C" 'event-apply-control-shift-modifier function-key-map)
 

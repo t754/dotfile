@@ -1,4 +1,5 @@
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/")
+
 (when  (require 'mozc nil t)
 
   ;;(setq mozc-candidate-style 'overlay)

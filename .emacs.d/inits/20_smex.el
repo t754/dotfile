@@ -1,5 +1,4 @@
 (require 'smex)
-
 ;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
 
@@ -11,8 +10,10 @@
 ;;;;; C-h w shows the key bindings for the selected command. (Via where-is.)
 (setq ido-max-window-height 0.75
       ido-enable-flex-matching t
-      ido-vertical-define-keys 'C-n-and-C-p-only)
+      ;; ido-vertical-define-keys 'C-n-and-C-p-only
+      )
 (ido-vertical-mode 1)
+
 (smex-initialize)
 (bind-key "M-x" 'smex)
 (bind-key "M-X" 'smex-major-mode-commands)

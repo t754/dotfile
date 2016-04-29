@@ -9,9 +9,9 @@
 ;;reload
 (global-set-key [f12] 'eval-buffer)
 
- (server-start)
- (unless (server-running-p)
-   (server-start))
+(server-start)
+(unless (server-running-p)
+  (server-start))
 ;;package
 
 ;; (require 'cask "~/.cask/cask.el")
@@ -33,6 +33,18 @@
  '(ac-delay 0.4)
  '(ace-isearch-input-idle-delay 1)
  '(ace-isearch-input-length 5)
+ '(flycheck-display-errors-delay 0.5)
+ '(flycheck-display-errors-function
+   (lambda
+     (errors)
+     (let ((messages
+            (mapcar
+             (function flycheck-error-message)
+             errors)))
+       (popup-tip
+        (mapconcat
+         (quote identity)
+         messages "")))))
  '(git-gutter:added-sign "A")
  '(git-gutter:deleted-sign "D")
  '(git-gutter:handled-backends (quote (git hg)))
@@ -44,6 +56,7 @@
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.9)
+ '(irony-additional-clang-options (quote ("-std=c++11")))
  '(mozc-leim-title "も")
  '(org-latex-default-packages-alist
    (quote
@@ -63,6 +76,8 @@
      ("" "marvosym" t)
      ("" "wasysym" t)
      ("" "amssymb" t)
+     ("" "svg" nil)
+     ("" "url" t)
      "\\ifx\\kanjiskip\\undefined\\else
   \\usepackage{atbegshi}
   \\ifx\\ucs\\undefined
@@ -75,8 +90,7 @@
     \\AtBeginShipoutFirst{\\special{pdf:tounicode UTF8-UCS2}}
   \\fi
   \\usepackage[dvipdfmx]{hyperref}
-\\fi" "\\tolerance=1000"
-     ("" "svg" nil))))
+\\fi" "\\tolerance=1000")))
  '(org-latex-hyperref-template
    "\\hypersetup{
  pdfauthor={%a},
@@ -85,12 +99,10 @@
  pdfkeywords={%k},
  pdfsubject={%d},
  pdfcreator={%c},
- pdflang={%L}}
-")
- '(org-trello-current-prefix-keybinding "C-c o")
+ pdflang={%L}}")
  '(package-selected-packages
    (quote
-    (inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
+    (company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
  '(safe-local-variable-values
    (quote
     ((eval progn
@@ -112,8 +124,6 @@
  '(tab-width 4)
  '(undo-tree-mode-lighter " U🌳")
  '(yas-trigger-key "TAB"))
-
-(put 'upcase-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -122,4 +132,8 @@
  '(bold ((t (:weight bold :height 0.8))))
  '(git-gutter:added ((t (:weight bold :height 0.8 :foreground "green"))))
  '(git-gutter:deleted ((t (:weight bold :height 0.8 :foreground "red"))))
- '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta")))))
+ '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta"))))
+ '(popup-tip-face ((t (:background "olive drab" :foreground "black" :weight normal :height 0.9)))))
+
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)

@@ -25,7 +25,7 @@
   (condition-case nil
       (org-display-inline-images)
     (error nil)))
-
+;; (setq org-log-reschedule  'time)
 (setq org-directory "~/Dropbox/org/")
 (setq org-startup-truncated                   nil
       org-hide-leading-stars                  t ;; 見出しの余分な*を消す
@@ -33,13 +33,14 @@
       org-enforce-todo-dependencies           t
       org-use-speed-commands                  t ;;
       org-log-done                            'time ;; DONEの時刻を記録
-      org-todo-keywords                       '((sequence "INBOX(i)" "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)"));; TODO状態
+
+      ;; org-todo-keywords                       '((sequence "TODO(t)" "DELEGATED(g)" "SOMEDAY(s)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)" "REFERENCE(r)"));; TODO状態
       org-agenda-files                        (list org-directory) ;; アジェンダ表示の対象ファイル
       hl-line-face                            'underline
       calendar-holidays                       nil ;; 標準の祝日を利用しない
       org-alphabetical-lists                  t
       org-tag-alist                           '(("@OFFICE" . ?o) ("@HOME" . ?h) ("NOTE" . ?s))
-
+      org-lowest-priority 68 ;; ← D (A...D)
 
       org-export-latex-coding-system          'utf-8-unix
       org-export-with-sub-superscripts        nil
@@ -121,14 +122,18 @@
 
 
 (require 'ox-bibtex)
+(require 'ox-odt)
+
 (with-eval-after-load "ox-latex"
   (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
+  (when (eq system-type 'gnu/linux)
+	(setq org-latex-preview-ltxpng-directory  "/tmp/ltxpng/"))
   (setq latex 'platex
         org-latex-image-default-width           ".45\\linewidth"
         org-ditaa-jar-path                      "~/.emacs.d/ditaa.jar"
         org-export-latex-date-format            "%Y-%m-%d"
+		org-latex-pdf-process                   '("latexmk %f")
         org-latex-create-formula-image-program  'imagemagick
-        org-latex-pdf-process                   '("latexmk -C %f && latexmk  %f")
         org-file-apps                           '(("pdf" . "evince %s"));; Viewerの設定(evince)
         org-beamer-frame-default-options        "fragile"
         org-latex-default-class                 "jarticle"

@@ -19,13 +19,13 @@ alias df="df -h -T --total"
 # alias grep="grep -i -n --color"
 # sudo alias get
 alias sudo="sudo "
-
+alias tmux="tmux -2"
 # alias bee='for i in {1..5}; do aplay -D plughw:1,7 ~/beep.wav; done'
 alias pgg='ps -Af | grep'
 alias xsels='xsel -ib < /tmp/screen-exchange'
 alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
 alias open="mimeopen"
-
+alias o="open"
 # coredump した場所
 
 alias core="sudo systemd-coredumpctl list | tail"
@@ -200,21 +200,12 @@ function route () {
   echo 'Use `ip r`'
 }
 
-#
 function cdd {
-    local dir=$( find . -maxdepth 1 -type d | sed  -e '1d' -e 's;\./;;' | sort | sed -e '$a..\n.' | peco --query "$READLINE_LINE" )
+    local dir=$( find . -maxdepth 1 -type d | sed  -e '1d' -e 's;\./;;' | sort | sed -e '$a..\n.' | peco --query "$READLINE_LINE" --initial-filter Migemo)
     if [ ! -z "$dir" ] ; then
         cd "$dir"
     fi
 }
-
-function cddd {
-    local dir=$( locate -Ai  "$*" | \grep  -vE '~$' |  peco --query "$READLINE_LINE" )
-    if [ ! -z "$dir" ] ; then
-        cd "$dir"
-    fi
-}
-
 
 function peco-ssh() {
   local SSH=$(\grep "^\s*Host " ~/.ssh/config | sed s/"[\s ]*Host "// | \grep -v "^\*$" | sort | peco)
@@ -301,15 +292,16 @@ fi
 
 function j() {
     if [ $# -eq 0 ] ; then
-        local cddd="$(z  | tac | awk '{for(i=2;i<NF;i++){printf("%s ",$i)}print $NF}'  | peco)"
-        echo cd "$cddd"
-        cd -- "$cddd"
+        local ccc
+        ccc="$(z  | tac | awk '{for(i=2;i<NF;i++){printf("%s ",$i)}print $NF}'  | peco)"
+        echo cd "$ccc"
+        cd -- "$ccc"
     else
         z $*
     fi
 }
 function lll() {
-    ls -a1 $* |  peco
+    ls -a1t | tail -n +3 | peco
 }
 function man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
@@ -739,12 +731,33 @@ function _alc(){
     shift
     ag  --nonumbers "^$*" ${dicPath} | peco --initial-filter CaseSensitive --query "$*" | sed -e 's/[●¥]/\n/g' -e 's@/// @\n\n@' -e 's/◆/ ◆ /g'
 }
+function _alc2(){
+    if [ $# -le 1 ] ; then
+       return
+    fi
+	local dicPath
+	local dicPath2
+	dicPath=$1
+	dicPath2=/tmp/"$(basename ${dicPath})"
+	if [[ ! -e ${dicPath2} ]] ; then
+		cp "${dicPath}" "${dicPath2}"
+	fi
+	shift
+    peco --initial-filter CaseSensitive --query "$*" "${dicPath2}" | sed -e 's/[●¥]/\n/g' -e 's@/// @\n\n@' -e 's/◆/ ◆ /g'
+}
 
 
 function alcw(){
     _alc ~/Dropbox/eijiroDIC/waeiji98.txt "$*"
 }
+function alcw2(){
+    _alc2 ~/Dropbox/eijiroDIC/waeiji98.txt "$*"
+}
+
 
 function alce(){
     _alc ~/Dropbox/eijiroDIC/eijiro98.txt "$*"
+}
+function alce2(){
+    _alc2 ~/Dropbox/eijiroDIC/eijiro98.txt "$*"
 }

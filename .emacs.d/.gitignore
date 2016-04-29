@@ -23,3 +23,8 @@ smex-items
 .mc-lists.el
 tutorial/
 irony/
+woman_cache.el
+snippets/org-mode/mailTemp
+inits/grass.el
+.trello/
+.chicken-scheme-symbols-dump.el

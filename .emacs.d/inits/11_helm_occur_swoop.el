@@ -2,7 +2,7 @@
 ;; (require 'helm-ag);;agg
 ;; (require 'helm-config)
 ;; (require 'all-ext)
-;; (require 'helm-swoop)
+(require 'helm-swoop)
 ;; (require 'ace-isearch)
 
 ;; (require 'color-moccur)
@@ -35,11 +35,27 @@
 (bind-keys :map isearch-mode-map
            ;; ("M-j" . helm-swoop-from-isearch)
            ;; ("M-j" . avy-isearch)
-           ("C-o" . helm-occur-from-isearch)) ;; isearchからhelm-occurを起動
+		   ("M-i" . helm-swoop-from-isearch)
+           ("C-o" . helm-occur-from-isearch))
+;; isearchからhelm-occurを起動
 ;; (unbind-key "C-o")
-(bind-key   "C-c C-a" 'all-from-helm-occur helm-map) ;; helm-occurからall-extに受け渡し
+
+(bind-keys :map helm-swoop-map
+		   ("C-r" . helm-previous-line)
+		   ("C-s" . helm-next-line)
+		   ("M-i" .helm-multi-swoop-all-from-helm-swoop))
+;; (bind-keys :map  helm-map
+;; 		   ("C-c C-a" . all-from-helm-occur )) ;; helm-occurからall-extに受け渡し
 (bind-keys*
  ("M-o"     . myfix-helm-occur)             ;; helm-occurの起動
+ ("M-i"     . helm-swoop)
+ ("C-c M-i" . helm-multi-swoop)
  ;; ("M-i"     . avy-goto-char)
  ("C-M-o"   . helm-ag))
-;; M-n で現在地にある文字を入力
+
+
+
+
+(bind-keys :map helm-multi-swoop-map
+		   ("C-r" . helm-previous-line)
+		   ("C-s" . helm-next-line))
