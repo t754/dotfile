@@ -4,14 +4,17 @@
 (defun python-mode-hooks ()
   (highlight-indentation-mode)
   (highlight-indentation-current-column-mode)
-  (flymake-python-pyflakes-load)
+  ;;(flymake-python-pyflakes-load)
+  (flycheck-mode t)
   (auto-complete-mode)
   (company-mode -1)
   (key-chord-mode 1)
   (jedi:setup)
   ;; (whitespace-mode)
   (setq jedi:setup-keys t
-		jedi:complete-on-dot t)
+		jedi:complete-on-dot t
+		jedi:environment-virtualenv
+		(list "virtualenv3" "--system-site-packages"))
   (set-face-background 'highlight-indentation-face "gray4")
   (set-face-background 'highlight-indentation-current-column-face "gray20")
   (add-to-list 'company-backends 'company-jedi)
