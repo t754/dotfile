@@ -105,7 +105,6 @@
         slime-company
         smartparens
         smartrep
-        smex
         switch-window
         toml-mode
         undo-tree
