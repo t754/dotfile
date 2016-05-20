@@ -8,13 +8,14 @@
 ;; 			   ))
 ;; (package-refresh-contents)
 ;; (package-initialize)
+(setq el-get-user-package-directory "~/.emacs.d/el-files/")
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
        "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
     (goto-char (point-max))
     (eval-print-last-sexp)))
-
+(require 'el-get-elpa)
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 
 
@@ -59,6 +60,7 @@
         go-eldoc
         go-mode
         google-translate
+        graphviz-dot-mode
         haskell-mode
         helm
         helm-ag
@@ -88,7 +90,6 @@
         minimap
         multiple-cursors
         org-mode
-        org-trello
         popup
         popwin
         pos-tip
@@ -171,6 +172,7 @@
                            purcell/flymake-haskell-multi
                            purcell/flymake-python-pyflakes
                            senny/emacs-eclim
+                           yasuyk/helm-git-grep
                            yasuyk/web-beautify
                            zonuexe/emoji-fontset.el
                            ;;##)

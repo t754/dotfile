@@ -37,10 +37,11 @@
  '(flycheck-display-errors-function
    (lambda
      (errors)
-     (let ((messages
-            (mapcar
-             (function flycheck-error-message)
-             errors)))
+     (let
+         ((messages
+           (mapcar
+            (function flycheck-error-message)
+            errors)))
        (popup-tip
         (mapconcat
          (quote identity)

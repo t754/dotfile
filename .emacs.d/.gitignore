@@ -28,3 +28,5 @@ snippets/org-mode/mailTemp
 inits/grass.el
 .trello/
 .chicken-scheme-symbols-dump.el
+tramp
+nil/
