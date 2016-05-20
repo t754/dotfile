@@ -54,7 +54,7 @@
  '(git-gutter:unchanged-sign nil)
  '(git-gutter:update-interval 2)
  '(git-gutter:window-width 1)
- '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.9)
  '(irony-additional-clang-options (quote ("-std=c++11")))
