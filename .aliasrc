@@ -761,3 +761,22 @@ function alce(){
 function alce2(){
     _alc2 ~/Dropbox/eijiroDIC/eijiro98.txt "$*"
 }
+
+function jsay() {
+    # open_jtalk でしゃべらす
+    local outfile=$(mktemp 2>/dev/null||mktemp -t tmp)
+    local talk="open_jtalk -m /usr/share/voice/mei_normal.htsvoice -x /usr/local/dic/ -ow ${outfile}"
+    trap  '[[ "${outfile}" ]] && rm ${outfile}' 0 1 2 3 15
+
+    if [[ $# -gt 0 ]]; then
+        if [[ -f $1 ]]; then
+            $talk $1 && aplay ${outfile}
+        else
+            echo $* | $talk && aplay ${outfile}
+        fi
+    elif [ -p /dev/stdin ]; then
+        $talk && aplay ${outfile}
+    fi
+
+    rm ${outfile}
+}
