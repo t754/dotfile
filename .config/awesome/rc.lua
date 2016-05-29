@@ -180,7 +180,9 @@ wallpaperTimer:start()
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
-tagsnames={ "📝", "🌐", "📃","🔑", "💻","🎵"}
+tagsnames={ "📝", "🌐", "📃"
+            ,"", "💻","🎵"
+            ,"etc","📛","🔑"}
 for s = 1, screen.count() do
    -- Each screen has its own tag table.
    tags[s] = awful.tag(tagsnames, s, layouts[1])
@@ -724,15 +726,13 @@ awful.rules.rules = {
    	 properties = { floating = true } },
    { rule = { instance = "pavucontrol" },
    	 properties = { floating = true } },
-   { rule = { instance = "fiji-Main" },
-   	 properties = { floating = true } },
    -- Set Firefox to always map on tags number 2 of screen 1.
    { rule = { class = "Firefox" },
 	 properties = { tag = tags[1][2] } },
    { rule = { class = "Spotify" },
 	 properties = { tag = tags[1][6] } },
    { rule = { class = "Keepassx" },
-	 properties = { tag = tags[1][4] } },
+	 properties = { tag = tags[1][9] } },
    { rule = { class = "VirtualBox" },
      except = { name = "Oracle VM VirtualBox Manager" },
      properties = { tag = tags[1][5] } },

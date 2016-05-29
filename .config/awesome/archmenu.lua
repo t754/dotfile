@@ -124,7 +124,7 @@
  }
 
  local menu939d4bf2f196aba57e1b56d7c4403e2d = {
-     {"GNU Octave", "/usr/bin/octave --force-gui", "///usr/share/octave/4.0.0/imagelib/octave-logo.svg" },
+     {"GNU Octave", "/usr/bin/octave --force-gui ", "///usr/share/octave/4.0.2/imagelib/octave-logo.svg" },
      {"LibreOffice Math", "libreoffice --math ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-math.png" },
  }
 
