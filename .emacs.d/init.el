@@ -3,7 +3,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-;; (package-initialize)
+(package-initialize)
 
 (setq debug-on-error nil)
 ;;reload
@@ -12,12 +12,7 @@
 (server-start)
 (unless (server-running-p)
   (server-start))
-;;package
 
-;; (require 'cask "~/.cask/cask.el")
-;; (cask-initialize)
-;; (require 'pallet)
-;; (pallet-mode t)
 (load (concat user-emacs-directory "el-gets.el"))
 
 ;;inits -- start-els
@@ -37,10 +32,11 @@
  '(flycheck-display-errors-function
    (lambda
      (errors)
-     (let ((messages
-            (mapcar
-             (function flycheck-error-message)
-             errors)))
+     (let
+         ((messages
+           (mapcar
+            (function flycheck-error-message)
+            errors)))
        (popup-tip
         (mapconcat
          (quote identity)
@@ -53,7 +49,7 @@
  '(git-gutter:unchanged-sign nil)
  '(git-gutter:update-interval 2)
  '(git-gutter:window-width 1)
- '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.9)
  '(irony-additional-clang-options (quote ("-std=c++11")))

@@ -47,14 +47,15 @@
 ;; (bind-keys :map  helm-map
 ;; 		   ("C-c C-a" . all-from-helm-occur )) ;; helm-occurからall-extに受け渡し
 (bind-keys*
- ("M-o"     . myfix-helm-occur)             ;; helm-occurの起動
- ("M-i"     . helm-swoop)
+ ("C-c M-o" . myfix-helm-occur)             ;; helm-occurの起動
+ ("M-o"     . helm-swoop)
  ("C-c M-i" . helm-multi-swoop)
- ;; ("M-i"     . avy-goto-char)
- ("C-M-o"   . helm-ag))
+ ("C-M-o"   . my/grep))
 
-
-
+(defun my/grep ()
+  (interactive)
+  (if (magit-toplevel)
+      (helm-git-grep) (helm-ag)))
 
 (bind-keys :map helm-multi-swoop-map
 		   ("C-r" . helm-previous-line)
