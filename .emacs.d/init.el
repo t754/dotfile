@@ -50,6 +50,7 @@
  '(git-gutter:update-interval 2)
  '(git-gutter:window-width 1)
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
+ '(haskell-process-type (quote stack-ghci))
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.9)
  '(irony-additional-clang-options (quote ("-std=c++11")))
@@ -86,7 +87,8 @@
     \\AtBeginShipoutFirst{\\special{pdf:tounicode UTF8-UCS2}}
   \\fi
   \\usepackage[dvipdfmx]{hyperref}
-\\fi" "\\tolerance=1000")))
+\\fi" "\\tolerance=1000" "\\makeatletter\\chardef\\pdf@shellescape=\\@ne\\makeatother
+\\usepackage{minted}")))
  '(org-latex-hyperref-template
    "\\hypersetup{
  pdfauthor={%a},
@@ -133,3 +135,4 @@
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+(put 'set-goal-column 'disabled nil)
