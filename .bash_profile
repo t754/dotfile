@@ -64,12 +64,12 @@ fi
 export GOPATH="$HOME/.go"
 
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
-export PATH="$HOME/bin:$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:$GOPATH/bin:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
+export PATH="$HOME/bin:$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:$GOPATH/bin:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
 if which ruby >/dev/null && which gem >/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
-export PATH=$(echo $PATH":" | tr ":" "\0" |  xargs -0 -I% sh -c 'test -d "%" && echo -n "%:"' | sed 's/:$//')
+export PATH=$(echo $PATH":" | tr ":" "\0" |  xargs -0 -I% bash -c 'test -d "%" && echo -n "%:"' | sed 's/:$//')
 
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
