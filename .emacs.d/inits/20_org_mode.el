@@ -28,6 +28,7 @@
 ;; (setq org-log-reschedule  'time)
 (setq org-directory "~/Dropbox/org/")
 (setq org-startup-truncated                   nil
+      org-latex-listings 'minted
       org-hide-leading-stars                  t ;; 見出しの余分な*を消す
       org-return-follows-link                 t
       org-enforce-todo-dependencies           t
