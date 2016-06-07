@@ -27,7 +27,7 @@
   (bind-keys :map interactive-haskell-mode-map
              ("M-." . haskell-mode-goto-loc)
              ("C-c C-t" . haskell-mode-show-type-at)))
-
+(custom-set-variables '(haskell-process-type 'stack-ghci))
 
 ;; ‘C-c C-z’
 ;;      is bound to ‘switch-to-haskell’
