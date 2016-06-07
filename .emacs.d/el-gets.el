@@ -26,6 +26,7 @@
         cmake-ide
         cmake-mode
         color-theme
+        company-coq
         company-irony
         company-jedi
         company-quickhelp
@@ -84,6 +85,7 @@
         pos-tip
         powerline
         projectile-rails
+        proof-general
         py-autopep8
         python-pep8
         quickrun
