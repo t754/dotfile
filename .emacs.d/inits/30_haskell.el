@@ -27,8 +27,18 @@
   (bind-keys :map interactive-haskell-mode-map
              ("M-." . haskell-mode-goto-loc)
              ("C-c C-t" . haskell-mode-show-type-at)))
-(custom-set-variables '(haskell-process-type 'stack-ghci))
 
+(custom-set-variables '(haskell-process-type 'stack-ghci))
+     (add-hook 'haskell-mode-hook
+               (lambda ()
+                 (set (make-local-variable 'company-backends)
+                      (append '((company-capf company-dabbrev-code))
+                              company-backends))))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method)
+(add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
+(setq haskell-compile-cabal-build-command "stack build")
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 ;; ‘C-c C-z’
 ;;      is bound to ‘switch-to-haskell’
 ;; ‘C-c C-b’
