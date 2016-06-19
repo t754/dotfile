@@ -14,11 +14,18 @@
 
 (require 'cl-lib)
 (require 'color)
-(defun rainbow-delimiters-using-stronger-colors ()
-  (interactive)
-  (cl-loop
-   for index from 1 to rainbow-delimiters-max-face-count
-   do
-   (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-    (cl-callf color-saturate-name (face-foreground face) 80))))
-(add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
+
+
+(defun rainbow-delimiters-mode-hooks ()
+  (flet ((my/color-rainbow (i mx)
+                           (let ((offset 0.43)
+                                 (x 0.5))
+                             (+ (* x (/ (* 1.0 i) mx)) offset))))
+    (dotimes (i rainbow-delimiters-max-face-count)
+      (set-face-foreground (intern (format "rainbow-delimiters-depth-%d-face" (1+ i)))
+                           (apply 'color-rgb-to-hex
+                                  (color-hsl-to-rgb
+                                   (my/color-rainbow (- rainbow-delimiters-max-face-count i) rainbow-delimiters-max-face-count) 0.8 0.7))))))
+
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'rainbow-delimiters-mode-hook 'rainbow-delimiters-mode-hooks)
