@@ -89,6 +89,7 @@
         py-autopep8
         python-pep8
         quickrun
+        rainbow-delimiters
         rbenv
         recentf-ext
         rubocop
