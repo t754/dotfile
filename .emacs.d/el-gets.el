@@ -41,6 +41,7 @@
         flycheck
         flycheck-cask
         flycheck-color-mode-line
+        flycheck-gometalinter
         flycheck-irony
         flymake-cursor
         flymake-lua
