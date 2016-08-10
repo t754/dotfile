@@ -69,7 +69,8 @@
    ((some (lambda (strs) (equal system-name strs))
           '("localhost.localdomain"
             "localhost.homenetwork"
-            "localhostss")) 12)))
+            "localhostss")) 12)
+   (t 12)))
 
 (defun --set-emoji-font (frame)
   "Adjust the font settings of FRAME so Emacs can display emoji properly."
