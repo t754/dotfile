@@ -180,7 +180,7 @@ spacer:set_text(" ")
 separator:set_text("|")
 
 -- Create a textclock widget
-mytextclock = awful.widget.textclock("%d/%m-%H:%M")
+mytextclock = awful.widget.textclock("%m/%d%a-%H:%M")
 
 calendar2.addCalendarToWidget(mytextclock, "<span color='green'>%s</span>")
 
