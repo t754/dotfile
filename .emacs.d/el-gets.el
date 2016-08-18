@@ -125,6 +125,7 @@
                            emacs-jp/helm-migemo
                            emacs-jp/init-loader
                            jcpetkovich/shrink-whitespace.el
+                           ptrv/company-lua
                            purcell/exec-path-from-shell
                            purcell/flymake-easy
                            purcell/flymake-haskell-multi
