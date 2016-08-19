@@ -53,14 +53,14 @@
 [credential]
     helper       = /usr/lib/git/git-credential-gnome-keyring
 [help]
-	autoCorrect = -1
+	autoCorrect  = -1
 [pull]
-	ff = only
+	ff           = only
 [log]
 	abbrevCommit = true
-	decorate = short
+	decorate     = short
 [rerere]
-	enabled = true
-	autoUpdate = true
+	enabled      = true
+	autoUpdate   = true
 [diff]
-	algorithm = histogram
+	algorithm    = histogram
