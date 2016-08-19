@@ -52,3 +52,15 @@
     default      = simple
 [credential]
     helper       = /usr/lib/git/git-credential-gnome-keyring
+[help]
+	autoCorrect = -1
+[pull]
+	ff = only
+[log]
+	abbrevCommit = true
+	decorate = short
+[rerere]
+	enabled = true
+	autoUpdate = true
+[diff]
+	algorithm = histogram
