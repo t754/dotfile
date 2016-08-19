@@ -26,7 +26,6 @@
     f            = fetch --prune
     fs           = !git f && git su
     hint         = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-    ignore       = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >> .gitignore
     info         = remote show origin
     l            = log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
     ll           = log --stat --abbrev-commit
@@ -37,6 +36,7 @@
     s            = status --short --branch
     st           = status
     su           = submodule update
+    l80          = "!f () { git log --abbrev-commit --date=short --pretty=format:'%h%x00%cd%x00%s%x00%an%x00%d' $@ | gawk -F '\\0' '{ printf \"\\033[31m%s\\033[0m \\033[32m%s\\033[0m %-80s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5 }' | less -R; }; f"
 [core]
     excludesfile = ~/.gitignore
     pager        = less -r
