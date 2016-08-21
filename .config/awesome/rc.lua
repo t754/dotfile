@@ -336,7 +336,7 @@ vicious.register(mybattery, function(format, warg)
     elseif args[2] < (2 * 100 / 3) then
        args['{color}'] = 'yellow'
     else
-       args['{color}'] = 'blue'
+       args['{color}'] = '#5555ee'
     end
     return args
 end, '<span foreground="${color}">bat: $2% $3h</span>', 10, 'BAT0')
