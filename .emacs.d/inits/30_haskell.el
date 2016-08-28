@@ -7,6 +7,8 @@
   (imenu-add-menubar-index)
   (haskell-indent-mode))
 (with-eval-after-load 'haskell
+  (eval-after-load 'flycheck
+    '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
   (bind-keys :map haskell-mode-map
              ("<f8>" . haskell-navigate-imports)
              ("C-c C-c" . haskell-compile)
@@ -28,7 +30,15 @@
              ("M-." . haskell-mode-goto-loc)
              ("C-c C-t" . haskell-mode-show-type-at)))
 
-
+(custom-set-variables '(haskell-process-type 'stack-ghci))
+     (add-hook 'haskell-mode-hook
+               (lambda ()
+                 (set (make-local-variable 'company-backends)
+                      (append '((company-capf company-dabbrev-code))
+                              company-backends))))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method)
+(add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
+(setq haskell-compile-cabal-build-command "stack build")
 ;; ‘C-c C-z’
 ;;      is bound to ‘switch-to-haskell’
 ;; ‘C-c C-b’

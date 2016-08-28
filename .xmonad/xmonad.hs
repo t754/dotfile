@@ -17,27 +17,25 @@ import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig
 import           XMonad.Util.Run
 
+
+
 myterm::String
--- myterm = "urxvt256c-ml"
 myterm = "xfce4-terminal"
--- myterm = "st -f \"Inconsolata:size=16\""
+
 
 
 main::IO()
-myManageHook::ManageHook
 
+myManageHook::ManageHook
 myManageHook = composeAll . concat $
     [ [className =? c --> doFloat  | c<-myfloat]
     , [className =? c --> doIgnore | c<-myignore]
     , [title     =? t --> doFloat  | t<-myfloatTitle]
-    --- , className =? "Emacs" --> (ask >>= doF .  \w -> (\ws -> foldr ($) ws (copyToWss ["2","4"] w) ) . W.shift "3" ) :: ManageHook
     ]
     where myfloat = ["Vncviewer","Xfrun4","Xfce4-appfinder","MPlayer","Display.py"]
-          myignore = ["Xfce4-notifyd","Wrapper-1.0"]
+          myignore = ["Xfce4-notifyd","Wrapper-1.0","xfce4-panel"]
           myfloatTitle = (map ("Figure " ++) (map (\x -> [x]) (map (intToDigit) [1..9])))
 
-  --- where copyToWss ids win = map (copyWindow win) ids
--- myWorkspaces = ["1:work","2:web"] ++ map show [3..9]
 
 myLayout =
     toggleLayouts Full
@@ -70,14 +68,15 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
   [((modMask, button1),(\w -> focus w >> mouseMoveWindow w))
   ,((modMask, button2),(\w -> focus w >> windows W.swapMaster))
   ,((modMask, button3),(\w -> focus w >> mouseResizeWindow w))
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
   ]
-myLogHook = do
-  -- dynamicLogWithPP xmobarPP
-  updatePointer (Relative 0.5 0.5)
-  logHook xfceConfig
 
-main = xmonad $ xfceConfig
+myLogHook = do
+  ewmhDesktopsLogHook
+  updatePointer (0.5, 0.5) (0 , 0)
+  -- dynamicLogWithPP xmobarPP
+  -- logHook xfceConfig
+
+main = xmonad $ ewmh xfceConfig
     { layoutHook         = myLayout
     , terminal           = myterm
     , focusedBorderColor = "Deep Pink"
@@ -86,7 +85,7 @@ main = xmonad $ xfceConfig
     , manageHook         = myManageHook <+> myManageHookShift <+> manageHook xfceConfig
     , handleEventHook    = ewmhDesktopsEventHook <+> fullscreenEventHook
     , startupHook        = startupHook xfceConfig
-                         >> setWMName "LG3D" -- Java app focus fix
+                           >> setWMName "LG3D" -- Java app focus fix
     , mouseBindings      = myMouseBindings
     , logHook = myLogHook
     }
@@ -107,9 +106,6 @@ main = xmonad $ xfceConfig
     , ("M-C-S-w" , runOrRaise "spotify" (className =? "Spotify"))
     , ("M-C-S-h" , (raiseMaybe . unsafeSpawn) (myterm ++ " -t htopTerm -e htop") (title =? "htopTerm"))
     , ("M-d"     , (raiseMaybe . unsafeSpawn) "emacsclient -a emacs -c -n" (className =? "Emacs"))
-    , ("M-S-t"   , (raiseMaybe. unsafeSpawn)
-                   ("st -t dictTerm -f \"Inconsolata:size=16\" -e bash -c 'alce $(xsel -p) 2>&1 | less'")
-                   (title =? "dictTerm"))
     , ("M-v"     , windows copyToAll)
     , ("M-S-v"   , killAllOtherCopies)
     , ("M-g"     , spawn "xdotool mousemove 0 0")

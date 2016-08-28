@@ -126,3 +126,4 @@ wget-log*
 *.out
 *.app
 powerline-shell.py
+*.local

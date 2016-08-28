@@ -26,6 +26,7 @@
         cmake-ide
         cmake-mode
         color-theme
+        company-coq
         company-irony
         company-jedi
         company-quickhelp
@@ -40,6 +41,7 @@
         flycheck
         flycheck-cask
         flycheck-color-mode-line
+        flycheck-gometalinter
         flycheck-irony
         flymake-cursor
         flymake-lua
@@ -84,9 +86,11 @@
         pos-tip
         powerline
         projectile-rails
+        proof-general
         py-autopep8
         python-pep8
         quickrun
+        rainbow-delimiters
         rbenv
         recentf-ext
         rubocop
@@ -121,6 +125,7 @@
                            emacs-jp/helm-migemo
                            emacs-jp/init-loader
                            jcpetkovich/shrink-whitespace.el
+                           ptrv/company-lua
                            purcell/exec-path-from-shell
                            purcell/flymake-easy
                            purcell/flymake-haskell-multi

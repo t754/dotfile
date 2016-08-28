@@ -12,16 +12,6 @@
 -- for browsers, or the file name for emacs).
 
 table5={
-   ["d"]={"emacsclient -a emacs -n -c","Emacs"},
+   ["C-d"]={"emacsclient -a emacs -n -c","Emacs"},
    ["C-f"]={"firefox","Firefox"},
-   ["C-g"]={"firefox -new-window 'http://mail.google.com/mail/'","Gmail","name"},
-   ["C-S-t"]={"st -f 'Inconsolata:size=16' -c htopTerm -e htop","htopTerm","instance"},
-   ["C-S-s"]={"Spotify","Spotify"}
-   -- ["Control-z"]={"google-chrome --app=http://www.rdio.com","www.rdio.com", "instance"},
-   -- ["v"]={"firefox -new-window 'http://www.evernote.com/Home.action?login=true#v=l&so=mn'","Evernote", "name"},
-      -- ["x"]={"xterm","xterm", "instance"},
-   -- ["f"]={"xterm -name mcTerm -e mc -d","mcTerm", "instance"},
-   -- ["Shift-s"]={"xterm -name rootTerm -cr red -title rootTerm -e su","rootTerm", "instance"},
-   -- ["b"]={"xterm -name rtorrentTerm -e rtorrent","rtorrentTerm","instance"},
-   -- ["z"]={"xterm -name mocpTerm -e mocp","mocpTerm", "instance"}
 }
