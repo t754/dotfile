@@ -134,35 +134,35 @@ function listshuffle(array)
    end
    return array
 end
-wallpaperList = listshuffle(scanDir( os.getenv("HOME").."/.wallpaper/OK/"))
+-- wallpaperList = listshuffle(scanDir( os.getenv("HOME").."/.wallpaper/OK/"))
 
--- Apply a random wallpaper on startup.
-gears.wallpaper.maximized(wallpaperList[math.random(1, #wallpaperList)], s, true)
+-- -- Apply a random wallpaper on startup.
+-- gears.wallpaper.maximized(wallpaperList[math.random(1, #wallpaperList)], s, true)
 
--- Apply a random wallpaper every changeTime seconds.
-local changeTime = 59
-local listIte = 0
-wallpaperTimer = timer { timeout = changeTime }
-wallpaperTimer:connect_signal("timeout",
-                              function()
-                                 listIte = listIte + 1
-                                 if listIte > #wallpaperList then
-                                    listIte = 1
-                                    wallpaperList = listshuffle(wallpaperList)
-                                 end
-                                 for s = 1, screen.count() do
-                                    gears.wallpaper.maximized(wallpaperList[listIte], s, true)
-                                 end
-                                 -- gears.wallpaper.maximized(wallpaperList[listIte], s, true)
-                                 -- stop the timer (we don't need multiple instances running at the same time)
-                                 wallpaperTimer:stop()
-                                 --restart the timer
-                                 wallpaperTimer.timeout = changeTime
-                                 wallpaperTimer:start()
-end)
+-- -- Apply a random wallpaper every changeTime seconds.
+-- local changeTime = 59
+-- local listIte = 0
+-- wallpaperTimer = timer { timeout = changeTime }
+-- wallpaperTimer:connect_signal("timeout",
+--                               function()
+--                                  listIte = listIte + 1
+--                                  if listIte > #wallpaperList then
+--                                     listIte = 1
+--                                     wallpaperList = listshuffle(wallpaperList)
+--                                  end
+--                                  for s = 1, screen.count() do
+--                                     gears.wallpaper.maximized(wallpaperList[listIte], s, true)
+--                                  end
+--                                  -- gears.wallpaper.maximized(wallpaperList[listIte], s, true)
+--                                  -- stop the timer (we don't need multiple instances running at the same time)
+--                                  wallpaperTimer:stop()
+--                                  --restart the timer
+--                                  wallpaperTimer.timeout = changeTime
+--                                  wallpaperTimer:start()
+-- end)
 
---- initial start when rc.lua is first run
-wallpaperTimer:start()
+-- --- initial start when rc.lua is first run
+-- wallpaperTimer:start()
 
 
 --- }}}
@@ -181,8 +181,8 @@ wallpaperTimer:start()
 -- Define a tag table which hold all screen tags.
 tags = {}
 tagsnames={ "📝", "🌐", "📃"
-            ,"", "💻","🎵"
-            ,"etc","📛","🔑"}
+            ,"4", "💻","🎵"
+            ,"7","📛","🔑"}
 for s = 1, screen.count() do
    -- Each screen has its own tag table.
    tags[s] = awful.tag(tagsnames, s, layouts[1])
@@ -735,7 +735,7 @@ awful.rules.rules = {
 	 properties = { tag = tags[1][9] } },
    { rule = { class = "VirtualBox" },
      except = { name = "Oracle VM VirtualBox Manager" },
-     properties = { tag = tags[1][5] } },
+     properties = { tag = tags[1][4] } },
    { rule = { class = "Skype" },
 	 properties = { tag = tags[1][6] } },
 }
