@@ -1,4 +1,4 @@
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc")
 
 (when  (require 'mozc nil t)
 
