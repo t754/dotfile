@@ -66,14 +66,14 @@ fi
 
 export GOPATH="$HOME/.go"
 export GOROOT="/usr/local/go/"
-export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 export PATH="$HOME/bin:$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:/usr/local/go/bin:$GOPATH/bin:$GOBIN:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
 if which ruby >/dev/null && which gem >/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
 #export PATH=$(echo $PATH":" | tr ":" "\0" |  xargs -0 -I% bash -c 'test -d "%" && echo -n "%:"' | sed 's/:$//')
-
+export PATH=$(echo $PATH | tr ':' '\n' | awk '!/^[:space:]*$/ && !a[$0]++' | tr '\n' ':')
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
 # SCREEN buffer
