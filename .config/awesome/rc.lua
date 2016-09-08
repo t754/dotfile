@@ -33,10 +33,10 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 -- Freedesktop integration
-require("freedesktop.menu")
-require("freedesktop.desktop")
+--require("freedesktop.menu")
+--require("freedesktop.desktop")
 -- calendar functions
-local calendar2 = require("calendar2")
+
 -- Extra widgets
 local vicious = require("vicious")
 -- to create shortcuts help screen
@@ -81,25 +81,41 @@ do
         beautiful.init(user_theme)
     else
         print("Personal theme doesn't exist, falling back to openSUSE")
-        beautiful.init("/usr/share/awesome/themes/openSUSE/theme.lua")
+        beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
     end
 end
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xfce4-terminal"
+terminal = "st -f 'Inconsolata:size=18'"
 editor = os.getenv("EDITOR") or os.getenv("VISUAL") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
 menubar.utils.terminal = terminal
-theme.icon_theme = 'Adwaita'
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
+--- Themes define colours, icons, and wallpapers
+--- beautiful.init("/usr/share/awesome/themes/sky/theme.lua")
+
+--revelation.init()
+-- ------------ --
+-- テーマの改造 --
+-- ------------ --
+myfont = "Ricty 18"
+awesome.font          = myfont
+theme.font          = myfont
+beautiful.font          = myfont
+naughty.config.defaults.font = myfont
+theme.menu_height           = 32
+theme.menu_width            = 200
+
+menubar.font          = "Ricty 18"
+menubar.cache_entries = true
+menubar.show_categories = tr
+
+menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", "~/.local/share/applications" }
 modkey = "Mod4"
-
+menubar.geometry = {
+   height = 32
+}
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
@@ -198,6 +214,7 @@ local function menu()
    return menu
 end
 
+
 -- Display xrandr notifications from choices
 local state = { iterator = nil,
 		timer = nil,
@@ -209,6 +226,7 @@ function unpack (t, i)
       return t[i], unpack(t, i + 1)
    end
 end
+
 
 local function xrandr()
    -- Stop any previous timer
@@ -266,6 +284,11 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
+
+-- tagsnames={ "📝", "🌐", "📃"
+--             ,"4", "💻","🎵"
+--             ,"7","📛","🔑"}
+
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
@@ -288,7 +311,7 @@ end
   }
 
   top_menu = {
-     { 'Applications', freedesktop.menu.new(), menubar.utils.lookup_icon('start-here') },
+     --{ 'Applications', freedesktop.menu.new(), menubar.utils.lookup_icon('start-here') },
      { 'Awesome',      myawesome_menu,         beautiful.awesome_icon                  },
      { 'System',       mysystem_menu,          menubar.utils.lookup_icon('system')     },
      { 'Terminal',     menubar.utils.terminal, menubar.utils.lookup_icon('terminal')   }
@@ -300,10 +323,10 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Desktop icons
-for s = 1, screen.count() do
-   freedesktop.desktop.add_applications_icons({screen = s, showlabels = true})
-   freedesktop.desktop.add_dirs_and_files_icons({screen = s, showlabels = true})
-end
+--for s = 1, screen.count() do
+--   freedesktop.desktop.add_applications_icons({screen = s, showlabels = true})
+--   freedesktop.desktop.add_dirs_and_files_icons({screen = s, showlabels = true})
+--end
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -317,9 +340,14 @@ spacer:set_text(" ")
 separator:set_text("|")
 
 -- Create a textclock widget
-mytextclock = awful.widget.textclock("%m/%d%a-%H:%M")
+-- mytextclock = awful.widget.textclock("%m/%d%a-%H:%M")
+datewidget = wibox.widget.textbox()
+datewidget:set_font(myfont)
+vicious.register(datewidget, vicious.widgets.date, "%m-%d(%a)%H:%M", 29)
 
-calendar2.addCalendarToWidget(mytextclock, "<span color='green'>%s</span>")
+cputempwidget = wibox.widget.textbox()
+cputempwidget:set_font(myfont)
+vicious.register(cputempwidget, vicious.widgets.thermal, "$1℃", 7, { "coretemp.0/hwmon/hwmon0/", "core"})
 
 cpuwidget = awful.widget.graph()
 
@@ -341,55 +369,7 @@ vicious.register(mybattery, function(format, warg)
     return args
 end, '<span foreground="${color}">bat: $2% $3h</span>', 10, 'BAT0')
 
--- Initialise widget
-mynetwidget = wibox.widget.textbox()
--- Register widget
--- vicious.register(mynetwidget, vicious.widgets.net, "${eth0 down_kb} / ${eth0 up_kb}", 1)
 
--- wifi
--- provides wireless information for a requested interface
--- takes the network interface as an argument, i.e. "wlan0"
--- returns a table with string keys: {ssid}, {mode}, {chan}, {rate}, {link}, {linp} and {sign}
--- wifi = widget({ type = "textbox" })
--- vicious.register(wifi, vicious.widgets.wifi, "${link}", 121, "wlan0")
-
-
-
--- Weather widget
--- myweatherwidget = wibox.widget.textbox()
--- weather_t = awful.tooltip({ objects = { myweatherwidget },})
--- vicious.register(myweatherwidget, vicious.widgets.weather,
---                 function (widget, args)
---                     weather_t:set_text("City: " .. args["{city}"] .."\nWind: " .. args["{windkmh}"] .. "km/h " .. args["{wind}"] .. "\nSky: " .. args["{sky}"] .. "\nHumidity: " .. args["{humid}"] .. "%")
---                     return args["{tempc}"] .. "C"
---                 end, 1800, "EDDN")
-                --'1800': check every 30 minutes.
-                --'EDDN': Nuernberg ICAO code.
-
-
--- Keyboard map indicator and changer
--- https://awesome.naquadah.org/wiki/Change_keyboard_maps
--- default keyboard is us, second is german adapt to your needs
---
-
--- kbdcfg = {}
--- kbdcfg.cmd = "setxkbmap"
--- kbdcfg.layout = { { "us", "" } }
--- kbdcfg.current = 1  -- us is our default layout
--- kbdcfg.widget = wibox.widget.textbox()
--- kbdcfg.widget.set_align = "right"
--- kbdcfg.widget:set_text(" " .. kbdcfg.layout[kbdcfg.current][1] .. " ")
--- kbdcfg.switch = function ()
---     kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
---     local t = kbdcfg.layout[kbdcfg.current]
---     kbdcfg.widget.text = " " .. t[1] .. " "
---     os.execute( kbdcfg.cmd .. " " .. t[1] .. " " .. t[2] )
--- end
-
--- -- Mouse bindings
--- kbdcfg.widget:buttons(awful.util.table.join(
---     awful.button({ }, 1, function () kbdcfg.switch() end)
--- ))
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -459,7 +439,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "top", screen = s ,height = theme.menu_height})
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -470,11 +450,11 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mytextclock)
-    -- right_layout:add(separator)
+    right_layout:add(datewidget)
+    right_layout:add(separator)
     -- right_layout:add(spacer)
 
-    -- right_layout:add(kbdcfg.widget)
+    right_layout:add(cputempwidget)
     -- right_layout:add(spacer)
     right_layout:add(separator)
     right_layout:add(spacer)
@@ -489,8 +469,7 @@ for s = 1, screen.count() do
     right_layout:add(separator)
     right_layout:add(spacer)
 
-    right_layout:add(mynetwidget)
-    right_layout:add(spacer)
+
     -- right_layout:add(separator)
     -- right_layout:add(spacer)
 
@@ -641,17 +620,22 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,"Swap to master"),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen,"Move to screen" ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end,"Minimize client"),
+    awful.key({ modkey,           }, "n",      function (c) c.minimized = true end,"Minimize client"),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
-        end,"Maximize client")
+        end,"Maximize client"),
+   awful.key({ modkey,  }, "i",
+      function ()
+
+         awful.prompt.run({ prompt = "variable name: " },
+            mypromptbox[mouse.screen].widget,
+            function (var) awful.util.eval("dbg(".. var ..")") end,
+			nil,
+			awful.util.getdir("cache") .. "/history_eval")
+   end,"debug dump")
+
 )
 
 globalkeys = awful.util.table.join(
@@ -663,45 +647,40 @@ globalkeys = awful.util.table.join(
 -- This should map on the top row of your keyboard, usually 1 to 9.
 globalkeys = awful.util.table.join(globalkeys, ror.genkeys(modkey))
 for i = 1, 9 do
-    globalkeys = awful.util.table.join(globalkeys,
-        -- View tag only.
-        awful.key({ modkey }, "#" .. i + 9,
-                  function ()
-                        local screen = mouse.screen
-                        local tag = awful.tag.gettags(screen)[i]
-                        if tag then
-                           awful.tag.viewonly(tag)
-                        end
-                  end),
-        -- Toggle tag.
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
-                  function ()
-                      local screen = mouse.screen
-                      local tag = awful.tag.gettags(screen)[i]
-                      if tag then
-                         awful.tag.viewtoggle(tag)
-                      end
-                  end),
-        -- Move client to tag.
-        awful.key({ modkey, "Shift" }, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = awful.tag.gettags(client.focus.screen)[i]
-                          if tag then
-                              awful.client.movetotag(tag)
-                          end
-                     end
-                  end),
-        -- Toggle tag.
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = awful.tag.gettags(client.focus.screen)[i]
-                          if tag then
-                              awful.client.toggletag(tag)
-                          end
-                      end
-                  end))
+   globalkeys = awful.util.table.join(
+      globalkeys,
+      awful.key({ modkey }, "#" .. i + 9,
+         function ()
+            local screen = mouse.screen
+            local tag = awful.tag.gettags(screen)[i]
+            if tag then
+               awful.tag.viewonly(tag)
+            end
+      end,"move tag (num)"),
+      awful.key({ modkey, "Control" }, "#" .. i + 9,
+         function ()
+            local screen = mouse.screen
+            local tag = awful.tag.gettags(screen)[i]
+            if tag then
+               awful.tag.viewtoggle(tag)
+            end
+      end,"view mix tag (num)"),
+      awful.key({ modkey, "Shift" }, "#" .. i + 9,
+             function ()
+            local tag = awful.tag.gettags(client.focus.screen)[i]
+            if client.focus and tag then
+               awful.client.movetotag(tag)
+            end
+      end,"move window to (num)tag"),
+      awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+         function ()
+            local tag = awful.tag.gettags(client.focus.screen)[i]
+            if client.focus and tag then
+               awful.client.toggletag(tag)
+            end
+      end,"copy window to (num)tag")
+   )
+
 end
 
 clientbuttons = awful.util.table.join(
@@ -739,6 +718,9 @@ awful.rules.rules = {
       properties = { tag = tags[1][9] } },
     { rule = { class = "Firefox" },
       properties = { tag = tags[1][2] } },
+    { rule = { class = "VirtualBox" },
+     except = { name = "Oracle VM VirtualBox Manager" },
+     properties = { tag = tags[1][4] } },
 }
 -- }}}
 

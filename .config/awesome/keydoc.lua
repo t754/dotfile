@@ -94,6 +94,7 @@ function keydoc.markup(keys)
          local skey =  key2str(key)
          result[group] = (result[group] or "") ..
             string.format("%" .. longest - unilen(skey) .. "s  ", "") ..
+             -- "<span color=\"#FF00FF\">" .. skey  .. "</span> <span color=\"#FF0000\">" .. help .. "</span>\n"
             ansicolors.magenta .. skey .. ansicolors.reset .. " " .. help .. "\n"
       end
    end
@@ -103,7 +104,8 @@ end
 
 -- Display help in a naughty notification
 local nid = nil
-function keydoc.display()
+
+function keydoc.display() --myfunc
    local keytable = awful.util.table.join(
       keydoc.markup(capi.root.keys()),
       capi.client.focus and keydoc.markup(capi.client.focus:keys()) or {}
@@ -112,12 +114,47 @@ function keydoc.display()
    for group, res in pairs(keytable) do
       result = result .. ansicolors.red .. group ..  ansicolors.reset .."\n" .. res .. "\n"
    end
+   -- for group, res in pairs(keytable) do
+   --    -- if #result > 0 then result = result .. "\n" end
+   --    result = result ..
+   --       -- .. beautiful.fg_widget_value_important ..
+   --   "<span color=\"#00FF00\">" ..
+   --   group .. "</span>\n" .. res
+   -- end
    local tp = os.tmpname() -- open temporary file
    local f = io.open(tp, "w")
    f:write (result)  -- write to it
    f:close ()  -- close file
-   awful.util.spawn_with_shell()
-   return result
+   -- keydoc.path=tp
+   -- nid = naughty.notify({
+   --       title = "keydoc",
+   --       text = result,
+   --                         replaces_id = nid,
+   --                         timeout = 30 }).id
+   -- awful.util.spawn_with_shell("less " .. tp)
+   return tp
 end
+-- function keydoc.display()
+--    local keytable = awful.util.table.join(
+--       keydoc.markup(capi.root.keys()),
+--       capi.client.focus and keydoc.markup(capi.client.focus:keys()) or {}
+--    )
+
+--    -- local strings = markup(awful.util.table.join(
+--    --    capi.root.keys(),
+--    --    capi.client.focus and capi.client.focus:keys() or {}))
+
+--    local result = ""
+--    for group, res in pairs(keytable) do
+--       if #result > 0 then result = result .. "\n" end
+--       result = result ..
+-- 	 '<span weight="bold" color="' .. beautiful.fg_widget_value_important .. '">' ..
+-- 	 group .. "</span>\n" .. res
+--    end
+--    nid = naughty.notifyl({ text = result,
+-- 			  replaces_id = nid,
+-- 			  hover_timeout = 0.1,
+-- 			  timeout = 30 }).id
+-- end
 
 return keydoc

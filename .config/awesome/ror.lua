@@ -12,6 +12,6 @@
 -- for browsers, or the file name for emacs).
 
 table5={
-   ["Control-d"]={"emacsclient -a emacs -n -c","Emacs"},
-   ["Control-f"]={"firefox","Firefox"},
+   ["C-d"]={"emacsclient -a emacs -n -c","Emacs"},
+   ["C-f"]={"firefox","Firefox"},
 }

@@ -2,7 +2,6 @@
   (local-unset-key "\)")
   (local-unset-key ">")
   (c-toggle-auto-state 1)
-  (c-toggle-hungry-state 1)
   ;; (set (make-local-variable 'eldoc-idle-delay) 0.05)
   ;; (c-turn-on-eldoc-mode)
   ;; (define-key c-mode-map(kbd "C-c p") 'smart-compile)
@@ -12,11 +11,7 @@
   (setq gdb-many-windows           t
         gdb-use-separate-io-buffer t)
   (add-hook 'gdb-mode-hook '(lambda () (gud-tooltip-mode t)))
-  (set (make-local-variable 'eldoc-idle-delay) 0.20)
-
-  ;; (flymake-mode t)
-  ;; (define-key c-mode-map (kbd "C-c C-p") 'c-indent-defun)
-  )
+  (set (make-local-variable 'eldoc-idle-delay) 0.20))
 
 (add-hook 'c-mode-common-hook 'c-mode-common-hooks)
 

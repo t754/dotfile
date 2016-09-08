@@ -26,13 +26,11 @@
         cmake-ide
         cmake-mode
         color-theme
-        company-coq
         company-irony
         company-jedi
         company-quickhelp
         dockerfile-mode
         drag-stuff
-        elisp-format
         emmet-mode
         epc
         epl
@@ -41,7 +39,6 @@
         flycheck
         flycheck-cask
         flycheck-color-mode-line
-        flycheck-gometalinter
         flycheck-irony
         flymake-cursor
         flymake-lua
@@ -86,7 +83,6 @@
         pos-tip
         powerline
         projectile-rails
-        proof-general
         py-autopep8
         python-pep8
         quickrun
@@ -123,6 +119,7 @@
                            emacs-helm/helm-w3m
                            emacs-jp/helm-migemo
                            emacs-jp/init-loader
+                           favadi/flycheck-gometalinter
                            jcpetkovich/shrink-whitespace.el
                            ptrv/company-lua
                            purcell/exec-path-from-shell
