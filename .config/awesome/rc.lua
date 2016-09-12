@@ -347,7 +347,25 @@ vicious.register(datewidget, vicious.widgets.date, "%m-%d(%a)%H:%M", 29)
 
 cputempwidget = wibox.widget.textbox()
 cputempwidget:set_font(myfont)
-vicious.register(cputempwidget, vicious.widgets.thermal, "$1℃", 7, { "coretemp.0/hwmon/hwmon0/", "core"})
+
+function templateColor(tmp)
+   if tmp < 40 then
+      return "#aaaaff"
+   elseif tmp < 70 then
+      return "green"
+   else
+      return "red"
+   end
+end
+
+vicious.register(cputempwidget,
+                 function(format, warg)
+                    local args = vicious.widgets.thermal(format, warg)
+                    args['{color}']=templateColor(args[1])
+                    return args
+                 end,
+                 '<span foreground="${color}">$1℃</span>',
+                 7, { "coretemp.0/hwmon/hwmon0/", "core"})
 
 cpuwidget = awful.widget.graph()
 
