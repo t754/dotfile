@@ -1,5 +1,6 @@
 ;; install roswell !
-(load (expand-file-name "~/.roswell/lisp/quicklisp/slime-helper.el"))
+(load (expand-file-name "~/.roswell/helper.el"))
+
 (with-eval-after-load "slime"
   (require 'slime-autoloads)
   (slime-setup '(slime-repl slime-fancy slime-banner slime-company))
@@ -10,7 +11,23 @@
   (define-key company-active-map (kbd "C-d") 'company-show-doc-buffer)
   (define-key company-active-map (kbd "M-.") 'company-show-location)
   (define-key slime-prefix-map (kbd "M-h") 'slime-documentation-lookup)
+  (define-key slime-mode-map (kbd "C-c C-k") 'my/load-lisp)
   (setq inferior-lisp-program "ros -L sbcl -Q run"))
+
+(defun my/load-lisp ()
+  (interactive)
+  (if (and (>= (buffer-size) 2)
+           (save-restriction
+             (widen) (buffer-substring (point-min) (+ 2 (point-min)))))
+      (progn
+        (beginning-of-buffer nil)
+        (forward-line 1)
+        (set-mark-command nil)
+        (end-of-buffer nil)
+        (slime-compile-defun)
+        (deactivate-mark nil))
+    (slime-compile-and-load-file)))
+
 
 (require 'cl-lib)
 (require 'color)
