@@ -119,6 +119,7 @@
                (sort-lines nil mbegin mend)))))))
  '(search-web-default-browser (quote eww-browse-url))
  '(search-web-in-emacs-browser (quote eww-browse-url))
+ '(slime-company-completion (quote fuzzy))
  '(tab-width 4)
  '(undo-tree-mode-lighter " U🌳")
  '(yas-trigger-key "TAB"))

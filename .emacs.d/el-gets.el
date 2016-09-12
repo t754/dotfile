@@ -91,7 +91,6 @@
         recentf-ext
         rubocop
         scheme-complete
-        slime
         slime-company
         smartparens
         smartrep
