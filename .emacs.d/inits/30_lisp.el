@@ -9,7 +9,6 @@
   (define-key slime-prefix-map (kbd "M-h") 'slime-documentation-lookup)
   (define-key slime-mode-map (kbd "C-c C-k") 'my/load-lisp)
   (setq inferior-lisp-program "ros -L sbcl -Q run")
-  (define-key slime-prefix-map (kbd "M-h") 'slime-documentation-lookup)
   (add-to-list 'load-path (expand-file-name "~/slime"))
   (require 'slime)
   (require 'slime-autoloads)
