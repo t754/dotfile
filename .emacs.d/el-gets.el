@@ -117,6 +117,7 @@
                            ShingoFukuyama/emacs-emoji-cheat-sheet
                            bmag/imenu-list
                            company-mode/company-mode
+                           dgutov/robe
                            emacs-helm/helm-w3m
                            emacs-jp/helm-migemo
                            emacs-jp/init-loader
