@@ -65,6 +65,7 @@
         irony-eldoc
         irony-mode
         jedi
+        company-tern
         js2-mode
         js2-refactor
         json-reformat
