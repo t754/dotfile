@@ -11,7 +11,6 @@
   (setq inferior-lisp-program "ros -L sbcl -Q run")
   (define-key slime-prefix-map (kbd "M-h") 'slime-documentation-lookup)
   (add-to-list 'load-path (expand-file-name "~/slime"))
-  (setq inferior-lisp-program "sbcl")
   (require 'slime)
   (require 'slime-autoloads)
   (slime-setup '(
