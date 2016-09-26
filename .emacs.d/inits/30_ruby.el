@@ -15,10 +15,11 @@
   (show-smartparens-mode t)
   ;; (setq flycheck-checker 'ruby-rubocop)
   ;; (flycheck-mode t)
-  ;; (robe-mode t)
+  (robe-mode t)
   ;; (ruby-end-mode +1)
   )
 
-
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
 ;; (add-hook 'robe-mode-hook 'ac-robe-setup)
 (add-hook 'ruby-mode-hook 'my/ruby-mode-hook)
