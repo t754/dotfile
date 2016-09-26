@@ -26,6 +26,7 @@
         [".config/fontconfig/conf.d/"]
     ]
     cmds =[
+         ["mkdir", "-p","$HOME/.config/systemd/user/"],
          ["cp", "$PWD/.config/systemd/user/emacs.service","$HOME/.config/systemd/user/"]
     ]
 
