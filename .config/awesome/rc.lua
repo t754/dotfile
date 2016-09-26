@@ -375,17 +375,12 @@ cpuwidget:set_color("#AECF96")
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1",0.3)
 
 mybattery = wibox.widget.textbox()
+mybattery:set_font(myfont)
 vicious.register(mybattery, function(format, warg)
     local args = vicious.widgets.bat(format, warg)
-    if args[2] < (100 / 3)  then
-       args['{color}'] = 'red'
-    elseif args[2] < (2 * 100 / 3) then
-       args['{color}'] = 'yellow'
-    else
-       args['{color}'] = '#5555ee'
-    end
+    args['{color}']=templateColor(100-args[2])
     return args
-end, '<span foreground="${color}">bat: $2% $3h</span>', 10, 'BAT0')
+end, '<span foreground="${color}">🔋[$3]$2%</span>', 10, 'BAT0')
 
 
 
