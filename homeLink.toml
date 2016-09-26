@@ -4,6 +4,8 @@
     prefix = ["sudo", "pacman", "-S"]
 [macros.install__fedora]
     prefix = ["sudo", "dnf", "install"]
+[macros.install__gentoo]
+    prefix = ["sudo", "emerge"]
 
 [tasks.default]
     links = [
