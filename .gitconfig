@@ -51,7 +51,7 @@
 [push]
     default      = simple
 [credential]
-    helper       = /usr/lib/git-core/git-credential-gnome-keyring
+	helper = gnome-keyring
 [help]
 	autoCorrect  = -1
 [pull]
