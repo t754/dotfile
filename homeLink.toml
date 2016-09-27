@@ -53,7 +53,7 @@
          ["ghq","get","https://github.com/milkbikis/powerline-shell.git"],
          ["ghq","get","https://github.com/rupa/z.git"],
          ["ghq","get","https://github.com/tmux-plugins/tpm.git"],
-         ["sed","-i","s/.*THEME.*/THEME = \"my\"/","${HOME}/.ghq/github.com/milkbikis/powerline-shell/config.py"],
+         ["sed","-i","s/.*THEME.*/THEME = \"my\"/","${HOME}/.ghq/github.com/milkbikis/powerline-shell/config.py.dist"],
     ]
     links = [
           ["${HOME}/.tmux/plugins/tpm","${HOME}/.ghq/github.com/tmux-plugins/tpm"],
