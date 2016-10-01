@@ -86,7 +86,7 @@ do
 end
 
 -- This is used later as the default terminal and editor to run.
-terminal = "st -f 'Inconsolata:size=18'"
+terminal = "xfce4-terminal"
 editor = os.getenv("EDITOR") or os.getenv("VISUAL") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
