@@ -83,6 +83,7 @@ do
         print("Personal theme doesn't exist, falling back to openSUSE")
         beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
     end
+   theme.border_width  = 10
 end
 
 -- This is used later as the default terminal and editor to run.
