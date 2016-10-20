@@ -366,7 +366,8 @@ vicious.register(cputempwidget,
                     return args
                  end,
                  '<span foreground="${color}">$1℃</span>',
-                 7, { "coretemp.0/hwmon/hwmon0/", "core"})
+                 7, { "thermal_zone0", "sys"})
+
 memwidget = awful.widget.progressbar()
 -- Progressbar properties
 memwidget:set_width(8)
