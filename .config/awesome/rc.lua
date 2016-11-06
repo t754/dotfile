@@ -733,15 +733,10 @@ awful.rules.rules = {
                     buttons = clientbuttons } },
    -- to fix youtube fullscreen problems if still seeing bottom bar
    -- for chromium change "plugin-container" to "exe"
-
-   { rule = { instance = "plugin-container" },
-     properties = { floating = true } },
-   { rule = { class = "MPlayer" },
-     properties = { floating = true } },
-   { rule = { class = "pinentry" },
-     properties = { floating = true } },
    { rule = { class = "gimp" },
      properties = { floating = true } },
+   { rule = { name = "Wicd Network Manager" },
+     properties = { tag = tags[1][9] } },
    { rule = { class = "Keepassx" },
      properties = { tag = tags[1][9] } },
    { rule = { class = "Firefox" },
