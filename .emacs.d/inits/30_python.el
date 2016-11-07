@@ -12,9 +12,7 @@
   (jedi:setup)
   ;; (whitespace-mode)
   (setq jedi:setup-keys t
-		jedi:complete-on-dot t
-		jedi:environment-virtualenv
-		(list "virtualenv3" "--system-site-packages"))
+		jedi:complete-on-dot t)
   (set-face-background 'highlight-indentation-face "gray4")
   (set-face-background 'highlight-indentation-current-column-face "gray20")
   (add-to-list 'company-backends 'company-jedi)

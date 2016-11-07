@@ -4,6 +4,8 @@
     prefix = ["sudo", "pacman", "-S"]
 [macros.install__fedora]
     prefix = ["sudo", "dnf", "install"]
+[macros.install__gentoo]
+    prefix = ["sudo", "emerge"]
 
 [tasks.default]
     links = [
@@ -18,15 +20,15 @@
         [".gitconfig"],
         [".hgrc"],
         [".inputrc"],
-        [".screenrc"],
         [".tmux.conf"],
-        [".xmodmap"],
+        [".Xmodmap"],
         [".xmonad"],
         [".zshrc"],
         [".config/awesome"],
         [".config/fontconfig/conf.d/"]
     ]
     cmds =[
+         ["mkdir", "-p","$HOME/.config/systemd/user/"],
          ["cp", "$PWD/.config/systemd/user/emacs.service","$HOME/.config/systemd/user/"]
     ]
 
@@ -51,12 +53,14 @@
          ["ghq","get","https://github.com/milkbikis/powerline-shell.git"],
          ["ghq","get","https://github.com/rupa/z.git"],
          ["ghq","get","https://github.com/tmux-plugins/tpm.git"],
+         ["sed","-i","s/.*THEME.*/THEME = \"my\"/","${HOME}/.ghq/github.com/milkbikis/powerline-shell/config.py.dist"],
     ]
     links = [
           ["${HOME}/.tmux/plugins/tpm","${HOME}/.ghq/github.com/tmux-plugins/tpm"],
-          ["${HOME}/.urxvt/ext/font-size", "${HOME}/.ghq/github.com/majutsushi/urxvt-font-size/font-size"],
+          ["${HOME}/.urxvt/ext/font-size","${HOME}/.ghq/github.com/majutsushi/urxvt-font-size/font-size"],
+          ["${HOME}/.ghq/github.com/milkbikis/powerline-shell/themes/my.py","powerline-shell/themes/my.py"],
+          ["${HOME}/.ghq/github.com/erikw/tmux-powerline/themes/default.sh","default.sh"],
     ]
-
 [tasks.dropbox]
     cmds = [
          ["@install", "curl"],

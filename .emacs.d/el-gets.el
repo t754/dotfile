@@ -76,7 +76,6 @@
         markdown-mode
         midje-mode
         migemo
-        minimap
         multiple-cursors
         org-mode
         popup

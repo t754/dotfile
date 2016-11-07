@@ -2,23 +2,24 @@
 
 (load (expand-file-name "~/.roswell/helper.el"))
 (with-eval-after-load "slime"
+  (require 'slime-autoloads)
+  (require 'slime-repl)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
   (define-key company-active-map (kbd "C-d") 'company-show-doc-buffer)
   (define-key company-active-map (kbd "M-.") 'company-show-location)
   (define-key slime-prefix-map (kbd "M-h") 'slime-documentation-lookup)
   (define-key slime-mode-map (kbd "C-c C-k") 'my/load-lisp)
-  (setq inferior-lisp-program "ros -L sbcl -Q run")
-  (add-to-list 'load-path (expand-file-name "~/slime"))
-  (require 'slime)
-  (require 'slime-autoloads)
-  (slime-setup '(
-                 slime-repl
-                 slime-fancy
-                 slime-banner
-                 slime-company
-                 )))
+  (setq inferior-lisp-program "ros  -Q run")
+  (define-key slime-prefix-map (kbd "M-h") 'slime-documentation-lookup)
+  )
 
+(slime-setup '(
+               slime-repl
+               slime-fancy
+               slime-banner
+               slime-company
+               ))
 
 (defun my/load-lisp ()
   (interactive)
