@@ -65,7 +65,7 @@
 
 (defun my/font-size ()
   (cond
-   ((equal system-name "utrtamako") 16)
+   ((equal system-name "utrtamako") 18)
    ((some (lambda (strs) (equal system-name strs))
           '("localhost.localdomain"
             "localhost.homenetwork"
