@@ -9,7 +9,6 @@ ulimit -c 4096
 export SHELL="/bin/bash"
 export LANG=ja_JP.UTF-8
 export EDITOR="emacsclient -nw"
-export PAGER="less"
 # if [ -n ${DISPLAY} ] ; then
 #     export DISPLAY=:0.0
 # fi
@@ -20,7 +19,7 @@ export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
 export ALTERNATE_EDITOR=""
 export PAGER="less"
-export LESS=' -R -X -I'
+export LESS='-g -i -M -R -S -W -z-4 -x4'
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;38;5;74m'
 export LESS_TERMCAP_me=$'\E[0m'
