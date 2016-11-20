@@ -70,8 +70,7 @@ if which ruby &>/dev/null && which gem &>/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
-#export PATH=$(echo $PATH":" | tr ":" "\0" |  xargs -0 -I% bash -c 'test -d "%" && echo -n "%:"' | sed 's/:$//')
-export PATH=$(echo $PATH | tr ':' '\n' | awk '!/^[:space:]*$/ && !a[$0]++' | tr '\n' ':')
+export PATH=$(echo $PATH | tr ':' '\n' | xargs -L1 -I@@ sh -c '[ -d "@@" ] && echo "@@"' | awk '!/^[:space:]*$/ && !a[$0]++' | tr '\n' ':')
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
 # SCREEN buffer
