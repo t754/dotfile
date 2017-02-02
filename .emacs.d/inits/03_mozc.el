@@ -1,11 +1,6 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc")
 
 (when  (require 'mozc nil t)
-
-  ;;(setq mozc-candidate-style 'overlay)
-  (global-set-key (kbd "C-\\") 'toggle-input-method)
-  ;; (bind-key (kbd "C-h") 'DEL mozc-mode-map)2
-
   (set-buffer-file-coding-system 'utf-8)
   (set-buffer-file-coding-system 'utf-8)
   (set-clipboard-coding-system 'utf-8)
@@ -20,11 +15,11 @@
         default-input-method "japanese-mozc"
         mozc-candidate-style 'echo-area)
 
-  ;; (if (featurep 'key-chord)
-  ;;   (defadvice toggle-input-method (after my-toggle-input-method activate)
-  ;;     (mozc-change-cursor-color)))
+  (global-set-key (kbd "C-\\") 'toggle-input-method)
+  (bind-keys :map mozc-mode-map
+             ("C-g" . toggle-input-method)))
 
-  )
+
 
 ;; helm で候補のアクションを表示する際に IME を OFF にする
 (defadvice helm-select-action (before ad-helm-select-action-for-mozc activate)
@@ -40,11 +35,11 @@
       (set-cursor-color "orange")
       ))
 
-(add-hook 'input-method-activate-hook 'mozc-change-cursor-color)
-          ;; (lambda() (set-cursor-color "blue")))
-(add-hook 'input-method-inactivate-hook 'mozc-change-cursor-color)
-          ;; (lambda() (set-cursor-color "white")))
+(defun input-method-activate-hooks ()
+  ;; 何もしなかったら 3sec で disable
+  (run-with-idle-timer 3 nil #'deactivate-input-method)
+  (mozc-change-cursor-color))
 
-;; (defvar my-default-cursor-color)
-;; (setq my-default-cursor-color (cdr (assoc 'cursor-color default-frame-alist)))
-;; (add-hook 'input-method-activate-hook 'mozc-change-cursor-color)
+(add-hook 'input-method-activate-hook 'input-method-activate-hooks)
+
+(add-hook 'input-method-inactivate-hook 'mozc-change-cursor-color)
