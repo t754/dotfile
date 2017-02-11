@@ -97,6 +97,7 @@ export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 -
 [ -r ~/.ghq/github.com/rupa/z/z.sh ] && source ~/.ghq/github.com/rupa/z/z.sh
 [ -r $HOME/.tmuxinator/tmuxinator.bash ] && source $HOME/.tmuxinator/tmuxinator.bash
 [ -r $HOME/.bashrc.local.bash ] && source $HOME/.bashrc.local.bash
+[ -r $HOME/.bashrc.local.bash ] && source $HOME/.cargo/env
 
 function _update_ps1() {
     export PS1="$(${powerlineShellPath}/powerline-shell.py ${powerlineArgopt} $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
