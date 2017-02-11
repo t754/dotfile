@@ -13,7 +13,6 @@
 (setq my/el-list
       '(
         ;;##(
-        actionscript-mode
         align-cljlet
         auto-complete
         avy
@@ -40,6 +39,7 @@
         flycheck-cask
         flycheck-color-mode-line
         flycheck-irony
+        flycheck-rust
         flymake-cursor
         flymake-lua
         fold-dwim
@@ -90,6 +90,8 @@
         rbenv
         recentf-ext
         rubocop
+        rust-mode
+        rust-racer
         scheme-complete
         slime-company
         smartparens
@@ -127,6 +129,7 @@
                            purcell/flymake-easy
                            purcell/flymake-haskell-multi
                            purcell/flymake-python-pyflakes
+                           racer-rust/emacs-racer
                            senny/emacs-eclim
                            yasuyk/helm-git-grep
                            yasuyk/web-beautify
