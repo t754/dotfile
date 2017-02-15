@@ -1,18 +1,18 @@
 ;; install roswell !
 
 (load (expand-file-name "~/.roswell/helper.el"))
-(with-eval-after-load "slime"
+(with-eval-after-load 'slime
   (require 'slime-autoloads)
   (require 'slime-repl)
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-active-map (kbd "C-d") 'company-show-doc-buffer)
-  (define-key company-active-map (kbd "M-.") 'company-show-location)
-  (define-key slime-prefix-map (kbd "M-h") 'slime-documentation-lookup)
-  (define-key slime-mode-map (kbd "C-c C-k") 'my/load-lisp)
-  (setq inferior-lisp-program "ros  -Q run")
-  (define-key slime-prefix-map (kbd "M-h") 'slime-documentation-lookup)
-  )
+  (bind-keys :map company-active-map
+             ("C-n" . company-select-next)
+             ("C-p" . company-select-previous)
+             ("C-d" . company-show-doc-buffer)
+             ("M-." . company-show-location))
+  (bind-keys :map slime-prefix-map
+             ("M-h" . slime-documentation-lookup)
+             ("C-c C-k" . my/load-lisp))
+  (setq inferior-lisp-program "ros  -Q run"))
 
 (slime-setup '(
                slime-repl
