@@ -83,9 +83,10 @@ do
       print("Personal theme doesn't exist, falling back to openSUSE")
       beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
    end
-   theme.border_width  = 10
 end
 
+
+local theme = beautiful.get()
 -- This is used later as the default terminal and editor to run.
 terminal = "xfce4-terminal"
 editor = os.getenv("EDITOR") or os.getenv("VISUAL") or "vi"
@@ -105,9 +106,10 @@ awesome.font          = myfont
 theme.font          = myfont
 beautiful.font          = myfont
 naughty.config.defaults.font = myfont
+theme.border_width          = 10
 theme.menu_height           = 32
 theme.menu_width            = 200
-
+theme.border_width          = 10
 menubar.font          = "Ricty 18"
 menubar.cache_entries = true
 menubar.show_categories = tr
