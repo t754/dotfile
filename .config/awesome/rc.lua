@@ -379,9 +379,9 @@ memwidget:set_background_color("#494B4F")
 memwidget:set_border_color(nil)
 memwidget:set_color({ type = "linear",
                       from = { 0, 0 },
-                      to = { 10,0 },
+                      to = { 0,0 },
                       stops = { {0, "#AECF96"}, {0.5, "#88A175"},
-                    {1, "#FF5656"}}})
+                         {1, "#FF5656"}}})
 -- Register widget
 vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
 
@@ -743,6 +743,10 @@ awful.rules.rules = {
      properties = { tag = tags[1][9] } },
    { rule = { class = "Firefox" },
      properties = { tag = tags[1][2] } },
+   { rule = { class = "xfreerdp" },
+     properties = { tag = tags[1][4] } },
+   { rule = { class = "Remmina" },
+     properties = { tag = tags[1][4] } },
    { rule = { class = "VirtualBox" },
      except = { name = "Oracle VM VirtualBox Manager" },
      properties = { tag = tags[1][4] } },
