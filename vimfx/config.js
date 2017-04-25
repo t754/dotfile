@@ -30,9 +30,12 @@ let {commands} = vimfx.modes.normal;
     },
      ({vim}) => {
          let location = new vim.window.URL(vim.browser.currentURI.spec)
-         vim.window.gBrowser.loadURI(`http://b.hatena.ne.jp/entry/${encodeURIComponent(location.href)}`)
+         let tmp=
+             (location.protocol === "https:" ? "s/" : "") +
+             location.href.replace(location.protocol+"//","")
+         vim.window.gBrowser.loadURI(`http://b.hatena.ne.jp/entry/${tmp}`)
      },
-     ['cc','custom.mode.normal'],
+     ['gc','custom.mode.normal'],
     ],
     [{
         name: 'bookmark_page',
@@ -50,7 +53,6 @@ let {commands} = vimfx.modes.normal;
     },
      ({vim}) => {
          let f = vim.window.document.getElementById("pocket-button")
-         console.log(f)
          f.click()
      },
      ["ga",'custom.mode.normal'],
