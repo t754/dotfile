@@ -29,13 +29,26 @@ let {commands} = vimfx.modes.normal;
         category: 'tabs',
     },
      ({vim}) => {
-         let location = new vim.window.URL(vim.browser.currentURI.spec)
-         let tmp=
+         const location = new vim.window.URL(vim.browser.currentURI.spec)
+         const tmp=
              (location.protocol === "https:" ? "s/" : "") +
              location.href.replace(location.protocol+"//","")
          vim.window.gBrowser.loadURI(`http://b.hatena.ne.jp/entry/${tmp}`)
      },
-     ['gc','custom.mode.normal'],
+     ['gb','custom.mode.normal'],
+    ],
+    [{
+        name: 'translate_en_to_jp',
+        description: 'Translate English to Japanese',
+        category: 'tabs',
+    },
+     ({vim}) => {
+     //TranslateEnglishToJapan(){
+         const location = new vim.window.URL(vim.browser.currentURI.spec)
+         const url=encodeURIComponent(location)
+         vim.window.gBrowser.loadURI(`http://translate.google.com/translate?sl=en&tl=ja&u=${url}`)
+     },
+     ['gt','custom.mode.normal'],
     ],
     [{
         name: 'bookmark_page',
@@ -45,8 +58,9 @@ let {commands} = vimfx.modes.normal;
          let {window} = vim
          window.PlacesCommandHook.bookmarkCurrentPage(true, window.PlacesUtils.bookmarksMenuFolderId)
      },
-     ['gb','custom.mode.normal'],
+     ['gv','custom.mode.normal'],
     ],
+
     [{
         name: 'pocket_click_toolbar_button',
         description: 'Pocket click',
@@ -66,15 +80,13 @@ let {commands} = vimfx.modes.normal;
         vimfx.set(`${mode}.${opt.name}`, shortcuts)
 })
 
-
 Object.entries(options).forEach(([option, value]) => vimfx.set(option, value));
 
 const MAPPINGS = {
-    // 'search_bookmarks': ['b','custom.mode.normal'],
     "scroll_half_page_down": "<c-v>",
     "scroll_half_page_up" :"<a-v>",
-    'tab_select_previous': 'K gT h',
-    'tab_select_next': 'J gt l',
+    'tab_select_previous': 'K h',
+    'tab_select_next': 'J l',
     'scroll_right': '<c-f>',
     'scroll_left': '<c-b>',
     'scroll_down': 'j <c-n>',
@@ -84,12 +96,13 @@ const MAPPINGS = {
     'find': '/ <C-s>',
     'scroll_to_top': 'gg <',
     'scroll_to_bottom': 'G >',
-    'follow': 'f',
-    'follow_in_tab': 'E',
-    'follow_in_focused_tab': 'e',
+    'follow': 'f e',
+    'follow_in_tab': '',
+    'follow_in_focused_tab': 'E',
     'follow_in_window': '',
     'follow_in_private_window': '',
-    // 'custom.mode.normal.click_toolbar_pocket': 'P',
+    'esc': '<force><escape> <c-[>',
+    'mode.caret.exit': '<escape> <c-[>',
 }
 
 Object.entries(MAPPINGS).forEach(([cmd, value]) => {
