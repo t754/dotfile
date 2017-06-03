@@ -23,6 +23,7 @@ alias xsels='xsel -ib < /tmp/screen-exchange'
 alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
 alias open="mimeopen"
 alias o="open"
+alias g="git"
 # coredump した場所
 alias core="sudo systemd-coredumpctl list | tail"
 alias coreout='sudo systemd-coredumpctl dump -o core'
@@ -742,4 +743,22 @@ function jsay() {
     fi
 
     rm ${outfile}
+}
+
+noti(){
+    local start=$(date +%s)
+    "$@"
+    local succ=$?
+    local elapsedtime=$(($(date +%s) - start))
+    local commandTimeout=1
+    if [[ $elapsedtime -gt $commandTimeout ]] ; then
+        local msg="$([ $succ -eq 0 ] && echo done || echo fail)($succ)::$(echo $@)::$elapsedtime[sec]"
+        echo $msg
+        if type arcus >/dev/null; then
+            arcus send -t "finish!" -m "$msg"
+        fi
+        if type notify-send >/dev/null; then
+            notify-send Notification "$msg"
+        fi
+    fi
 }
