@@ -1,8 +1,6 @@
 // vimfx.set('hints.chars', 'abcdefghijklmnopqrstuvw xyz')
 
-const options = {
-    "hints.chars": "asdfghjkl"
-};
+const options = {};
 let {commands} = vimfx.modes.normal;
 
 
@@ -71,6 +69,7 @@ let {commands} = vimfx.modes.normal;
      },
      ["ga",'custom.mode.normal'],
     ],
+
 ].forEach(([opt, fn, key]) => {
     vimfx.addCommand(opt,fn)
     let [shortcuts, mode] = Array.isArray(key)
@@ -103,6 +102,8 @@ const MAPPINGS = {
     'follow_in_private_window': '',
     'esc': '<force><escape> <c-[>',
     'mode.caret.exit': '<escape> <c-[>',
+    'tab_move_backward': 'gK <a-l>',
+    'tab_move_forward': 'gJ <a-h>',
 }
 
 Object.entries(MAPPINGS).forEach(([cmd, value]) => {
