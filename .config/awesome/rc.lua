@@ -370,20 +370,32 @@ vicious.register(cputempwidget,
                  '<span foreground="${color}">$1℃</span>',
                  7, { "thermal_zone0", "sys"})
 
-memwidget = awful.widget.progressbar()
--- Progressbar properties
-memwidget:set_width(8)
-memwidget:set_height(10)
-memwidget:set_vertical(true)
-memwidget:set_background_color("#494B4F")
-memwidget:set_border_color(nil)
-memwidget:set_color({ type = "linear",
-                      from = { 0, 0 },
-                      to = { 0,0 },
-                      stops = { {0, "#AECF96"}, {0.5, "#88A175"},
-                         {1, "#FF5656"}}})
--- Register widget
-vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
+
+for _, wdg in ipairs {
+   wibox.widget.textbox , wibox.widget.progressbar, wibox.widget.graph
+} do
+   function wdg:vicious(args)
+      local f = unpack or table.unpack -- Lua 5.1 compat
+      vicious.register(self, f(args))
+   end
+end
+
+memwidget = wibox.widget {
+   {
+      forced_height = 100,
+      forced_width  = 20,
+      border_width  = 1,
+      border_color  = "#AAAAAA",
+      color = "#AECF96",
+      background_color = "#494B4F",
+      vicious = { vicious.widgets.mem,"$1"},
+      widget        = wibox.widget.progressbar,
+   },
+   forced_width = 10,
+   direction = 'east',
+   widget = wibox.container.rotate,
+}
+
 
 cpuwidget = awful.widget.graph()
 
