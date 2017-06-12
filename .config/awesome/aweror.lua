@@ -107,7 +107,8 @@ function aweror.genkeys(mod1)
   local vvv = es2ak(allt1,mod1)
   for k,v in pairs(vvv) do
      rorkeys = awful.util.table.join(rorkeys,
-                                     awful.key(v.mask, v.key, genfun(v.func),v.func[2]))
+                                     awful.key(v.mask, v.key, genfun(v.func),
+                                               {description = v.func[2], group = "ROR"}))
   end
   return rorkeys
 end
