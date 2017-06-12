@@ -577,6 +577,20 @@ root.buttons(awful.util.table.join(
 ))
 -- }}}
 
+can_move_mouse = true
+function move_mouse_in_window_center()
+   if not can_move_mouse then
+      return
+   end
+   local c = client.focus
+   if c then
+      mouse.coords{
+         x = c.x + (c.width / 2),
+         y = c.y + (c.height / 2),
+      }
+   end
+end
+
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "/",      hotkeys_popup.show_help,
@@ -591,25 +605,14 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "j",
       function ()
          awful.client.focus.byidx( 1)
-         local c =awful.client
-         -- if c then
-         --    awful.mouse.coords({
-         --       x= 10,
-         --       y= 20,
-         --    })
-         -- end
-
-         -- local co = {
-         --    x=(c.x + c.width /2),
-         --    y=(c.y + c.height /2)}
-         -- awful.mouse.coords(co)
-
+         move_mouse_in_window_center()
       end,
       {description = "focus next by index", group = "client"}
    ),
    awful.key({ modkey,           }, "k",
       function ()
          awful.client.focus.byidx(-1)
+         move_mouse_in_window_center()
       end,
       {description = "focus previous by index", group = "client"}
    ),
