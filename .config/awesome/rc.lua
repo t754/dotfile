@@ -336,7 +336,7 @@ separator:set_text("|")
 -- mytextclock = awful.widget.textclock("%m/%d%a-%H:%M")
 datewidget = wibox.widget.textbox()
 datewidget:set_font(myfont)
-vicious.register(datewidget, vicious.widgets.date, "%m-%d(%a)%H:%M", 29)
+vicious.register(datewidget, vicious.widgets.date, "%m-%d(%a)%H:%M:%S", 1)
 
 cputempwidget = wibox.widget.textbox()
 cputempwidget:set_font(myfont)
@@ -537,14 +537,11 @@ awful.screen.connect_for_each_screen(function(s)
 
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            mybattery, separator,
-            memwidget, separator,
+            mybattery,
+            memwidget,
             cpuwidget,
             cputempwidget,
             datewidget,
-            mykeyboardlayout,
-
-            mytextclock,
             s.mylayoutbox
          },
       }
