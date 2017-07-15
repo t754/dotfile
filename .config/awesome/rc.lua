@@ -654,17 +654,6 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
       {description = "select previous", group = "layout"}),
 
-   awful.key({ modkey, "Control" }, "n",
-      function ()
-         local c = awful.client.restore()
-         -- Focus restored client
-         if c then
-            client.focus = c
-            c:raise()
-         end
-      end,
-      {description = "restore minimized", group = "client"}),
-
    -- Prompt
    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
       {description = "run prompt", group = "launcher"}),
