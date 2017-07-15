@@ -9,7 +9,6 @@ ulimit -c 4096
 export SHELL="/bin/bash"
 export LANG=ja_JP.UTF-8
 export EDITOR="emacsclient -nw"
-export PAGER="less"
 # if [ -n ${DISPLAY} ] ; then
 #     export DISPLAY=:0.0
 # fi
@@ -20,7 +19,7 @@ export COLORTERM="mlterm"
 export EDITOR="emacsclient -nw"
 export ALTERNATE_EDITOR=""
 export PAGER="less"
-export LESS=' -R -X -I'
+export LESS='-g -i -M -R -S -W -z-4 -x4'
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;38;5;74m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -71,8 +70,7 @@ if which ruby &>/dev/null && which gem &>/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
-#export PATH=$(echo $PATH":" | tr ":" "\0" |  xargs -0 -I% bash -c 'test -d "%" && echo -n "%:"' | sed 's/:$//')
-export PATH=$(echo $PATH | tr ':' '\n' | awk '!/^[:space:]*$/ && !a[$0]++' | tr '\n' ':')
+export PATH=$(echo $PATH | tr ':' '\n' | xargs -L1 -I@@ sh -c '[ -d "@@" ] && echo "@@"' | awk '!/^[:space:]*$/ && !a[$0]++' | tr '\n' ':')
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
 # SCREEN buffer
@@ -99,6 +97,7 @@ export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 -
 [ -r ~/.ghq/github.com/rupa/z/z.sh ] && source ~/.ghq/github.com/rupa/z/z.sh
 [ -r $HOME/.tmuxinator/tmuxinator.bash ] && source $HOME/.tmuxinator/tmuxinator.bash
 [ -r $HOME/.bashrc.local.bash ] && source $HOME/.bashrc.local.bash
+[ -r $HOME/.bashrc.local.bash ] && source $HOME/.cargo/env
 
 function _update_ps1() {
     export PS1="$(${powerlineShellPath}/powerline-shell.py ${powerlineArgopt} $? 2> /dev/null)"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';

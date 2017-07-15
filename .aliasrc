@@ -16,26 +16,19 @@ alias rm=' timeout 3 rm -Iv --one-file-system'
 alias server_name='ssh -v -l USERNAME IP ADDRESS'
 alias du="du -h -c"
 alias df="df -h -T --total"
-# alias grep="grep -i -n --color"
-# sudo alias get
 alias sudo="sudo "
 alias tmux="tmux -2"
-# alias bee='for i in {1..5}; do aplay -D plughw:1,7 ~/beep.wav; done'
 alias pgg='ps -Af | grep'
 alias xsels='xsel -ib < /tmp/screen-exchange'
 alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
 alias open="mimeopen"
 alias o="open"
+alias g="git"
 # coredump した場所
-
 alias core="sudo systemd-coredumpctl list | tail"
 alias coreout='sudo systemd-coredumpctl dump -o core'
 alias beeps="for i in {1..5}; do aplay ~/beep.wav; done"
 
-# alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-# alias alert='if [ "$?" -eq 0 ] ;
-# then  notify-send  "OKKKKKK" ;
-#  else notify-send  "NGGGGGGGGGGGG"  ; fi'
 
 function  alert {
     # local dir="$( find . -maxdepth 1 -type d | sed -e 's;\./;;' | peco )"
@@ -100,7 +93,6 @@ function dri() { docker rmi $(docker images -q); }
 function dbu() { docker build -t=$1 .; }
 
 # Show all alias related docker
-# dalias(){ alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort;}
 alias dalias='\grep -E -e "^alias.*docker" -e '\''\(\)\s+{.*docker'\'' -e '\''function docker'\'' $HOME/.aliasrc'
 #
 
@@ -675,34 +667,6 @@ function hg_dirty() {
     | sort | uniq | head -c1
 }
 
-
-### ------------------------------------
-### less-pretty-cat
-
-
-function pyedit() {
-    # about 'opens python module in your EDITOR'
-    # param '1: python module to open'
-    # example '$ pyedit requests'
-    # group 'python'
-
-    xpyc=`python -c "import sys; stdout = sys.stdout; sys.stdout = sys.stderr; import $1; stdout.write($1.__file__)"`
-
-    if [ "$xpyc" == "" ]; then
-        echo "Python module $1 not found"
-        return -1
-
-    elif [[ $xpyc == *__init__.py* ]]; then
-        xpydir=`dirname $xpyc`;
-        echo "$EDITOR $xpydir";
-        $EDITOR "$xpydir";
-    else
-        echo "$EDITOR ${xpyc%.*}.py";
-        $EDITOR "${xpyc%.*}.py";
-    fi
-}
-
-
 function peco-run(){
     function _peco_run(){       # clone dmenu_path
         cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
@@ -779,4 +743,22 @@ function jsay() {
     fi
 
     rm ${outfile}
+}
+
+noti(){
+    local start=$(date +%s)
+    "$@"
+    local succ=$?
+    local elapsedtime=$(($(date +%s) - start))
+    local commandTimeout=1
+    if [[ $elapsedtime -gt $commandTimeout ]] ; then
+        local msg="$([ $succ -eq 0 ] && echo done || echo fail)($succ)::$(echo $@)::$elapsedtime[sec]"
+        echo $msg
+        if type arcus >/dev/null; then
+            arcus send -t "finish!" -m "$msg"
+        fi
+        if type notify-send >/dev/null; then
+            notify-send Notification "$msg"
+        fi
+    fi
 }
