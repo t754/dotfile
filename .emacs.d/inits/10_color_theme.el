@@ -19,7 +19,7 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0.2
       show-paren-style 'expression)
-(set-face-underline-p 'show-paren-match-face "red")
+;; (set-face-underline-p 'show-paren-match-face "red")
 
 (custom-theme-set-faces 'my/color-theme-calm-forest
                         '(default ((t (:stipple nil :background "gray12" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "Ricty Discord"))))
