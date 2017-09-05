@@ -54,6 +54,9 @@ if type rbenv >/dev/null 2>&1; then
 fi
 [[ -e ~/.rbenv/completions/rbenv.bash ]] && source ~/.rbenv/completions/rbenv.bash
 
+if type luarocks >/dev/null 2>&1; then
+    eval "$(luarocks path --bin)"
+fi
 export PYENV_ROOT="$HOME/.pyenv"
 
 [[ -x "$(which pyenv 2>/dev/null)" ]] && eval "$(pyenv init -)"
