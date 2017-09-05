@@ -70,6 +70,10 @@ if which ruby &>/dev/null && which gem &>/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
+if which npm &> /dev/null ; then
+  export PATH="$PATH:$(npm root)/.bin"
+fi
+
 export PATH=$(echo $PATH | tr ':' '\n' | xargs -L1 -I@@ sh -c '[ -d "@@" ] && echo "@@"' | awk '!/^[:space:]*$/ && !a[$0]++' | tr '\n' ':')
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib64:/usr/lib32:/usr/lib:/usr/local/lib"
 export LDFLAGS=""
