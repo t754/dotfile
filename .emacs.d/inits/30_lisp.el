@@ -1,9 +1,13 @@
 ;; install roswell !
 
 (load (expand-file-name "~/.roswell/helper.el"))
-(with-eval-after-load 'slime
+
+(with-eval-after-load "slime"
   (require 'slime-autoloads)
   (require 'slime-repl)
+  (setq slime-complete-symbol*-fancy t)
+  (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+  (smartparens-strict-mode)
   (bind-keys :map company-active-map
              ("C-n" . company-select-next)
              ("C-p" . company-select-previous)
@@ -11,14 +15,23 @@
              ("M-." . company-show-location))
   (bind-keys :map slime-prefix-map
              ("M-h" . slime-documentation-lookup)
-             ("C-c C-k" . my/load-lisp))
-  (setq inferior-lisp-program "ros  -Q run"))
+             ("s"   . slime-selector))
+  (bind-keys :map slime-mode-map
+             ("C-c C-k" . my/load-lisp)))
+(setq inferior-lisp-program "ros -Q run")
+
+
+(defun lisp-mode-hooks ()
+  (smartparens-mode t))
+
+(add-hook 'lisp-mode-hook 'lisp-mode-hooks)
 
 (slime-setup '(
                slime-repl
                slime-fancy
                slime-banner
                slime-company
+               slime-indentation
                ))
 
 (defun my/load-lisp ()
@@ -26,7 +39,7 @@
   (if (and (>= (buffer-size) 2)
            (save-restriction
              (widen) (buffer-substring (point-min) (+ 2 (point-min)))))
-      (progn
+      (save-excursion
         (beginning-of-buffer nil)
         (forward-line 1)
         (set-mark-command nil)
