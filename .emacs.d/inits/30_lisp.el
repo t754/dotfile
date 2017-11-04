@@ -48,10 +48,18 @@
         (deactivate-mark nil))
     (slime-compile-and-load-file)))
 
+(let ((doc-path (expand-file-name "~/Documents/HyperSpec/")))
+  (when (file-directory-p doc-path)
+    (defadvice common-lisp-hyperspec (around hyperspec-around activate)
+      (let ((browse-url-browser-function (lambda (url etc) (eww-open-file url))))
+        ad-do-it))
+    (setq common-lisp-hyperspec-root doc-path
+          common-lisp-hyperspec-symbol-table (concat (file-name-as-directory doc-path)
+                                                     (file-name-as-directory "Data")
+                                                     "MapSym.txt"))))
 
 (require 'cl-lib)
 (require 'color)
-
 
 (defun rainbow-delimiters-mode-hooks ()
   (flet ((my/color-rainbow (i mx)
