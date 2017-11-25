@@ -14,6 +14,7 @@
       '(
         ;;##(
         align-cljlet
+        anzu
         auto-complete
         avy
         bm
@@ -100,7 +101,6 @@
         toml-mode
         undo-tree
         use-package
-        visual-regexp-steroids
         web-mode
         yaml-mode
         yascroll
