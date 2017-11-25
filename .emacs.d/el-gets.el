@@ -29,6 +29,7 @@
         company-irony
         company-jedi
         company-quickhelp
+        company-tern
         dockerfile-mode
         drag-stuff
         emmet-mode
@@ -65,8 +66,6 @@
         inf-ruby
         irony-eldoc
         irony-mode
-        jedi
-        company-tern
         js2-mode
         js2-refactor
         json-reformat
@@ -78,6 +77,7 @@
         midje-mode
         migemo
         multiple-cursors
+        omnisharp-mode
         org-mode
         popup
         popwin
@@ -97,6 +97,7 @@
         slime-company
         smartparens
         smartrep
+        smex
         switch-window
         toml-mode
         undo-tree
@@ -116,6 +117,7 @@
                            (yuutayamada/mykie-el :load-path "lisp")
                            Malabarba/beacon
                            ShingoFukuyama/emacs-emoji-cheat-sheet
+                           abo-abo/swiper
                            bmag/imenu-list
                            company-mode/company-mode
                            dgutov/robe
@@ -125,12 +127,14 @@
                            favadi/flycheck-gometalinter
                            jcpetkovich/shrink-whitespace.el
                            ptrv/company-lua
+                           ptrv/helm-smex
                            purcell/exec-path-from-shell
                            purcell/flymake-easy
                            purcell/flymake-haskell-multi
                            purcell/flymake-python-pyflakes
                            racer-rust/emacs-racer
                            senny/emacs-eclim
+                           syl20bnr/emacs-emoji-cheat-sheet-plus
                            yasuyk/helm-git-grep
                            yasuyk/web-beautify
                            zonuexe/emoji-fontset.el
