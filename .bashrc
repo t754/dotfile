@@ -105,11 +105,12 @@ export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 -
 [ -r $HOME/.tmuxinator/tmuxinator.bash ] && source $HOME/.tmuxinator/tmuxinator.bash
 [ -r $HOME/.bashrc.local.bash ] && source $HOME/.bashrc.local.bash
 [ -r $HOME/.bashrc.local.bash ] && source $HOME/.cargo/env
-
-function _update_ps1() {
-    export PS1="$(${powerlineShellPath}/powerline-shell.py ${powerlineArgopt} $? 2> /dev/null) \n"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
-}
-export PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
+if [ -x "${powerlineShellPath}/powerline-shell.py" ] ; then
+    function _update_ps1() {
+        export PS1="$(${powerlineShellPath}/powerline-shell.py ${powerlineArgopt} $? 2> /dev/null) \n"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
+    }
+    export PROMPT_COMMAND="  _update_ps1 ; $PROMPT_COMMAND"
+fi
 
 complete -cf sudo
 complete -cf man
