@@ -1,18 +1,20 @@
-(defun rust-mode-hooks ()
-  (racer-mode t)
-  (company-mode t)
-  (eldoc-mode t)
-  (racer-turn-on-eldoc t)
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-  (flycheck-mode t)
-  ;; (set (make-local-variable 'company-backends)
-  ;;      '(company-racer)
-  )
-
-(with-eval-after-load 'rust
-  (bind-keys :map rust-mode-map
-             ("M-." . racer-find-definition)
-             ("TAB" . racer-complete-or-indent)))
-(setq racer-rust-src-path "~/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src")
-
-(add-hook 'rust-mode-hook 'rust-mode-hooks)
+(use-package rust-mode
+  :defer t
+  :init
+  (setq rust-format-on-save t)
+  :config
+  (use-package racer-mode
+    :bind (:map rust-mode-map
+                ("M-." . racer-find-definition))
+    :init
+    (setq company-tooltip-align-annotations t)
+    (setq racer-rust-src-path (or (getenv "RUST_SRC_PATH")
+                                  (concat  (shell-command-to-string "rustc --print sysroot | tr -d '\n'")
+                                           "/lib/rustlib/src/rust/src")))
+    :config
+    (racer-turn-on-eldoc t))
+  (use-package flycheck-rust)
+  (add-hook 'rust-mode-hook  #'(lambda ()
+                                 (flycheck-mode)
+                                 (racer-mode)
+                                 (flycheck-rust-setup))))
