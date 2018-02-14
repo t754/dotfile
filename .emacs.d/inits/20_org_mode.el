@@ -26,7 +26,7 @@
       (org-display-inline-images)
     (error nil)))
 ;; (setq org-log-reschedule  'time)
-(setq org-directory "~/Dropbox/org/")
+(setq org-directory "~/org/")
 (setq org-startup-truncated                   nil
       org-latex-listings 'minted
       org-hide-leading-stars                  t ;; 見出しの余分な*を消す
@@ -55,20 +55,20 @@
                                                 (underline . "\\underline{%s}")
                                                 (verbatim . protectedtexttt))
 
-      org-capture-templates                   '(("t" "Task" entry (file+headline nil "Inbox")
-                                                 "** TODO %?\n %T\n %a\n %i\n")
-                                                ("b" "Bug" entry (file+headline nil "Inbox")
-                                                 "** TODO %?   :bug:\n  %T\n %a\n %i\n")
-                                                ("m" "Meeting" entry (file+headline nil "Meeting")
-                                                 "** %?\n %U\n %a\n %i\n")
-                                                ("i" "Idea" entry (file+headline nil "Idea")
-                                                 "** %?\n %U\n %i\n %a\n %i\n")
-                                                ;; ("d" "drill" entry
-                                                ;;  (file+headline (concat (getenv "HOME") "/Dropbox/flashCard.org") "hat")
-                                                ;;        "* Word :drill:\n%^ \n** Answer \n%^")
-                                                ("c" "同期カレンダーにエントリー" entry
-                                                 (file+headline nil "Schedule")
-                                                 "** TODO %?\n\t")))
+      org-capture-templates                   '(("i" "inbox"
+                                                 entry (file "~/org/inbox.org")
+                                                 "* %?\n %T\n %a\n %i\n"
+                                                 :empty-lines 1
+                                                 :unnarrowed 1)
+                                                ("h" "hobby"
+                                                 entry (file "~/org/hobby.org")
+                                                 "* %?\n %T\n %a\n %i\n"
+                                                 :empty-lines 1)
+                                                ("w" "work"
+                                                 entry (file "~/org/work.org")
+                                                 "* %?\n %T\n %a\n %i\n"
+                                                 :empty-lines 1)
+                                                ))
 
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
