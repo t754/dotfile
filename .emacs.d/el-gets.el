@@ -14,7 +14,6 @@
       '(
         ;;##(
         align-cljlet
-        anzu
         auto-complete
         avy
         bm
@@ -79,6 +78,7 @@
         multiple-cursors
         omnisharp-mode
         org-mode
+        pcre2el
         popup
         popwin
         pos-tip
@@ -102,6 +102,7 @@
         toml-mode
         undo-tree
         use-package
+        visual-regexp-steroids
         web-mode
         yaml-mode
         yascroll

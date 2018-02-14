@@ -1,9 +1,9 @@
-(global-anzu-mode +1)
-(global-set-key [remap query-replace] 'anzu-query-replace)
-(global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
-(custom-set-variables
- '(anzu-mode-lighter "")
- '(anzu-deactivate-region t)
- '(anzu-search-threshold 1000)
- '(anzu-replace-threshold 50)
- '(anzu-replace-to-string-separator " => "))
+(require 'visual-regexp-steroids)
+;; (setq vr/engine 'python)
+(setq vr/engine 'pcre2el)
+(global-set-key (kbd "M-%") 'vr/query-replace)
+;; multiple-cursorsを使っているならこれで
+(global-set-key (kbd "C-c m") 'vr/mc-mark)
+;; 普段の正規表現isearchにも使いたいならこれを
+(global-set-key (kbd "C-M-r") 'vr/isearch-backward)
+(global-set-key (kbd "C-M-s") 'vr/isearch-forward)
