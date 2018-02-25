@@ -127,10 +127,10 @@ menubar.geometry = {
 
 
 awful.layout.layouts = {
-    awful.layout.suit.tile.right,
-    awful.layout.suit.corner.nw,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.max,
+   awful.layout.suit.tile.right,
+   awful.layout.suit.corner.nw,
+   awful.layout.suit.tile.bottom,
+   awful.layout.suit.max,
 }
 
 local function client_menu_toggle_fn()
@@ -700,6 +700,16 @@ clientkeys = awful.util.table.join(
          c.minimized = true
       end,
       {description = "minimize", group = "client"}),
+   awful.key({ modkey,"Shift"    }, "n",
+      function()
+
+         local tag = awful.tag.selected()
+         for i=1, #tag:clients() do
+            tag:clients()[i].minimized=false
+            -- tag:clients()[i]:redraw()
+         end
+      end,
+      {description = "un-minimize", group = "client"}),
    awful.key({ modkey,           }, "m",
       function (c)
          c.maximized = not c.maximized
