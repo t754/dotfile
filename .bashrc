@@ -86,7 +86,7 @@ export IGNOREEOF=1
 stty stop undef
 export MANPATH=/usr/share/man/ja:
 export _Z_CMD=z
-
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
@@ -102,9 +102,8 @@ export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 -
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 [ -r "$HOME/.aliasrc" ] && . $HOME/.aliasrc
 [ -r ~/.ghq/github.com/rupa/z/z.sh ] && source ~/.ghq/github.com/rupa/z/z.sh
-[ -r $HOME/.tmuxinator/tmuxinator.bash ] && source $HOME/.tmuxinator/tmuxinator.bash
 [ -r $HOME/.bashrc.local.bash ] && source $HOME/.bashrc.local.bash
-[ -r $HOME/.bashrc.local.bash ] && source $HOME/.cargo/env
+[ -r $HOME/.cargo/env ] && source $HOME/.cargo/env
 if [ -x "${powerlineShellPath}/powerline-shell.py" ] ; then
     function _update_ps1() {
         export PS1="$(${powerlineShellPath}/powerline-shell.py ${powerlineArgopt} $? 2> /dev/null) \n"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")';
