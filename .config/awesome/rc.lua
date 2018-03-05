@@ -474,6 +474,39 @@ function map(func, tbl)
    end
 end
 
+
+
+local bar_color = "#74aeab"
+local mute_color = "#ff0000"
+local background_color = "#3a3a3a"
+local request_command = 'amixer -D pulse sget Master'
+local vol  = wibox.widget {
+    max_value = 1,
+    thickness = 2,
+    start_angle = 4.71238898, -- 2pi*3/4
+    forced_height = 17,
+    forced_width = 18,
+    bg = "#ffffff11",
+    paddings = 2,
+    widget = wibox.container.arcchart
+}
+
+local update_graphic = function(widget, stdout, _, _, _)
+    local mute = string.match(stdout, "%[(o%D%D?)%]")
+    local volume = string.match(stdout, "(%d?%d?%d)%%")
+    volume = tonumber(string.format("% 3d", volume))
+    widget.values = {volume / 100};
+    if mute == "off" then
+        widget.colors = {mute_color}
+    else
+        widget.colors = {bar_color}
+    end
+end
+
+
+
+
+
 screen.connect_signal("property::geometry", set_wallpaper)
 awful.screen.connect_for_each_screen(function(s)
       set_wallpaper(s)
@@ -538,6 +571,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
             mybattery,
+            awful.widget.watch(request_command, 1, update_graphic, vol),
             memwidget,
             cpuwidget,
             cputempwidget,
@@ -668,6 +702,12 @@ globalkeys = awful.util.table.join(
          }
       end,
       {description = "lua execute prompt", group = "awesome"}),
+   awful.key({ modkey}, "F11", function () awful.spawn("amixer -D pulse sset Master 5%-") end,
+      {description = "increase volume", group = "custom"}),
+   awful.key({ modkey}, "F12", function () awful.spawn("amixer -D pulse sset Master 5%+") end,
+      {description = "decrease volume", group = "custom"}),
+   awful.key({ modkey}, "F10", function () awful.spawn("amixer -D pulse set Master +1 toggle") end,
+      {description = "mute volume", group = "custom"}),
    -- Menubar
    awful.key({ modkey }, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
