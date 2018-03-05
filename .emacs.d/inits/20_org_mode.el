@@ -43,6 +43,9 @@
       org-tag-alist                           '(("@OFFICE" . ?o) ("@HOME" . ?h) ("NOTE" . ?s))
       org-lowest-priority 68 ;; ← D (A...D)
 
+      org-src-fontify-natively t
+      org-fontify-whole-heading-line t
+
       org-export-latex-coding-system          'utf-8-unix
       org-export-with-sub-superscripts        nil
 
