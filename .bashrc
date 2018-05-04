@@ -126,3 +126,42 @@ trap EC ERR
 
 # source ~/.ghq/github.com/arialdomartini/oh-my-git/prompt.sh
 [ -r $HOME/.bashrc.local.bash ] && source $HOME/.bashrc.local.bash
+
+MYTIME(){
+	date '+%s.%N'
+}
+
+export MYTIME_ONESHOT=1
+declare -A BINDS
+for b in $(bind -X | perl -nle 'm|:\s*"([^"]*)"| and print $1') ; do
+	BINDS[$b]=1
+done
+
+
+function MYTIME_PRE() {
+	if [ -z "$MYTIME_ONESHOT" ]; then
+		return
+	fi
+	[ -n "$COMP_LINE" ] && return
+	[ ${BINDS[$BASH_COMMAND]} ] && return
+	unset MYTIME_ONESHOT
+	export MYTIME_START=$(MYTIME)
+}
+trap 'MYTIME_PRE' DEBUG
+
+
+function MYTIME_POSTCOMMAND() {
+	local suc=$?
+	local tim=$(perl -e 'printf("%.3f",'"$(MYTIME) - $MYTIME_START"')' )
+	local COLOR='34'
+	if [[ 0 -ne $(perl -e 'print (3 < '"$tim"')') ]] ; then
+		local prev="$(history 1)"
+		notify-send "code :: $suc" "$prev"
+		echo -e "\033[${COLOR}m--${tim} sec--\033[0m"
+	fi
+}
+
+MYTIME_UNLOCK(){
+	export MYTIME_ONESHOT=1
+}
+export PROMPT_COMMAND=$(echo "MYTIME_POSTCOMMAND;${PROMPT_COMMAND};MYTIME_UNLOCK" | perl -pe 's/;\s*;/;/g')
