@@ -23,6 +23,7 @@
 
 
 (require 'search-web)
+(setq shr-color-visible-luminance-min 70)
 
 ;; (defadvice w3m-browse-url (around w3m-browse-url-popwin activate)
 ;;    (save-window-excursion ad-do-it)
