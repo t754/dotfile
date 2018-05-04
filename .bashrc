@@ -1,7 +1,6 @@
 # ~/.bashrc
 # If not running interactively, don't do anything
-# [[ $- != *i* ]] && return
-
+[[ $- != *i* ]] && return
 
 ulimit -c 4096
 
@@ -40,6 +39,7 @@ export LC_MESSAGES="C"
 # export HISTCONTROL=ignoredups
 export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
+builtin set -o histexpand;
 
 
 # ${PROMPT_COMMAND:$PROMPT_COMMAND$'\n'}
@@ -73,6 +73,14 @@ if which ruby &>/dev/null && which gem &>/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -f '/home/zztama/google-cloud-sdk/path.bash.inc' ]; then source '/home/zztama/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/home/zztama/google-cloud-sdk/completion.bash.inc' ]; then source '/home/zztama/google-cloud-sdk/completion.bash.inc'; fi
+
+export HISTTIMEFORMAT="%Y-%m-%dT%H:%M:%S "
 if which npm &> /dev/null ; then
   export PATH="$PATH:$(npm root)/.bin"
 fi
@@ -98,11 +106,10 @@ fi
 export powerlineShellPath="$(ghq list -p | grep 'milkbikis/powerline-shell')"
 export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 --mode ${POWERSHELL_MODE} --shell bash"
 
-
+[[ -x "$(which fasd 2>/dev/null)" ]] && eval "$(fasd --init auto)"
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 [ -r "$HOME/.aliasrc" ] && . $HOME/.aliasrc
 [ -r ~/.ghq/github.com/rupa/z/z.sh ] && source ~/.ghq/github.com/rupa/z/z.sh
-[ -r $HOME/.bashrc.local.bash ] && source $HOME/.bashrc.local.bash
 [ -r $HOME/.cargo/env ] && source $HOME/.cargo/env
 if [ -x "${powerlineShellPath}/powerline-shell.py" ] ; then
     function _update_ps1() {
@@ -118,3 +125,4 @@ function EC() { local r=$?;echo -e '\e[1;33m'code $r'\e[m'; return $r; }
 trap EC ERR
 
 # source ~/.ghq/github.com/arialdomartini/oh-my-git/prompt.sh
+[ -r $HOME/.bashrc.local.bash ] && source $HOME/.bashrc.local.bash

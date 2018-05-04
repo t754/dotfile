@@ -809,8 +809,7 @@ for i = 1, 9 do
                                                end
                                             end
                                          end,
-                                         {description = "toggle focused client on tag #" .. i, group = "tag"})
-   )
+                                         {description = "toggle focused client on tag #" .. i, group = "tag"}))
 end
 
 clientbuttons = awful.util.table.join(
