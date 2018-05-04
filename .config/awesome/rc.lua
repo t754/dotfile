@@ -87,7 +87,7 @@ menubar.font          = myfont
 menubar.cache_entries = true
 menubar.show_categories = tr
 
-menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", "~/.local/share/applications" }
+menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", "~/.local/share/applications" , "/var/lib/snapd/desktop/applications/"}
 modkey = "Mod4"
 menubar.geometry = {
    height = 32
@@ -516,7 +516,9 @@ awful.screen.connect_for_each_screen(function(s)
          end
       }
       s.mylayoutbox:buttons(
-         awful.util.table.join(map(function (fn) return (awful.button({ }, 1, fn))end),mybutton))
+         awful.util.table.join(
+			map(function (fn) return (awful.button({ }, 1, fn))end),
+			mybutton))
 
       s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
       s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
@@ -551,8 +553,6 @@ end)
 
 -- }}}
 
--- these are needed by the keydoc a better solution would be to place them in theme.lua
--- but leaving them here also provides a mean to change the colours here ;)
 
 beautiful.fg_widget_value="green"
 beautiful.fg_widget_clock="gold"
@@ -677,9 +677,23 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
-      {description = "setting xrandr", group = "launcher"})
+      {description = "setting xrandr", group = "launcher"}),
+   awful.key({ modkey}, "-", function ()
+         can_move_mouse = not(can_move_mouse);
+                           end,
+      {description = "etc", group = "custom"})
+
 
 )
+function un_minimize()
+   local c = awful.client.restore()
+   c.minimized = false
+   -- Focus restored client
+   if c then
+      client.focus = c
+      c:raise()
+   end
+end
 
 clientkeys = awful.util.table.join(
    awful.key({ modkey,           }, "f",
@@ -698,6 +712,8 @@ clientkeys = awful.util.table.join(
       {description = "move to screen", group = "client"}),
    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
       {description = "toggle keep on top", group = "client"}),
+   awful.key({ modkey, "Shift"   }, "t",      function (c)  awful.titlebar.toggle(c)        end,
+      {description = "toggle titlebar", group = "client"}),
    awful.key({ modkey,           }, "n",
       function (c)
          -- The client currently has the input focus, so it cannot be
@@ -706,15 +722,24 @@ clientkeys = awful.util.table.join(
       end,
       {description = "minimize", group = "client"}),
    awful.key({ modkey,"Shift"    }, "n",
-      function()
-
-         local tag = awful.tag.selected()
-         for i=1, #tag:clients() do
-            tag:clients()[i].minimized=false
-            -- tag:clients()[i]:redraw()
+      un_minimize,
+      {description = "un-minimize", group = "client"}),
+   awful.key({ modkey,"Control"    }, "n",
+      un_minimize,
+      {description = "un-minimize", group = "client"}),
+   awful.key({ modkey,  }, "@",
+      function ()
+         if client.focus then
+            for i = 1, 9 do
+               local tag = client.focus.screen.tags[i]
+               if tag then
+                  client.focus:toggle_tag(tag)
+               end
+            end
          end
       end,
-      {description = "un-minimize", group = "client"}),
+      {description = "all share tag",group = "tag"}
+   ),
    awful.key({ modkey,           }, "m",
       function (c)
          c.maximized = not c.maximized
@@ -858,6 +883,7 @@ client.connect_signal("manage", function (c, startup)
                             end
                          end
 
+                         awful.titlebar.hide(c)
                          local titlebars_enabled = false
                          if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
                             -- buttons for the titlebar
@@ -899,10 +925,51 @@ client.connect_signal("manage", function (c, startup)
                             layout:set_left(left_layout)
                             layout:set_right(right_layout)
                             layout:set_middle(middle_layout)
-
                             awful.titlebar(c):set_widget(layout)
                          end
 end)
+
+client.connect_signal("request::titlebars", function(c)
+    -- buttons for the titlebar
+    local buttons = gears.table.join(
+        awful.button({ }, 1, function()
+            client.focus = c
+            c:raise()
+            awful.mouse.client.move(c)
+        end),
+        awful.button({ }, 3, function()
+            client.focus = c
+            c:raise()
+            awful.mouse.client.resize(c)
+        end)
+    )
+
+    awful.titlebar(c) : setup {
+        { -- Left
+            awful.titlebar.widget.iconwidget(c),
+            buttons = buttons,
+            layout  = wibox.layout.fixed.horizontal
+        },
+        { -- Middle
+            { -- Title
+                align  = "center",
+                widget = awful.titlebar.widget.titlewidget(c)
+            },
+            buttons = buttons,
+            layout  = wibox.layout.flex.horizontal
+        },
+        { -- Right
+            awful.titlebar.widget.floatingbutton (c),
+            awful.titlebar.widget.maximizedbutton(c),
+            awful.titlebar.widget.stickybutton   (c),
+            awful.titlebar.widget.ontopbutton    (c),
+            awful.titlebar.widget.closebutton    (c),
+            layout = wibox.layout.fixed.horizontal()
+        },
+        layout = wibox.layout.align.horizontal
+    }
+end)
+
 
 client.connect_signal("mouse::enter", function(c)
                          if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
