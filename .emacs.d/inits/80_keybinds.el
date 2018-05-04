@@ -49,8 +49,8 @@ C-uをつけるとウィンドウを閉じる。"
   (interactive "p")
   (case arg
     (16 (delete-window))
-    (4  (other-window 1))
-    (t  (other-window-or-split))))
+    (4  (other-window-or-split))
+    (t  (other-window 1))))
 
 ;;;;C-x C-c で消すとき確認を問う
 (defun my-save-buffers-kill-emacs ()
