@@ -18,6 +18,7 @@
         avy
         bm
         c-eldoc
+        cargo
         clang-format
         clj-refactor
         clojure-mode
