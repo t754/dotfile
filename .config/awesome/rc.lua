@@ -1,24 +1,3 @@
---  rc.lua
---  custom initialization for awesome windowmanager 3.5.x
---
--- Copyright (C) 2012, 2013 by Togan Muftuoglu <toganm@opensuse.org>
--- Copyright (C) 2015 by Sorokin Alexei <sor.alexei@meowr.ru>
--- This program is free software; you can redistribute it and/or
--- modify it under the terms of the GNU General Public License as
--- published by the Free Software Foundation; either version 2, or (at
--- your option) any later version.
-
--- This program is distributed in the hope that it will be useful, but
--- WITHOUT ANY WARRANTY; without even the implied warranty of
--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
--- General Public License for more details.
-
--- You should have received a copy of the GNU General Public License
--- along with GNU Emacs; see the file COPYING.  If not, write to the
--- Free Software Foundation, Inc.,  51 Franklin Street, Fifth Floor,
--- Boston, MA 02110-1301 USA
-
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -29,7 +8,6 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
-local naughty = require("naughty")
 local menubar = require("menubar")
 
 -- Freedesktop integration
@@ -40,20 +18,14 @@ local menubar = require("menubar")
 -- Extra widgets
 local vicious = require("vicious")
 -- to create shortcuts help screen
-local keydoc = require("keydoc")
+
 local ror = require("aweror")
-
-
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
-if awesome.startup_errors then
-   naughty.notify({ preset = naughty.config.presets.critical,
-                    title = "Oops, there were errors during startup!",
-                    text = awesome.startup_errors })
-end
 
 -- Handle runtime errors after startup
 do
@@ -62,13 +34,11 @@ do
                              -- Make sure we don't go into an endless error loop
                              if in_error then return end
                              in_error = true
-
-                             naughty.notify({ preset = naughty.config.presets.critical,
-                                              title = "Oops, an error happened!",
-                                              text = err })
+                             awful.util.spawn('notify-send -u critical "Oops, an error happened!"  "' .. err .. '"')
                              in_error = false
    end)
 end
+
 -- }}}
 
 -- {{{ Variable definitions
@@ -108,7 +78,7 @@ awesome.font          = myfont
 theme.font          = myfont
 beautiful.font          = myfont
 
-naughty.config.defaults.font = myfont
+
 theme.menu_height           = 32
 theme.menu_width            = 200
 theme.border_width          = 2
@@ -251,17 +221,12 @@ local function xrandr()
    local next  = state.iterator()
    local label, action, icon
    if not next then
-      label, icon = "Keep the current configuration", "/usr/share/icons/Tango/32x32/devices/display.png"
+      label, icon = "Keep the current configuration", "/usr/share/icons/"
       state.iterator = nil
    else
       label, action, icon = unpack(next)
    end
-   state.cid = naughty.notify({ text = label,
-                                icon = icon,
-                                timeout = 4,
-                                screen = mouse.screen, -- Important, not all screens may be visible
-                                font = "Free Sans 18",
-                                replaces_id = state.cid }).id
+   awful.util.spawn('notify-send -a my-xrandr -c device  -t 4000  my-xrandr "' .. label .. '"')
 
    -- Setup the timer
    state.timer = timer { timeout = 4 }
