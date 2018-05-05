@@ -18,6 +18,7 @@
              ("s"   . slime-selector))
   (bind-keys :map slime-mode-map
              ("C-c C-k" . my/load-lisp)))
+
 (setq inferior-lisp-program "ros -Q run")
 
 
@@ -38,7 +39,8 @@
   (interactive)
   (if (and (>= (buffer-size) 2)
            (save-restriction
-             (widen) (buffer-substring (point-min) (+ 2 (point-min)))))
+             (widen)
+             (string= "#!" (buffer-substring (point-min) (+ 2 (point-min))))))
       (save-excursion
         (beginning-of-buffer nil)
         (forward-line 1)
