@@ -1,21 +1,68 @@
-#!/bin/bash
-if [[ $# -le 0 ]] ; then
-    echo "arg linux distros \
-(ex ubuntu,fedora,arch)"
-    exit 1
-fi
-source .bashrc
+#!/bin/bash -exv
+# source .bashrc
+ROOT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+BACKUPDIR="${HOME}/backup_setup_sh"
+mkdir -p $BACKUPDIR
 
-set -eu
-{
-    go get github.com/FooSoft/homemaker
-    homemaker  -verbose  homeLink.toml .
-    homemaker  -task ghq -verbose  homeLink.toml .
-    homemaker  -variant $1 -task dropbox -verbose  homeLink.toml .
+declare -a symlink_array=(
+    ".bashrc"
+    ".Xresources"
+    ".aliasrc"
+    ".bash_profile"
+    ".bashrc"
+    ".emacs.d"
+    ".latexmkrc"
+    ".gitignore"
+    ".gitconfig"
+    ".hgrc"
+    ".inputrc"
+    ".tmux.conf"
+    ".Xmodmap"
+    ".xmonad"
+    ".zshrc"
+    ".config/awesome"
+    ".config/fontconfig/conf.d"
+    ".config/systemd/user/emacs.service"
+)
+
+my_symlink(){
+    src="$1"
+    dst="$2"
+    dstdir=$(dirname "$dst")
+
+    if [[ ! -d $dstdir ]] ; then
+        mkdir -p "$dstdir"
+    fi
+    if [[ -f $dst ]] ; then
+        mv --backup=t "$dst" "${BACKUPDIR}/"
+    elif [[ -h $dst ]] ; then
+	unlink $dst
+    fi
+    ln -vs "$src" "$dst"
 }
-set +eu
 
-# init powerline-shell
-source ~/.bashrc
-ghq look powerline-shell
-./install.py
+deploy_symlink_array(){
+    for f in "${symlink_array[@]}"
+    do
+        my_symlink "${ROOT_DIR}/${f}" "${HOME}/${f}"
+    done
+}
+
+setup_go(){
+    if [[ ! -x "$(which go)" ]]; then
+        return -1
+    fi
+    go get github.com/motemen/ghq
+    ghq get https://github.com/clvv/fasd
+    my_symlink "$(ghq root)"/"$(ghq list clvv/fasd)"/fasd $HOME/bin/fasd
+
+    ghq get https://github.com/tmux-plugins/tpm
+    my_symlink "$(ghq root)"/"$(ghq list tmux-plugins/tpm)" $HOME/.tmux/plugins/tpm
+
+    go get github.com/prasmussen/gdrive
+}
+
+
+# main
+deploy_symlink_array
+setup_go
