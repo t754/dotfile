@@ -21,6 +21,7 @@ declare -a symlink_array=(
     ".xmonad"
     ".zshrc"
     ".config/awesome"
+    ".config/dunst"
     ".config/fontconfig/conf.d"
     ".config/systemd/user/emacs.service"
 )
