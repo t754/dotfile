@@ -107,6 +107,8 @@ export powerlineShellPath="$(ghq list -p | grep 'milkbikis/powerline-shell')"
 export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 --mode ${POWERSHELL_MODE} --shell bash"
 
 [[ -x "$(which fasd 2>/dev/null)" ]] && eval "$(fasd --init auto)"
+[[ -x "$(which kubectl 2>/dev/null)" ]] && source <(kubectl completion bash)
+[[ -x "$(which helm 2>/dev/null)" ]] && source <(helm completion bash)
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 [ -r "$HOME/.aliasrc" ] && . $HOME/.aliasrc
 [ -r ~/.ghq/github.com/rupa/z/z.sh ] && source ~/.ghq/github.com/rupa/z/z.sh
@@ -165,3 +167,6 @@ MYTIME_UNLOCK(){
 	export MYTIME_ONESHOT=1
 }
 export PROMPT_COMMAND=$(echo "MYTIME_POSTCOMMAND;${PROMPT_COMMAND};MYTIME_UNLOCK" | perl -pe 's/;\s*;/;/g')
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
