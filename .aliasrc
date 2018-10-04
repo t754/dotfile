@@ -439,7 +439,7 @@ function ips ()
 function down4me ()
 {
     # example '$ down4me http://www.google.com'
-    curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
+    curl -s "https://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
 }
 
 function myip ()
