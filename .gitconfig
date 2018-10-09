@@ -21,6 +21,7 @@
     co           = checkout
     d            = diff
     dc           = diff --cached
+    dn           = diff --name-only
     di           = diff
     dic          = diff --cached
     f            = fetch --prune
@@ -39,7 +40,7 @@
     l80          = "!f () { git log --abbrev-commit --date=short --pretty=format:'%h%x00%cd%x00%s%x00%an%x00%d' $@ | gawk -F '\\0' '{ printf \"\\033[31m%s\\033[0m \\033[32m%s\\033[0m %-80s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5 }' | less -R; }; f"
 [core]
     excludesfile = ~/.gitignore
-    pager        = less -r
+    pager        = less
     editor       = emacsclient
 [mergetool.ediff]
     cmd          = emacsclient -c --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
@@ -64,3 +65,5 @@
 	autoUpdate   = true
 [diff]
 	algorithm    = histogram
+[rebase]
+	autosquash = true
