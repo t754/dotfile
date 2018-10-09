@@ -85,9 +85,8 @@ theme.border_width          = 2
 theme.border_focus  = "#FFFF00"
 menubar.font          = myfont
 menubar.cache_entries = true
-menubar.show_categories = tr
-
-menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", "~/.local/share/applications" , "/var/lib/snapd/desktop/applications/"}
+menubar.show_categories = false
+menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications/", "~/.local/share/applications/" , "/var/lib/snapd/desktop/applications/"}
 modkey = "Mod4"
 menubar.geometry = {
    height = 32
@@ -614,7 +613,10 @@ globalkeys = awful.util.table.join(
       {description = "swap with next client by index", group = "client"}),
    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
       {description = "swap with previous client by index", group = "client"}),
-   awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+   awful.key({ modkey, "Control" }, "j",
+      function ()
+         awful.screen.focus_relative(1)
+      end,
       {description = "focus the next screen", group = "screen"}),
    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
       {description = "focus the previous screen", group = "screen"}),
@@ -676,7 +678,14 @@ globalkeys = awful.util.table.join(
    -- Menubar
    awful.key({ modkey }, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
+   awful.key({ modkey, "Control","Shift" }, "p", function() menubar.refresh() end,
+      {description = "reflesh the menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
+      {description = "setting xrandr", group = "launcher"}),
+   awful.key({ modkey}, "F7",
+      function()
+         awful.spawn([[emacsclient -n -c -e ' (org-capture) ']])
+      end,
       {description = "setting xrandr", group = "launcher"}),
    awful.key({ modkey}, "-", function ()
          can_move_mouse = not(can_move_mouse);
@@ -740,6 +749,11 @@ clientkeys = awful.util.table.join(
       end,
       {description = "all share tag",group = "tag"}
    ),
+   awful.key({ modkey, "Control", "Shift" }, "y",
+      function (c)
+         awful.util.spawn('dm-tool lock')
+      end,
+      {description = "lock screen", group = "client"}),
    awful.key({ modkey,           }, "m",
       function (c)
          c.maximized = not c.maximized
@@ -846,7 +860,7 @@ awful.rules.rules = {
            "Wicd Network Manager"
         },
    },
-     properties = { tag = "9" }},
+     properties = { tag = "8" }},
    { rule_any = {
         type = {
            "normal",
