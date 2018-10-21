@@ -51,7 +51,7 @@
 [push]
     default      = simple
 [credential]
-	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+	helper = libsecret
 [help]
 	autoCorrect  = -1
 [pull]
