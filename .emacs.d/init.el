@@ -9,7 +9,7 @@
 ;;reload
 (global-set-key [f12] 'eval-buffer)
 
-(server-start)
+(require 'server)
 (unless (server-running-p)
   (server-start))
 
