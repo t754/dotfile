@@ -32,7 +32,7 @@
     ln           = log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset' --name-status
     graph        = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     lp           = log --oneline -n 20 -p
-    ls           = log --stat --abbrev-commit -n 1 # display previous log
+    ls           = ls-files
     s            = status --short --branch
     st           = status
     su           = submodule update
@@ -51,7 +51,7 @@
 [push]
     default      = simple
 [credential]
-	helper = gnome-keyring
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 [help]
 	autoCorrect  = -1
 [pull]

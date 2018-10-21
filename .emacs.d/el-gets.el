@@ -44,7 +44,6 @@
         flycheck-rust
         flymake-cursor
         flymake-lua
-        fold-dwim
         git-commit-mode
         git-gutter
         go-eldoc
