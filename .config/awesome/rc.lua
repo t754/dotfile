@@ -323,7 +323,7 @@ vicious.register(cputempwidget,
                     return args
                  end,
                  '<span foreground="${color}">$1℃</span>',
-                 7, { "thermal_zone0", "sys"})
+                 7, { "hwmon2", "hwmon"})
 
 
 for _, wdg in ipairs {
