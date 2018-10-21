@@ -63,6 +63,7 @@
         htmlize
         idle-highlight-mode
         ido-vertical-mode
+        indium
         inf-ruby
         irony-eldoc
         irony-mode
@@ -99,12 +100,17 @@
         smartparens
         smartrep
         smex
+        swank-js
         switch-window
+        tern
+        tide
         toml-mode
+        typescript-mode
         undo-tree
         use-package
         visual-regexp-steroids
         web-mode
+        xref-js2
         yaml-mode
         yascroll
         yasnippet
