@@ -15,7 +15,9 @@ export EDITOR="emacsclient -nw"
 # set -x
 export TERM="xterm-256color"
 export COLORTERM="mlterm"
-export EDITOR="emacsclient -nw"
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
 export ALTERNATE_EDITOR=""
 export PAGER="less"
 export LESS='-g -i -M -R -S -W -z-4 -x4'
@@ -31,7 +33,6 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m'
 if type src-hilite-lesspipe.sh  >/dev/null 2>&1 ; then
     export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
 fi
-export VISUAL="emacsclient"
 export BROWSER="firefox"
 export TZ="Asia/Tokyo"
 export LC_MESSAGES="C"
