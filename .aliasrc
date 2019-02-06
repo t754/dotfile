@@ -5,11 +5,13 @@ alias la='ls -a'
 alias l1='ls -1'
 alias starte='emacs --daemon'
 alias e="emacsclient -c -n"
+alias del_e="emacsclient -e '(delete-frame)'"
 alias et="emacsclient -t -n"
-alias enox="emacsclient"
+alias enox="emacsclient -nw"
 alias en="emacsclient"
 alias E='SUDO_EDITOR="emacsclient -c" sudo -e '
-alias Enox='SUDO_EDITOR="emacsclient " sudo -e '
+alias Enox='SUDO_EDITOR="emacsclient -nw " sudo -e '
+alias En='SUDO_EDITOR="emacsclient  " sudo -e '
 alias mv=' timeout 8 mv -iv'
 alias cp="cp -i"
 alias rm=' timeout 3 rm -Iv --one-file-system'
@@ -30,6 +32,15 @@ alias coreout='sudo systemd-coredumpctl dump -o core'
 alias beeps="for i in {1..5}; do aplay ~/beep.wav; done"
 alias feh="feh -."
 
+
+# if [[ -x "$(which bundle 2>/dev/null)" ]] ; then
+#     function rails (){
+#         bundle exec rails $@
+#     }
+#     function rake (){
+#         bundle exec rails $@
+#     }
+# fi
 
 function  alert {
     # local dir="$( find . -maxdepth 1 -type d | sed -e 's;\./;;' | peco )"
@@ -58,6 +69,19 @@ function git-root() {
   fi
 }
 
+function el {
+    local path="$(echo $1 | perl -pe 's/([^:]+):([\d:]+)\s.*$/+$2 $1/g')"
+    eval "e $path"
+}
+
+function srch {
+    local tmp=/tmp/srch
+    csearch $@ | fzf | perl -pe 's/([^:]+):([\d:]+)\s.*$/+$2 $1/g' > $tmp
+    if [[ $(head -1 $tmp | wc -l ) -eq 0 ]] ; then
+        return
+    fi
+    cat /tmp/srch | xargs -L1 emacsclient -t -n
+}
 
 
 ############################################
@@ -291,7 +315,7 @@ function peco-select-history ()
     builtin typeset \
         READLINE_LINE_NEW="$(
             HISTTIMEFORMAT= builtin history |
-            command fzf +s --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r |
+            command fzf +s -e --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r |
             command sed '
                 /^ *[0-9]/ {
                     s/ *\([0-9]*\) .*/!\1/;
@@ -315,7 +339,6 @@ function peco-select-history ()
 
 
 if [ -x "$(which peco)" ]; then
-
 	function peco-ag () {
 		ag $@ | peco --query "$READLINE_LINE" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
 	}
