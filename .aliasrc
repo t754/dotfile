@@ -815,3 +815,30 @@ noti(){
         fi
     fi
 }
+
+
+no_modules() {
+  local project_root=$1
+
+  [ ! -r "$project_root/node_modules" ]
+}
+
+complete_npx() {
+  local project_root="$(pwd -P)"
+
+  while no_modules "$project_root"; do
+    if [ "$project_root" = '/' ]; then
+      return 1
+    fi
+
+    project_root=$(dirname "$project_root")
+  done
+
+  local CURR_ARG
+  local FILES=$(find ./node_modules/.bin -print0 -type f -or -type l | xargs  -0 -n1 basename)
+
+  CURR_ARG=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=( $(compgen -W "${FILES[@]}" -- $CURR_ARG ) );
+}
+
+complete -F complete_npx npx
