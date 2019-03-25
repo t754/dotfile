@@ -37,6 +37,7 @@
         epl
         expand-region
         f
+        ht
         flycheck
         flycheck-cask
         flycheck-color-mode-line
@@ -119,6 +120,9 @@
 (defvar my/bundle-list '() "A list to install for el-get-bundle ")
 (setq my/bundle-list     '(
                            ;;##(
+						   emacs-lsp/lsp-mode
+						   emacs-lsp/lsp-ui
+						   tigersoldier/company-lsp
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
