@@ -99,8 +99,9 @@ export IGNOREEOF=1
 stty stop undef
 export MANPATH=/usr/share/man/ja:
 export _Z_CMD=z
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-
+if [[ -x "$(which rustc 2>/dev/null)" ]] ; then
+    export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+fi
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     export POWERSHELL_MODE="flat"
