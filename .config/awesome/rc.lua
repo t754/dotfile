@@ -458,6 +458,11 @@ local vol  = wibox.widget {
 local update_graphic = function(widget, stdout, _, _, _)
     local mute = string.match(stdout, "%[(o%D%D?)%]")
     local volume = string.match(stdout, "(%d?%d?%d)%%")
+    if volume == nil then
+       widget.colors = {mute_color};
+       widget.values = {0.0};
+       return
+    end
     volume = tonumber(string.format("% 3d", volume))
     widget.values = {volume / 100};
     if mute == "off" then
