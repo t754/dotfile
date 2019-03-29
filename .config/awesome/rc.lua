@@ -351,7 +351,7 @@ memwidget = wibox.widget {
 }
 
 
-cpuwidget = awful.widget.graph()
+cpuwidget = wibox.widget.graph()
 
 cpuwidget:set_width(50)
 cpuwidget:set_background_color("#494B4F")
@@ -751,7 +751,7 @@ clientkeys = awful.util.table.join(
    ),
    awful.key({ modkey, "Control", "Shift" }, "y",
       function (c)
-         awful.util.spawn('dm-tool lock')
+         awful.util.spawn('gnome-screensaver-command -l')
       end,
       {description = "lock screen", group = "client"}),
    awful.key({ modkey,           }, "m",
@@ -853,18 +853,22 @@ awful.rules.rules = {
    },
      properties = { tag = "4" } },
    { rule_any = {
-        class = {
-           "Keepassx"
-        },
         name = {
-           "Wicd Network Manager"
+           "Wicd Network Manager",
+           "keepassxc"
         },
    },
      properties = { tag = "8" }},
    { rule_any = {
+        name = {
+           "Slack"
+        },
+   },
+     properties = { tag = "9" }},
+   { rule_any = {
         type = {
            "normal",
-           "dialog"
+           "dialog",
         }
    },
      properties = { titlebars_enabled = true }
