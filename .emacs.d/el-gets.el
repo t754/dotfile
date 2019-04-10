@@ -56,6 +56,7 @@
         helm-ag
         helm-descbinds
         helm-gtags
+        helm-ls-git
         helm-rails
         helm-robe
         helm-swoop
