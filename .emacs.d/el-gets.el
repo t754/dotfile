@@ -46,7 +46,7 @@
         flymake-cursor
         flymake-lua
         git-commit-mode
-        git-gutter
+        git-gutter+
         go-eldoc
         go-mode
         google-translate
