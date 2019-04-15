@@ -674,8 +674,10 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey}, "F10", function () awful.spawn("amixer -D pulse set Master +1 toggle") end,
       {description = "mute volume", group = "custom"}),
    -- Menubar
-   awful.key({ modkey }, "p", function() menubar.show() end,
+   awful.key({ modkey , "Shift"}, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
+   awful.key({ modkey }, "p", function() awful.spawn("dmenu_run -fn 'monospace-18'") end,
+      {description = "run dmenu menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
       {description = "setting xrandr", group = "launcher"}),
    awful.key({ modkey}, "-", function ()
