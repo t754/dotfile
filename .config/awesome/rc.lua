@@ -38,6 +38,10 @@ do
                              in_error = false
    end)
 end
+function my_notify(title,a)
+   awful.util.spawn('notify-send -u critical "' .. title .. '"  "' .. gears.debug.dump_return(a) .. '"')
+end
+
 
 -- }}}
 
@@ -60,7 +64,9 @@ end
 
 local theme = beautiful.get()
 -- This is used later as the default terminal and editor to run.
-terminal = "xfce4-terminal"
+-- terminal = "xfce4-terminal"
+terminal = "alacritty"
+
 editor = os.getenv("EDITOR") or os.getenv("VISUAL") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -358,6 +364,8 @@ cpuwidget:set_background_color("#494B4F")
 cpuwidget:set_color("#AECF96")
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1",0.3)
 
+traywidget = wibox.widget.systray()
+traywidget.opacity = 0
 mybattery = wibox.widget.textbox()
 mybattery:set_font(myfont)
 vicious.register(mybattery,
@@ -540,7 +548,7 @@ awful.screen.connect_for_each_screen(function(s)
          { -- Right widgets
 
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
+            traywidget,
             mybattery,
             awful.widget.watch(request_command, 1, update_graphic, vol),
             memwidget,
@@ -683,7 +691,7 @@ globalkeys = awful.util.table.join(
    -- Menubar
    awful.key({ modkey , "Shift"}, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
-   awful.key({ modkey }, "p", function() awful.spawn("dmenu_run -fn 'monospace-18'") end,
+   awful.key({ modkey }, "p", function() awful.spawn("rofi -modi combi -combi-modi window,run,drun,ssh -show combi") end,
       {description = "run dmenu menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
       {description = "setting xrandr", group = "launcher"}),
@@ -701,11 +709,11 @@ globalkeys = awful.util.table.join(
 )
 function un_minimize()
    local c = awful.client.restore()
-   c.minimized = false
-   -- Focus restored client
+   my_notify("notiy",c)
    if c then
       client.focus = c
       c:raise()
+      c.minimized = false
    end
 end
 
