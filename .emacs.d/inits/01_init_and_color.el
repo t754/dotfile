@@ -41,10 +41,7 @@
 ;(setq browse-url-browser-function 'browse-url-chrome)
 
                                         ;firefox の場合
-;; (setq browse-url-browser-function 'browse-url-firefox)
- (setq browse-url-generic-program (executable-find "firefox")
-          browse-url-browser-function 'browse-url-generic)
-
+(setq browse-url-browser-function 'browse-url-firefox)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;tab -> 空白に
 (setq-default tab-width 4 indent-tabs-mode nil)
