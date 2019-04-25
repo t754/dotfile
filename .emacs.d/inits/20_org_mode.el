@@ -61,8 +61,7 @@
       org-capture-templates                   '(("i" "inbox"
                                                  entry (file "~/org/inbox.org")
                                                  "* %?\n %T\n %a\n %i\n"
-                                                 :empty-lines 1
-                                                 :unnarrowed 1)
+                                                 :empty-lines 1 )
                                                 ("h" "hobby"
                                                  entry (file "~/org/hobby.org")
                                                  "* %?\n %T\n %a\n %i\n"
@@ -98,10 +97,10 @@
          (ruby . t)
          (gnuplot . t)
          (clojure . t)
-         (sh . t)
+         ;; (sh . t)
          ;;(ledger . t)
          (org . t)
-         ;;(plantuml . t)
+         (plantuml . t)
          (latex . t))))
 ;; org-default-notes-fileのディレクトリ
 
@@ -205,6 +204,3 @@
                                    "[NO-PACKAGES]\n"
                                    "\\usepackage{graphicx}\n")
                                  org-beamer-sectioning))))
-
-
-;; org-startup

@@ -15,7 +15,9 @@ export EDITOR="emacsclient -nw"
 # set -x
 export TERM="xterm-256color"
 export COLORTERM="mlterm"
-export EDITOR="emacsclient -nw"
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
 export ALTERNATE_EDITOR=""
 export PAGER="less"
 export LESS='-g -i -M -R -S -W -z-4 -x4'
@@ -31,7 +33,6 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m'
 if type src-hilite-lesspipe.sh  >/dev/null 2>&1 ; then
     export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
 fi
-export VISUAL="emacsclient"
 export BROWSER="firefox"
 export TZ="Asia/Tokyo"
 export LC_MESSAGES="C"
@@ -57,15 +58,8 @@ fi
 if type luarocks >/dev/null 2>&1; then
     eval "$(luarocks path --bin)"
 fi
-export PYENV_ROOT="$HOME/.pyenv"
-
-[[ -x "$(which pyenv 2>/dev/null)" ]] && eval "$(pyenv init -)"
-#Load pyenv virtualenv if the virtualenv plugin is installed.
-if pyenv virtualenv-init - &> /dev/null; then
-  eval "$(pyenv virtualenv-init -)"
-fi
 # [ -f ~/.pythonrc.py ] && export PYTHONSTARTUP=$HOME/.pythonrc.py
-
+export PYENV_ROOT="$HOME/.pyenv"
 export GOPATH="$HOME/.go"
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 export PATH="$HOME/bin:$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:/usr/local/go/bin:$GOPATH/bin:$GOBIN:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
@@ -76,10 +70,14 @@ fi
 
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-if [ -f '/home/zztama/google-cloud-sdk/path.bash.inc' ]; then source '/home/zztama/google-cloud-sdk/path.bash.inc'; fi
-if [ -f '/home/zztama/google-cloud-sdk/completion.bash.inc' ]; then source '/home/zztama/google-cloud-sdk/completion.bash.inc'; fi
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[[ -r "$HOME/google-cloud-sdk/path.bash.inc" ]]  && source "$HOME/google-cloud-sdk/path.bash.inc"
+[[ -r "$HOME/google-cloud-sdk/completion.bash.inc" ]] && source "$HOME/google-cloud-sdk/completion.bash.inc"
+[[ -r "$HOME/lib/azure-cli/az.completion" ]] && source "$HOME/lib/azure-cli/az.completion"
+[[ -r "$HOME/.bashrc.local.bash" ]] && source "$HOME/.bashrc.local.bash"
+[[ -r "$HOME/.fzf.bash" ]] && source "$HOME/.fzf.bash"
 
 export HISTTIMEFORMAT="%Y-%m-%dT%H:%M:%S "
 if which npm &> /dev/null ; then
@@ -95,8 +93,9 @@ export IGNOREEOF=1
 stty stop undef
 export MANPATH=/usr/share/man/ja:
 export _Z_CMD=z
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-
+if [[ -x "$(which rustc 2>/dev/null)" ]] ; then
+    export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+fi
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     export POWERSHELL_MODE="flat"
@@ -127,54 +126,16 @@ fi
 complete -cf sudo
 complete -cf man
 
-function EC() { local r=$?;echo -e '\e[1;33m'code $r'\e[m'; return $r; }
+function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
 trap EC ERR
 
 # source ~/.ghq/github.com/arialdomartini/oh-my-git/prompt.sh
-[ -r $HOME/.bashrc.local.bash ] && source $HOME/.bashrc.local.bash
 
-MYTIME(){
-	date '+%s.%N'
+peco() {
+    fzf +s
 }
 
-export MYTIME_ONESHOT=1
-declare -A BINDS
-for b in $(bind -X | perl -nle 'm|:\s*"([^"]*)"| and print $1') ; do
-	BINDS[$b]=1
-done
 
-
-function MYTIME_PRE() {
-	if [ -z "$MYTIME_ONESHOT" ]; then
-		return
-	fi
-	[ -n "$COMP_LINE" ] && return
-	[ ${BINDS[$BASH_COMMAND]} ] && return
-	unset MYTIME_ONESHOT
-	export MYTIME_START=$(MYTIME)
-}
-#trap 'MYTIME_PRE' DEBUG
-
-
-function MYTIME_POSTCOMMAND() {
-	local suc=$?
-	local tim=$(perl -e 'printf("%.3f",'"$(MYTIME) - $MYTIME_START"')' )
-	local COLOR='34'
-	if [[ 0 -ne $(perl -e 'print (3 < '"$tim"')') ]] ; then
-		local prev="$(history 1)"
-		notify-send "code :: $suc" "$prev"
-		echo -e "\033[${COLOR}m--${tim} sec--\033[0m"
-	fi
-}
-
-MYTIME_UNLOCK(){
-	export MYTIME_ONESHOT=1
-}
-#export PROMPT_COMMAND=$(echo "MYTIME_POSTCOMMAND;${PROMPT_COMMAND};MYTIME_UNLOCK" | perl -pe 's/;\s*;/;/g')
-
-
-export PYENV_ROOT="$HOME/.local/pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 [[ -x "$(which pyenv 2>/dev/null)" ]] && eval "$(pyenv init -)"
 
 #Load pyenv virtualenv if the virtualenv plugin is installed.
@@ -190,12 +151,14 @@ fi
 
 
 
+
 # Path to the bash it configuration
-export BASH_IT="$HOME/.bash_it"
+export BASH_IT="/home/zztama/.bash_it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
-export BASH_IT_THEME='nwinkler'
+# export BASH_IT_THEME='bobby'
+export BASH_IT_THEME='bobby'
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
@@ -243,6 +206,7 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
+
 
 # added by travis gem
 [ -f /home/t-nagoshi/.travis/travis.sh ] && source /home/t-nagoshi/.travis/travis.sh

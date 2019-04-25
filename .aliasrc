@@ -83,6 +83,15 @@ function srch {
     cat /tmp/srch | xargs -L1 emacsclient -t -n
 }
 
+function ediff() {
+	if [ "X${2}" = "X" ]; then
+		echo "USAGE: ediff <FILE 1> <FILE 2>"
+	else
+		# The --eval flag takes lisp code and evaluates it with EMACS
+		emacsclient --eval "(ediff-files \"$1\" \"$2\")"
+	fi
+}
+
 
 ############################################
 # Get latest container ID
@@ -458,7 +467,7 @@ function ips ()
 function down4me ()
 {
     # example '$ down4me http://www.google.com'
-    curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
+    curl -s "https://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
 }
 
 function myip ()
@@ -829,3 +838,30 @@ noti(){
         fi
     fi
 }
+
+
+no_modules() {
+  local project_root=$1
+
+  [ ! -r "$project_root/node_modules" ]
+}
+
+complete_npx() {
+  local project_root="$(pwd -P)"
+
+  while no_modules "$project_root"; do
+    if [ "$project_root" = '/' ]; then
+      return 1
+    fi
+
+    project_root=$(dirname "$project_root")
+  done
+
+  local CURR_ARG
+  local FILES=$(find ./node_modules/.bin -print0 -type f -or -type l | xargs  -0 -n1 basename)
+
+  CURR_ARG=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=( $(compgen -W "${FILES[@]}" -- $CURR_ARG ) );
+}
+
+complete -F complete_npx npx

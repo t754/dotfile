@@ -3,7 +3,6 @@
 (require 'helm-config)
 (require 'helm-descbinds)
 
-(helm-descbinds-install)
 (helm-descbinds-mode)
 
 (setq recentf-exclude '("/.mozilla/firefox/" "^/tmp/" "~$"
@@ -14,6 +13,7 @@
       recentf-auto-cleanup 600
       recentf-count 0
       helm-use-migemo t
+      helm-M-x-fuzzy-match t
       helm-delete-minibuffer-contents-from-point t
       helm-for-files-preferred-list '(helm-source-buffers-list
                                       helm-source-recentf
@@ -28,8 +28,8 @@
 (run-at-time t 600 'recentf-save-list)
 (recentf-mode 1)
 ;; (require 'helm-git)
-;; (require 'helm-ls-git)
-
+(require 'helm-ls-git)
+(helm-autoresize-mode)
 ;;;;;;;;;;;;
 ;; migemo ;;
 ;;;;;;;;;;;;
@@ -72,15 +72,13 @@
 
 (global-set-key (kbd "M-x") 'helm-M-x)
 
-;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
+
 
 (bind-keys :map helm-map
            ;; ("C-h" . delete-backward-char)
            ;; ("C-z" . scroll-down-command)
-           ("C-u C-z" . helm-buffer-run-kill-buffers))
-
+           ("C-u C-z" . helm-buffer-run-kill-buffers)
+           ("<tab>" . helm-execute-persistent-action)
+           ("C-i" . helm-execute-persistent-action))
 
 ;; (define-key global-map (kbd "C-x C-g") 'helm-git-find-file)
-;;
-;; TABで任意補完。選択肢が出てきたらC-nやC-pで上下移動してから決定することも可能
-;; (define-key helm-c-read-file-map (kbd "TAB") 'helm-execute-persistent-action)

@@ -95,18 +95,17 @@ URxvt*pointerColor:                     2
 ! /usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
 ! URxvt*font:                               xft:Source Code Pro for Powerline:size=14:antialias=true
 ! URxvt*imfont:                         xft:Ricty Discord4Powerline:Regular:size=14:antialias=true
-URxvt*.font:                            xft:Inconsolata:antialias=true:size=14,\
-                                        xft:Ricty:antialias=true:size=14,\
-                                        xft:Inconsolata\ for \Powerline:antialias=true:size=14,\
-                                        xft:PowerlineSymbols:antialias=true:size=14,\
-                                        xft:Noto\ Emoji:antialias=true:size=14,\
-                                        xft:Symbola:antialias=true:size=14,\
-                                        xft:Pomodoro:antialias=true:size=14,\
-                                        xft:FontAwesome:antialias=true:size=14,\
-                                        xft:Quivira:antialias=true:size=14,\
-                                        xft:Octicons:antialias=true:size=14
+URxvt*.font: xft:Inconsolata:antialias=true:size=12,\
+             xft:Ricty:antialias=true:size=12,\
+             xft:DejaVu Sans Mono:antialias=true:size=12,\
+             xft:PowerlineSymbols:antialias=true:size=12,\
+             xft:Noto Emoji:antialias=true:size=12,\
+             xft:Android Emoji:antialias=true:size=12,\
+             xft:Symbola:antialias=true:size=12,\
+             xft:Pomodoro:antialias=true:size=12,\
+             xft:FontAwesome:antialias=true:size=12,\
+             xft:Octicons:antialias=true:size=12
 
-! ,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
 ! URxvt*boldfont:                           xft:RictyDiscord4Powerline:Bold:pixelsize=14:antialias=true
 ! ! ,xft:Inconsolate-g for Powerline:size=14:antialias=true,xft:Droid Sans Mono:size=14:antialias=true,xft:Android Emoji:size=14:antialias=true
 ! ! URxvt*font: xft:Android Emoji:size=14:antialias=true
@@ -220,4 +219,5 @@ dzen2.font: xft:Droid Sans Mono:size=8:antialias=true
 
 ! Xft.embolden: true
 Emacs.FontBackend: xft
+emacs.useXIM: true
 Emacs.font: Monospace-12

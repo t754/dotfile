@@ -39,6 +39,7 @@
         epl
         expand-region
         f
+        ht
         flycheck
         flycheck-cask
         flycheck-color-mode-line
@@ -47,7 +48,7 @@
         flymake-cursor
         flymake-lua
         git-commit-mode
-        git-gutter
+        git-gutter+
         go-eldoc
         go-mode
         google-translate
@@ -66,6 +67,7 @@
         htmlize
         idle-highlight-mode
         ido-vertical-mode
+        indium
         inf-ruby
         irony-eldoc
         irony-mode
@@ -101,12 +103,17 @@
         smartparens
         smartrep
         smex
+        swank-js
         switch-window
+        tern
+        tide
         toml-mode
+        typescript-mode
         undo-tree
         use-package
         visual-regexp-steroids
         web-mode
+        xref-js2
         yaml-mode
         yascroll
         yasnippet
@@ -116,6 +123,9 @@
 (defvar my/bundle-list '() "A list to install for el-get-bundle ")
 (setq my/bundle-list     '(
                            ;;##(
+						   emacs-lsp/lsp-mode
+						   emacs-lsp/lsp-ui
+						   tigersoldier/company-lsp
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")

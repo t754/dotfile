@@ -44,11 +44,10 @@
 		   ("C-r" . helm-previous-line)
 		   ("C-s" . helm-next-line)
 		   ("M-i" .helm-multi-swoop-all-from-helm-swoop))
-;; (bind-keys :map  helm-map
-;; 		   ("C-c C-a" . all-from-helm-occur )) ;; helm-occurからall-extに受け渡し
+
 (bind-keys*
- ("C-c M-o" . myfix-helm-occur)             ;; helm-occurの起動
- ("M-o"     . helm-swoop)
+ ("M-o"     . myfix-helm-occur)             ;; helm-occurの起動
+ ("C-c M-o" . helm-swoop)
  ("C-c M-i" . helm-multi-swoop)
  ("C-M-o"   . my/grep))
 
