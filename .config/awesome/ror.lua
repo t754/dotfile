@@ -14,4 +14,6 @@
 table5={
    ["C-d"]={"emacsclient -c -n","Emacs"},
    ["C-f"]={"firefox","Firefox"},
+   ["C-s"]={"slack","Slack"},
+   ["C-g"]={"keepassxc","keepassxc"},
 }

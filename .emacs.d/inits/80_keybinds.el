@@ -119,6 +119,7 @@ For example, type \\[event-apply-control-shift-modifier] SPC to enter Control-Sh
  ;; ("C-k"       . my/kill-line)
  ("<f9>"      . menu-bar-mode))
 
+(define-key global-map (kbd "C-x C-f") 'counsel-find-file)
 (setq switch-window-shortcut-style 'qwerty)
 
 (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))

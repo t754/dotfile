@@ -38,6 +38,10 @@ do
                              in_error = false
    end)
 end
+function my_notify(title,a)
+   awful.util.spawn('notify-send -u critical "' .. title .. '"  "' .. gears.debug.dump_return(a) .. '"')
+end
+
 
 -- }}}
 
@@ -60,7 +64,8 @@ end
 
 local theme = beautiful.get()
 -- This is used later as the default terminal and editor to run.
-terminal = "Alacritty"
+
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or os.getenv("VISUAL") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -85,9 +90,8 @@ theme.border_width          = 2
 theme.border_focus  = "#FFFF00"
 menubar.font          = myfont
 menubar.cache_entries = true
-menubar.show_categories = tr
-
-menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", "~/.local/share/applications" , "/var/lib/snapd/desktop/applications/"}
+menubar.show_categories = false
+menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications/", "~/.local/share/applications/" , "/var/lib/snapd/desktop/applications/"}
 modkey = "Mod4"
 menubar.geometry = {
    height = 32
@@ -352,13 +356,15 @@ memwidget = wibox.widget {
 }
 
 
-cpuwidget = awful.widget.graph()
+cpuwidget = wibox.widget.graph()
 
 cpuwidget:set_width(50)
 cpuwidget:set_background_color("#494B4F")
 cpuwidget:set_color("#AECF96")
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1",0.3)
 
+traywidget = wibox.widget.systray()
+traywidget.opacity = 0
 mybattery = wibox.widget.textbox()
 mybattery:set_font(myfont)
 vicious.register(mybattery,
@@ -459,6 +465,11 @@ local vol  = wibox.widget {
 local update_graphic = function(widget, stdout, _, _, _)
     local mute = string.match(stdout, "%[(o%D%D?)%]")
     local volume = string.match(stdout, "(%d?%d?%d)%%")
+    if volume == nil then
+       widget.colors = {mute_color};
+       widget.values = {0.0};
+       return
+    end
     volume = tonumber(string.format("% 3d", volume))
     widget.values = {volume / 100};
     if mute == "off" then
@@ -536,7 +547,7 @@ awful.screen.connect_for_each_screen(function(s)
          { -- Right widgets
 
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
+            traywidget,
             mybattery,
             awful.widget.watch(request_command, 1, update_graphic, vol),
             memwidget,
@@ -614,7 +625,10 @@ globalkeys = awful.util.table.join(
       {description = "swap with next client by index", group = "client"}),
    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
       {description = "swap with previous client by index", group = "client"}),
-   awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+   awful.key({ modkey, "Control" }, "j",
+      function ()
+         awful.screen.focus_relative(1)
+      end,
       {description = "focus the next screen", group = "screen"}),
    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
       {description = "focus the previous screen", group = "screen"}),
@@ -676,9 +690,14 @@ globalkeys = awful.util.table.join(
    -- Menubar
    awful.key({ modkey , "Shift"}, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
-   awful.key({ modkey }, "p", function() awful.spawn("dmenu_run -fn 'monospace-18'") end,
+   awful.key({ modkey }, "p", function() awful.spawn("rofi -modi combi -combi-modi window,run,drun,ssh -show combi") end,
       {description = "run dmenu menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
+      {description = "setting xrandr", group = "launcher"}),
+   awful.key({ modkey}, "F7",
+      function()
+         awful.spawn([[emacsclient -n -c -e ' (org-capture) ']])
+      end,
       {description = "setting xrandr", group = "launcher"}),
    awful.key({ modkey}, "-", function ()
          can_move_mouse = not(can_move_mouse);
@@ -689,11 +708,11 @@ globalkeys = awful.util.table.join(
 )
 function un_minimize()
    local c = awful.client.restore()
-   c.minimized = false
-   -- Focus restored client
+   my_notify("notiy",c)
    if c then
       client.focus = c
       c:raise()
+      c.minimized = false
    end
 end
 
@@ -742,6 +761,11 @@ clientkeys = awful.util.table.join(
       end,
       {description = "all share tag",group = "tag"}
    ),
+   awful.key({ modkey, "Control", "Shift" }, "y",
+      function (c)
+         awful.util.spawn('gnome-screensaver-command -l')
+      end,
+      {description = "lock screen", group = "client"}),
    awful.key({ modkey,           }, "m",
       function (c)
          c.maximized = not c.maximized
@@ -841,18 +865,22 @@ awful.rules.rules = {
    },
      properties = { tag = "4" } },
    { rule_any = {
-        class = {
-           "Keepassx"
-        },
         name = {
-           "Wicd Network Manager"
+           "Wicd Network Manager",
+           "keepassxc"
+        },
+   },
+     properties = { tag = "8" }},
+   { rule_any = {
+        name = {
+           "Slack"
         },
    },
      properties = { tag = "9" }},
    { rule_any = {
         type = {
            "normal",
-           "dialog"
+           "dialog",
         }
    },
      properties = { titlebars_enabled = true }

@@ -1,4 +1,5 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mozc")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/anthy")
 
 (setq input-cursor-color "PowderBlue")
