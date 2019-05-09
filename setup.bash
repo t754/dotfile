@@ -20,6 +20,7 @@ declare -a symlink_array=(
     ".Xmodmap"
     ".xmonad"
     ".zshrc"
+    ".config/alacritty"
     ".config/awesome"
     ".config/dunst"
     ".config/fontconfig/conf.d"
