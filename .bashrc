@@ -8,6 +8,7 @@ ulimit -c 4096
 export SHELL="/bin/bash"
 export LANG=ja_JP.UTF-8
 export EDITOR="emacsclient -nw"
+export REACT_EDITOR="emacsclient -c -n -a emacs"
 # if [ -n ${DISPLAY} ] ; then
 #     export DISPLAY=:0.0
 # fi
