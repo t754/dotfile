@@ -93,7 +93,8 @@ menubar.font          = myfont
 menubar.cache_entries = true
 menubar.show_categories = tr
 
-menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", "~/.local/share/applications" , "/var/lib/snapd/desktop/applications/"}
+
+menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", os.getenv("HOME") .. "/.local/share/applications" , "/var/lib/snapd/desktop/applications/"}
 modkey = "Mod4"
 menubar.geometry = {
    height = 32
