@@ -64,9 +64,8 @@ end
 
 local theme = beautiful.get()
 -- This is used later as the default terminal and editor to run.
--- terminal = "xfce4-terminal"
-terminal = "alacritty"
 
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or os.getenv("VISUAL") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -91,9 +90,7 @@ theme.border_width          = 2
 theme.border_focus  = "#FFFF00"
 menubar.font          = myfont
 menubar.cache_entries = true
-menubar.show_categories = tr
-
-
+menubar.show_categories = true
 menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", os.getenv("HOME") .. "/.local/share/applications" , "/var/lib/snapd/desktop/applications/"}
 modkey = "Mod4"
 menubar.geometry = {
@@ -468,6 +465,11 @@ local vol  = wibox.widget {
 local update_graphic = function(widget, stdout, _, _, _)
     local mute = string.match(stdout, "%[(o%D%D?)%]")
     local volume = string.match(stdout, "(%d?%d?%d)%%")
+    if volume == nil then
+       widget.colors = {mute_color};
+       widget.values = {0.0};
+       return
+    end
     volume = tonumber(string.format("% 3d", volume))
     widget.values = {volume / 100};
     if mute == "off" then
@@ -623,7 +625,10 @@ globalkeys = awful.util.table.join(
       {description = "swap with next client by index", group = "client"}),
    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
       {description = "swap with previous client by index", group = "client"}),
-   awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+   awful.key({ modkey, "Control" }, "j",
+      function ()
+         awful.screen.focus_relative(1)
+      end,
       {description = "focus the next screen", group = "screen"}),
    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
       {description = "focus the previous screen", group = "screen"}),
@@ -689,6 +694,11 @@ globalkeys = awful.util.table.join(
       {description = "run dmenu menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
       {description = "setting xrandr", group = "launcher"}),
+   awful.key({ modkey}, "F7",
+      function()
+         awful.spawn([[emacsclient -n -c -e ' (org-capture) ']])
+      end,
+      {description = "setting xrandr", group = "launcher"}),
    awful.key({ modkey}, "-", function ()
          can_move_mouse = not(can_move_mouse);
                            end,
@@ -751,6 +761,11 @@ clientkeys = awful.util.table.join(
       end,
       {description = "all share tag",group = "tag"}
    ),
+   awful.key({ modkey, "Control", "Shift" }, "y",
+      function (c)
+         awful.util.spawn('gnome-screensaver-command -l')
+      end,
+      {description = "lock screen", group = "client"}),
    awful.key({ modkey,           }, "m",
       function (c)
          c.maximized = not c.maximized
@@ -850,18 +865,22 @@ awful.rules.rules = {
    },
      properties = { tag = "4" } },
    { rule_any = {
-        class = {
-           "Keepassx"
-        },
         name = {
-           "Wicd Network Manager"
+           "Wicd Network Manager",
+           "keepassxc"
+        },
+   },
+     properties = { tag = "8" }},
+   { rule_any = {
+        name = {
+           "Slack"
         },
    },
      properties = { tag = "9" }},
    { rule_any = {
         type = {
            "normal",
-           "dialog"
+           "dialog",
         }
    },
      properties = { titlebars_enabled = true }

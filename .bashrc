@@ -54,7 +54,7 @@ export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 if type rbenv >/dev/null 2>&1; then
     eval "$(rbenv init -)"
 fi
-[[ -e ~/.rbenv/completions/rbenv.bash ]] && source ~/.rbenv/completions/rbenv.bash
+
 
 if type luarocks >/dev/null 2>&1; then
     eval "$(luarocks path --bin)"
@@ -64,16 +64,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 export GOPATH="$HOME/.go"
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 export PATH="$HOME/bin:$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:/usr/local/go/bin:$GOPATH/bin:$GOBIN:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
+export PATH="$PATH:$HOME/go/bin:$HOME/.cargo/bin"
 if which ruby &>/dev/null && which gem &>/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
-fi
-
-
-
-[[ -x "$(which pyenv 2>/dev/null)" ]] && eval "$(pyenv init -)"
-#Load pyenv virtualenv if the virtualenv plugin is installed.
-if pyenv virtualenv-init - &> /dev/null; then
-  eval "$(pyenv virtualenv-init -)"
 fi
 
 
@@ -114,6 +107,9 @@ fi
 export powerlineShellPath="$(ghq list -p | grep 'milkbikis/powerline-shell')"
 export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 --mode ${POWERSHELL_MODE} --shell bash"
 
+railsComp="$(ghq list -p | grep 'jweslley/rails_completion')"
+[[ -d $railsComp  ]] && source $railsComp"/rails.bash"
+
 [[ -x "$(which fasd 2>/dev/null)" ]] && eval "$(fasd --init auto)"
 [[ -x "$(which kubectl 2>/dev/null)" ]] && source <(kubectl completion bash)
 [[ -x "$(which helm 2>/dev/null)" ]] && source <(helm completion bash)
@@ -139,6 +135,23 @@ trap EC ERR
 peco() {
     fzf +s
 }
+
+
+[[ -x "$(which pyenv 2>/dev/null)" ]] && eval "$(pyenv init -)"
+
+#Load pyenv virtualenv if the virtualenv plugin is installed.
+if pyenv virtualenv-init - &> /dev/null; then
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+
+[ -f $HOME/.complete_bundle_exec.sh ] && source $HOME/.complete_bundle_exec.sh
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f $HOME/.bashrc.local ] && source $HOME/.bashrc.local
+
+
+
+
 
 # Path to the bash it configuration
 export BASH_IT="/home/zztama/.bash_it"
@@ -194,3 +207,7 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
+
+
+# added by travis gem
+[ -f /home/t-nagoshi/.travis/travis.sh ] && source /home/t-nagoshi/.travis/travis.sh

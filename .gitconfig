@@ -21,6 +21,7 @@
     co           = checkout
     d            = diff
     dc           = diff --cached
+    dn           = diff --name-only
     di           = diff
     dic          = diff --cached
     f            = fetch --prune
@@ -43,7 +44,7 @@
     editor       = emacsclient
 
 [mergetool.ediff]
-    cmd          = emacsclient -c --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
+    cmd          = emacsclient  --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
 [merge]
     tool         = ediff
 [ghq]
@@ -65,3 +66,5 @@
 	autoUpdate   = true
 [diff]
 	algorithm    = histogram
+[rebase]
+	autosquash = true

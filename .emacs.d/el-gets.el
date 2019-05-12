@@ -13,10 +13,12 @@
 (setq my/el-list
       '(
         ;;##(
+        ;;rust-racer
         align-cljlet
         auto-complete
         avy
         bm
+        bundler
         c-eldoc
         cargo
         clang-format
@@ -59,6 +61,7 @@
         helm-rails
         helm-robe
         helm-swoop
+        help-fns+
         highlight-indentation
         ht
         htmlize
@@ -96,7 +99,6 @@
         rjsx-mode
         rubocop
         rust-mode
-        rust-racer
         scheme-complete
         slime-company
         smartparens
@@ -128,8 +130,11 @@
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
+                           ;; racer-rust/emacs-racer
                            Malabarba/beacon
+                           RadekMolenda/yaml-tomato
                            ShingoFukuyama/emacs-emoji-cheat-sheet
+                           abingham/codesearch.el
                            abo-abo/swiper
                            bmag/imenu-list
                            company-mode/company-mode
@@ -146,8 +151,8 @@
                            purcell/flymake-easy
                            purcell/flymake-haskell-multi
                            purcell/flymake-python-pyflakes
-                           racer-rust/emacs-racer
                            senny/emacs-eclim
+                           ssm/vcl-mode
                            syl20bnr/emacs-emoji-cheat-sheet-plus
                            yasuyk/helm-git-grep
                            yasuyk/web-beautify
