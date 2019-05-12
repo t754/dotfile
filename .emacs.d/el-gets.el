@@ -37,7 +37,6 @@
         epl
         expand-region
         f
-        ht
         flycheck
         flycheck-cask
         flycheck-color-mode-line
@@ -61,6 +60,7 @@
         helm-robe
         helm-swoop
         highlight-indentation
+        ht
         htmlize
         idle-highlight-mode
         ido-vertical-mode
@@ -93,6 +93,7 @@
         rainbow-delimiters
         rbenv
         recentf-ext
+        rjsx-mode
         rubocop
         rust-mode
         rust-racer
@@ -136,6 +137,7 @@
                            emacs-helm/helm-w3m
                            emacs-jp/helm-migemo
                            emacs-jp/init-loader
+                           emacs-lsp/dap-mode
                            favadi/flycheck-gometalinter
                            jcpetkovich/shrink-whitespace.el
                            ptrv/company-lua
