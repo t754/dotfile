@@ -685,7 +685,7 @@ globalkeys = awful.util.table.join(
    -- Menubar
    awful.key({ modkey , "Shift"}, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
-   awful.key({ modkey }, "p", function() awful.spawn("rofi -modi combi -combi-modi window,run,drun,ssh -show combi") end,
+   awful.key({ modkey }, "p", function() awful.spawn("rofi -modi combi -combi-modi drun,run -show combi") end,
       {description = "run dmenu menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
       {description = "setting xrandr", group = "launcher"}),
