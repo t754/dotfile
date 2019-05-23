@@ -28,6 +28,7 @@
  '(ac-delay 0.4)
  '(ace-isearch-input-idle-delay 1)
  '(ace-isearch-input-length 5)
+ '(browse-url-generic-program "firefox")
  '(flycheck-display-errors-delay 0.5)
  '(flycheck-display-errors-function
    (lambda
@@ -100,7 +101,7 @@
  pdflang={%L}}")
  '(package-selected-packages
    (quote
-    (company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
+    (markdown-mode edit-indirect company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
  '(safe-local-variable-values
    (quote
     ((eval progn

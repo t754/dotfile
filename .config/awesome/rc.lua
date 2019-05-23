@@ -90,8 +90,8 @@ theme.border_width          = 2
 theme.border_focus  = "#FFFF00"
 menubar.font          = myfont
 menubar.cache_entries = true
-menubar.show_categories = false
-menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications/", "~/.local/share/applications/" , "/var/lib/snapd/desktop/applications/"}
+menubar.show_categories = true
+menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", os.getenv("HOME") .. "/.local/share/applications" , "/var/lib/snapd/desktop/applications/"}
 modkey = "Mod4"
 menubar.geometry = {
    height = 32
@@ -691,7 +691,7 @@ globalkeys = awful.util.table.join(
    -- Menubar
    awful.key({ modkey , "Shift"}, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
-   awful.key({ modkey }, "p", function() awful.spawn("rofi -modi combi -combi-modi window,run,drun,ssh -show combi") end,
+   awful.key({ modkey }, "p", function() awful.spawn("rofi -modi combi -combi-modi drun,run -show combi") end,
       {description = "run dmenu menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
       {description = "setting xrandr", group = "launcher"}),
