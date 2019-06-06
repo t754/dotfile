@@ -168,6 +168,7 @@ export BASH_IT="/home/zztama/.bash_it"
 # location /.bash_it/themes/
 # export BASH_IT_THEME='bobby'
 export BASH_IT_THEME='bobby'
+[[ "$(echo $HOSTNAME | grep -c -- '-600-')" -eq 1 ]] && export BASH_IT_THEME='nwinkler'
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
