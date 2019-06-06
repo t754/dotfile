@@ -68,9 +68,15 @@ if which ruby &>/dev/null && which gem &>/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
+if which brew &>/dev/null ; then
+    source <(brew shellenv)
+fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+if [ -s "$NVM_DIR/nvm.sh" ] ; then
+    source "$NVM_DIR/nvm.sh"  # This loads nvm
+    nvm use lts/*
+fi
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -r "$HOME/google-cloud-sdk/path.bash.inc" ]]  && source "$HOME/google-cloud-sdk/path.bash.inc"
@@ -136,7 +142,10 @@ peco() {
 }
 
 
-[[ -x "$(which pyenv 2>/dev/null)" ]] && eval "$(pyenv init -)"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+# [[ -x "$(which pyenv 2>/dev/null)" ]] && ( eval "$(pyenv init -)" ; echo "aaaa" )
 
 #Load pyenv virtualenv if the virtualenv plugin is installed.
 if pyenv virtualenv-init - &> /dev/null; then
