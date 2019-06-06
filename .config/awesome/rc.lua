@@ -263,8 +263,9 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
+local lockcmd = 'dm-tool lock'
 mysystem_menu = {
-   { 'Lock Screen',     'light-locker-command --lock', menubar.utils.lookup_icon('system-lock-screen') },
+   { 'Lock Screen',      lockcmd,                      menubar.utils.lookup_icon('system-lock-screen') },
    { 'Logout',           awesome.quit,                 menubar.utils.lookup_icon('system-log-out')     },
    { 'Reboot System',   'systemctl reboot',            menubar.utils.lookup_icon('reboot-notifier')    },
    { 'Shutdown System', 'systemctl poweroff',          menubar.utils.lookup_icon('system-shutdown')    }
@@ -763,7 +764,7 @@ clientkeys = awful.util.table.join(
    ),
    awful.key({ modkey, "Control", "Shift" }, "y",
       function (c)
-         awful.util.spawn('gnome-screensaver-command -l')
+         awful.util.spawn(lockcmd)
       end,
       {description = "lock screen", group = "client"}),
    awful.key({ modkey,           }, "m",
