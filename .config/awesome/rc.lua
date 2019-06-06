@@ -275,14 +275,16 @@ myawesome_menu = {
    { "hotkeys", function() return false, hotkeys_popup.show_help end},
    { 'Restart Awesome', awesome.restart, menubar.utils.lookup_icon('gtk-refresh') },
    { "Edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua", menubar.utils.lookup_icon('package_settings') },
-   { "manual", terminal .. " -e man awesome" }
+   { "manual", terminal .. " -e man awesome" },
+   { "quit", function() awesome.quit() end}
 }
 
 top_menu = {
    --{ 'Applications', freedesktop.menu.new(), menubar.utils.lookup_icon('start-here') },
    { 'Awesome',      myawesome_menu,         beautiful.awesome_icon                  },
    { 'System',       mysystem_menu,          menubar.utils.lookup_icon('system')     },
-   { 'Terminal',     menubar.utils.terminal, menubar.utils.lookup_icon('terminal')   }
+   { 'Terminal',     menubar.utils.terminal, menubar.utils.lookup_icon('terminal')   },
+   { 'Terminal2',    "xfce4-terminal", menubar.utils.lookup_icon('terminal')   }
 }
 
 mymainmenu = awful.menu.new({ items = top_menu, width = 150 })
