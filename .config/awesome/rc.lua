@@ -697,10 +697,11 @@ globalkeys = awful.util.table.join(
          awful.spawn([[emacsclient -n -c -e ' (org-capture) ']])
       end,
       {description = "setting xrandr", group = "launcher"}),
-   awful.key({ modkey}, "-", function ()
+   awful.key({ modkey}, "-",
+      function ()
          can_move_mouse = not(can_move_mouse);
-                           end,
-      {description = "etc", group = "custom"})
+      end,
+      {description = "toggle move mouse", group = "custom"})
 
 
 )
@@ -958,44 +959,44 @@ client.connect_signal("manage", function (c, startup)
 end)
 
 client.connect_signal("request::titlebars", function(c)
-    -- buttons for the titlebar
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            client.focus = c
-            c:raise()
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 3, function()
-            client.focus = c
-            c:raise()
-            awful.mouse.client.resize(c)
-        end)
-    )
+                         -- buttons for the titlebar
+                         local buttons = gears.table.join(
+                            awful.button({ }, 1, function()
+                                  client.focus = c
+                                  c:raise()
+                                  awful.mouse.client.move(c)
+                            end),
+                            awful.button({ }, 3, function()
+                                  client.focus = c
+                                  c:raise()
+                                  awful.mouse.client.resize(c)
+                            end)
+                         )
 
-    awful.titlebar(c) : setup {
-        { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
+                         awful.titlebar(c) : setup {
+                            { -- Left
+                               awful.titlebar.widget.iconwidget(c),
+                               buttons = buttons,
+                               layout  = wibox.layout.fixed.horizontal
+                            },
+                            { -- Middle
+                               { -- Title
+                                  align  = "center",
+                                  widget = awful.titlebar.widget.titlewidget(c)
+                               },
+                               buttons = buttons,
+                               layout  = wibox.layout.flex.horizontal
+                            },
+                            { -- Right
+                               awful.titlebar.widget.floatingbutton (c),
+                               awful.titlebar.widget.maximizedbutton(c),
+                               awful.titlebar.widget.stickybutton   (c),
+                               awful.titlebar.widget.ontopbutton    (c),
+                               awful.titlebar.widget.closebutton    (c),
+                               layout = wibox.layout.fixed.horizontal()
+                            },
+                            layout = wibox.layout.align.horizontal
+                                                   }
 end)
 
 
