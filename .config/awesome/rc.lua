@@ -64,9 +64,8 @@ end
 
 local theme = beautiful.get()
 -- This is used later as the default terminal and editor to run.
--- terminal = "xfce4-terminal"
-terminal = "alacritty"
 
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or os.getenv("VISUAL") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -91,8 +90,8 @@ theme.border_width          = 2
 theme.border_focus  = "#FFFF00"
 menubar.font          = myfont
 menubar.cache_entries = true
-menubar.show_categories = false
-menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications/", "~/.local/share/applications/" , "/var/lib/snapd/desktop/applications/"}
+menubar.show_categories = true
+menubar.menu_gen.all_menu_dirs = { "/usr/share/applications/", "/usr/local/share/applications", os.getenv("HOME") .. "/.local/share/applications" , "/var/lib/snapd/desktop/applications/"}
 modkey = "Mod4"
 menubar.geometry = {
    height = 32
@@ -264,8 +263,9 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
+local lockcmd = 'dm-tool lock'
 mysystem_menu = {
-   { 'Lock Screen',     'light-locker-command --lock', menubar.utils.lookup_icon('system-lock-screen') },
+   { 'Lock Screen',      lockcmd,                      menubar.utils.lookup_icon('system-lock-screen') },
    { 'Logout',           awesome.quit,                 menubar.utils.lookup_icon('system-log-out')     },
    { 'Reboot System',   'systemctl reboot',            menubar.utils.lookup_icon('reboot-notifier')    },
    { 'Shutdown System', 'systemctl poweroff',          menubar.utils.lookup_icon('system-shutdown')    }
@@ -688,7 +688,7 @@ globalkeys = awful.util.table.join(
    -- Menubar
    awful.key({ modkey , "Shift"}, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
-   awful.key({ modkey }, "p", function() awful.spawn("rofi -modi combi -combi-modi window,run,drun,ssh -show combi") end,
+   awful.key({ modkey }, "p", function() awful.spawn("rofi -modi combi -combi-modi drun,run -show combi") end,
       {description = "run dmenu menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
       {description = "setting xrandr", group = "launcher"}),
@@ -762,7 +762,7 @@ clientkeys = awful.util.table.join(
    ),
    awful.key({ modkey, "Control", "Shift" }, "y",
       function (c)
-         awful.util.spawn('gnome-screensaver-command -l')
+         awful.util.spawn(lockcmd)
       end,
       {description = "lock screen", group = "client"}),
    awful.key({ modkey,           }, "m",
