@@ -49,8 +49,8 @@ define_keymap(re.compile("Zeal"), {
 
 define_keymap(re.compile("Code"), {
     K("M-x"): K("C-p"),
-    K("C-M-h"): K("C-Shift-TAB"),
-    K("C-M-l"): K("C-TAB"),
+    K("C-M-h"): K("C-PAGE_UP"),
+    K("C-M-l"): K("C-PAGE_DOWN"),
     K("C-i"): K("TAB"),
     K("C-x"): {
         # C-x h (select all)

@@ -25,6 +25,7 @@ declare -a symlink_array=(
     ".config/dunst"
     ".config/fontconfig/conf.d"
     ".config/systemd/user/emacs.service"
+    ".config/systemd/user/xkeysnail.service"
 )
 
 my_symlink(){

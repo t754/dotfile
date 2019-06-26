@@ -63,15 +63,21 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 export GOPATH="$HOME/.go"
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
-export PATH="$HOME/bin:$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:/usr/local/go/bin:$GOPATH/bin:$GOBIN:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
+export PATH="$PYENV_ROOT/bin:$HOME/bin:$HOME/.local/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:/usr/local/go/bin:$GOPATH/bin:$GOBIN:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
 export PATH="$PATH:$HOME/go/bin:$HOME/.cargo/bin"
 if which ruby &>/dev/null && which gem &>/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
+if which brew &>/dev/null ; then
+    source <(brew shellenv)
+fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+if [ -s "$NVM_DIR/nvm.sh" ] ; then
+    source "$NVM_DIR/nvm.sh"  # This loads nvm
+    nvm use lts/*
+fi
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -r "$HOME/google-cloud-sdk/path.bash.inc" ]]  && source "$HOME/google-cloud-sdk/path.bash.inc"
@@ -137,7 +143,10 @@ peco() {
 }
 
 
-[[ -x "$(which pyenv 2>/dev/null)" ]] && eval "$(pyenv init -)"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+# [[ -x "$(which pyenv 2>/dev/null)" ]] && ( eval "$(pyenv init -)" ; echo "aaaa" )
 
 #Load pyenv virtualenv if the virtualenv plugin is installed.
 if pyenv virtualenv-init - &> /dev/null; then
@@ -160,6 +169,7 @@ export BASH_IT="/home/zztama/.bash_it"
 # location /.bash_it/themes/
 # export BASH_IT_THEME='bobby'
 export BASH_IT_THEME='bobby'
+[[ "$(echo $HOSTNAME | grep -c -- '-600-')" -eq 1 ]] && export BASH_IT_THEME='nwinkler'
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.

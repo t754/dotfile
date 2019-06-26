@@ -275,14 +275,16 @@ myawesome_menu = {
    { "hotkeys", function() return false, hotkeys_popup.show_help end},
    { 'Restart Awesome', awesome.restart, menubar.utils.lookup_icon('gtk-refresh') },
    { "Edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua", menubar.utils.lookup_icon('package_settings') },
-   { "manual", terminal .. " -e man awesome" }
+   { "manual", terminal .. " -e man awesome" },
+   { "quit", function() awesome.quit() end}
 }
 
 top_menu = {
    --{ 'Applications', freedesktop.menu.new(), menubar.utils.lookup_icon('start-here') },
    { 'Awesome',      myawesome_menu,         beautiful.awesome_icon                  },
    { 'System',       mysystem_menu,          menubar.utils.lookup_icon('system')     },
-   { 'Terminal',     menubar.utils.terminal, menubar.utils.lookup_icon('terminal')   }
+   { 'Terminal',     menubar.utils.terminal, menubar.utils.lookup_icon('terminal')   },
+   { 'Terminal2',    "xfce4-terminal", menubar.utils.lookup_icon('terminal')   }
 }
 
 mymainmenu = awful.menu.new({ items = top_menu, width = 150 })
@@ -308,8 +310,6 @@ datewidget = wibox.widget.textbox()
 datewidget:set_font(myfont)
 vicious.register(datewidget, vicious.widgets.date, "%m-%d(%a)%H:%M:%S", 1)
 
-cputempwidget = wibox.widget.textbox()
-cputempwidget:set_font(myfont)
 
 function templateColor(tmp)
    if tmp < 40 then
@@ -320,15 +320,6 @@ function templateColor(tmp)
       return "red"
    end
 end
-
-vicious.register(cputempwidget,
-                 function(format, warg)
-                    local args = vicious.widgets.thermal(format, warg)
-                    args['{color}']=templateColor(args[1])
-                    return args
-                 end,
-                 '<span foreground="${color}">$1℃</span>',
-                 7, { "hwmon2", "hwmon"})
 
 
 for _, wdg in ipairs {
@@ -368,17 +359,23 @@ traywidget = wibox.widget.systray()
 traywidget.opacity = 0
 mybattery = wibox.widget.textbox()
 mybattery:set_font(myfont)
-vicious.register(mybattery,
-                 function(format, warg)
-                    local args = vicious.widgets.bat(format, warg)
-                    args['{color}']=templateColor(100-args[2])
-                    if args[1] == '+' then
-                       args['{bat}']= "⚡"
-                    else
-                       args['{bat}']="🚫"
-                    end
-                    return args
-                 end, '<span foreground="${color}">${bat}[$3]$2%</span>', 10, 'BAT0')
+
+vicious.widgets.bat(format, 'BAT0')
+-- exist battery
+if not(vicious.widgets.bat("","BAT0")[2] == 0) then
+
+   vicious.register(mybattery,
+                    function(format, warg)
+                       local args = vicious.widgets.bat(format, warg)
+                       args['{color}']=templateColor(100-args[2])
+                       if args[1] == '+' then
+                          args['{bat}']= "⚡"
+                       else
+                          args['{bat}']="🚫"
+                       end
+                       return args
+                    end, '<span foreground="${color}">${bat}[$3]$2%</span>', 10, 'BAT0')
+end
 
 local taglist_buttons = awful.util.table.join(
    awful.button({ }, 1, function(t) t:view_only() end),
@@ -718,10 +715,11 @@ globalkeys = awful.util.table.join(
          awful.spawn([[emacsclient -n -c -e ' (org-capture) ']])
       end,
       {description = "setting xrandr", group = "launcher"}),
-   awful.key({ modkey}, "-", function ()
+   awful.key({ modkey}, "-",
+      function ()
          can_move_mouse = not(can_move_mouse);
-                           end,
-      {description = "etc", group = "custom"})
+      end,
+      {description = "toggle move mouse", group = "custom"})
 
 
 )
@@ -979,44 +977,44 @@ client.connect_signal("manage", function (c, startup)
 end)
 
 client.connect_signal("request::titlebars", function(c)
-    -- buttons for the titlebar
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            client.focus = c
-            c:raise()
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 3, function()
-            client.focus = c
-            c:raise()
-            awful.mouse.client.resize(c)
-        end)
-    )
+                         -- buttons for the titlebar
+                         local buttons = gears.table.join(
+                            awful.button({ }, 1, function()
+                                  client.focus = c
+                                  c:raise()
+                                  awful.mouse.client.move(c)
+                            end),
+                            awful.button({ }, 3, function()
+                                  client.focus = c
+                                  c:raise()
+                                  awful.mouse.client.resize(c)
+                            end)
+                         )
 
-    awful.titlebar(c) : setup {
-        { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
+                         awful.titlebar(c) : setup {
+                            { -- Left
+                               awful.titlebar.widget.iconwidget(c),
+                               buttons = buttons,
+                               layout  = wibox.layout.fixed.horizontal
+                            },
+                            { -- Middle
+                               { -- Title
+                                  align  = "center",
+                                  widget = awful.titlebar.widget.titlewidget(c)
+                               },
+                               buttons = buttons,
+                               layout  = wibox.layout.flex.horizontal
+                            },
+                            { -- Right
+                               awful.titlebar.widget.floatingbutton (c),
+                               awful.titlebar.widget.maximizedbutton(c),
+                               awful.titlebar.widget.stickybutton   (c),
+                               awful.titlebar.widget.ontopbutton    (c),
+                               awful.titlebar.widget.closebutton    (c),
+                               layout = wibox.layout.fixed.horizontal()
+                            },
+                            layout = wibox.layout.align.horizontal
+                                                   }
 end)
 
 
