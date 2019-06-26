@@ -263,7 +263,7 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
-local lockcmd = 'dm-tool lock'
+local lockcmd = 'i3lock-fancy'
 mysystem_menu = {
    { 'Lock Screen',      lockcmd,                      menubar.utils.lookup_icon('system-lock-screen') },
    { 'Logout',           awesome.quit,                 menubar.utils.lookup_icon('system-log-out')     },
