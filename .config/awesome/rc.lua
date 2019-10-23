@@ -263,7 +263,7 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
-local lockcmd = 'dm-tool lock'
+local lockcmd = 'sh -c \'dm-tool lock || gnome-screensaver-command -l\''
 mysystem_menu = {
    { 'Lock Screen',      lockcmd,                      menubar.utils.lookup_icon('system-lock-screen') },
    { 'Logout',           awesome.quit,                 menubar.utils.lookup_icon('system-log-out')     },
