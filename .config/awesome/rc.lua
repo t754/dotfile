@@ -263,7 +263,7 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
-local lockcmd = 'sh -c \'dm-tool lock || gnome-screensaver-command -l\''
+local lockcmd = 'sh -c \'i3lock-fancy || dm-tool lock || gnome-screensaver-command -l\''
 mysystem_menu = {
    { 'Lock Screen',      lockcmd,                      menubar.utils.lookup_icon('system-lock-screen') },
    { 'Logout',           awesome.quit,                 menubar.utils.lookup_icon('system-log-out')     },
@@ -590,6 +590,24 @@ function move_mouse_in_window_center()
    end
 end
 
+local rofi = {}
+awful.spawn.easy_async(
+   "which rofi",
+   function(stdout, stderr, reason, exit_code)
+      if exit_code == 0 then
+         table.insert(
+            rofi ,
+            function()
+               awful.spawn("rofi -modi combi -combi-modi drun,run -show combi")
+         end)
+      else
+         table.insert(
+            rofi ,
+            function()
+               menubar.show()
+         end)
+      end
+end)
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "/",      hotkeys_popup.show_help,
@@ -688,7 +706,7 @@ globalkeys = awful.util.table.join(
    -- Menubar
    awful.key({ modkey , "Shift"}, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
-   awful.key({ modkey }, "p", function() awful.spawn("rofi -modi combi -combi-modi drun,run -show combi") end,
+   awful.key({ modkey }, "p", function () rofi[1]() end,
       {description = "run dmenu menubar", group = "launcher"}),
    awful.key({ modkey}, "e", xrandr,
       {description = "setting xrandr", group = "launcher"}),
