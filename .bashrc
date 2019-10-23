@@ -163,7 +163,7 @@ fi
 
 
 # Path to the bash it configuration
-export BASH_IT="/home/zztama/.bash_it"
+export BASH_IT="$HOME/.bash_it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
@@ -220,4 +220,4 @@ source "$BASH_IT"/bash_it.sh
 
 
 # added by travis gem
-[ -f /home/t-nagoshi/.travis/travis.sh ] && source /home/t-nagoshi/.travis/travis.sh
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
