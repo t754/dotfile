@@ -212,7 +212,7 @@ function colors() {
 #     # READLINE_POINT=${#l}
 # }
 
-function peco-select-history ()
+function __fzf_history ()
 {
     builtin history -a;
     builtin history -c;
