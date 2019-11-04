@@ -158,9 +158,11 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f $HOME/.bashrc.local ] && source $HOME/.bashrc.local
 
-
-
-
+if [[ -d $HOME/Android/Sdk ]] ; then
+    export ANDROID_HOME=$HOME/Android/Sdk
+    export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+    export PATH=$PATH:/usr/local/src/android-studio/bin
+fi
 
 # Path to the bash it configuration
 export BASH_IT="/home/zztama/.bash_it"
