@@ -86,6 +86,8 @@ blacklist = (
     "Vncviewer",
     "Alacritty",
     "VirtualBox Machine",
+    "Steam",
+    "",
 )
 
 define_keymap(lambda wm_class: wm_class not in blacklist, {
