@@ -25,7 +25,7 @@ define_multipurpose_modmap(
 
 
 # Keybindings for Firefox/Chrome
-define_keymap(re.compile("Firefox|Google-chrome|Chromium"), {
+define_keymap(re.compile("firefox|Google-chrome|Chromium",re.IGNORECASE), {
     # Ctrl+Alt+j/k to switch next/previous tab
     K("C-M-h"): K("C-Shift-TAB"),
     K("C-M-l"): K("C-TAB"),
@@ -47,7 +47,7 @@ define_keymap(re.compile("Zeal"), {
     K("C-s"): K("C-k"),
 }, "Zeal")
 
-define_keymap(re.compile("Code"), {
+define_keymap(re.compile("Code|code-oss"), {
     K("M-x"): K("C-p"),
     K("C-M-h"): K("C-PAGE_UP"),
     K("C-M-l"): K("C-PAGE_DOWN"),
