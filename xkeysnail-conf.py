@@ -73,22 +73,23 @@ define_keymap(re.compile("Code|code-oss"), {
 
 
 # Emacs-like keybindings in non-Emacs applications
+# lowercase
 blacklist = (
-    "Emacs",
-    "Gnome-terminal",
-    "org.remmina.Remmina",
-    "Remmina",
-    "URxvt",
-    "Xfce4-terminal",
+    "emacs",
+    "gnome-terminal",
+    "org.remmina.remmina",
+    "remmina",
+    "urxvt",
+    "xfce4-terminal",
     "keepassxc",
     "st-256color",
     "hl2linux",
-    "Vncviewer",
-    "Alacritty",
-    "VirtualBox Machine",
+    "vncviewer",
+    "alacritty",
+    "virtualbox machine",
 )
 
-define_keymap(lambda wm_class: wm_class not in blacklist, {
+define_keymap(lambda wm_class: wm_class.lower() not in blacklist, {
     # Cursor
     K("C-b"): with_mark(K("left")),
     K("C-f"): with_mark(K("right")),
