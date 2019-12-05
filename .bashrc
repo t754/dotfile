@@ -165,13 +165,18 @@ if [[ -d $HOME/Android/Sdk ]] ; then
 fi
 
 # Path to the bash it configuration
-export BASH_IT="/home/zztama/.bash_it"
+export BASH_IT="$HOME/.bash_it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
-# export BASH_IT_THEME='bobby'
-export BASH_IT_THEME='bobby'
-[[ "$(echo $HOSTNAME | grep -c -- '-600-')" -eq 1 ]] && export BASH_IT_THEME='nwinkler'
+case $HOSTNAME in
+    *-600-*|*4PC)
+        export BASH_IT_THEME='nwinkler'
+    ;;
+    *)
+        export BASH_IT_THEME='bobby'
+    ;;
+esac
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
@@ -218,8 +223,8 @@ export SCM_CHECK=true
 # export BASH_IT_RELOAD_LEGACY=1
 
 # Load Bash It
-source "$BASH_IT"/bash_it.sh
+[[ -f "$BASH_IT"/bash_it.sh ]] && source "$BASH_IT"/bash_it.sh
 
 
 # added by travis gem
-[ -f /home/t-nagoshi/.travis/travis.sh ] && source /home/t-nagoshi/.travis/travis.sh
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh

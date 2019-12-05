@@ -107,6 +107,7 @@
         swank-js
         switch-window
         tern
+        terraform-mode
         tide
         toml-mode
         typescript-mode
