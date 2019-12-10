@@ -159,6 +159,7 @@ fi
 
 
 [ -f $HOME/.complete_bundle_exec.sh ] && source $HOME/.complete_bundle_exec.sh
+[ -f $HOME/.complete_bundle_exec.sh ] && complete -C $HOME/bin/terraform terraform
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f $HOME/.bashrc.local ] && source $HOME/.bashrc.local
 
