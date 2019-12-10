@@ -55,6 +55,10 @@ if type rbenv >/dev/null 2>&1; then
     eval "$(rbenv init -)"
 fi
 
+if type akamai >/dev/null 2>&1; then
+    eval "$(akamai --bash)"
+fi
+
 
 if type luarocks >/dev/null 2>&1; then
     eval "$(luarocks path --bin)"
