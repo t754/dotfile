@@ -37,6 +37,8 @@
     s            = status --short --branch
     st           = status
     su           = submodule update
+    sw           = switch
+    re           = restore
 
 [core]
     excludesfile = ~/.gitignore
