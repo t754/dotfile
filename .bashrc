@@ -163,19 +163,24 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f $HOME/.bashrc.local ] && source $HOME/.bashrc.local
 
-
-
-
+if [[ -d $HOME/Android/Sdk ]] ; then
+    export ANDROID_HOME=$HOME/Android/Sdk
+    export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+    export PATH=$PATH:/usr/local/src/android-studio/bin
+fi
 
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
-# export BASH_IT_THEME='bobby'
 case $HOSTNAME in
-    *-600-* | *4PC ) export BASH_IT_THEME='nwinkler' ;;
-    * ) export BASH_IT_THEME='bobby' ;;
+    *-600-*|*4PC)
+        export BASH_IT_THEME='nwinkler'
+    ;;
+    *)
+        export BASH_IT_THEME='bobby'
+    ;;
 esac
 
 # (Advanced): Change this to the name of your remote repo if you
@@ -223,7 +228,7 @@ export SCM_CHECK=true
 # export BASH_IT_RELOAD_LEGACY=1
 
 # Load Bash It
-source "$BASH_IT"/bash_it.sh
+[[ -f "$BASH_IT"/bash_it.sh ]] && source "$BASH_IT"/bash_it.sh
 
 
 # added by travis gem

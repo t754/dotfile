@@ -94,110 +94,6 @@ function ediff() {
 
 
 ############################################
-# Get latest container ID
-alias dl="docker ps -l -q"
-
-# Get container process
-alias dps="docker ps"
-
-# Get process included stop container
-alias dpa="docker ps -a"
-
-# Get images
-alias di="docker images"
-
-# Get container IP
-alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
-
-# Run deamonized container, e.g., $dkd base /bin/echo hello
-alias dkd="docker run -d -P"
-
-# Run interactive container, e.g., $dki base /bin/bash
-alias dki="docker run -i -t -P"
-
-# Stop and Remove all containers
-alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
-
-# Stop all containers
-function dstop() { docker stop $(docker ps -a -q);}
-
-# Remove all containers
-function drm() { docker rm $(docker ps -aq --filter='status=exited'); }
-
-
-# Remove all images
-function dri() { docker rmi $(docker images -q); }
-
-# Dockerfile build, e.g., $dbu tcnksm/test
-function dbu() { docker build -t=$1 .; }
-
-# Show all alias related docker
-alias dalias='\grep -E -e "^alias.*docker" -e '\''\(\)\s+{.*docker'\'' -e '\''function docker'\'' $HOME/.aliasrc'
-#
-
-function docker-remove-most-recent-container() {
-  docker ps -a | head -2 | tail -1 | awk '{print $NF}' | xargs docker rm
-}
-
-function docker-remove-most-recent-image() {
-  docker images | head -2 | tail -1 | awk '{print $3}' | xargs docker rmi
-}
-
-function docker-enter() {
-  # about 'enter the specified docker container using bash'
-  # group 'docker'
-  # param '1: Name of the container to enter'
-  # example 'docker-enter oracle-xe'
-  docker exec -it "$@" /bin/bash;
-}
-
-function docker-remove-images() {
-  # about 'attempt to remove images with supplied tags or all if no tags are supplied'
-  # group 'docker'
-  if [ -z "$1" ]; then
-    docker rmi $(docker images -q)
-  else
-    DOCKER_IMAGES=""
-    for IMAGE_ID in $@; do DOCKER_IMAGES="$DOCKER_IMAGES\|$IMAGE_ID"; done
-    # Find the image IDs for the supplied tags
-    ID_ARRAY=($(docker images | grep "${DOCKER_IMAGES:2}" | awk {'print $3'}))
-    # Strip out duplicate IDs before attempting to remove the image(s)
-    docker rmi $(echo ${ID_ARRAY[@]} | tr ' ' '\n' | sort -u | tr '\n' ' ')
- fi
-}
-
-function docker-image-dependencies() {
-  # about 'attempt to create a Graphiz image of the supplied image ID dependencies'
-  # group 'docker'
-  if hash dot 2>/dev/null; then
-    OUT=$(mktemp -t docker-viz-XXXX.png)
-    docker images -viz | dot -Tpng > $OUT
-    case $OSTYPE in
-      linux*)
-        xdg-open $OUT
-        ;;
-      darwin*)
-        open $OUT
-        ;;
-    esac
-  else
-    >&2 echo "Can't show dependencies; Graphiz is not installed"
-  fi
-}
-
-function docker-runtime-environment() {
-  # about 'attempt to list the environmental variables of the supplied image ID'
-  # group 'docker'
-  docker run "$@" env
-}
-
-
-
-
-
-
-
-############################################
 function net_tools_deprecated_message () {
   echo -n 'net-tools コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
 }
@@ -316,7 +212,7 @@ function colors() {
 #     # READLINE_POINT=${#l}
 # }
 
-function peco-select-history ()
+function __fzf_history ()
 {
     builtin history -a;
     builtin history -c;
@@ -347,15 +243,9 @@ function peco-select-history ()
 }
 
 
-if [ -x "$(which peco)" ]; then
-	function peco-ag () {
-		ag $@ | peco --query "$READLINE_LINE" | awk -F : '{print "+" $2 " " $1}' | xargs emacsclient -c
-	}
-    if [[ "$-" = *i* ]] ; then
-	    bind -x '"\C-r": peco-select-history'
-	    bind    '"\C-xr": reverse-search-history'
-    fi
-fi
+builtin set -o histexpand;
+builtin bind -x '"\C-x1": __fzf_history';
+builtin bind '"\C-r": "\C-x1\e^\er"'
 
 
 function j() {
