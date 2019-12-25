@@ -44,8 +44,6 @@
         flycheck-color-mode-line
         flycheck-irony
         flycheck-rust
-        flymake-cursor
-        flymake-lua
         git-commit-mode
         git-gutter+
         go-eldoc
@@ -149,9 +147,6 @@
                            ptrv/company-lua
                            ptrv/helm-smex
                            purcell/exec-path-from-shell
-                           purcell/flymake-easy
-                           purcell/flymake-haskell-multi
-                           purcell/flymake-python-pyflakes
                            senny/emacs-eclim
                            ssm/vcl-mode
                            syl20bnr/emacs-emoji-cheat-sheet-plus
