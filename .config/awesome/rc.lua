@@ -698,9 +698,9 @@ globalkeys = awful.util.table.join(
       end,
       {description = "lua execute prompt", group = "awesome"}),
    awful.key({ modkey}, "F11", function () awful.spawn("amixer -D pulse sset Master 5%-") end,
-      {description = "increase volume", group = "custom"}),
+      {description = "increase volume", group = "audio"}),
    awful.key({ modkey}, "F12", function () awful.spawn("amixer -D pulse sset Master 5%+") end,
-      {description = "decrease volume", group = "custom"}),
+      {description = "decrease volume", group = "audio"}),
    awful.key({ modkey}, "F10", function () awful.spawn("amixer -D pulse set Master +1 toggle") end,
       {description = "mute volume", group = "custom"}),
    -- Menubar
