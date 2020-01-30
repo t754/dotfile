@@ -26,17 +26,17 @@
       (org-display-inline-images)
     (error nil)))
 ;; (setq org-log-reschedule  'time)
-(setq org-directory "~/org/")
+(setq org-directory "~/org")
 (setq org-startup-truncated                   nil
       org-latex-listings 'minted
-      org-hide-leading-stars                  t ;; 見出しの余分な*を消す
-      org-return-follows-link                 t
-      org-enforce-todo-dependencies           t
-      org-use-speed-commands                  t ;;
+      org-hide-leading-stars                  t     ;; 見出しの余分な*を消す
+      org-return-follows-link                 t     ;;
+      org-enforce-todo-dependencies           t     ;;
+      org-use-speed-commands                  t     ;;
       org-log-done                            'time ;; DONEの時刻を記録
 
       ;; org-todo-keywords                       '((sequence "TODO(t)" "DELEGATED(g)" "SOMEDAY(s)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)" "REFERENCE(r)"));; TODO状態
-      org-agenda-files                        (list org-directory) ;; アジェンダ表示の対象ファイル
+      org-agenda-files                        '("inbox.org" "work.org") ;; アジェンダ表示の対象ファイル
       hl-line-face                            'underline
       calendar-holidays                       nil ;; 標準の祝日を利用しない
       org-alphabetical-lists                  t
@@ -72,11 +72,14 @@
                                                  :empty-lines 1)
                                                 ))
 
+
+
+(setq org-refile-targets
+      (list (cons (directory-files org-directory t "^[^\.]*\.org") '(:maxlevel . 2))))
+
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(setq org-refile-targets
-      '(("sleep.org" :level . 1)
-        ("next.org" :level . 1)))
+
 (bind-keys :map global-map
            ("C-c a" . org-agenda)
            ("C-c c" . org-capture)
