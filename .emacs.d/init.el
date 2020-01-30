@@ -29,6 +29,17 @@
  '(ace-isearch-input-idle-delay 1)
  '(ace-isearch-input-length 5)
  '(browse-url-generic-program "firefox")
+ '(company-lsp-filter-candidates
+   (quote
+    ((ccls)
+     (clangd)
+     (cquery)
+     (gopls)
+     (javacomp)
+     (jdtls)
+     (pyls)
+     (rls)
+     (t . t))))
  '(flycheck-display-errors-delay 0.5)
  '(flycheck-display-errors-function
    (lambda
@@ -101,7 +112,7 @@
  pdflang={%L}}")
  '(package-selected-packages
    (quote
-    (markdown-mode edit-indirect company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
+    (yasnippet company-lsp company lsp-ui markdown-mode edit-indirect company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
  '(safe-local-variable-values
    (quote
     ((eval progn
