@@ -29,17 +29,7 @@
  '(ace-isearch-input-idle-delay 1)
  '(ace-isearch-input-length 5)
  '(browse-url-generic-program "firefox")
- '(company-lsp-filter-candidates
-   (quote
-    ((ccls)
-     (clangd)
-     (cquery)
-     (gopls)
-     (javacomp)
-     (jdtls)
-     (pyls)
-     (rls)
-     (t . t))))
+ '(company-lsp-cache-candidates (quote auto))
  '(flycheck-display-errors-delay 0.5)
  '(flycheck-display-errors-function
    (lambda
@@ -66,6 +56,9 @@
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.9)
  '(irony-additional-clang-options (quote ("-std=c++11")))
+ '(lsp-prefer-flymake nil)
+ '(lsp-rust-build-on-save t)
+ '(lsp-ui-flycheck-enable t)
  '(mozc-leim-title "も")
  '(org-latex-default-packages-alist
    (quote
@@ -112,7 +105,9 @@
  pdflang={%L}}")
  '(package-selected-packages
    (quote
-    (yasnippet company-lsp company lsp-ui markdown-mode edit-indirect company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
+    (go-mode lsp-ui markdown-mode edit-indirect company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
+ '(projectile-completion-system (quote ivy))
+ '(projectile-mode t nil (projectile))
  '(safe-local-variable-values
    (quote
     ((eval progn
@@ -145,7 +140,8 @@
  '(git-gutter:added ((t (:weight bold :height 0.8 :foreground "green"))))
  '(git-gutter:deleted ((t (:weight bold :height 0.8 :foreground "red"))))
  '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta"))))
- '(popup-tip-face ((t (:background "olive drab" :foreground "black" :weight normal :height 0.9)))))
+ '(popup-tip-face ((t (:background "olive drab" :foreground "black" :weight normal :height 0.9))))
+ '(whitespace-space ((t (:background "gray15" :foreground "gray18")))))
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)

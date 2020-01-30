@@ -68,18 +68,18 @@
                                                  :empty-lines 1)
                                                 ("w" "work"
                                                  entry (file "~/org/work.org")
-                                                 "* %?\n %T\n %a\n %i\n"
+                                                 "* %?\n %T\n %i\n"
                                                  :empty-lines 1)
                                                 ))
 
 
 
-(setq org-refile-targets
-      (list (cons (directory-files org-directory t "^[^\.]*\.org") '(:maxlevel . 2))))
 
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-
+(setq org-refile-targets
+      '(("trash.org" :level . 1)
+        ("next.org" :level . 1)))
 (bind-keys :map global-map
            ("C-c a" . org-agenda)
            ("C-c c" . org-capture)
