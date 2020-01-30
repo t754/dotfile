@@ -68,14 +68,14 @@
                                                  :empty-lines 1)
                                                 ("w" "work"
                                                  entry (file "~/org/work.org")
-                                                 "* %?\n %T\n %a\n %i\n"
+                                                 "* %?\n %T\n %i\n"
                                                  :empty-lines 1)
                                                 ))
 
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (setq org-refile-targets
-      '(("sleep.org" :level . 1)
+      '(("trash.org" :level . 1)
         ("next.org" :level . 1)))
 (bind-keys :map global-map
            ("C-c a" . org-agenda)
