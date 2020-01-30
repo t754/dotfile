@@ -55,6 +55,10 @@ if type rbenv >/dev/null 2>&1; then
     eval "$(rbenv init -)"
 fi
 
+if type akamai >/dev/null 2>&1; then
+    eval "$(akamai --bash)"
+fi
+
 
 if type luarocks >/dev/null 2>&1; then
     eval "$(luarocks path --bin)"
@@ -64,7 +68,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export GOPATH="$HOME/.go"
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 export PATH="$PYENV_ROOT/bin:$HOME/bin:$HOME/.local/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:/usr/local/go/bin:$GOPATH/bin:$GOBIN:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
-export PATH="$PATH:$HOME/go/bin:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/go/bin:$HOME/.cargo/bin:/snap/bin/"
 if which ruby &>/dev/null && which gem &>/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
@@ -155,12 +159,15 @@ fi
 
 
 [ -f $HOME/.complete_bundle_exec.sh ] && source $HOME/.complete_bundle_exec.sh
+[ -f $HOME/.complete_bundle_exec.sh ] && complete -C $HOME/bin/terraform terraform
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f $HOME/.bashrc.local ] && source $HOME/.bashrc.local
 
-
-
-
+if [[ -d $HOME/Android/Sdk ]] ; then
+    export ANDROID_HOME=$HOME/Android/Sdk
+    export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+    export PATH=$PATH:/usr/local/src/android-studio/bin
+fi
 
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
@@ -226,3 +233,14 @@ export SCM_CHECK=true
 
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+_real_git="$(which git)"
+_checkout_list="$(git config -l | grep checkout | perl -nle 'm|alias\.([^=]*)=checkout| and print $1')"
+git () {
+    if echo "$_checkout_list checkout" | grep -q "$1" ; then
+        echo "git checkout つかってるんですか??? おじさんですか??"
+        echo "git switch | git restore を使え!!!"
+        return
+    fi
+    $_real_git "$@"
+}
+export -f git

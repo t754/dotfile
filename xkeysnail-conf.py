@@ -88,6 +88,7 @@ blacklist = (
     "alacritty",
     "virtualbox machine",
     "factorio",
+    "",
 )
 
 

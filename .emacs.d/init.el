@@ -136,6 +136,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bold ((t (:weight bold :height 0.8))))
+ '(fixed-pitch ((t (:family "monospace"))))
  '(git-gutter:added ((t (:weight bold :height 0.8 :foreground "green"))))
  '(git-gutter:deleted ((t (:weight bold :height 0.8 :foreground "red"))))
  '(git-gutter:modified ((t (:weight bold :height 0.8 :foreground "magenta"))))
