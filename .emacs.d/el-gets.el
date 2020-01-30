@@ -146,6 +146,7 @@
                            emacs-lsp/dap-mode
                            favadi/flycheck-gometalinter
                            jcpetkovich/shrink-whitespace.el
+                           john2x/jenkinsfile-mode
                            magit/with-editor
                            ptrv/company-lua
                            ptrv/helm-smex
