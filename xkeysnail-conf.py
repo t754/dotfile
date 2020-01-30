@@ -87,9 +87,18 @@ blacklist = (
     "vncviewer",
     "alacritty",
     "virtualbox machine",
+    "factorio",
 )
 
-define_keymap(lambda wm_class: wm_class.lower() not in blacklist, {
+
+def blk(wm_class):
+    lw = wm_class.lower()
+    if lw.startswith("minecraft"):
+        return False
+    return wm_class.lower() not in blacklist
+
+
+define_keymap(blk, {
     # Cursor
     K("C-b"): with_mark(K("left")),
     K("C-f"): with_mark(K("right")),
