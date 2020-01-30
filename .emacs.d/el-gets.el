@@ -147,6 +147,7 @@
                            favadi/flycheck-gometalinter
                            jcpetkovich/shrink-whitespace.el
                            john2x/jenkinsfile-mode
+                           ljos/jq-mode
                            magit/with-editor
                            ptrv/company-lua
                            ptrv/helm-smex
