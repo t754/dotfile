@@ -702,7 +702,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey}, "F12", function () awful.spawn("amixer -D pulse sset Master 5%+") end,
       {description = "decrease volume", group = "audio"}),
    awful.key({ modkey}, "F10", function () awful.spawn("amixer -D pulse set Master +1 toggle") end,
-      {description = "mute volume", group = "custom"}),
+      {description = "mute volume", group = "audio"}),
    -- Menubar
    awful.key({ modkey , "Shift"}, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
