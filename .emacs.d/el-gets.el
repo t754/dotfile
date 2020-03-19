@@ -44,6 +44,8 @@
         flycheck-color-mode-line
         flycheck-irony
         flycheck-rust
+        flymake-cursor
+        flymake-lua
         git-commit-mode
         git-gutter+
         go-eldoc
@@ -75,7 +77,6 @@
         key-chord
         levenshtein
         lua-mode
-        magit
         markdown-mode
         midje-mode
         migemo
@@ -127,6 +128,8 @@
 						   emacs-lsp/lsp-ui
 						   tigersoldier/company-lsp
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
+                           (magit/magit :load-path "lisp")
+                           (magit/transient :load-path "lisp")
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
                            ;; racer-rust/emacs-racer
@@ -144,6 +147,9 @@
                            emacs-lsp/dap-mode
                            favadi/flycheck-gometalinter
                            jcpetkovich/shrink-whitespace.el
+                           john2x/jenkinsfile-mode
+                           ljos/jq-mode
+                           magit/with-editor
                            ptrv/company-lua
                            ptrv/helm-smex
                            purcell/exec-path-from-shell
