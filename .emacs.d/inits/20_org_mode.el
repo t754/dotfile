@@ -70,7 +70,13 @@
                                                  entry (file "~/org/work.org")
                                                  "* %?\n %T\n %i\n"
                                                  :empty-lines 1)
-                                                ))
+                                                ("d" "daily-template"
+                                                 entry
+                                                 (file+olp+datetree "daily.org")
+                                                 "%[~/org/daily-template]"
+                                                 ;; :unnarrowed 1
+                                                 :time-prompt t
+                                                 )))
 
 
 

@@ -1,15 +1,11 @@
 [Unit]
-Description=xkeysnail
+Description=xkeysnail!
 
 [Service]
-KillMode=process
-ExecStart=/usr/local/bin/xkeysnail ~/dotfile/xkeysnail.py
+ExecStart=/usr/local/bin/xkeysnail -q %h/dotfile/xkeysnail-conf.py
 ExecStartPre=/usr/bin/xhost +SI:localuser:root
-Type=simple
-Restart=always
-
-# Update DISPLAY to be the same as `echo $DISPLAY` on your graphical terminal.
-Environment=DISPLAY=:0
+Restart=on-failure
+RestartSec=1s
 
 [Install]
-WantedBy=default.target
+WantedBy=basic.target
