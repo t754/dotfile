@@ -129,6 +129,9 @@
  '(slime-company-completion (quote fuzzy))
  '(tab-width 4)
  '(undo-tree-mode-lighter " U🌳")
+ '(whitespace-style
+   (quote
+    (face trailing tabs spaces newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark)))
  '(yas-trigger-key "TAB"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
