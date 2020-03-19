@@ -207,3 +207,17 @@
                                    "[NO-PACKAGES]\n"
                                    "\\usepackage{graphicx}\n")
                                  org-beamer-sectioning))))
+(defun my-org-screenshot ()
+  "take screenshot"
+  (interactive)
+  (let ((filename
+         (concat
+          (make-temp-name
+           (concat (expand-file-name "~/org/img/")
+                   (buffer-name)
+                   "_"
+                   (format-time-string "%Y%m%d_%H%M%S_")))
+         ".png")))
+    (call-process "import" nil nil nil filename)
+    (insert (concat "[[" filename "]]"))
+    (org-display-inline-images)))
