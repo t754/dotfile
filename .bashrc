@@ -178,6 +178,9 @@ case $HOSTNAME in
     *-600-*|*4PC)
         export BASH_IT_THEME='nwinkler'
     ;;
+    *tam*)
+        export BASH_IT_THEME='doubletime'
+    ;;
     *)
         export BASH_IT_THEME='bobby'
     ;;
