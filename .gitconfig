@@ -50,8 +50,7 @@
 [merge]
     tool         = ediff
 [ghq]
-    root         = ~/.ghq
-    root         = ~/.go/src
+    root         = ~/ghq
 [push]
     default      = simple
 [credential]
