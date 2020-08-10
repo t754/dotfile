@@ -44,9 +44,9 @@ my_symlink(){
     if [[ -f $dst ]] ; then
         mv --backup=t "$dst" "${BACKUPDIR}/"
     elif [[ -h $dst ]] ; then
-	unlink $dst
+	    unlink $dst
     fi
-    ln -vs "$src" "$dst"
+    ln --backup=numbered -vs "$src" "$dst"
 }
 
 deploy_symlink_array(){
