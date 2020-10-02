@@ -237,14 +237,3 @@ export SCM_CHECK=true
 
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
-_real_git="$(which git)"
-_checkout_list="$(git config -l | grep checkout | perl -nle 'm|alias\.([^=]*)=checkout| and print $1')"
-git () {
-    if echo "$_checkout_list checkout" | grep -q "$1" ; then
-        echo "git checkout つかってるんですか??? おじさんですか??"
-        echo "git switch | git restore を使え!!!"
-        return
-    fi
-    $_real_git "$@"
-}
-export -f git
