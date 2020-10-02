@@ -174,6 +174,7 @@ fi
 
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
+export NODE_PATH=$HOME/.config/yarn/global/node_modules
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
