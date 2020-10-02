@@ -13,7 +13,7 @@
 
 table5={
    ["C-d"]={"emacsclient -c -n","Emacs"},
-   ["C-f"]={"firefox","Firefox"},
+   ["C-f"]={"firefox","firefox"},
    ["C-s"]={"slack","Slack"},
    ["C-g"]={"keepassxc","keepassxc"},
 }
