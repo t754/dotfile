@@ -16,4 +16,6 @@ table5={
    ["C-f"]={"firefox","firefox"},
    ["C-s"]={"slack","Slack"},
    ["C-g"]={"keepassxc","keepassxc"},
+   ["C-t"]={"Alacritty","Alacritty"},
+   ["C-b"]={"xfce4-terminal","Xfce4-terminal"},
 }
