@@ -13,8 +13,10 @@
 (setq my/el-list
       '(
         ;;##(
-        ;;rust-racer
-        align-cljlet
+        ;; align-cljlet
+        ;; clj-refactor
+        ;; company-ternxs
+        ;; yascroll
         auto-complete
         avy
         bm
@@ -22,7 +24,6 @@
         c-eldoc
         cargo
         clang-format
-        clj-refactor
         clojure-mode
         clojure-snippets
         cmake-ide
@@ -31,7 +32,6 @@
         company-irony
         company-jedi
         company-quickhelp
-        company-tern
         dockerfile-mode
         drag-stuff
         emmet-mode
@@ -58,7 +58,6 @@
         helm-descbinds
         helm-gtags
         helm-ls-git
-        helm-rails
         helm-robe
         helm-swoop
         help-fns+
@@ -88,7 +87,7 @@
         popwin
         pos-tip
         powerline
-        projectile-rails
+        projectile
         py-autopep8
         python-pep8
         quickrun
@@ -116,7 +115,6 @@
         web-mode
         xref-js2
         yaml-mode
-        yascroll
         yasnippet
         ;;##)
         ))
@@ -130,6 +128,7 @@
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                            (magit/magit :load-path "lisp")
                            (magit/transient :load-path "lisp")
+                           (rtags :branch "v2.38")
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
                            ;; racer-rust/emacs-racer
