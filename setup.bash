@@ -24,13 +24,14 @@ declare -a symlink_array=(
     ".config/fontconfig/conf.d"
     ".config/systemd/user/emacs.service"
     ".config/systemd/user/xkeysnail.service"
+    ".config/dunst/dunstrc"
+    ".config/alacritty/alacritty.yml"
 )
 
 # key = src
 # value = dst
 declare -A symlink_hash=(
-    [".config/dunst"]=".config/dunst/dunstrc"
-    [".config/alacritty/"]=".config/"
+    # [""]=".config/"
 )
 
 my_symlink(){
