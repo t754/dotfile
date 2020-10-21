@@ -13,7 +13,11 @@
 (setq my/el-list
       '(
         ;;##(
+        ;; clj-refactor
+        ;; company-tern
+        ;; tern
         ;;rust-racer
+        request
         align-cljlet
         auto-complete
         avy
@@ -22,16 +26,15 @@
         c-eldoc
         cargo
         clang-format
-        clj-refactor
         clojure-mode
         clojure-snippets
         cmake-ide
         cmake-mode
         color-theme
+        color-theme-almost-monokai
         company-irony
         company-jedi
         company-quickhelp
-        company-tern
         dockerfile-mode
         drag-stuff
         emmet-mode
@@ -105,7 +108,6 @@
         smex
         swank-js
         switch-window
-        tern
         terraform-mode
         tide
         toml-mode
@@ -148,6 +150,7 @@
                            favadi/flycheck-gometalinter
                            jcpetkovich/shrink-whitespace.el
                            john2x/jenkinsfile-mode
+                           larstvei/ox-gfm
                            ljos/jq-mode
                            magit/with-editor
                            ptrv/company-lua
@@ -156,8 +159,10 @@
                            senny/emacs-eclim
                            ssm/vcl-mode
                            syl20bnr/emacs-emoji-cheat-sheet-plus
+                           titaniumbones/ox-slack
                            yasuyk/helm-git-grep
                            yasuyk/web-beautify
+                           yuya373/emacs-slack
                            zonuexe/emoji-fontset.el
                            ;;##)
                            ))
