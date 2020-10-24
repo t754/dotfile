@@ -46,6 +46,8 @@
   :tag "builtin" "faces" "help"
   :custom `((custom-file  . ,(locate-user-emacs-file "custom.el"))))
 
+
+
 (leaf cus-start
   :doc "define customization properties of builtins"
   :tag "builtin" "internal"
@@ -75,11 +77,26 @@
   :custom ((linum-delay . t))
   :global-minor-mode global-linum-mode)
 
+(leaf beacon
+  :doc "Highlight the cursor whenever the window scrolls"
+  :req "seq-2.14"
+  :tag "convenience"
+  :added "2020-10-24"
+  :url "https://github.com/Malabarba/beacon"
+  :ensure t
+  ;; :hook (after-focus-change-function . beacon--blink-on-focus)
+  :global-minor-mode t
+  :custom ((beacon-blink-when-focused . t))
+  :init   (add-function :after after-focus-change-function
+                        (lambda ()
+                          (beacon--blink-on-focus))))
+
 (leaf paren
   :doc "highlight matching paren"
   :tag "builtin"
   :custom ((show-paren-delay . 0.1))
   :global-minor-mode show-paren-mode)
+
 
 (leaf files
   :doc "file input and output commands for Emacs"
