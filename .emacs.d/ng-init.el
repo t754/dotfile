@@ -187,6 +187,8 @@
     :bind (("C-S-s" . counsel-imenu)
            ("C-x C-r" . counsel-recentf)
            ("C-x C-b" . counsel-ibuffer)
+           ("M-s a" . counsel-ag)
+           ("M-s g" . counsel-git-grep)
            ("M-x" . counsel-M-x))
     :custom `((counsel-yank-pop-separator . "\n----------\n")
               (counsel-find-file-ignore-regexp . ,(rx-to-string '(or "./" "../") 'no-group)))
@@ -257,6 +259,17 @@
   :ensure t
   ;; :after git-commit with-editor
   :bind (("C-x g" . magit-status)))
+
+(leaf find-file-in-project
+  :doc "Find file/directory and review Diff/Patch/Commit efficiently everywhere"
+  :req "ivy-0.10.0" "emacs-24.4"
+  :tag "convenience" "project" "emacs>=24.4"
+  :added "2020-10-30"
+  :url "https://github.com/technomancy/find-file-in-project"
+  :emacs>= 24.4
+  :ensure t
+  :after ivy
+  :bind (("C-M-o" . find-file-in-project)))
 
 (provide 'init)
 
