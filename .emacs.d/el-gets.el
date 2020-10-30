@@ -13,12 +13,16 @@
 (setq my/el-list
       '(
         ;;##(
+        ;; align-cljlet
+        ;; clj-refactor
         ;; clj-refactor
         ;; company-tern
+        ;; company-ternxs
         ;; tern
+        ;; yascroll
         ;;rust-racer
-        atom-dark-theme
         align-cljlet
+        atom-dark-theme
         auto-complete
         avy
         bm
@@ -61,7 +65,6 @@
         helm-descbinds
         helm-gtags
         helm-ls-git
-        helm-rails
         helm-robe
         helm-swoop
         help-fns+
@@ -91,7 +94,7 @@
         popwin
         pos-tip
         powerline
-        projectile-rails
+        projectile
         py-autopep8
         python-pep8
         quickrun
@@ -119,7 +122,6 @@
         web-mode
         xref-js2
         yaml-mode
-        yascroll
         yasnippet
         ;;##)
         ))
@@ -133,6 +135,7 @@
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                            (magit/magit :load-path "lisp")
                            (magit/transient :load-path "lisp")
+                           (rtags :branch "v2.38")
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
                            ;; racer-rust/emacs-racer

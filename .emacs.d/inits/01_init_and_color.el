@@ -30,7 +30,7 @@
 
 ;;
 (mouse-wheel-mode -1)
-;; (beacon-mode 1)
+(beacon-mode 1)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;ハイパーリンク (cygwinの場合)
 
@@ -62,7 +62,7 @@
 ;;起動画面いれない
       inhibit-startup-message t)
 
-(global-yascroll-bar-mode 1)
+
 ;; ;;;;;;
 ;; 行末のスペース + ファイル末尾の連続する改行の除去を行う
 (defvar my/current-cleanup-state "")
