@@ -46,6 +46,8 @@
   :tag "builtin" "faces" "help"
   :custom `((custom-file  . ,(locate-user-emacs-file "custom.el"))))
 
+
+
 (leaf cus-start
   :doc "define customization properties of builtins"
   :tag "builtin" "internal"
@@ -75,11 +77,26 @@
   :custom ((linum-delay . t))
   :global-minor-mode global-linum-mode)
 
+(leaf beacon
+  :doc "Highlight the cursor whenever the window scrolls"
+  :req "seq-2.14"
+  :tag "convenience"
+  :added "2020-10-24"
+  :url "https://github.com/Malabarba/beacon"
+  :ensure t
+  ;; :hook (after-focus-change-function . beacon--blink-on-focus)
+  :global-minor-mode t
+  :custom ((beacon-blink-when-focused . t))
+  :init   (add-function :after after-focus-change-function
+                        (lambda ()
+                          (beacon--blink-on-focus))))
+
 (leaf paren
   :doc "highlight matching paren"
   :tag "builtin"
   :custom ((show-paren-delay . 0.1))
   :global-minor-mode show-paren-mode)
+
 
 (leaf files
   :doc "file input and output commands for Emacs"
@@ -134,7 +151,7 @@
     :ensure t
     :config
     (flycheck-elsa-setup)))
- 
+
 (leaf ivy
   :doc "Incremental Vertical completYon"
   :req "emacs-24.5"
@@ -170,6 +187,8 @@
     :bind (("C-S-s" . counsel-imenu)
            ("C-x C-r" . counsel-recentf)
            ("C-x C-b" . counsel-ibuffer)
+           ("M-s a" . counsel-ag)
+           ("M-s g" . counsel-git-grep)
            ("M-x" . counsel-M-x))
     :custom `((counsel-yank-pop-separator . "\n----------\n")
               (counsel-find-file-ignore-regexp . ,(rx-to-string '(or "./" "../") 'no-group)))
@@ -183,7 +202,8 @@
   :ensure t
   :after ivy
   :global-minor-mode t)
-    
+
+
 (leaf prescient
   :doc "Better sorting and filtering"
   :req "emacs-25.1"
@@ -195,7 +215,7 @@
   :custom `((prescient-aggressive-file-save . t)
             (prescient-save-file . ,(locate-user-emacs-file "prescient")))
   :global-minor-mode prescient-persist-mode)
-  
+
 (leaf ivy-prescient
   :doc "prescient.el + Ivy"
   :req "emacs-25.1" "prescient-4.0" "ivy-0.11.0"
@@ -231,7 +251,59 @@
            (company-transformers . '(company-sort-by-occurrence)))
   :global-minor-mode global-company-mode)
 
+(leaf magit
+  :doc "A Git porcelain inside Emacs."
+  :req "emacs-25.1" "async-20200113" "dash-20200524" "git-commit-20200516" "transient-20200601" "with-editor-20200522"
+  :tag "vc" "tools" "git" "emacs>=25.1"
+  :added "2020-10-24"
+  :emacs>= 25.1
+  :ensure t
+  ;; :after git-commit with-editor
+  :bind (("C-x g" . magit-status)))
 
+(leaf find-file-in-project
+  :doc "Find file/directory and review Diff/Patch/Commit efficiently everywhere"
+  :req "ivy-0.10.0" "emacs-24.4"
+  :tag "convenience" "project" "emacs>=24.4"
+  :added "2020-10-30"
+  :url "https://github.com/technomancy/find-file-in-project"
+  :emacs>= 24.4
+  :ensure t
+  :after ivy
+  :bind (("C-M-o" . find-file-in-project)))
+
+(leaf org
+  :doc "Export Framework for Org Mode"
+  :tag "builtin"
+  :added "2020-10-30"
+  :bind (("C-c a" . org-agenda)
+         ("C-c c" . org-capture)
+         ("C-c b" . org-iswitchb))
+  :custom
+  (org-capture-templates
+   .
+   '(("i" "inbox" entry
+      (file "~/org/inbox.org")
+      "* %?\n %T\n %a\n %i\n"
+      :empty-lines 1 )
+     ("h" "hobby"
+      entry (file "~/org/hobby.org")
+      "* %?\n %T\n %a\n %i\n"
+      :empty-lines 1)
+     ("w" "work"
+      entry (file "~/org/work.org")
+      "* %?\n %T\n %i\n"
+      :empty-lines 1)
+     ("d" "daily-template"
+      entry
+      (file+olp+datetree "daily.org")
+      "%[~/org/daily-template]"
+      ;; :unnarrowed 1
+      :time-prompt t)))
+  (org-directory . "~/org")
+  (org-use-speed-commands . t))
+
+(load-theme 'tango-dark)
 (provide 'init)
 
 ;; Local Variables:
