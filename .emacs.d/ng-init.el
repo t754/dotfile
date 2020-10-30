@@ -151,7 +151,7 @@
     :ensure t
     :config
     (flycheck-elsa-setup)))
- 
+
 (leaf ivy
   :doc "Incremental Vertical completYon"
   :req "emacs-24.5"
@@ -202,7 +202,8 @@
   :ensure t
   :after ivy
   :global-minor-mode t)
-    
+
+
 (leaf prescient
   :doc "Better sorting and filtering"
   :req "emacs-25.1"
@@ -214,7 +215,7 @@
   :custom `((prescient-aggressive-file-save . t)
             (prescient-save-file . ,(locate-user-emacs-file "prescient")))
   :global-minor-mode prescient-persist-mode)
-  
+
 (leaf ivy-prescient
   :doc "prescient.el + Ivy"
   :req "emacs-25.1" "prescient-4.0" "ivy-0.11.0"
@@ -271,6 +272,38 @@
   :after ivy
   :bind (("C-M-o" . find-file-in-project)))
 
+(leaf org
+  :doc "Export Framework for Org Mode"
+  :tag "builtin"
+  :added "2020-10-30"
+  :bind (("C-c a" . org-agenda)
+         ("C-c c" . org-capture)
+         ("C-c b" . org-iswitchb))
+  :custom
+  (org-capture-templates
+   .
+   '(("i" "inbox" entry
+      (file "~/org/inbox.org")
+      "* %?\n %T\n %a\n %i\n"
+      :empty-lines 1 )
+     ("h" "hobby"
+      entry (file "~/org/hobby.org")
+      "* %?\n %T\n %a\n %i\n"
+      :empty-lines 1)
+     ("w" "work"
+      entry (file "~/org/work.org")
+      "* %?\n %T\n %i\n"
+      :empty-lines 1)
+     ("d" "daily-template"
+      entry
+      (file+olp+datetree "daily.org")
+      "%[~/org/daily-template]"
+      ;; :unnarrowed 1
+      :time-prompt t)))
+  (org-directory . "~/org")
+  (org-use-speed-commands . t))
+
+(load-theme 'tango-dark)
 (provide 'init)
 
 ;; Local Variables:
