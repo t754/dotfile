@@ -17,7 +17,7 @@
         ;; company-tern
         ;; tern
         ;;rust-racer
-        request
+        atom-dark-theme
         align-cljlet
         auto-complete
         avy
@@ -98,6 +98,7 @@
         rainbow-delimiters
         rbenv
         recentf-ext
+        request
         rjsx-mode
         rubocop
         rust-mode
