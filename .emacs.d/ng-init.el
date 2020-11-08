@@ -52,6 +52,10 @@
   :config
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>")))
 
+(leaf my/font
+  :config
+  (setq default-frame-alist '((font . "Ricty-12"))))
+
 (leaf cus-edit
   :doc "tools for customizing Emacs and Lisp packages"
   :tag "builtin" "faces" "help"
