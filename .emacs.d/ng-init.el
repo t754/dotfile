@@ -99,7 +99,7 @@
   :added "2020-10-24"
   :url "https://github.com/Malabarba/beacon"
   :ensure t
-  ;; :hook (after-focus-change-function . beacon--blink-on-focus)
+  :defun beacon--blink-on-focus
   :global-minor-mode t
   :custom ((beacon-blink-when-focused . t))
   :init   (add-function :after after-focus-change-function
