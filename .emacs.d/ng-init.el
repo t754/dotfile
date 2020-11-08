@@ -318,7 +318,15 @@
   (org-directory . "~/org")
   (org-use-speed-commands . t))
 
-(load-theme 'tango-dark)
+(leaf color-theme-sanityinc-tomorrow
+  :doc "A version of Chris Kempson's \"tomorrow\" themes"
+  :tag "themes" "faces"
+  :added "2020-11-04"
+  :url "https://github.com/purcell/color-theme-sanityinc-tomorrow"
+  :ensure t
+  :config (load-theme 'sanityinc-tomorrow-night t))
+
+  
 (provide 'init)
 
 ;; Local Variables:
