@@ -48,6 +48,10 @@
   :ensure t
   :bind (("M-=" . transient-dwim-dispatch)))
 
+(leaf my/global-key-map
+  :config
+  (define-key key-translation-map (kbd "C-h") (kbd "<DEL>")))
+
 (leaf cus-edit
   :doc "tools for customizing Emacs and Lisp packages"
   :tag "builtin" "faces" "help"
@@ -71,8 +75,8 @@
            (indent-tabs-mode . nil)
            (text-quoting-style . 'straight))
   :config
-  (defalias 'yes-or-no-p 'y-or-n-p)
-  (keyboard-translate ?\C-h ?\C-?))
+  (defalias 'yes-or-no-p 'y-or-n-p))
+
 
 (leaf linum
   :doc "display line numbers in the left margin"
