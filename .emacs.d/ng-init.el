@@ -33,6 +33,13 @@
   (leaf leaf-tree :ensure t)
   (leaf leaf-convert  :ensure t))
 
+
+(leaf server
+  :require t
+  :defun server-running-p
+  :config
+  (unless (server-running-p) (server-start)))
+
 (leaf macrostep
   :ensure t
   :bind (("C-c e" . macrostep-expand)))
