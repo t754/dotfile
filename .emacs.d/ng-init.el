@@ -33,6 +33,13 @@
   (leaf leaf-tree :ensure t)
   (leaf leaf-convert  :ensure t))
 
+
+(leaf server
+  :require t
+  :defun server-running-p
+  :config
+  (unless (server-running-p) (server-start)))
+
 (leaf macrostep
   :ensure t
   :bind (("C-c e" . macrostep-expand)))
@@ -40,6 +47,14 @@
 (leaf transient-dwim
   :ensure t
   :bind (("M-=" . transient-dwim-dispatch)))
+
+(leaf my/global-key-map
+  :config
+  (define-key key-translation-map (kbd "C-h") (kbd "<DEL>")))
+
+(leaf my/font
+  :config
+  (setq default-frame-alist '((font . "Ricty-12"))))
 
 (leaf cus-edit
   :doc "tools for customizing Emacs and Lisp packages"
@@ -64,8 +79,8 @@
            (indent-tabs-mode . nil)
            (text-quoting-style . 'straight))
   :config
-  (defalias 'yes-or-no-p 'y-or-n-p)
-  (keyboard-translate ?\C-h ?\C-?))
+  (defalias 'yes-or-no-p 'y-or-n-p))
+
 
 (leaf linum
   :doc "display line numbers in the left margin"
@@ -84,7 +99,7 @@
   :added "2020-10-24"
   :url "https://github.com/Malabarba/beacon"
   :ensure t
-  ;; :hook (after-focus-change-function . beacon--blink-on-focus)
+  :defun beacon--blink-on-focus
   :global-minor-mode t
   :custom ((beacon-blink-when-focused . t))
   :init   (add-function :after after-focus-change-function
@@ -303,7 +318,15 @@
   (org-directory . "~/org")
   (org-use-speed-commands . t))
 
-(load-theme 'tango-dark)
+(leaf color-theme-sanityinc-tomorrow
+  :doc "A version of Chris Kempson's \"tomorrow\" themes"
+  :tag "themes" "faces"
+  :added "2020-11-04"
+  :url "https://github.com/purcell/color-theme-sanityinc-tomorrow"
+  :ensure t
+  :config (load-theme 'sanityinc-tomorrow-night t))
+
+  
 (provide 'init)
 
 ;; Local Variables:

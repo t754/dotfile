@@ -15,8 +15,14 @@
         ;;##(
         ;; align-cljlet
         ;; clj-refactor
+        ;; clj-refactor
+        ;; company-tern
         ;; company-ternxs
+        ;; tern
         ;; yascroll
+        ;;rust-racer
+        align-cljlet
+        atom-dark-theme
         auto-complete
         avy
         bm
@@ -29,6 +35,7 @@
         cmake-ide
         cmake-mode
         color-theme
+        color-theme-almost-monokai
         company-irony
         company-jedi
         company-quickhelp
@@ -94,6 +101,7 @@
         rainbow-delimiters
         rbenv
         recentf-ext
+        request
         rjsx-mode
         rubocop
         rust-mode
@@ -104,7 +112,6 @@
         smex
         swank-js
         switch-window
-        tern
         terraform-mode
         tide
         toml-mode
@@ -147,6 +154,7 @@
                            favadi/flycheck-gometalinter
                            jcpetkovich/shrink-whitespace.el
                            john2x/jenkinsfile-mode
+                           larstvei/ox-gfm
                            ljos/jq-mode
                            magit/with-editor
                            ptrv/company-lua
@@ -155,8 +163,10 @@
                            senny/emacs-eclim
                            ssm/vcl-mode
                            syl20bnr/emacs-emoji-cheat-sheet-plus
+                           titaniumbones/ox-slack
                            yasuyk/helm-git-grep
                            yasuyk/web-beautify
+                           yuya373/emacs-slack
                            zonuexe/emoji-fontset.el
                            ;;##)
                            ))
