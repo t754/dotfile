@@ -127,3 +127,11 @@ wget-log*
 *.app
 powerline-shell.py
 *.local
+
+
+#Added by cargo
+#
+#already existing elements are commented out
+
+/target
+**/*.rs.bk

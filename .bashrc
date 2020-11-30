@@ -45,7 +45,17 @@ builtin set -o histexpand;
 
 
 # ${PROMPT_COMMAND:$PROMPT_COMMAND$'\n'}
-export PROMPT_COMMAND=" history -a; history -c; history -r;"
+export PROMPT_COMMAND=" history -a; history -c; history -r"
+case ${TERM} in
+
+  xterm*|rxvt*|Eterm|aterm|kterm|gnome*)
+     PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+
+    ;;
+  screen*)
+    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+    ;;
+esac
 
 shopt -s extglob
 export HISTIGNORE="fg*:bg*:history*:rm*:export AWS_?(A|SE)*"
@@ -67,6 +77,9 @@ fi
 # [ -f ~/.pythonrc.py ] && export PYTHONSTARTUP=$HOME/.pythonrc.py
 export PYENV_ROOT="$HOME/.pyenv"
 export GOPATH="$HOME/.go"
+export GO111MODULE=on
+export GOBIN=$HOME/bin
+export GOMODCACHE=$HOME/.cache/go_mod
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 export PATH="$PYENV_ROOT/bin:$HOME/bin:$HOME/.local/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:/usr/local/go/bin:$GOPATH/bin:$GOBIN:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
 export PATH="$PATH:$HOME/go/bin:$HOME/.cargo/bin:/snap/bin/"
@@ -168,12 +181,16 @@ fi
 
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
+export NODE_PATH=$HOME/.config/yarn/global/node_modules
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
 case $HOSTNAME in
     *-600-*|*4PC)
         export BASH_IT_THEME='nwinkler'
+    ;;
+    *tam*)
+        export BASH_IT_THEME='doubletime'
     ;;
     *)
         export BASH_IT_THEME='bobby'

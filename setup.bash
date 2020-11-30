@@ -20,12 +20,18 @@ declare -a symlink_array=(
     ".Xmodmap"
     ".xmonad"
     ".zshrc"
-    ".config/alacritty"
     ".config/awesome"
-    ".config/dunst"
     ".config/fontconfig/conf.d"
     ".config/systemd/user/emacs.service"
     ".config/systemd/user/xkeysnail.service"
+    ".config/dunst/dunstrc"
+    ".config/alacritty/alacritty.yml"
+)
+
+# key = src
+# value = dst
+declare -A symlink_hash=(
+    # [""]=".config/"
 )
 
 my_symlink(){
@@ -39,9 +45,9 @@ my_symlink(){
     if [[ -f $dst ]] ; then
         mv --backup=t "$dst" "${BACKUPDIR}/"
     elif [[ -h $dst ]] ; then
-	unlink $dst
+	    unlink $dst
     fi
-    ln -vs "$src" "$dst"
+    ln --backup=numbered -vs "$src" "$dst"
 }
 
 deploy_symlink_array(){
@@ -51,21 +57,34 @@ deploy_symlink_array(){
     done
 }
 
+deploy_symlink_hash(){
+    for k in "${!symlink_hash[@]}"
+    do
+        my_symlink "${ROOT_DIR}/${k}" "${HOME}/${symlink_hash[${k}]}"
+    done
+}
+
 setup_go(){
     if [[ ! -x "$(which go)" ]]; then
         return -1
     fi
-    go get github.com/motemen/ghq
+    if [[ ! -x "$(which ghq)" ]]; then
+        go get github.com/x-motemen/ghq
+    fi
     ghq get https://github.com/clvv/fasd
     my_symlink "$(ghq root)"/"$(ghq list clvv/fasd)"/fasd $HOME/bin/fasd
 
     ghq get https://github.com/tmux-plugins/tpm
     my_symlink "$(ghq root)"/"$(ghq list tmux-plugins/tpm)" $HOME/.tmux/plugins/tpm
 
-    go get github.com/prasmussen/gdrive
+    ghq get https://github.com/tmux-plugins/tpm
+
+    ghq get github.com/Bash-it/bash-it
+    my_symlink "$(ghq root)"/"$(ghq list Bash-it/bash-it)" $HOME/.bash_it
 }
 
 
 # main
 deploy_symlink_array
+deploy_symlink_hash
 setup_go

@@ -703,6 +703,20 @@ globalkeys = awful.util.table.join(
       {description = "decrease volume", group = "audio"}),
    awful.key({ modkey}, "F10", function () awful.spawn("amixer -D pulse set Master +1 toggle") end,
       {description = "mute volume", group = "audio"}),
+
+   awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn("amixer -c 0 set Master 1dB+") end,
+      {description = "increase volume", group = "audio"}),
+   awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn("amixer -c 0 set Master 1dB-") end,
+      {description = "decrease volume", group = "audio"}),
+   awful.key({ }, "XF86AudioMute", function () awful.spawn("amixer -D pulse set Master +1 toggle") end,
+      {description = "muto toggle", group = "audio"}),
+
+   awful.key({ }, "XF86MonBrightnessUp", function () awful.spawn("xbacklight -inc 2") end,
+      {description = "increase backlight", group = "bright"}),
+   awful.key({ }, "XF86MonBrightnessDown", function () awful.spawn("xbacklight -dec 2") end,
+      {description = "decrease backlight", group = "bright"}),
+
+
    -- Menubar
    awful.key({ modkey , "Shift"}, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),

@@ -29,40 +29,38 @@
  '(ace-isearch-input-idle-delay 1)
  '(ace-isearch-input-length 5)
  '(browse-url-generic-program "firefox")
- '(company-lsp-cache-candidates (quote auto))
+ '(company-lsp-cache-candidates 'auto)
+ '(custom-safe-themes
+   '("319bf1bab5d05e3a4c4a165efe69d27b3d975759034074f15fe61e92c7304884" default))
  '(flycheck-display-errors-delay 0.5)
  '(flycheck-display-errors-function
    (lambda
      (errors)
      (let
          ((messages
-           (mapcar
-            (function flycheck-error-message)
-            errors)))
+           (mapcar #'flycheck-error-message errors)))
        (popup-tip
-        (mapconcat
-         (quote identity)
-         messages "")))))
+        (mapconcat 'identity messages "")))))
  '(git-gutter:added-sign "A")
  '(git-gutter:deleted-sign "D")
- '(git-gutter:handled-backends (quote (git hg)))
+ '(git-gutter:handled-backends '(git hg))
  '(git-gutter:lighter "GG")
  '(git-gutter:modified-sign "X")
  '(git-gutter:unchanged-sign nil)
  '(git-gutter:update-interval 2)
  '(git-gutter:window-width 1)
- '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
- '(haskell-process-type (quote stack-ghci))
- '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
+ '(haskell-mode-hook '(turn-on-haskell-indentation))
+ '(haskell-process-type 'stack-ghci)
+ '(help-at-pt-display-when-idle '(flymake-overlay) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.9)
- '(irony-additional-clang-options (quote ("-std=c++11")))
+ '(irony-additional-clang-options '("-std=c++11"))
  '(lsp-prefer-flymake nil)
  '(lsp-rust-build-on-save t)
  '(lsp-ui-flycheck-enable t)
  '(mozc-leim-title "も")
+ '(org-agenda-files '("inbox.org" "work.org"))
  '(org-latex-default-packages-alist
-   (quote
-    (("AUTO" "inputenc" t)
+   '(("AUTO" "inputenc" t)
      ("T1" "fontenc" t)
      ("" "fixltx2e" nil)
      ("dvipdfmx" "graphicx" t)
@@ -93,7 +91,7 @@
   \\fi
   \\usepackage[dvipdfmx]{hyperref}
 \\fi" "\\tolerance=1000" "\\makeatletter\\chardef\\pdf@shellescape=\\@ne\\makeatother
-\\usepackage{minted}")))
+\\usepackage{minted}"))
  '(org-latex-hyperref-template
    "\\hypersetup{
  pdfauthor={%a},
@@ -104,13 +102,11 @@
  pdfcreator={%c},
  pdflang={%L}}")
  '(package-selected-packages
-   (quote
-    (go-mode lsp-ui markdown-mode edit-indirect company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s)))
- '(projectile-completion-system (quote ivy))
+   '(emojify slack go-mode lsp-ui markdown-mode edit-indirect company-jedi inflections mykie nil robe mozc yascroll package-build shut-up epl git commander f dash s))
+ '(projectile-completion-system 'ivy)
  '(projectile-mode t nil (projectile))
  '(safe-local-variable-values
-   (quote
-    ((eval progn
+   '((eval progn
            (beginning-of-buffer)
            (let
                (mbegin mend)
@@ -123,10 +119,10 @@
                (forward-line 0)
                (setq mend
                      (point))
-               (sort-lines nil mbegin mend)))))))
- '(search-web-default-browser (quote eww-browse-url))
- '(search-web-in-emacs-browser (quote eww-browse-url))
- '(slime-company-completion (quote fuzzy))
+               (sort-lines nil mbegin mend))))))
+ '(search-web-default-browser 'eww-browse-url)
+ '(search-web-in-emacs-browser 'eww-browse-url)
+ '(slime-company-completion 'fuzzy)
  '(tab-width 4)
  '(undo-tree-mode-lighter " U🌳")
  '(whitespace-style

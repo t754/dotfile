@@ -13,8 +13,16 @@
 (setq my/el-list
       '(
         ;;##(
+        ;; align-cljlet
+        ;; clj-refactor
+        ;; clj-refactor
+        ;; company-tern
+        ;; company-ternxs
+        ;; tern
+        ;; yascroll
         ;;rust-racer
         align-cljlet
+        atom-dark-theme
         auto-complete
         avy
         bm
@@ -22,16 +30,15 @@
         c-eldoc
         cargo
         clang-format
-        clj-refactor
         clojure-mode
         clojure-snippets
         cmake-ide
         cmake-mode
         color-theme
+        color-theme-almost-monokai
         company-irony
         company-jedi
         company-quickhelp
-        company-tern
         dockerfile-mode
         drag-stuff
         emmet-mode
@@ -58,7 +65,6 @@
         helm-descbinds
         helm-gtags
         helm-ls-git
-        helm-rails
         helm-robe
         helm-swoop
         help-fns+
@@ -88,13 +94,14 @@
         popwin
         pos-tip
         powerline
-        projectile-rails
+        projectile
         py-autopep8
         python-pep8
         quickrun
         rainbow-delimiters
         rbenv
         recentf-ext
+        request
         rjsx-mode
         rubocop
         rust-mode
@@ -105,7 +112,6 @@
         smex
         swank-js
         switch-window
-        tern
         terraform-mode
         tide
         toml-mode
@@ -116,7 +122,6 @@
         web-mode
         xref-js2
         yaml-mode
-        yascroll
         yasnippet
         ;;##)
         ))
@@ -130,6 +135,7 @@
                            (emacs-codic :type github :pkgname "syohex/emacs-codic" )
                            (magit/magit :load-path "lisp")
                            (magit/transient :load-path "lisp")
+                           (rtags :branch "v2.38")
                            (search-web :type github :pkgname "tomoya/search-web.el")
                            (yuutayamada/mykie-el :load-path "lisp")
                            ;; racer-rust/emacs-racer
@@ -148,6 +154,7 @@
                            favadi/flycheck-gometalinter
                            jcpetkovich/shrink-whitespace.el
                            john2x/jenkinsfile-mode
+                           larstvei/ox-gfm
                            ljos/jq-mode
                            magit/with-editor
                            ptrv/company-lua
@@ -156,8 +163,10 @@
                            senny/emacs-eclim
                            ssm/vcl-mode
                            syl20bnr/emacs-emoji-cheat-sheet-plus
+                           titaniumbones/ox-slack
                            yasuyk/helm-git-grep
                            yasuyk/web-beautify
+                           yuya373/emacs-slack
                            zonuexe/emoji-fontset.el
                            ;;##)
                            ))
