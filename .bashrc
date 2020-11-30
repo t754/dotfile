@@ -57,7 +57,8 @@ case ${TERM} in
     ;;
 esac
 
-export HISTIGNORE="fg*:bg*:history*:rm*"
+shopt -s extglob
+export HISTIGNORE="fg*:bg*:history*:rm*:export AWS_?(A|SE)*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 
 # export COLORTERM="mlterm"
@@ -82,6 +83,9 @@ export GOMODCACHE=$HOME/.cache/go_mod
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 export PATH="$PYENV_ROOT/bin:$HOME/bin:$HOME/.local/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH:/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$HOME/.cabal/bin/:$HOME/node_modules/.bin/:/usr/local/go/bin:$GOPATH/bin:$GOBIN:$HOME/.rbenv/bin:/usr/bin/vendor_perl"
 export PATH="$PATH:$HOME/go/bin:$HOME/.cargo/bin:/snap/bin/"
+
+export PATH="$HOME/.tfenv/bin:$PATH"
+
 if which ruby &>/dev/null && which gem &>/dev/null; then
   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
@@ -89,13 +93,6 @@ fi
 if which brew &>/dev/null ; then
     source <(brew shellenv)
 fi
-
-export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ] ; then
-    source "$NVM_DIR/nvm.sh"  # This loads nvm
-    nvm use lts/*
-fi
-[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -r "$HOME/google-cloud-sdk/path.bash.inc" ]]  && source "$HOME/google-cloud-sdk/path.bash.inc"
 [[ -r "$HOME/google-cloud-sdk/completion.bash.inc" ]] && source "$HOME/google-cloud-sdk/completion.bash.inc"
@@ -250,3 +247,10 @@ export SCM_CHECK=true
 
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+export GOENV_ROOT=$HOME/.goenv
+export PATH=$GOENV_ROOT/bin:$PATH
+eval "$(goenv init -)"
+export PATH=$GOENV_ROOT/bin:$PATH:$GOPATH/bin
+
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
