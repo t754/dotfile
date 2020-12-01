@@ -326,6 +326,31 @@
   :ensure t
   :config (load-theme 'sanityinc-tomorrow-night t))
 
+(leaf my/scratch
+  :defun my/make-scratch
+  :hook
+  (kill-buffer-query-functions
+   .
+   (lambda ()
+     (let ((is-sc (string= "*scratch*" (buffer-name))))
+       (when is-sc
+         (my/make-scratch 0))
+       (not is-sc))))
+
+  :config
+  (defun my/make-scratch (&optional arg)
+    (interactive)
+    (progn
+      (set-buffer (get-buffer-create "*scratch*"))
+      (funcall initial-major-mode)
+      (erase-buffer)
+      (when (and initial-scratch-message (not inhibit-startup-message))
+        (insert initial-scratch-message))
+      (or arg (progn (setq arg 0)
+                     (switch-to-buffer "*scratch*")))
+      (cond ((= arg 0) (message "*scratch* is cleared up."))
+            ((= arg 1) (message "another *scratch* is created"))))))
+  
   
 (provide 'init)
 
