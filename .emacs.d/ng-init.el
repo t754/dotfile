@@ -291,9 +291,16 @@
          ("C-c c" . org-capture)
          ("C-c b" . org-iswitchb))
   :custom
-  (org-capture-templates
-   .
-   '(("i" "inbox" entry
+  ((org-directory . "~/org")
+   (org-default-notes-file .  "~/org/inbox.org")
+   (org-capture-templates
+    .
+    '(
+     ("p" "Protocol" entry (file+headline "inbox.org" "Inbox")
+      "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+     ("L" "Protocol Link" entry (file+headline "inbox.org" "Inbox")
+      "* %? %:annotation\n")
+     ("i" "inbox" entry
       (file "~/org/inbox.org")
       "* %?\n %T\n %a\n %i\n"
       :empty-lines 1 )
@@ -311,8 +318,11 @@
       "%[~/org/daily-template]"
       ;; :unnarrowed 1
       :time-prompt t)))
-  (org-directory . "~/org")
-  (org-use-speed-commands . t))
+   (org-use-speed-commands . t)
+   (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
+                           ("~/org/daily.org" :level . 3))))
+  :init
+  (require 'org-protocol))
 
 (leaf color-theme-sanityinc-tomorrow
   :doc "A version of Chris Kempson's \"tomorrow\" themes"
