@@ -50,7 +50,8 @@
 
 (leaf my/font
   :config
-  (setq default-frame-alist '((font . "Ricty-12"))))
+  (setq default-frame-alist '((font . "Ricty-12")))
+  (set-fontset-font "fontset-default" 'unicode "Noto Color Emoji" nil 'prepend))
 
 (leaf cus-edit
   :doc "tools for customizing Emacs and Lisp packages"
