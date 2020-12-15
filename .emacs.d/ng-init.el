@@ -44,10 +44,6 @@
   :ensure t
   :bind (("C-c e" . macrostep-expand)))
 
-(leaf transient-dwim
-  :ensure t
-  :bind (("M-=" . transient-dwim-dispatch)))
-
 (leaf my/global-key-map
   :config
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>")))
