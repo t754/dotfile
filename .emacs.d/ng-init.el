@@ -179,6 +179,7 @@
   :custom ((ivy-initial-inputs-alist . nil)
            (ivy-re-builders-alist . '((t . ivy--regex-fuzzy)
                                       (swiper . ivy--regex-plus)))
+           (ivy-use-virtual-buffers . t)
            (ivy-use-selectable-prompt . t))
   :global-minor-mode t
   :config
