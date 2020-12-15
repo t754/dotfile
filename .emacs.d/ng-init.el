@@ -176,6 +176,7 @@
   :custom ((ivy-initial-inputs-alist . nil)
            (ivy-re-builders-alist . '((t . ivy--regex-fuzzy)
                                       (swiper . ivy--regex-plus)))
+           (ivy-use-virtual-buffers . t)
            (ivy-use-selectable-prompt . t))
   :global-minor-mode t
   :config
@@ -357,8 +358,46 @@
                      (switch-to-buffer "*scratch*")))
       (cond ((= arg 0) (message "*scratch* is cleared up."))
             ((= arg 1) (message "another *scratch* is created"))))))
+(leaf lsp-mode
+  :doc "LSP mode"
+  :req "emacs-26.1" "dash-2.14.1" "dash-functional-2.14.1" "f-0.20.0" "ht-2.0" "spinner-1.7.3" "markdown-mode-2.3" "lv-0"
+  :tag "languages" "emacs>=26.1"
+  :added "2020-12-10"
+  :url "https://github.com/emacs-lsp/lsp-mode"
+  :emacs>= 26.1
+  :ensure t
+  :after spinner markdown-mode lv
   
-  
+
+  :hook ((go-mode . (lambda ()
+                      (lsp-deferred)
+                      (add-hook 'before-save-hook
+                                (lambda ()
+                                  (lsp-format-buffer)
+                                  (lsp-organize-imports))
+                                t t)))
+         (python-mode . (lambda ()
+                          (lsp-deferred))))
+  :custom ((lsp-log-io . t))
+  :init
+  (leaf lsp-ivy
+    :doc "LSP ivy integration"
+    :req "emacs-25.1" "dash-2.14.1" "lsp-mode-6.2.1" "ivy-0.13.0"
+    :tag "debug" "languages" "emacs>=25.1"
+    :added "2020-12-10"
+    :url "https://github.com/emacs-lsp/lsp-ivy"
+    :emacs>= 25.1
+    :ensure t
+    :after lsp-mode ivy)
+  :hook ((lsp-after-initialize-hook . lsp-set-cfg))
+  :config
+  (setq read-process-output-max 10240)
+  (setq gc-cons-threshold  (* 1024 1024 10))
+  (defun lsp-set-cfg ()
+    (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
+      ;; TODO: check lsp--cur-workspace here to decide per server / project
+      (lsp--set-configuration lsp-cfg))))
+
 (provide 'init)
 
 ;; Local Variables:
