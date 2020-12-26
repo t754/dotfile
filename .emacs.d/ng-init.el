@@ -77,7 +77,9 @@
            (tool-bar-mode . nil)
            (scroll-bar-mode . nil)
            (indent-tabs-mode . nil)
-           (text-quoting-style . 'straight))
+           (text-quoting-style . 'straight)
+           (browse-url-browser-function . 'eww-browse-url)
+           )
   :config
   (defalias 'yes-or-no-p 'y-or-n-p))
 
