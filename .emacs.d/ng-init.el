@@ -74,7 +74,11 @@
            (tool-bar-mode . nil)
            (scroll-bar-mode . nil)
            (indent-tabs-mode . nil)
-           (text-quoting-style . 'straight))
+           (text-quoting-style . 'straight)
+           (tab-width . 4)
+           (abbrev-file-name . "~/.emacs.d/abbrev_defs")
+           (recentf-max-saved-items . 2000)
+           (recentf-auto-cleanup . 'never))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p))
 
