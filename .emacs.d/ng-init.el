@@ -417,6 +417,21 @@
     :hook (python-mode-hook . (lambda ()
                               (require 'lsp-python-ms)
                               (lsp-deferred))))
+(leaf go-mode
+  :doc "Major mode for the Go programming language"
+  :tag "go" "languages"
+  :added "2020-12-18"
+  :url "https://github.com/dominikh/go-mode.el"
+  :ensure t
+  :defun lsp-format-buffer lsp-organize-imports
+  :hook
+  (go-mode-hook . (lambda ()
+                    (lsp-deferred)
+                    (add-hook 'before-save-hook
+                              (lambda ()
+                                (lsp-format-buffer)
+                                (lsp-organize-imports))
+                              t t))))
 (leaf lsp-mode
   :doc "LSP mode"
   :req "emacs-26.1" "dash-2.14.1" "dash-functional-2.14.1" "f-0.20.0" "ht-2.0" "spinner-1.7.3" "markdown-mode-2.3" "lv-0"
