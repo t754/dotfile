@@ -82,6 +82,19 @@
   :config
   (defalias 'yes-or-no-p 'y-or-n-p))
 
+(leaf dired
+  :doc "directory-browsing commands"
+  :tag "builtin" "files"
+  :added "2020-12-26"
+  :bind (("C-c o" . my/dired-open-file))
+  :custom ((dired-dwim-target . t))
+  :config
+  (defun my/dired-open-file ()
+    "In dired, open the file named on this line."
+    (interactive)
+    (let* ((file (dired-get-filename nil t)))
+      (call-process "xdg-open" nil 0 nil file))))
+
 
 (leaf linum
   :doc "display line numbers in the left margin"
