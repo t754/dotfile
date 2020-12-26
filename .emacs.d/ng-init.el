@@ -302,6 +302,15 @@
   ;; :after git-commit with-editor
   :bind (("C-x g" . magit-status)))
 
+(leaf pcre2el
+  :doc "regexp syntax converter"
+  :req "emacs-24" "cl-lib-0.3"
+  :tag "emacs>=24"
+  :added "2020-12-18"
+  :url "https://github.com/joddie/pcre2el"
+  :emacs>= 24
+  :ensure t)
+
 (leaf find-file-in-project
   :doc "Find file/directory and review Diff/Patch/Commit efficiently everywhere"
   :req "ivy-0.10.0" "emacs-24.4"
