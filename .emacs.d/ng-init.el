@@ -426,17 +426,6 @@
   :emacs>= 26.1
   :ensure t
   :after spinner markdown-mode lv
-  
-
-  :hook ((go-mode . (lambda ()
-                      (lsp-deferred)
-                      (add-hook 'before-save-hook
-                                (lambda ()
-                                  (lsp-format-buffer)
-                                  (lsp-organize-imports))
-                                t t)))
-         (python-mode . (lambda ()
-                          (lsp-deferred))))
   :custom ((lsp-log-io . t))
   :init
   (leaf lsp-ivy
@@ -448,14 +437,8 @@
     :emacs>= 25.1
     :ensure t
     :after lsp-mode ivy)
-  :hook ((lsp-after-initialize-hook . lsp-set-cfg))
-  :config
   (setq read-process-output-max 10240)
-  (setq gc-cons-threshold  (* 1024 1024 10))
-  (defun lsp-set-cfg ()
-    (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
-      ;; TODO: check lsp--cur-workspace here to decide per server / project
-      (lsp--set-configuration lsp-cfg))))
+  (setq gc-cons-threshold  (* 1024 1024 10)))
 
 (provide 'init)
 
