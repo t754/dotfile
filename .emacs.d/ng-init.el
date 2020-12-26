@@ -386,6 +386,28 @@
                      (switch-to-buffer "*scratch*")))
       (cond ((= arg 0) (message "*scratch* is cleared up."))
             ((= arg 1) (message "another *scratch* is created"))))))
+
+(leaf python-mode
+  :doc "Python major mode"
+  :added "2020-12-16"
+  :ensure t
+  :custom ((python-indent-guess-indent-offset . t)
+           (python-indent-guess-indent-offset-verbose . nil))
+
+  :init
+  (leaf lsp-python-ms
+    :doc "The lsp-mode client for Microsoft python-language-server"
+    :req "emacs-25.1" "lsp-mode-6.1"
+    :tag "tools" "languages" "emacs>=25.1"
+    :added "2020-12-16"
+    :url "https://github.com/emacs-lsp/lsp-python-ms"
+    :emacs>= 25.1
+    :ensure t
+    :after lsp-mode
+    :custom ((lsp-python-ms-auto-install-server . t)))
+    :hook (python-mode-hook . (lambda ()
+                              (require 'lsp-python-ms)
+                              (lsp-deferred))))
 (leaf lsp-mode
   :doc "LSP mode"
   :req "emacs-26.1" "dash-2.14.1" "dash-functional-2.14.1" "f-0.20.0" "ht-2.0" "spinner-1.7.3" "markdown-mode-2.3" "lv-0"
