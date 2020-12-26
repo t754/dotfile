@@ -106,6 +106,17 @@
   :custom ((linum-delay . t))
   :global-minor-mode global-linum-mode)
 
+(leaf exec-path-from-shell
+  :doc "Get environment variables such as $PATH from the shell"
+  :req "emacs-24.1" "cl-lib-0.6"
+  :tag "environment" "unix" "emacs>=24.1"
+  :added "2020-12-18"
+  :url "https://github.com/purcell/exec-path-from-shell"
+  :emacs>= 24.1
+  :ensure t
+  :init
+  (exec-path-from-shell-copy-envs '("MANPATH" "PATH" "GOROOT" "GOPATH" )))
+
 (leaf beacon
   :doc "Highlight the cursor whenever the window scrolls"
   :req "seq-2.14"
