@@ -7,16 +7,11 @@ $if Bash
     "\C-x\C-p": " | peco"
 $endif
 
-# Color files by types
-# set colored-stats On
-# # Append char to indicate type
-# set visible-stats On
-# # Mark symlinked directories
-# set mark-symlinked-directories On
-# Color the common prefix
+set colored-stats On
+set visible-stats On
+set mark-symlinked-directories On
 set colored-completion-prefix On
-# # Color the common prefix in menu-complete
-# set menu-complete-display-prefix On
+set menu-complete-display-prefix On
 
 
 

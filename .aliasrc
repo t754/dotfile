@@ -2,10 +2,8 @@
 alias ls='ls -x -v --color=auto'
 alias ll='ls -la'
 alias la='ls -a'
-alias l1='ls -1'
 alias starte='emacs --daemon'
 alias e="emacsclient -c -n"
-alias del_e="emacsclient -e '(delete-frame)'"
 alias et="emacsclient -t -n"
 alias enox="emacsclient -nw"
 alias en="emacsclient"
@@ -15,22 +13,12 @@ alias En='SUDO_EDITOR="emacsclient  " sudo -e '
 alias mv=' timeout 8 mv -iv'
 alias cp="cp -i"
 alias rm=' timeout 3 rm -Iv --one-file-system'
-alias server_name='ssh -v -l USERNAME IP ADDRESS'
 alias du="du -h -c"
 alias df="df -h -T --total"
-alias sudo="sudo "
-alias tmux="tmux -2"
-alias pgg='ps -Af | grep'
-alias xsels='xsel -ib < /tmp/screen-exchange'
 alias xselex='xsel -p | xsel -is && xsel -b | xsel -ip && xsel -s | xsel -ib'
 alias open="mimeopen"
-alias o="open"
-alias g="git"
-# coredump した場所
-alias core="sudo systemd-coredumpctl list | tail"
-alias coreout='sudo systemd-coredumpctl dump -o core'
-alias beeps="for i in {1..5}; do aplay ~/beep.wav; done"
 alias feh="feh -."
+alias sudo='sudo '
 
 
 # if [[ -x "$(which bundle 2>/dev/null)" ]] ; then
