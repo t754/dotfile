@@ -361,6 +361,15 @@
   :ensure t
   :custom ((flycheck-disabled-checkers . '(yaml-ruby))))
 
+(leaf emamux
+  :doc "Interact with tmux"
+  :req "emacs-24.3"
+  :tag "emacs>=24.3"
+  :added "2020-12-02"
+  :url "https://github.com/syohex/emacs-emamux"
+  :emacs>= 24.3
+  :ensure t)
+
 (leaf lsp-mode
   :doc "LSP mode"
   :req "emacs-26.1" "dash-2.14.1" "dash-functional-2.14.1" "f-0.20.0" "ht-2.0" "spinner-1.7.3" "markdown-mode-2.3" "lv-0"
