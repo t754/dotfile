@@ -351,6 +351,16 @@
                      (switch-to-buffer "*scratch*")))
       (cond ((= arg 0) (message "*scratch* is cleared up."))
             ((= arg 1) (message "another *scratch* is created"))))))
+
+(leaf yaml-mode
+  :doc "Major mode for editing YAML files"
+  :req "emacs-24.1"
+  :tag "yaml" "data" "emacs>=24.1"
+  :added "2020-12-02"
+  :emacs>= 24.1
+  :ensure t
+  :custom ((flycheck-disabled-checkers . '(yaml-ruby))))
+
 (leaf lsp-mode
   :doc "LSP mode"
   :req "emacs-26.1" "dash-2.14.1" "dash-functional-2.14.1" "f-0.20.0" "ht-2.0" "spinner-1.7.3" "markdown-mode-2.3" "lv-0"
