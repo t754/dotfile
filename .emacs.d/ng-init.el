@@ -44,17 +44,14 @@
   :ensure t
   :bind (("C-c e" . macrostep-expand)))
 
-(leaf transient-dwim
-  :ensure t
-  :bind (("M-=" . transient-dwim-dispatch)))
-
 (leaf my/global-key-map
   :config
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>")))
 
 (leaf my/font
   :config
-  (setq default-frame-alist '((font . "Ricty-12"))))
+  (setq default-frame-alist '((font . "Ricty-12")))
+  (set-fontset-font "fontset-default" 'unicode "Noto Color Emoji" nil 'prepend))
 
 (leaf cus-edit
   :doc "tools for customizing Emacs and Lisp packages"
@@ -77,9 +74,28 @@
            (tool-bar-mode . nil)
            (scroll-bar-mode . nil)
            (indent-tabs-mode . nil)
-           (text-quoting-style . 'straight))
+           (text-quoting-style . 'straight)
+           (browse-url-browser-function . 'eww-browse-url)
+           (tab-width . 4)
+           (abbrev-file-name . "~/.emacs.d/abbrev_defs")
+           (recentf-max-saved-items . 2000)
+           (recentf-auto-cleanup . 'never)
+           )
   :config
   (defalias 'yes-or-no-p 'y-or-n-p))
+
+(leaf dired
+  :doc "directory-browsing commands"
+  :tag "builtin" "files"
+  :added "2020-12-26"
+  :bind (("C-c o" . my/dired-open-file))
+  :custom ((dired-dwim-target . t))
+  :config
+  (defun my/dired-open-file ()
+    "In dired, open the file named on this line."
+    (interactive)
+    (let* ((file (dired-get-filename nil t)))
+      (call-process "xdg-open" nil 0 nil file))))
 
 
 (leaf linum
@@ -91,6 +107,17 @@
     (run-with-idle-timer 0.2 nil #'linum-update-current))
   :custom ((linum-delay . t))
   :global-minor-mode global-linum-mode)
+
+(leaf exec-path-from-shell
+  :doc "Get environment variables such as $PATH from the shell"
+  :req "emacs-24.1" "cl-lib-0.6"
+  :tag "environment" "unix" "emacs>=24.1"
+  :added "2020-12-18"
+  :url "https://github.com/purcell/exec-path-from-shell"
+  :emacs>= 24.1
+  :ensure t
+  :init
+  (exec-path-from-shell-copy-envs '("MANPATH" "PATH" "GOROOT" "GOPATH" )))
 
 (leaf beacon
   :doc "Highlight the cursor whenever the window scrolls"
@@ -277,6 +304,15 @@
   ;; :after git-commit with-editor
   :bind (("C-x g" . magit-status)))
 
+(leaf pcre2el
+  :doc "regexp syntax converter"
+  :req "emacs-24" "cl-lib-0.3"
+  :tag "emacs>=24"
+  :added "2020-12-18"
+  :url "https://github.com/joddie/pcre2el"
+  :emacs>= 24
+  :ensure t)
+
 (leaf find-file-in-project
   :doc "Find file/directory and review Diff/Patch/Commit efficiently everywhere"
   :req "ivy-0.10.0" "emacs-24.4"
@@ -296,9 +332,16 @@
          ("C-c c" . org-capture)
          ("C-c b" . org-iswitchb))
   :custom
-  (org-capture-templates
-   .
-   '(("i" "inbox" entry
+  ((org-directory . "~/org")
+   (org-default-notes-file .  "~/org/inbox.org")
+   (org-capture-templates
+    .
+    '(
+     ("p" "Protocol" entry (file+headline "inbox.org" "Inbox")
+      "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+     ("L" "Protocol Link" entry (file+headline "inbox.org" "Inbox")
+      "* %? %:annotation\n")
+     ("i" "inbox" entry
       (file "~/org/inbox.org")
       "* %?\n %T\n %a\n %i\n"
       :empty-lines 1 )
@@ -316,8 +359,11 @@
       "%[~/org/daily-template]"
       ;; :unnarrowed 1
       :time-prompt t)))
-  (org-directory . "~/org")
-  (org-use-speed-commands . t))
+   (org-use-speed-commands . t)
+   (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
+                           ("~/org/daily.org" :level . 3))))
+  :init
+  (require 'org-protocol))
 
 (leaf color-theme-sanityinc-tomorrow
   :doc "A version of Chris Kempson's \"tomorrow\" themes"
@@ -352,6 +398,7 @@
       (cond ((= arg 0) (message "*scratch* is cleared up."))
             ((= arg 1) (message "another *scratch* is created"))))))
 
+
 (leaf yaml-mode
   :doc "Major mode for editing YAML files"
   :req "emacs-24.1"
@@ -370,6 +417,44 @@
   :emacs>= 24.3
   :ensure t)
 
+
+(leaf python-mode
+  :doc "Python major mode"
+  :added "2020-12-16"
+  :ensure t
+  :custom ((python-indent-guess-indent-offset . t)
+           (python-indent-guess-indent-offset-verbose . nil))
+
+  :init
+  (leaf lsp-python-ms
+    :doc "The lsp-mode client for Microsoft python-language-server"
+    :req "emacs-25.1" "lsp-mode-6.1"
+    :tag "tools" "languages" "emacs>=25.1"
+    :added "2020-12-16"
+    :url "https://github.com/emacs-lsp/lsp-python-ms"
+    :emacs>= 25.1
+    :ensure t
+    :after lsp-mode
+    :custom ((lsp-python-ms-auto-install-server . t)))
+    :hook (python-mode-hook . (lambda ()
+                              (require 'lsp-python-ms)
+                              (lsp-deferred))))
+(leaf go-mode
+  :doc "Major mode for the Go programming language"
+  :tag "go" "languages"
+  :added "2020-12-18"
+  :url "https://github.com/dominikh/go-mode.el"
+  :ensure t
+  :defun lsp-format-buffer lsp-organize-imports
+  :hook
+  (go-mode-hook . (lambda ()
+                    (lsp-deferred)
+                    (add-hook 'before-save-hook
+                              (lambda ()
+                                (lsp-format-buffer)
+                                (lsp-organize-imports))
+                              t t))))
+
 (leaf lsp-mode
   :doc "LSP mode"
   :req "emacs-26.1" "dash-2.14.1" "dash-functional-2.14.1" "f-0.20.0" "ht-2.0" "spinner-1.7.3" "markdown-mode-2.3" "lv-0"
@@ -379,17 +464,6 @@
   :emacs>= 26.1
   :ensure t
   :after spinner markdown-mode lv
-  
-
-  :hook ((go-mode . (lambda ()
-                      (lsp-deferred)
-                      (add-hook 'before-save-hook
-                                (lambda ()
-                                  (lsp-format-buffer)
-                                  (lsp-organize-imports))
-                                t t)))
-         (python-mode . (lambda ()
-                          (lsp-deferred))))
   :custom ((lsp-log-io . t))
   :init
   (leaf lsp-ivy
@@ -401,14 +475,8 @@
     :emacs>= 25.1
     :ensure t
     :after lsp-mode ivy)
-  :hook ((lsp-after-initialize-hook . lsp-set-cfg))
-  :config
   (setq read-process-output-max 10240)
-  (setq gc-cons-threshold  (* 1024 1024 10))
-  (defun lsp-set-cfg ()
-    (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
-      ;; TODO: check lsp--cur-workspace here to decide per server / project
-      (lsp--set-configuration lsp-cfg))))
+  (setq gc-cons-threshold  (* 1024 1024 10)))
 
 (provide 'init)
 
