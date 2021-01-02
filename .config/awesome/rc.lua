@@ -575,6 +575,12 @@ root.buttons(awful.util.table.join(
                 awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
+confirmQuitmenu = awful.menu({ items = {
+                                  { "Cancel", "" },
+                                  { "Quit awesome WM", function () awesome.quit() end },
+                               }
+                             })
+
 
 can_move_mouse = true
 function move_mouse_in_window_center()
@@ -663,7 +669,8 @@ globalkeys = awful.util.table.join(
       {description = "open a terminal", group = "launcher"}),
    awful.key({ modkey, "Control" }, "r", awesome.restart,
       {description = "reload awesome", group = "awesome"}),
-   awful.key({ modkey, "Shift"   }, "q", awesome.quit,
+    --awesome.quit
+   awful.key({ modkey, "Shift"   }, "q", function () confirmQuitmenu:show() end,
       {description = "quit awesome", group = "awesome"}),
 
    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
