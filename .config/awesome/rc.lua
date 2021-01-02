@@ -1049,3 +1049,15 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+function autostart()
+   local xdg_config = os.getenv("XDG_CONFIG_DIRS") or (os.getenv("HOME") .. "/.config")
+   awful.spawn.with_shell(
+      'if (xrdb -query | grep -q "^awesome\\.started:\\s*true$"); then exit; fi;' ..
+      'xrdb -merge <<< "awesome.started:true";' ..
+      -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
+      -- https://github.com/jceb/dex ..
+      'dex --autostart' 
+   )
+end
+autostart()
