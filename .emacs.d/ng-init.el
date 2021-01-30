@@ -233,6 +233,9 @@
            ("M-s a" . counsel-ag)
            ("M-s g" . counsel-git-grep)
            ("M-x" . counsel-M-x))
+    :config
+    (add-to-list 'ivy-sort-functions-alist
+                 '(counsel-recentf . file-newer-than-file-p))
     :custom `((counsel-yank-pop-separator . "\n----------\n")
               (counsel-find-file-ignore-regexp . ,(rx-to-string '(or "./" "../") 'no-group)))
     :global-minor-mode t))
