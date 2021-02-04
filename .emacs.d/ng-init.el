@@ -324,6 +324,14 @@
   :after ivy
   :bind (("C-M-o" . find-file-in-project)))
 
+(leaf yasnippet
+  :doc "Yet another snippet extension for Emacs"
+  :req "cl-lib-0.5"
+  :tag "emulation" "convenience"
+  :added "2020-12-27"
+  :url "http://github.com/joaotavora/yasnippet"
+  :ensure t)
+
 (leaf org
   :doc "Export Framework for Org Mode"
   :tag "builtin"
