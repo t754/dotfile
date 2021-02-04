@@ -233,6 +233,9 @@
            ("M-s a" . counsel-ag)
            ("M-s g" . counsel-git-grep)
            ("M-x" . counsel-M-x))
+    :config
+    (add-to-list 'ivy-sort-functions-alist
+                 '(counsel-recentf . file-newer-than-file-p))
     :custom `((counsel-yank-pop-separator . "\n----------\n")
               (counsel-find-file-ignore-regexp . ,(rx-to-string '(or "./" "../") 'no-group)))
     :global-minor-mode t))
@@ -406,6 +409,26 @@
       (cond ((= arg 0) (message "*scratch* is cleared up."))
             ((= arg 1) (message "another *scratch* is created"))))))
 
+
+(leaf yaml-mode
+  :doc "Major mode for editing YAML files"
+  :req "emacs-24.1"
+  :tag "yaml" "data" "emacs>=24.1"
+  :added "2020-12-02"
+  :emacs>= 24.1
+  :ensure t
+  :custom ((flycheck-disabled-checkers . '(yaml-ruby))))
+
+(leaf emamux
+  :doc "Interact with tmux"
+  :req "emacs-24.3"
+  :tag "emacs>=24.3"
+  :added "2020-12-02"
+  :url "https://github.com/syohex/emacs-emamux"
+  :emacs>= 24.3
+  :ensure t)
+
+
 (leaf python-mode
   :doc "Python major mode"
   :added "2020-12-16"
@@ -442,6 +465,7 @@
                                 (lsp-format-buffer)
                                 (lsp-organize-imports))
                               t t))))
+
 (leaf lsp-mode
   :doc "LSP mode"
   :req "emacs-26.1" "dash-2.14.1" "dash-functional-2.14.1" "f-0.20.0" "ht-2.0" "spinner-1.7.3" "markdown-mode-2.3" "lv-0"
