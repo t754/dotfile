@@ -2,12 +2,18 @@
 Description=Emacs: the extensible, self-documenting text editor
 
 [Service]
-Type=forking
-ExecStart=/usr/local/bin/emacs --daemon
+Type=simple
+ExecStart=/usr/local/bin/emacs --fg-daemon
 ExecStop=/usr/local/bin/emacsclient --eval "(kill-emacs)"
-Environment="LC_CTYPE=ja_JP.UTF-8" "XMODIFIERS=@im=fcitx"
-Restart=always
-TimeoutSec=0
+
+Environment=LC_ALL=ja_JP.UTF-8
+Environment=XMODIFIERS=@im=fcitx
+Environment=GTK_IM_MODULE=fcitx
+Environment=QT_IM_MODULE=fcitx
+Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+
+Restart=on-failure
+TimeoutSec=2
 
 [Install]
 WantedBy=default.target
