@@ -238,7 +238,17 @@
                  '(counsel-recentf . file-newer-than-file-p))
     :custom `((counsel-yank-pop-separator . "\n----------\n")
               (counsel-find-file-ignore-regexp . ,(rx-to-string '(or "./" "../") 'no-group)))
-    :global-minor-mode t))
+    :global-minor-mode t)
+  (leaf ivy-hydra
+  :doc "Additional key bindings for Ivy"
+  :req "emacs-24.5" "ivy-0.13.0" "hydra-0.15.0"
+  :tag "convenience" "emacs>=24.5"
+  :added "2021-03-17"
+  :url "https://github.com/abo-abo/swiper"
+  :emacs>= 24.5
+  :ensure t
+  :after ivy hydra))
+
 
 (leaf ivy-rich
   :doc "More friendly display transformer for ivy."
