@@ -405,7 +405,7 @@
          (my/make-scratch 0))
        (not is-sc))))
 
-  :config
+  :init
   (defun my/make-scratch (&optional arg)
     (interactive)
     (progn
