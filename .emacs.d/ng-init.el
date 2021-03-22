@@ -355,6 +355,7 @@
   :custom
   ((org-directory . "~/org")
    (org-default-notes-file .  "~/org/inbox.org")
+   (org-agenda-files . '("~/org/work.org" "~/org/daily.org" "~/org/inbox.org"))
    (org-capture-templates
     .
     '(
