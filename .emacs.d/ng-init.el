@@ -353,39 +353,48 @@
          ("C-c c" . org-capture)
          ("C-c b" . org-iswitchb))
   :custom
-  ((org-directory . "~/org")
-   (org-default-notes-file .  "~/org/inbox.org")
-   (org-agenda-files . '("~/org/work.org" "~/org/daily.org" "~/org/inbox.org"))
-   (org-capture-templates
-    .
-    '(
-      ("p" "Protocol" entry (file+headline "inbox.org" "Inbox")
-       "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-      ("L" "Protocol Link" entry (file+headline "inbox.org" "Inbox")
-       "* %? %:annotation\n")
-      ("i" "inbox" entry
-       (file "~/org/inbox.org")
-       "* %?\n %T\n %a\n %i\n"
-       :empty-lines 1 )
-      ("h" "hobby"
-       entry (file "~/org/hobby.org")
-       "* %?\n %T\n %a\n %i\n"
-       :empty-lines 1)
-      ("w" "work"
-       entry (file "~/org/work.org")
-       "* %?\n %T\n %i\n"
-       :empty-lines 1)
-      ("d" "daily-template"
-       entry
-       (file+olp+datetree "daily.org")
-       "%[~/org/daily-template]"
-       ;; :unnarrowed 1
-       :time-prompt t)))
-   (org-use-speed-commands . t)
-   (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
-                           ("~/org/daily.org" :level . 3))))
+  `((org-directory . "~/org")
+    (org-default-notes-file .  "~/org/inbox.org")
+    (org-agenda-files . '("~/org/work.org" "~/org/daily.org" "~/org/inbox.org"))
+    (org-capture-templates
+     .
+     '(
+       ("p" "Protocol" entry (file+headline "inbox.org" "Inbox")
+        "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+       ("L" "Protocol Link" entry (file+headline "inbox.org" "Inbox")
+        "* %? %:annotation\n")
+       ("i" "inbox" entry
+        (file "~/org/inbox.org")
+        "* %?\n %T\n %a\n %i\n"
+        :empty-lines 1 )
+       ("h" "hobby"
+        entry (file "~/org/hobby.org")
+        "* %?\n %T\n %a\n %i\n"
+        :empty-lines 1)
+       ("w" "work"
+        entry (file "~/org/work.org")
+        "* %?\n %T\n %i\n"
+        :empty-lines 1)
+       ("d" "daily-template"
+        entry
+        (file+olp+datetree "daily.org")
+        "%[~/org/daily-template]"
+        ;; :unnarrowed 1
+        :tree-type week
+        ;; :time-prompt t
+        )))
+    (org-archive-location . ,(format-time-string "%%s_archive_%Y::" (current-time)))
+    (org-use-speed-commands . t)
+    (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
+                            ("~/org/daily.org" :level . 3))))
   :init
-  (require 'org-protocol))
+  (require 'org-protocol)
+  (leaf ox-gfm
+    :doc "Github Flavored Markdown Back-End for Org Export Engine"
+    :tag "github" "markdown" "wp" "org"
+    :added "2021-04-26"
+    :ensure t))
+
 
 (leaf color-theme-sanityinc-tomorrow
   :doc "A version of Chris Kempson's \"tomorrow\" themes"
