@@ -513,6 +513,7 @@
 (provide 'init)
 
 ;; Local Variables:
+;; byte-compile-warnings: (not cl-functions obsolete)
 ;; indent-tabs-mode: nil
 ;; eval: (leaf-tree-mode)
 ;; End:
