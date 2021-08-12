@@ -515,6 +515,94 @@
   (setq read-process-output-max 10240)
   (setq gc-cons-threshold  (* 1024 1024 10)))
 
+(leaf consult
+  :doc "Consulting completing-read"
+  :req "emacs-26.1"
+  :tag "emacs>=26.1"
+  :added "2021-06-14"
+  :url "https://github.com/minad/consult"
+  :emacs>= 26.1
+  :ensure t
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :defun consult-customize project-roots
+  :defvar consult-theme consult-ripgrep consult-git-grep consult-grep
+  consult-bookmark consult-recent-file consult-xref
+  consult--source-file consult--source-project-file consult--source-bookmark
+  consult-project-root-function
+  :init
+  (setq register-preview-delay 0
+        register-preview-function #'consult-register-format)
+  (advice-add #'register-preview :override #'consult-register-window)
+  
+  (leaf consult-ghq
+    :doc "Ghq interface using consult"
+    :req "emacs-26.1" "consult-0.8" "affe-0.1"
+    :tag "ghq" "consult" "usability" "convenience" "emacs>=26.1"
+    :added "2021-06-18"
+    :url "https://github.com/tomoya/consult-ghq"
+    :emacs>= 26.1
+    :ensure t
+    :after consult affe)
+  (leaf orderless
+    :doc "Completion style for matching regexps in any order"
+    :req "emacs-24.4"
+    :tag "extensions" "emacs>=24.4"
+    :added "2021-06-14"
+    :url "https://github.com/oantolin/orderless"
+    :emacs>= 24.4
+    :ensure t
+    :custom ((completion-styles . '(orderless))))
+
+  (leaf vertico
+    :doc "VERTical Interactive COmpletion"
+    :req "emacs-27.1"
+    :tag "emacs>=27.1"
+    :added "2021-06-14"
+    :url "https://github.com/minad/vertico"
+    :emacs>= 27.1
+    :ensure t
+    :hook (after-init-hook . vertico-mode)
+    :custom ((vertico-count . 20)))
+
+  (leaf marginalia
+    :doc "Enrich existing commands with completion annotations"
+    :req "emacs-26.1"
+    :tag "emacs>=26.1"
+    :added "2021-06-14"
+    :url "https://github.com/minad/marginalia"
+    :emacs>= 26.1
+    :ensure t
+    :hook (after-init-hook . (lambda()
+                               (marginalia-mode)
+                               (savehist-mode))))
+  :config
+  (consult-customize
+   consult-theme
+   :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-file consult--source-project-file consult--source-bookmark
+   :preview-key (kbd "M-."))
+  (setq consult-project-root-function
+        (lambda ()
+          (when-let (project (project-current))
+            (car (project-roots project)))))
+  :bind (
+         ("C-x C-b" . consult-buffer)
+         ("C-x C-r" . consult-recent-file)
+         ("C-x b" . consult-buffer)
+         ("M-s f" . consult-find)
+         ("M-s L" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line)
+         ("M-s m" . consult-multi-occur)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         )
+  )
+
 (provide 'init)
 
 ;; Local Variables:
