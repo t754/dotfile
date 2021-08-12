@@ -81,9 +81,14 @@
            (recentf-max-saved-items . 2000)
            (recentf-auto-cleanup . 10)
            )
+  :init
+  (recentf-mode 1)
   :config
   (run-at-time nil (* 5 60) 'recentf-save-list)
-  (defalias 'yes-or-no-p 'y-or-n-p))
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (when window-system
+    (setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program (executable-find "firefox"))))
 
 (leaf dired
   :doc "directory-browsing commands"
