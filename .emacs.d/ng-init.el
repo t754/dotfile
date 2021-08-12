@@ -603,6 +603,27 @@
          )
   )
 
+
+(leaf embark
+  :doc "Conveniently act on minibuffer completions"
+  :req "emacs-26.1"
+  :tag "convenience" "emacs>=26.1"
+  :added "2021-06-14"
+  :url "https://github.com/oantolin/embark"
+  :emacs>= 26.1
+  :ensure t
+  :init
+  (leaf embark-consult
+    :doc "Consult integration for Embark"
+    :req "emacs-25.1" "embark-0.9" "consult-0.1"
+    :tag "convenience" "emacs>=25.1"
+    :added "2021-06-14"
+    :url "https://github.com/oantolin/embark"
+    :emacs>= 25.1
+    :ensure t
+    :after embark consult))
+
+
 (provide 'init)
 
 ;; Local Variables:
