@@ -53,6 +53,15 @@
   (setq default-frame-alist '((font . "Ricty-12")))
   (set-fontset-font "fontset-default" 'unicode "Noto Color Emoji" nil 'prepend))
 
+(leaf my/window
+  :hook (after-make-frame-functions
+         .
+         (lambda (frame)
+           (when (display-graphic-p frame)
+             (setq browse-url-browser-function 'browse-url-generic
+                   browse-url-generic-program (executable-find "firefox"))
+             ))))
+
 (leaf cus-edit
   :doc "tools for customizing Emacs and Lisp packages"
   :tag "builtin" "faces" "help"
@@ -85,10 +94,7 @@
   (recentf-mode 1)
   :config
   (run-at-time nil (* 5 60) 'recentf-save-list)
-  (defalias 'yes-or-no-p 'y-or-n-p)
-  (when window-system
-    (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program (executable-find "firefox"))))
+  (defalias 'yes-or-no-p 'y-or-n-p))
 
 (leaf dired
   :doc "directory-browsing commands"
