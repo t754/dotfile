@@ -514,9 +514,11 @@
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
          ("M-s l" . consult-line)
+         ("C-s" . consult-line)
          ("M-s m" . consult-multi-occur)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
+         ("M-y" . consult-yank-pop)
          )
   )
 
