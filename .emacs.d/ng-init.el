@@ -53,6 +53,15 @@
   (setq default-frame-alist '((font . "Ricty-12")))
   (set-fontset-font "fontset-default" 'unicode "Noto Color Emoji" nil 'prepend))
 
+(leaf my/window
+  :hook (after-make-frame-functions
+         .
+         (lambda (frame)
+           (when (display-graphic-p frame)
+             (setq browse-url-browser-function 'browse-url-generic
+                   browse-url-generic-program (executable-find "firefox"))
+             ))))
+
 (leaf cus-edit
   :doc "tools for customizing Emacs and Lisp packages"
   :tag "builtin" "faces" "help"
@@ -79,9 +88,12 @@
            (tab-width . 4)
            (abbrev-file-name . "~/.emacs.d/abbrev_defs")
            (recentf-max-saved-items . 2000)
-           (recentf-auto-cleanup . 'never)
+           (recentf-auto-cleanup . 10)
            )
+  :init
+  (recentf-mode 1)
   :config
+  (run-at-time nil (* 5 60) 'recentf-save-list)
   (defalias 'yes-or-no-p 'y-or-n-p))
 
 (leaf dired
@@ -194,95 +206,6 @@
     :config
     (flycheck-elsa-setup)))
 
-(leaf ivy
-  :doc "Incremental Vertical completYon"
-  :req "emacs-24.5"
-  :tag "matching" "emacs>=24.5"
-  :url "https://github.com/abo-abo/swiper"
-  :emacs>= 24.5
-  :ensure t
-  :blackout t
-  :leaf-defer nil
-  :custom ((ivy-initial-inputs-alist . nil)
-           (ivy-re-builders-alist . '((t . ivy--regex-fuzzy)
-                                      (swiper . ivy--regex-plus)))
-           (ivy-use-virtual-buffers . t)
-           (ivy-use-selectable-prompt . t))
-  :global-minor-mode t
-  :config
-  (leaf swiper
-    :doc "Isearch with an overview. Oh, man!"
-    :req "emacs-24.5" "ivy-0.13.0"
-    :tag "matching" "emacs>=24.5"
-    :url "https://github.com/abo-abo/swiper"
-    :emacs>= 24.5
-    :ensure t
-    :bind (("C-s" . swiper)))
-
-  (leaf counsel
-    :doc "Various completion functions using Ivy"
-    :req "emacs-24.5" "swiper-0.13.0"
-    :tag "tools" "matching" "convenience" "emacs>=24.5"
-    :url "https://github.com/abo-abo/swiper"
-    :emacs>= 24.5
-    :ensure t
-    :blackout t
-    :bind (("C-S-s" . counsel-imenu)
-           ("C-x C-r" . counsel-recentf)
-           ("C-x C-b" . counsel-ibuffer)
-           ("M-s a" . counsel-ag)
-           ("M-s g" . counsel-git-grep)
-           ("M-x" . counsel-M-x))
-    :config
-    (add-to-list 'ivy-sort-functions-alist
-                 '(counsel-recentf . file-newer-than-file-p))
-    :custom `((counsel-yank-pop-separator . "\n----------\n")
-              (counsel-find-file-ignore-regexp . ,(rx-to-string '(or "./" "../") 'no-group)))
-    :global-minor-mode t)
-  (leaf ivy-hydra
-  :doc "Additional key bindings for Ivy"
-  :req "emacs-24.5" "ivy-0.13.0" "hydra-0.15.0"
-  :tag "convenience" "emacs>=24.5"
-  :added "2021-03-17"
-  :url "https://github.com/abo-abo/swiper"
-  :emacs>= 24.5
-  :ensure t
-  :after ivy hydra))
-
-
-(leaf ivy-rich
-  :doc "More friendly display transformer for ivy."
-  :req "emacs-24.5" "ivy-0.8.0"
-  :tag "ivy" "emacs>=24.5"
-  :emacs>= 24.5
-  :ensure t
-  :after ivy
-  :global-minor-mode t)
-
-
-(leaf prescient
-  :doc "Better sorting and filtering"
-  :req "emacs-25.1"
-  :tag "extensions" "emacs>=25.1"
-  :url "https://github.com/raxod502/prescient.el"
-  :emacs>= 25.1
-  :ensure t
-  :commands (prescient-persist-mode)
-  :custom `((prescient-aggressive-file-save . t)
-            (prescient-save-file . ,(locate-user-emacs-file "prescient")))
-  :global-minor-mode prescient-persist-mode)
-
-(leaf ivy-prescient
-  :doc "prescient.el + Ivy"
-  :req "emacs-25.1" "prescient-4.0" "ivy-0.11.0"
-  :tag "extensions" "emacs>=25.1"
-  :url "https://github.com/raxod502/prescient.el"
-  :emacs>= 25.1
-  :ensure t
-  :after prescient ivy
-  :custom ((ivy-prescient-retain-classic-highlighting . t))
-  :global-minor-mode t)
-
 (leaf company
   :doc "Modular text completion framework"
   :req "emacs-24.3"
@@ -353,39 +276,48 @@
          ("C-c c" . org-capture)
          ("C-c b" . org-iswitchb))
   :custom
-  ((org-directory . "~/org")
-   (org-default-notes-file .  "~/org/inbox.org")
-   (org-agenda-files . '("~/org/work.org" "~/org/daily.org" "~/org/inbox.org"))
-   (org-capture-templates
-    .
-    '(
-      ("p" "Protocol" entry (file+headline "inbox.org" "Inbox")
-       "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-      ("L" "Protocol Link" entry (file+headline "inbox.org" "Inbox")
-       "* %? %:annotation\n")
-      ("i" "inbox" entry
-       (file "~/org/inbox.org")
-       "* %?\n %T\n %a\n %i\n"
-       :empty-lines 1 )
-      ("h" "hobby"
-       entry (file "~/org/hobby.org")
-       "* %?\n %T\n %a\n %i\n"
-       :empty-lines 1)
-      ("w" "work"
-       entry (file "~/org/work.org")
-       "* %?\n %T\n %i\n"
-       :empty-lines 1)
-      ("d" "daily-template"
-       entry
-       (file+olp+datetree "daily.org")
-       "%[~/org/daily-template]"
-       ;; :unnarrowed 1
-       :time-prompt t)))
-   (org-use-speed-commands . t)
-   (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
-                           ("~/org/daily.org" :level . 3))))
+  `((org-directory . "~/org")
+    (org-default-notes-file .  "~/org/inbox.org")
+    (org-agenda-files . '("~/org/work.org" "~/org/daily.org" "~/org/inbox.org"))
+    (org-capture-templates
+     .
+     '(
+       ("p" "Protocol" entry (file+headline "inbox.org" "Inbox")
+        "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+       ("L" "Protocol Link" entry (file+headline "inbox.org" "Inbox")
+        "* %? %:annotation\n")
+       ("i" "inbox" entry
+        (file "~/org/inbox.org")
+        "* %?\n %T\n %a\n %i\n"
+        :empty-lines 1 )
+       ("h" "hobby"
+        entry (file "~/org/hobby.org")
+        "* %?\n %T\n %a\n %i\n"
+        :empty-lines 1)
+       ("w" "work"
+        entry (file "~/org/work.org")
+        "* %?\n %T\n %i\n"
+        :empty-lines 1)
+       ("d" "daily-template"
+        entry
+        (file+olp+datetree "daily.org")
+        "%[~/org/daily-template]"
+        ;; :unnarrowed 1
+        :tree-type week
+        ;; :time-prompt t
+        )))
+    (org-archive-location . ,(format-time-string "%%s_archive_%Y::" (current-time)))
+    (org-use-speed-commands . t)
+    (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
+                            ("~/org/daily.org" :level . 3))))
   :init
-  (require 'org-protocol))
+  (require 'org-protocol)
+  (leaf ox-gfm
+    :doc "Github Flavored Markdown Back-End for Org Export Engine"
+    :tag "github" "markdown" "wp" "org"
+    :added "2021-04-26"
+    :ensure t))
+
 
 (leaf color-theme-sanityinc-tomorrow
   :doc "A version of Chris Kempson's \"tomorrow\" themes"
@@ -500,9 +432,121 @@
   (setq read-process-output-max 10240)
   (setq gc-cons-threshold  (* 1024 1024 10)))
 
+(leaf consult
+  :doc "Consulting completing-read"
+  :req "emacs-26.1"
+  :tag "emacs>=26.1"
+  :added "2021-06-14"
+  :url "https://github.com/minad/consult"
+  :emacs>= 26.1
+  :ensure t
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :defun consult-customize project-roots
+  :defvar consult-theme consult-ripgrep consult-git-grep consult-grep
+  consult-bookmark consult-recent-file consult-xref
+  consult--source-file consult--source-project-file consult--source-bookmark
+  consult-project-root-function
+  :init
+  (setq register-preview-delay 0
+        register-preview-function #'consult-register-format)
+  (advice-add #'register-preview :override #'consult-register-window)
+  
+  (leaf consult-ghq
+    :doc "Ghq interface using consult"
+    :req "emacs-26.1" "consult-0.8" "affe-0.1"
+    :tag "ghq" "consult" "usability" "convenience" "emacs>=26.1"
+    :added "2021-06-18"
+    :url "https://github.com/tomoya/consult-ghq"
+    :emacs>= 26.1
+    :ensure t
+    :after consult affe)
+  (leaf orderless
+    :doc "Completion style for matching regexps in any order"
+    :req "emacs-24.4"
+    :tag "extensions" "emacs>=24.4"
+    :added "2021-06-14"
+    :url "https://github.com/oantolin/orderless"
+    :emacs>= 24.4
+    :ensure t
+    :custom ((completion-styles . '(orderless))))
+
+  (leaf vertico
+    :doc "VERTical Interactive COmpletion"
+    :req "emacs-27.1"
+    :tag "emacs>=27.1"
+    :added "2021-06-14"
+    :url "https://github.com/minad/vertico"
+    :emacs>= 27.1
+    :ensure t
+    :hook (after-init-hook . vertico-mode)
+    :custom ((vertico-count . 20)))
+
+  (leaf marginalia
+    :doc "Enrich existing commands with completion annotations"
+    :req "emacs-26.1"
+    :tag "emacs>=26.1"
+    :added "2021-06-14"
+    :url "https://github.com/minad/marginalia"
+    :emacs>= 26.1
+    :ensure t
+    :hook (after-init-hook . (lambda()
+                               (marginalia-mode)
+                               (savehist-mode))))
+  :config
+  (consult-customize
+   consult-theme
+   :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-file consult--source-project-file consult--source-bookmark
+   :preview-key (kbd "M-."))
+  (setq consult-project-root-function
+        (lambda ()
+          (when-let (project (project-current))
+            (car (project-roots project)))))
+  :bind (
+         ("C-x C-b" . consult-buffer)
+         ("C-x C-r" . consult-recent-file)
+         ("C-x b" . consult-buffer)
+         ("M-s f" . consult-find)
+         ("M-s L" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line)
+         ("C-s" . consult-line)
+         ("M-s m" . consult-multi-occur)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         ("M-y" . consult-yank-pop)
+         )
+  )
+
+
+(leaf embark
+  :doc "Conveniently act on minibuffer completions"
+  :req "emacs-26.1"
+  :tag "convenience" "emacs>=26.1"
+  :added "2021-06-14"
+  :url "https://github.com/oantolin/embark"
+  :emacs>= 26.1
+  :ensure t
+  :init
+  (leaf embark-consult
+    :doc "Consult integration for Embark"
+    :req "emacs-25.1" "embark-0.9" "consult-0.1"
+    :tag "convenience" "emacs>=25.1"
+    :added "2021-06-14"
+    :url "https://github.com/oantolin/embark"
+    :emacs>= 25.1
+    :ensure t
+    :after embark consult))
+
+
 (provide 'init)
 
 ;; Local Variables:
+;; byte-compile-warnings: (not cl-functions obsolete)
 ;; indent-tabs-mode: nil
 ;; eval: (leaf-tree-mode)
 ;; End:

@@ -24,6 +24,7 @@ declare -a symlink_array=(
     ".config/fontconfig/conf.d"
     ".config/systemd/user/emacs.service"
     ".config/systemd/user/xkeysnail.service"
+    ".config/systemd/user/ssh-agent.service"
     ".config/dunst/dunstrc"
     ".config/alacritty/alacritty.yml"
 )
