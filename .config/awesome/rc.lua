@@ -65,7 +65,7 @@ end
 local theme = beautiful.get()
 -- This is used later as the default terminal and editor to run.
 
-terminal = "alacritty"
+terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or os.getenv("VISUAL") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
