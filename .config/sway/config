@@ -240,6 +240,6 @@ client.urgent           $base08 $base08 $base00 $base08 $base08
 include /etc/sway/config.d/*
 
 input * {
-  xkb_layout "jp"7
+  xkb_layout "jp"
   xkb_options "caps:ctrl_modifier"
 }
