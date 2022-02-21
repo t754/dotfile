@@ -26,6 +26,7 @@ declare -a symlink_array=(
     ".config/systemd/user/xkeysnail.service"
     ".config/systemd/user/ssh-agent.service"
     ".config/dunst/dunstrc"
+    ".config/sway"
     ".config/alacritty/alacritty.yml"
 )
 
