@@ -18,8 +18,8 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-# set $menu "rofi -modi combi -combi-modi drun,run -show combi"
-set $menu dmenu_path | wofi --show drun -i
+set $menu "rofi -modi combi -combi-modi drun,run -show combi"
+
 
 ### Output configuration
 #
@@ -73,7 +73,7 @@ exec swayidle -w \
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $term
 
     # Kill focused window
     bindsym $mod+Shift+c kill
@@ -238,3 +238,8 @@ client.unfocused        $base01 $base00 $base05 $base01 $base01
 client.urgent           $base08 $base08 $base00 $base08 $base08
 
 include /etc/sway/config.d/*
+
+input * {
+  xkb_layout "jp"7
+  xkb_options "caps:ctrl_modifier"
+}
