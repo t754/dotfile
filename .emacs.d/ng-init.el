@@ -563,6 +563,17 @@
   :ensure t
   :custom ((typescript-indent-level . 2)))
 
+
+(leaf lua-mode
+  :doc "a major-mode for editing Lua scripts"
+  :req "emacs-24.3"
+  :tag "tools" "processes" "languages" "emacs>=24.3"
+  :added "2021-12-02"
+  :url "https://immerrr.github.io/lua-mode"
+  :emacs>= 24.3
+  :ensure t)
+
+
 (provide 'init)
 
 ;; Local Variables:
