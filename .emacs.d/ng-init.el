@@ -532,6 +532,7 @@
   :url "https://github.com/oantolin/embark"
   :emacs>= 26.1
   :ensure t
+  :bind (("C-h b" . embark-bindings))
   :init
   (leaf embark-consult
     :doc "Consult integration for Embark"
