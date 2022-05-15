@@ -112,15 +112,11 @@
       (call-process "xdg-open" nil 0 nil file))))
 
 
-(leaf linum
-  :doc "display line numbers in the left margin"
+(leaf display-line-numbers
+  :doc "interface for display-line-numbers"
   :tag "builtin"
-  :added "2020-10-20"
-  :preface
-  (defadvice linum-schedule (around my-linum-schedule () activate)
-    (run-with-idle-timer 0.2 nil #'linum-update-current))
-  :custom ((linum-delay . t))
-  :global-minor-mode global-linum-mode)
+  :added "2022-05-15"
+  :global-minor-mode global-display-line-numbers-mode)
 
 (leaf exec-path-from-shell
   :doc "Get environment variables such as $PATH from the shell"
