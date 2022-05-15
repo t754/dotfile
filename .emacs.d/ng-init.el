@@ -309,6 +309,9 @@
     (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
                             ("~/org/daily.org" :level . 3))))
   :init
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)))
   (require 'org-protocol)
   (leaf ox-gfm
     :doc "Github Flavored Markdown Back-End for Org Export Engine"
