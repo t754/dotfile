@@ -94,7 +94,9 @@
   (recentf-mode 1)
   :config
   (run-at-time nil (* 5 60) 'recentf-save-list)
-  (defalias 'yes-or-no-p 'y-or-n-p))
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (setq use-short-answers t))
+
 
 (leaf dired
   :doc "directory-browsing commands"
