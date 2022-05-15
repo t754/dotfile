@@ -1057,7 +1057,7 @@ function autostart()
       'xrdb -merge <<< "awesome.started:true";' ..
       -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
       -- https://github.com/jceb/dex ..
-      'dex --autostart' 
+      'dex -a -s ~/.config/autostart/; '
    )
 end
 autostart()
