@@ -545,6 +545,24 @@
     :after embark consult))
 
 
+
+(leaf js
+  :doc "Major mode for editing JavaScript"
+  :tag "builtin"
+  :added "2022-05-01"
+  :custom ((js-indent-level . 2)))
+
+
+(leaf typescript-mode
+  :doc "Major mode for editing typescript"
+  :req "emacs-24.3"
+  :tag "languages" "typescript" "emacs>=24.3"
+  :added "2022-05-01"
+  :url "http://github.com/ananthakumaran/typescript.el"
+  :emacs>= 24.3
+  :ensure t
+  :custom ((typescript-indent-level . 2)))
+
 (provide 'init)
 
 ;; Local Variables:
