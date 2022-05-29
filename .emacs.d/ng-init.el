@@ -432,6 +432,19 @@
   :after spinner markdown-mode lv
   :custom ((lsp-log-io . t))
   :init
+  (leaf lsp-ui
+    :doc "UI modules for lsp-mode"
+    :req "emacs-26.1" "dash-2.18.0" "lsp-mode-6.0" "markdown-mode-2.3"
+    :tag "tools" "languages" "emacs>=26.1"
+    :added "2022-05-01"
+    :url "https://github.com/emacs-lsp/lsp-ui"
+    :emacs>= 26.1
+    :ensure t
+    :bind ((:lsp-ui-mode-map
+            ([remap xref-find-definitions] . #'lsp-ui-peek-find-definitions)
+            ([remap xref-find-references]  . #'lsp-ui-peek-find-references)))
+    :after lsp-mode markdown-mode)
+  
   (leaf lsp-ivy
     :doc "LSP ivy integration"
     :req "emacs-25.1" "dash-2.14.1" "lsp-mode-6.2.1" "ivy-0.13.0"
