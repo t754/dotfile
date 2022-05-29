@@ -447,6 +447,9 @@
   consult-bookmark consult-recent-file consult-xref
   consult--source-file consult--source-project-file consult--source-bookmark
   consult-project-root-function
+  consult--source-recent-file
+  consult--source-project-recent-file
+  consult-narrow-key
   :init
   (setq register-preview-delay 0
         register-preview-function #'consult-register-format)
@@ -494,18 +497,33 @@
                                (marginalia-mode)
                                (savehist-mode))))
   :config
+  (setq consult-narrow-key "<")
   (consult-customize
    consult-theme
    :preview-key '(:debounce 0.2 any)
    consult-ripgrep consult-git-grep consult-grep
    consult-bookmark consult-recent-file consult-xref
-   consult--source-file consult--source-project-file consult--source-bookmark
+   consult--source-bookmark
+   consult--source-recent-file
+   consult--source-project-recent-file
    :preview-key (kbd "M-."))
-  (setq consult-project-root-function
-        (lambda ()
-          (when-let (project (project-current))
-            (car (project-roots project)))))
+  ;; (setq consult-project-root-function
+  ;;       (lambda ()
+  ;;         (when-let (project (project-current))
+  ;;           (car (project-roots project)))))
+  ;; :global-minor-mode consult-mode
   :bind (
+         ("C-c h" . consult-history)
+         ("C-c m" . consult-mode-command)
+         ("C-c k" . consult-kmacro)
+         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ("M-#" . consult-register-load)
+         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+         ("C-M-#" . consult-register)
          ("C-x C-b" . consult-buffer)
          ("C-x C-r" . consult-recent-file)
          ("C-x b" . consult-buffer)
@@ -520,8 +538,21 @@
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
          ("M-y" . consult-yank-pop)
-         )
-  )
+         ("M-g e" . consult-compile-error)
+         ("M-g f" . consult-flymake)
+         ("M-g g" . consult-goto-line)             ;; orig. goto-line
+         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+         ("M-g o" . consult-outline)
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
+         (minibuffer-local-map
+               ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+               ("M-r" . consult-history))
+         ))
+
+
 
 
 (leaf embark
