@@ -264,7 +264,18 @@
   :tag "emulation" "convenience"
   :added "2020-12-27"
   :url "http://github.com/joaotavora/yasnippet"
-  :ensure t)
+  :ensure t
+  :defun yas-reload-all
+  ;; :hook (prog-mode-hook . #'yas-minor-mode)
+  ;; :global-minor-mode yas-minor-mode
+  :hook (after-init . yas-global-mode)
+  :bind ((yas-minor-mode-map
+          ("C-c i n" . yas-new-snippet)
+          ("C-c i v" . yas-visit-snippet-file)
+          ("C-c i i" . yas-insert-snippet)))
+  :config
+  (yas-reload-all)
+   )
 
 (leaf org
   :doc "Export Framework for Org Mode"
