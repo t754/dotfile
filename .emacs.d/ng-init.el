@@ -628,6 +628,20 @@
   :emacs>= 24.3
   :ensure t)
 
+(leaf terraform-mode
+  :doc "Major mode for terraform configuration file"
+  :req "emacs-24.3" "hcl-mode-0.3" "dash-2.17.0"
+  :tag "emacs>=24.3"
+  :url "https://github.com/syohex/emacs-terraform-mode"
+  :added "2022-05-19"
+  :emacs>= 24.3
+  :ensure t
+  :after hcl-mode)
+
+(leaf jinja2-mode
+  :doc "A major mode for jinja2"
+  :added "2022-05-23"
+  :ensure t)
 
 (provide 'init)
 
