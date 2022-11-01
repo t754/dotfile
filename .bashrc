@@ -13,8 +13,9 @@ export REACT_EDITOR="emacsclient -c -n -a emacs"
 #     export DISPLAY=:0.0
 # fi
 
-# set -x
-export TERM="xterm-256color"
+if [[ "$TERM" != "dumb" ]] ; then
+    export TERM="xterm-256color"
+fi
 export COLORTERM="mlterm"
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
@@ -177,6 +178,12 @@ if [[ -d $HOME/Android/Sdk ]] ; then
     export ANDROID_HOME=$HOME/Android/Sdk
     export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
     export PATH=$PATH:/usr/local/src/android-studio/bin
+fi
+
+# for emacs-tramp
+if [[ "$TERM" == "dumb" ]] ; then
+    PS1='$ '
+    return
 fi
 
 # Path to the bash it configuration
