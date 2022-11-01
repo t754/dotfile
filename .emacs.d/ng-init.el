@@ -491,6 +491,17 @@
   (setq register-preview-delay 0
         register-preview-function #'consult-register-format)
   (advice-add #'register-preview :override #'consult-register-window)
+
+  (leaf counsel-tramp
+    :doc "Tramp ivy interface for ssh, docker, vagrant"
+    :req "emacs-24.3" "counsel-0.10"
+    :tag "emacs>=24.3"
+    :url "https://github.com/masasam/emacs-counsel-tramp"
+    :added "2022-11-01"
+    :emacs>= 24.3
+    :ensure t
+    :after counsel
+    :custom (tramp-default-method . "ssh"))
   
   (leaf consult-ghq
     :doc "Ghq interface using consult"
