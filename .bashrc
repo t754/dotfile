@@ -59,7 +59,7 @@ case ${TERM} in
 esac
 
 shopt -s extglob
-export HISTIGNORE="fg*:bg*:history*:rm*:export AWS_?(A|SE)*"
+export HISTIGNORE="fg*:bg*:history*:rm*:export AWS_?(A|SE)*:*poweroff*"
 export HISTSIZE=10000 # C-r C-s　で履歴を検索できるらしい
 
 # export COLORTERM="mlterm"
