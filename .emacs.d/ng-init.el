@@ -317,6 +317,7 @@
         )))
     (org-archive-location . ,(format-time-string "%%s_archive_%Y::" (current-time)))
     (org-use-speed-commands . t)
+    (org-tag-alist . '(("crypt" . ?c)))
     (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
                             ("~/org/daily.org" :level . 3))))
   :init
@@ -324,6 +325,18 @@
    'org-babel-load-languages
    '((python . t)))
   (require 'org-protocol)
+  (leaf org-crypt
+    :doc "Public Key Encryption for Org Entries"
+    :tag "builtin"
+    :added "2022-06-14"
+    :custom
+    (org-tags-exclude-from-inheritance . '("crypt"))
+    (org-crypt-key . nil)
+    (auto-save-default . nil)
+    :init
+    (org-crypt-use-before-save-magic)
+    )
+  
   (leaf ox-gfm
     :doc "Github Flavored Markdown Back-End for Org Export Engine"
     :tag "github" "markdown" "wp" "org"
