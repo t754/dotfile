@@ -81,7 +81,8 @@
   :custom `((custom-file  . ,(locate-user-emacs-file "custom.el"))))
 
 
-
+(leaf ssh
+  :custom ((tramp-default-method  . "ssh")))
 (leaf cus-start
   :doc "define customization properties of builtins"
   :tag "builtin" "internal"
