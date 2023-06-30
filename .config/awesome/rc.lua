@@ -67,7 +67,7 @@ end
 local theme = beautiful.get()
 -- This is used later as the default terminal and editor to run.
 
-terminal = "alacritty"
+terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or os.getenv("VISUAL") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -1085,7 +1085,7 @@ function autostart()
       'xrdb -merge <<< "awesome.started:true";' ..
       -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
       -- https://github.com/jceb/dex ..
-      'dex --autostart' 
+      'dex -a -s ~/.config/autostart/; '
    )
 end
 autostart()

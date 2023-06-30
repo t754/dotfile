@@ -108,7 +108,9 @@
   (recentf-mode 1)
   :config
   (run-at-time nil (* 5 60) 'recentf-save-list)
-  (defalias 'yes-or-no-p 'y-or-n-p))
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (setq use-short-answers t))
+
 
 (leaf dired
   :doc "directory-browsing commands"
@@ -124,15 +126,11 @@
       (call-process "xdg-open" nil 0 nil file))))
 
 
-(leaf linum
-  :doc "display line numbers in the left margin"
+(leaf display-line-numbers
+  :doc "interface for display-line-numbers"
   :tag "builtin"
-  :added "2020-10-20"
-  :preface
-  (defadvice linum-schedule (around my-linum-schedule () activate)
-    (run-with-idle-timer 0.2 nil #'linum-update-current))
-  :custom ((linum-delay . t))
-  :global-minor-mode global-linum-mode)
+  :added "2022-05-15"
+  :global-minor-mode global-display-line-numbers-mode)
 
 (leaf exec-path-from-shell
   :doc "Get environment variables such as $PATH from the shell"
@@ -347,6 +345,9 @@
    '((python . t)
      (shell . t)))
   :init
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)))
   (require 'org-protocol)
   (require 'org-id)
   (org-crypt-use-before-save-magic)
@@ -606,6 +607,7 @@
   :url "https://github.com/oantolin/embark"
   :emacs>= 26.1
   :ensure t
+  :bind (("C-h b" . embark-bindings))
   :init
   (leaf embark-consult
     :doc "Consult integration for Embark"
@@ -616,6 +618,35 @@
     :emacs>= 25.1
     :ensure t
     :after embark consult))
+
+
+
+(leaf js
+  :doc "Major mode for editing JavaScript"
+  :tag "builtin"
+  :added "2022-05-01"
+  :custom ((js-indent-level . 2)))
+
+
+(leaf typescript-mode
+  :doc "Major mode for editing typescript"
+  :req "emacs-24.3"
+  :tag "languages" "typescript" "emacs>=24.3"
+  :added "2022-05-01"
+  :url "http://github.com/ananthakumaran/typescript.el"
+  :emacs>= 24.3
+  :ensure t
+  :custom ((typescript-indent-level . 2)))
+
+
+(leaf lua-mode
+  :doc "a major-mode for editing Lua scripts"
+  :req "emacs-24.3"
+  :tag "tools" "processes" "languages" "emacs>=24.3"
+  :added "2021-12-02"
+  :url "https://immerrr.github.io/lua-mode"
+  :emacs>= 24.3
+  :ensure t)
 
 
 (provide 'init)
