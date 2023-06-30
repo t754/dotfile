@@ -1,3 +1,5 @@
+pcall(require, "luarocks.loader")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -21,7 +23,7 @@ local vicious = require("vicious")
 
 local ror = require("aweror")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-
+require("awful.hotkeys_popup.keys")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -102,10 +104,30 @@ menubar.geometry = {
 
 awful.layout.layouts = {
    awful.layout.suit.tile.right,
-   awful.layout.suit.corner.nw,
+--   awful.layout.suit.corner.nw,
+   awful.layout.suit.fair,
    awful.layout.suit.tile.bottom,
    awful.layout.suit.max,
 }
+
+-- awful.layout.layouts = {
+--     awful.layout.suit.floating,
+--     awful.layout.suit.tile,
+--     awful.layout.suit.tile.left,
+--     awful.layout.suit.tile.bottom,
+--     awful.layout.suit.tile.top,
+
+--     awful.layout.suit.fair.horizontal,
+--     awful.layout.suit.spiral,
+--     awful.layout.suit.spiral.dwindle,
+--     awful.layout.suit.max,
+--     awful.layout.suit.max.fullscreen,
+--     awful.layout.suit.magnifier,
+--     awful.layout.suit.corner.nw,
+--     awful.layout.suit.corner.ne,
+--     awful.layout.suit.corner.sw,
+--     awful.layout.suit.corner.se,
+-- }
 
 local function client_menu_toggle_fn()
    local instance = nil
@@ -614,6 +636,7 @@ awful.spawn.easy_async(
          end)
       end
 end)
+
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "/",      hotkeys_popup.show_help,
@@ -769,8 +792,10 @@ clientkeys = awful.util.table.join(
       {description = "move to master", group = "client"}),
    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
       {description = "move to screen", group = "client"}),
-   awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
-      {description = "toggle keep on top", group = "client"}),
+   awful.key({ modkey,           }, "b",      function (c) c.below = not c.below   end,
+  {description = "toggle below", group = "client"}),
+   awful.key({ modkey,           }, "t",      function (c)   c.ontop = not c.ontop end,
+{description = "toggle keep on top", group = "client"}),
    awful.key({ modkey, "Shift"   }, "t",      function (c)  awful.titlebar.toggle(c)        end,
       {description = "toggle titlebar", group = "client"}),
    awful.key({ modkey,           }, "n",
@@ -1049,6 +1074,9 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+
+
 
 function autostart()
    local xdg_config = os.getenv("XDG_CONFIG_DIRS") or (os.getenv("HOME") .. "/.config")
