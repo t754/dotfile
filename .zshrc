@@ -1,7 +1,13 @@
- # [[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
-
-# [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
-# [[ -s $HOME/.autojump/etc/profile.d/autojump.zsh ]] && source $HOME/.autojump/etc/profile.d/autojump.zsh
+# Use powerline
+USE_POWERLINE="true"
+# Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
+fi
 
 
 # autoload -U  promptinit && promptinit
@@ -38,25 +44,10 @@ PERL_MB_OPT="--install_base \"/home/tamas/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/tamas/perl5"; export PERL_MM_OPT;
 export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB
 
-
 #
 export PATH="$HOME/.cask/bin:$PATH:$HOME/adt-bundle-linux/sdk/platform-tools:$GOPATH/bin:$HOME/.rbenv/bin:$HOME/share/flex/flex3/bin:$HOME/perl5/bin"
 export PATH="$HOME/H8H/bin:$PATH"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
-
-# z.sh JUMP!!
-if [ -r $HOME/.ghq/github.com/rupa/z/z.sh ] ; then
-    export _Z_CMD=z
-    source $HOME/.ghq/github.com/rupa/z/z.sh
-
-    function j(){
-        if [ $# -eq 0 ] ; then
-            cd $(z | tac | awk "{print \$2}" | peco)
-        else
-            z $*
-        fi
-    }
-fi
 
 
 
@@ -176,62 +167,20 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 # コンパイル面倒くさい用
 function runcpp () { g++ $1 && shift && ./a.out $@ }
 # peco 用
-function peco-select-history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(\history -n 1 | \
-        eval $tac | \
-        peco --query "$LBUFFER")
-    CURSOR=$#BUFFER
-    zle clear-screen
-}
-zle -N peco-select-history
-bindkey '^R' peco-select-history # M-xに割り当て
-bindkey '^X^R' history-incremental-search-backward
-
-
-######powerline
-function powerline_precmd() {
-    export PS1="$(~/powerline-shell.py $? --shell zsh 2> /dev/null)"
-}
-
-function install_powerline_precmd() {
-    for s in "${precmd_functions[@]}"; do
-        if [ "$s" = "powerline_precmd" ]; then
-            return
-        fi
-    done
-    precmd_functions+=(powerline_precmd)
-}
-
-install_powerline_precmd
-
-eval "$(rbenv init -)"
-
-# autojump
-# export AUTOJUMP_IGNORE_CASE=1
-
-# setopt autopushd
-# setopt pushd_ignore_dups        # 同じディレクトリは追加しない
-
-
-
-# if [ -z "$STY" ] ; then
-#     screen -Rd "work"
-# else
-#     archey3
-#     fortune -s | tee /tmp/trans;echo;goslate.py -t ja /tmp/trans
-# fi
-# $HOME/screenfetch 2> /dev/null
-
-
-
-setopt auto_cd                  # ディレクトリ名と一致した場合 cd
-function chpwd {
-    ls
-}
+# function peco-select-history() {
+#     local tac
+#     if which tac > /dev/null; then
+#         tac="tac"
+#     else
+#         tac="tail -r"
+#     fi
+#     BUFFER=$(\history -n 1 | \
+#         eval $tac | \
+#         peco --query "$LBUFFER")
+#     CURSOR=$#BUFFER
+#     zle clear-screen
+# }
+# zle -N peco-select-history
+# bindkey '^R' peco-select-history # M-xに割り当て
+# bindkey '^X^R' history-incremental-search-backward
 
