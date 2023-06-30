@@ -217,8 +217,10 @@
     :doc "Flycheck for Elsa."
     :emacs>= 25
     :ensure t
-    :config
-    (flycheck-elsa-setup)))
+    :hook (emacs-lisp-mode-hook . flycheck-elsa-setup)
+    ;; :config
+    ;; (flycheck-elsa-setup)
+    ))
 
 (leaf company
   :doc "Modular text completion framework"
