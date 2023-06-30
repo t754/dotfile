@@ -273,6 +273,16 @@
   :after ivy
   :bind (("C-M-o" . find-file-in-project)))
 
+(leaf avy
+  :doc "Jump to arbitrary positions in visible text and select text quickly."
+  :req "emacs-24.1" "cl-lib-0.5"
+  :tag "location" "point" "emacs>=24.1"
+  :url "https://github.com/abo-abo/avy"
+  :added "2022-01-31"
+  :emacs>= 24.1
+  :ensure t)
+(avy-setup-default)
+
 (leaf yasnippet
   :doc "Yet another snippet extension for Emacs"
   :req "cl-lib-0.5"
@@ -322,14 +332,63 @@
     (org-archive-location . ,(format-time-string "%%s_archive_%Y::" (current-time)))
     (org-use-speed-commands . t)
     (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
-                            ("~/org/daily.org" :level . 3))))
+                            ("~/org/daily.org" :level . 3)
+                            ("~/org/hobby.org" :level . 2)))
+    (org-adapt-indentation . nil)
+
+    (org-tags-exclude-from-inheritance . '("crypt"))
+    (org-crypt-key . nil))
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (shell . t)))
   :init
   (require 'org-protocol)
+  (require 'org-id)
+  (org-crypt-use-before-save-magic)
   (leaf ox-gfm
     :doc "Github Flavored Markdown Back-End for Org Export Engine"
     :tag "github" "markdown" "wp" "org"
     :added "2021-04-26"
-    :ensure t))
+    :ensure t)
+  )
+
+
+
+(leaf org-roam
+  :doc "Roam Research replica with Org-mode"
+  :req "emacs-26.1" "dash-2.13" "f-0.17.2" "s-1.12.0" "org-9.3" "emacsql-3.0.0" "emacsql-sqlite3-1.0.2"
+  :tag "convenience" "roam" "org-mode" "emacs>=26.1"
+  :added "2021-08-17"
+  :url "https://github.com/org-roam/org-roam"
+  :emacs>= 26.1
+  :ensure t
+  :after org ;; emacsql emacsql-sqlite3
+  ;; :hook
+  ;; (after-init-hook . org-roam-mode)
+  ;; :defvar org-roam-db-location org-roam-directory org-roam-index-file
+  :custom
+  ((org-roam-db-location . "~/.emacs.d/org-roam.db")
+   (org-roam-directory . "~/org/org-roam/")
+   (org-roam-index-file . "~/org/org-roam/index.org")
+   (org-roam-v2-ack . t))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  ;; (setq org-roam-db-location  "~/.emacs.d/org-roam.db")
+  ;; (setq org-roam-directory  "~/org/org-roam/")
+  ;; (setq org-roam-index-file  "~/org/org-roam/index.org")
+  (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol)
+  )
+
 
 
 (leaf color-theme-sanityinc-tomorrow
