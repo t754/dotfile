@@ -49,9 +49,22 @@
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>")))
 
 (leaf my/font
+  :preface
+  (defun font-available-p (font-name)
+    (find-font (font-spec :name font-name)))
   :config
-  (setq default-frame-alist '((font . "Ricty-12")))
-  (set-fontset-font "fontset-default" 'unicode "Noto Color Emoji" nil 'prepend))
+  (setq default-frame-alist '((font . "Cica-12")))
+  (set-fontset-font "fontset-default" 'unicode "Noto Color Emoji" nil 'prepend)
+  ;; 日本語 | 🍣
+  (cond
+   ((font-available-p "Cica")
+    (set-frame-font "Cica-12"))
+   ((font-available-p "Cascadia Code")
+    (set-frame-font "Cascadia Code-12"))
+   ((font-available-p "Menlo")
+    (set-frame-font "Menlo-12"))
+   ((font-available-p "Inconsolata")
+    (set-frame-font "Inconsolata-12"))))
 
 (leaf my/window
   :hook (after-make-frame-functions
