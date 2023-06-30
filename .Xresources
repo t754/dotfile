@@ -13,6 +13,7 @@ Xft.hintstyle:  hintfull
 Xft.antialias: True
 Xft.rgba: rgb
 Xft.dpi: 96
+!Xft.dpi: 144
 *customization: -color
 ! URxvt*font:           -misc-fixed-medium-r-normal-*-18-120-100-100-c-90-iso8859-1
 ! Using Xft
@@ -218,6 +219,8 @@ dzen2.font: xft:Droid Sans Mono:size=8:antialias=true
 *VT100.colorUL:         cyan
 
 ! Xft.embolden: true
-Emacs.FontBackend: xft
-emacs.useXIM: true
-Emacs.font: Monospace-12
+Emacs*FontBackend: xft
+Emacs*useXIM: true
+Emacs.useXIM: true
+Emacs*font: Monospace-12
+
