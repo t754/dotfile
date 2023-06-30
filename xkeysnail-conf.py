@@ -95,9 +95,14 @@ blacklist = (
 
 def blk(wm_class):
     lw = wm_class.lower()
-    if lw.startswith("minecraft"):
+    prefix = [
+        "minecraft",
+        "gimp",
+    ]
+    
+    if map(lambda x: lw.startswith(x),prefix):
         return False
-    return wm_class.lower() not in blacklist
+    return lw not in blacklist
 
 
 define_keymap(blk, {
