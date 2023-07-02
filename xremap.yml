@@ -34,7 +34,8 @@ keymap:
         - "xfce4-terminal"
         - KeePassXC
         - "vncviewer"
-        - Alacritty
+        - "Alacritty"
+        - "foot"
         - "virtualbox machine"
         - "factorio"
         - "openshot"
