@@ -71,7 +71,7 @@ setup_go(){
         return -1
     fi
     if [[ ! -x "$(which ghq)" ]]; then
-        go get github.com/x-motemen/ghq
+        go install github.com/x-motemen/ghq@latest
     fi
     ghq get https://github.com/clvv/fasd
     my_symlink "$(ghq root)"/"$(ghq list clvv/fasd)"/fasd $HOME/bin/fasd
