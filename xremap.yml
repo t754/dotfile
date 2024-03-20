@@ -25,6 +25,7 @@ keymap:
   - name: Emacs
     application:
       not:
+        - '/Minecraft.*/'
         - Emacs
         - Gnome-terminal
         - urxvt
@@ -36,6 +37,7 @@ keymap:
         - "vncviewer"
         - "Alacritty"
         - "foot"
+        - "footclient"        
         - "virtualbox machine"
         - "factorio"
         - "openshot"
