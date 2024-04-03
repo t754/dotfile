@@ -814,6 +814,15 @@
   :config
   (editorconfig-mode 1)
   )
+
+(leaf ansible-vault
+  :doc "Minor mode for editing ansible vault files"
+  :req "emacs-24.3"
+  :tag "tools" "ansible-vault" "ansible" "emacs>=24.3"
+  :url "http://github.com/zellio/ansible-vault-mode"
+  :added "2023-12-08"
+  :emacs>= 24.3
+  :ensure t)
 (provide 'init)
 
 ;; Local Variables:
