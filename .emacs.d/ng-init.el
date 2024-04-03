@@ -353,7 +353,44 @@
     :doc "Github Flavored Markdown Back-End for Org Export Engine"
     :tag "github" "markdown" "wp" "org"
     :added "2021-04-26"
-    :ensure t))
+    :ensure t)
+
+  
+  (leaf org-journal
+    :doc "a simple org-mode based journaling mode"
+    :req "emacs-25.1" "org-9.1"
+    :tag "emacs>=25.1"
+    :url "http://github.com/bastibe/org-journal"
+    :added "2022-12-20"
+    :emacs>= 25.1
+    :ensure t
+    :after org
+    :bind (("C-c j" . org-journal-new-entry))
+    :custom `((org-journal-dir . ,(file-truename "~/org/roam"))
+              (org-journal-date-format . "%Y-%m-%d, %A")
+              (org-journal-time-format . "%R\n\n")
+              (org-journal-file-format . "%Y%m%d.org")
+              (org-journal-file-type . 'weekly)
+              ))
+  (leaf org-roam
+    :doc "A database abstraction layer for Org-mode"
+    :req "emacs-26.1" "dash-2.13" "org-9.4" "emacsql-3.0.0" "emacsql-sqlite-1.0.0" "magit-section-3.0.0"
+    :tag "convenience" "roam" "org-mode" "emacs>=26.1"
+    :url "https://github.com/org-roam/org-roam"
+    :added "2022-12-20"
+    :emacs>= 26.1
+    :ensure t
+    :after org emacsql emacsql-sqlite magit-section
+    :custom `((org-roam-directory . ,(file-truename "~/org/roam"))))
+  (leaf org-roam-ui
+    :doc "User Interface for Org-roam"
+    :req "emacs-27.1" "org-roam-2.0.0" "simple-httpd-20191103.1446" "websocket-1.13"
+    :tag "outlines" "files" "emacs>=27.1"
+    :url "https://github.com/org-roam/org-roam-ui"
+    :added "2022-12-20"
+    :emacs>= 27.1
+    :ensure t
+    :after org-roam websocket))
 
 
 (leaf color-theme-sanityinc-tomorrow
