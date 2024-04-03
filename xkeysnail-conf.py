@@ -90,6 +90,7 @@ blacklist = (
     "factorio",
     "openshot",
     "tigervnc viewer",
+    "xfreerdp",
     "",
 )
 
