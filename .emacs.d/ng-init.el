@@ -747,6 +747,26 @@
   :ensure t
   :after reformatter)
 
+(leaf dashboard
+  :doc "A startup screen extracted from Spacemacs"
+  :req "emacs-26.1"
+  :tag "dashboard" "tools" "screen" "startup" "emacs>=26.1"
+  :url "https://github.com/emacs-dashboard/emacs-dashboard"
+  :added "2023-10-06"
+  :emacs>= 26.1
+  :ensure t
+  :hook (elpaca-after-init-hook . dashboard-insert-startupify-lists)
+  :hook (elpaca-after-init-hook . dashboard-initialize)
+  :defvar dashboard-projects-switch-function
+  :init
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+  (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
+  (dashboard-setup-startup-hook)
+  :custom ((dashboard-items . '((recents  . 5)
+                        (bookmarks . 5)
+                        (projects . 5)
+                        (agenda . 5)
+                        (registers . 5)))))
 (provide 'init)
 
 ;; Local Variables:
