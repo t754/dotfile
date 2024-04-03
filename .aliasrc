@@ -3,10 +3,14 @@ alias ls='ls -x -v --color=auto'
 alias ll='ls -la'
 alias la='ls -a'
 alias starte='emacs --daemon'
-alias e="emacsclient -c -n"
-alias et="emacsclient -t -n"
-alias enox="emacsclient -nw"
-alias en="emacsclient"
+
+export emacsc="flatpak run --command=emacsclient org.gnu.emacs"
+export EDITOR="$emacsc"
+
+alias e="$emacsc -c -n"
+alias et="$emacsc -t -n"
+alias enox="$emacsc -nw"
+alias en="$emacsc"
 alias E='SUDO_EDITOR="emacsclient -c" sudo -e '
 alias Enox='SUDO_EDITOR="emacsclient -nw " sudo -e '
 alias En='SUDO_EDITOR="emacsclient  " sudo -e '
@@ -20,6 +24,7 @@ alias open="mimeopen"
 alias feh="feh -."
 alias sudo='sudo '
 
+# alias akamai='docker run -it -v $HOME/.edgerc:/root/.edgerc:ro akamai/shell akamai'
 
 # if [[ -x "$(which bundle 2>/dev/null)" ]] ; then
 #     function rails (){
@@ -331,6 +336,11 @@ function alias_completion {
     source "$tmp_file" && rm -f "$tmp_file"
 }; alias_completion
 
+
+complete -F _filedir_xspec e
+complete -F _filedir_xspec et
+complete -F _filedir_xspec enox
+complete -F _filedir_xspec en
 
 function ips ()
 {
