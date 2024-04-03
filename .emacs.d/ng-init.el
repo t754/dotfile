@@ -48,10 +48,8 @@
   :config
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>")))
 
-(leaf my/font
-  :config
-  (setq default-frame-alist '((font . "Ricty-12")))
-  (set-fontset-font "fontset-default" 'unicode "Noto Color Emoji" nil 'prepend))
+
+
 
 (leaf my/window
   :hook (after-make-frame-functions
@@ -67,6 +65,31 @@
   :tag "builtin" "faces" "help"
   :custom `((custom-file  . ,(locate-user-emacs-file "custom.el"))))
 
+
+;; initial-frame-alist '((font . "Cica-13.5"))
+;; default-frame-alist '((font . "Cica-13.5"))
+
+;; |012345 678910|
+;; |abcdef ghijkl|
+;; |ABCDEF GHIJKL|
+;; |αβγδεζ ηθικλμ|
+;; |ΑΒΓΔΕΖ ΗΘΙΚΛΜ|
+;; |∩∪∞≤≥∏ ∑∫×±⊆⊇|
+;; |'";:-+ =/\~`?|
+;; |日本語 の美観|
+;; |あいう えおか|
+;; |アイウ エオカ|
+;; |ｱｲｳｴｵｶ ｷｸｹｺｻｼ|
+
+(leaf font
+  :config
+  (let* ((family "Cica")
+         (fontspec (font-spec :family family :weight 'normal)))
+    (set-face-attribute 'default nil :family family :height 120)
+    (set-fontset-font nil 'ascii fontspec nil 'append)
+    (set-fontset-font nil 'japanese-jisx0208 fontspec nil 'append))
+    (add-to-list 'face-font-rescale-alist '(".*icons.*" . 0.9))
+    (add-to-list 'face-font-rescale-alist '(".*FontAwesome.*" . 0.9)))
 
 
 (leaf cus-start
