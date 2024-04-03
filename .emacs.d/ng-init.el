@@ -767,6 +767,20 @@
                         (projects . 5)
                         (agenda . 5)
                         (registers . 5)))))
+
+(leaf editorconfig
+  :doc "EditorConfig Emacs Plugin"
+  :req "emacs-26.1" "nadvice-0.3"
+  :tag "editorconfig" "convenience" "emacs>=26.1"
+  :url "https://github.com/editorconfig/editorconfig-emacs#readme"
+  :added "2023-10-25"
+  :emacs>= 26.1
+  :ensure t
+  :after nadvice
+  :defun editorconfig-mode
+  :config
+  (editorconfig-mode 1)
+  )
 (provide 'init)
 
 ;; Local Variables:
