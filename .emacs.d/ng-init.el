@@ -493,6 +493,11 @@
   :ensure t
   :after spinner markdown-mode lv
   :custom ((lsp-log-io . t))
+  :defvar my/format-on-save
+  :hook (before-save-hook . (lambda ()
+                              ;; consider setproject-local variables on `.dir-locals.el`
+                              (when (intern-soft (concat "my/" (symbol-name 'format-on-save)))
+                                (lsp-format-buffer))))
   :init
   (leaf lsp-ui
     :doc "UI modules for lsp-mode"
@@ -541,6 +546,15 @@
         register-preview-function #'consult-register-format)
   (advice-add #'register-preview :override #'consult-register-window)
 
+  (leaf counsel-projectile
+    :doc "Ivy integration for Projectile"
+    :req "counsel-0.13.4" "projectile-2.5.0"
+    :tag "convenience" "project"
+    :url "https://github.com/ericdanan/counsel-projectile"
+    :added "2023-10-10"
+    :ensure t
+    :after counsel projectile)
+  
   (leaf counsel-tramp
     :doc "Tramp ivy interface for ssh, docker, vagrant"
     :req "emacs-24.3" "counsel-0.10"
@@ -714,6 +728,14 @@
 (leaf jinja2-mode
   :doc "A major mode for jinja2"
   :added "2022-05-23"
+  :ensure t)
+(leaf php-mode
+  :doc "Major mode for editing PHP code"
+  :req "emacs-25.2"
+  :tag "php" "languages" "emacs>=25.2"
+  :url "https://github.com/emacs-php/php-mode"
+  :added "2023-02-06"
+  :emacs>= 25.2
   :ensure t)
 
 (provide 'init)
