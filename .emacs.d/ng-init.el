@@ -319,6 +319,10 @@
         entry (file "~/org/work.org")
         "* %?\n %T\n %i\n"
         :empty-lines 1)
+       ("t" "todo-work"
+        entry
+        (file+headline "~/org/work.org" "tasks")
+        "** TODO %?\n  SCHEDULED: %^t\n ")
        ("d" "daily-template"
         entry
         (file+olp+datetree "daily.org")
@@ -329,13 +333,19 @@
         )))
     (org-archive-location . ,(format-time-string "%%s_archive_%Y::" (current-time)))
     (org-use-speed-commands . t)
+    (org-todo-keywords . '("TODO(t)" "DOING(g)" "WAITING(w)" "|" "DONE(d)"))
+    (org-log-done . 'note)
     (org-tag-alist . '(("crypt" . ?c)))
-    (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
-                            ("~/org/daily.org" :level . 3))))
+    (org-refile-targets . '(
+                            ;; ("~/org/inbox.org" :maxlevel . 2)
+                            ;; ("~/org/daily.org" :level . 3)
+                            
+                            )))
   :init
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((python . t)))
+   '((python . t)
+     (shell . t)))
   (require 'org-protocol)
   (leaf org-crypt
     :doc "Public Key Encryption for Org Entries"
@@ -346,8 +356,8 @@
     (org-crypt-key . nil)
     (auto-save-default . nil)
     :init
-    (org-crypt-use-before-save-magic)
-    )
+    (org-crypt-use-before-save-magic))
+    
   
   (leaf ox-gfm
     :doc "Github Flavored Markdown Back-End for Org Export Engine"
