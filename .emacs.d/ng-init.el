@@ -258,6 +258,18 @@
   :after ivy
   :bind (("C-M-o" . find-file-in-project)))
 
+(leaf projectile
+  :doc "Manage and navigate projects in Emacs easily"
+  :req "emacs-25.1"
+  :tag "convenience" "project" "emacs>=25.1"
+  :url "https://github.com/bbatsov/projectile"
+  :added "2023-10-06"
+  :emacs>= 25.1
+  :ensure t
+  :bind ((projectile-mode-map ("C-c p" . projectile-command-map)))
+  :config
+  (projectile-mode +1))
+
 (leaf yasnippet
   :doc "Yet another snippet extension for Emacs"
   :req "cl-lib-0.5"
