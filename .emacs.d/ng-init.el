@@ -737,6 +737,15 @@
   :added "2023-02-06"
   :emacs>= 25.2
   :ensure t)
+(leaf xml-format
+  :doc "XML reformatter using xmllint"
+  :req "emacs-25" "reformatter-0.4"
+  :tag "languages" "emacs>=25"
+  :url "https://github.com/wbolster/emacs-xml-format"
+  :added "2023-05-19"
+  :emacs>= 25
+  :ensure t
+  :after reformatter)
 
 (provide 'init)
 
