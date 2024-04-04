@@ -1,7 +1,8 @@
 ;;; package --- Summary
 
 ;;; Commentary:
-
+(defconst my/saved-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
 ;;; Code:
 (eval-and-compile
   (customize-set-variable
@@ -825,6 +826,7 @@
   :ensure t)
 (provide 'init)
 
+(setq file-name-handler-alist my/saved-file-name-handler-alist)
 ;; Local Variables:
 ;; byte-compile-warnings: (not cl-functions obsolete)
 ;; indent-tabs-mode: nil
