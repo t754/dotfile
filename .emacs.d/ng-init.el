@@ -659,7 +659,7 @@
    consult--source-bookmark
    consult--source-recent-file
    consult--source-project-recent-file
-   :preview-key (kbd "M-."))
+   )
   ;; (setq consult-project-root-function
   ;;       (lambda ()
   ;;         (when-let (project (project-current))
