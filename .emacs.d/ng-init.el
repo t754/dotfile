@@ -82,18 +82,26 @@
 ;; |アイウ エオカ|
 ;; |ｱｲｳｴｵｶ ｷｸｹｺｻｼ|
 
-(leaf font
-  :config
-  (let* ((family "Cica")
-         (fontspec (font-spec :family family :weight 'normal)))
-    (set-face-attribute 'default nil :family family :height 120)
-    (set-fontset-font nil 'ascii fontspec nil 'append)
-    (set-fontset-font nil 'japanese-jisx0208 fontspec nil 'append))
+
+
+(defun my/configure-font (frame)
+  (leaf font
+    :config
+    (let* ((family "Cica")
+           (fontspec (font-spec :family family :weight 'normal)))
+      (set-face-attribute 'default nil :family family :height 120)
+      (set-fontset-font nil 'ascii fontspec nil 'append)
+      (set-fontset-font nil 'japanese-jisx0208 fontspec nil 'append))
     (add-to-list 'face-font-rescale-alist '(".*icons.*" . 0.9))
     (add-to-list 'face-font-rescale-alist '(".*FontAwesome.*" . 0.9)))
+  ;; Do stuff with FRAME...
+  (remove-hook 'after-make-frame-functions #'my/configure-font))
+
+(add-hook 'after-make-frame-functions #'my/configure-font)
 
 
-(leaf cus-start
+
+(leaf cus-starts
   :doc "define customization properties of builtins"
   :tag "builtin" "internal"
   :preface
