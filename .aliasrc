@@ -4,7 +4,7 @@ alias ll='ls -la'
 alias la='ls -a'
 alias starte='emacs --daemon'
 
-export emacsc="flatpak run --command=emacsclient org.gnu.emacs"
+export emacsc="emacsclient"
 export EDITOR="$emacsc"
 
 alias e="$emacsc -c -n"
