@@ -129,7 +129,14 @@ export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 -
 railsComp="$(ghq list -p | grep 'jweslley/rails_completion')"
 [[ -d $railsComp  ]] && source $railsComp"/rails.bash"
 
-[[ -x "$(which fasd 2>/dev/null)" ]] && eval "$(fasd --init auto)"
+if [[ -x "$(which fasd 2>/dev/null)" ]] ; then
+    eval "$(fasd --init auto)"
+    __fasd_cmd_list=("f" "d")
+    for c in "${__fasd_cmd_list[@]}" ; do
+        unalias "${c}"
+        complete -r "${c}"
+    done
+fi
 [[ -x "$(which kubectl 2>/dev/null)" ]] && source <(kubectl completion bash)
 [[ -x "$(which helm 2>/dev/null)" ]] && source <(helm completion bash)
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
