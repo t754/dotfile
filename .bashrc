@@ -203,6 +203,9 @@ case $HOSTNAME in
     *tam*)
         export BASH_IT_THEME='doubletime'
     ;;
+    *work*)
+        export BASH_IT_THEME="powerline-multiline"
+    ;;
     *)
         export BASH_IT_THEME='bobby'
     ;;
