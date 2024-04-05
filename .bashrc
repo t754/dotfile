@@ -98,7 +98,6 @@ fi
 [[ -r "$HOME/google-cloud-sdk/completion.bash.inc" ]] && source "$HOME/google-cloud-sdk/completion.bash.inc"
 [[ -r "$HOME/lib/azure-cli/az.completion" ]] && source "$HOME/lib/azure-cli/az.completion"
 [[ -r "$HOME/.bashrc.local.bash" ]] && source "$HOME/.bashrc.local.bash"
-[[ -r "$HOME/.fzf.bash" ]] && source "$HOME/.fzf.bash"
 
 export HISTTIMEFORMAT="%Y-%m-%dT%H:%M:%S "
 if which npm &> /dev/null ; then
@@ -163,10 +162,16 @@ peco() {
     fzf +s
 }
 
-
+if command -v fzf 1>/dev/null 2>&1; then
+    eval "$(fzf --bash)"
+fi
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+if command -v rye 1>/dev/null 2>&1; then
+  source "$HOME/.rye/env"
+fi
+
 # [[ -x "$(which pyenv 2>/dev/null)" ]] && ( eval "$(pyenv init -)" ; echo "aaaa" )
 
 #Load pyenv virtualenv if the virtualenv plugin is installed.
