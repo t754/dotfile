@@ -153,8 +153,6 @@ fi
 complete -cf sudo
 complete -cf man
 
-function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
-trap EC ERR
 
 # source ~/.ghq/github.com/arialdomartini/oh-my-git/prompt.sh
 
@@ -182,9 +180,10 @@ fi
 
 [ -f $HOME/.complete_bundle_exec.sh ] && source $HOME/.complete_bundle_exec.sh
 [ -f $HOME/.complete_bundle_exec.sh ] && complete -C $HOME/bin/terraform terraform
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f $HOME/.bashrc.local ] && source $HOME/.bashrc.local
-
+if [[ -f $HOME/.local/share/blesh/ble.sh ]] ; then
+    source $HOME/.local/share/blesh/ble.sh
+fi
 if [[ -d $HOME/Android/Sdk ]] ; then
     export ANDROID_HOME=$HOME/Android/Sdk
     export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
@@ -261,3 +260,5 @@ export SCM_CHECK=true
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
+trap EC ERR
