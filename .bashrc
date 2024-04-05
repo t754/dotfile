@@ -70,7 +70,7 @@ if type akamai >/dev/null 2>&1; then
     eval "$(akamai --bash)"
 fi
 
-
+[[ -x "$(which direnv 2>/dev/null)" ]] && eval "$(direnv hook bash)"
 if type luarocks >/dev/null 2>&1; then
     eval "$(luarocks path --bin)"
 fi
