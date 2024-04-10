@@ -85,15 +85,16 @@
 
 
 (defun my/configure-font (frame)
-  (leaf font
-    :config
+  ;; (leaf font
+  ;;   :config
     (let* ((family "Cica")
-           (fontspec (font-spec :family family :weight 'normal)))
-      (set-face-attribute 'default nil :family family :height 120)
-      (set-fontset-font nil 'ascii fontspec nil 'append)
-      (set-fontset-font nil 'japanese-jisx0208 fontspec nil 'append))
-    (add-to-list 'face-font-rescale-alist '(".*icons.*" . 0.9))
-    (add-to-list 'face-font-rescale-alist '(".*FontAwesome.*" . 0.9)))
+           (fontspec (font-spec :family family :weight 'normal))
+           (fsize 12))
+      (setq use-default-font-for-symbols nil)
+      (add-to-list 'default-frame-alist '(font . (concat family "-" (number-to-string fsize))))
+      (set-fontset-font "fontset-default" 'unicode family)
+      (set-face-attribute 'default nil :family "monospace" :height (* fsize 10))
+      )
   ;; Do stuff with FRAME...
   (remove-hook 'after-make-frame-functions #'my/configure-font))
 
