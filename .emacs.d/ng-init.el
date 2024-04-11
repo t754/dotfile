@@ -254,7 +254,31 @@
     :emacs>= 24.3
     :ensure t
     :hook (ibuffer-mode-hook . nerd-icons-ibuffer-mode)
-    :custom ((inhibit-compacting-font-caches . t))))
+    :custom ((inhibit-compacting-font-caches . t)))
+
+  (leaf dirvish
+    :doc "A modern file manager based on dired mode"
+    :req "emacs-27.1" "transient-0.3.7"
+    :tag "convenience" "files" "emacs>=27.1"
+    :url "https://github.com/alexluigit/dirvish"
+    :added "2024-04-11"
+    :emacs>= 27.1
+    :ensure t
+    :global-minor-mode dirvish-override-dired-mode dirvish-peek-mode
+    :custom '(
+              (dirvish-mode-line-format . '(:left (sort file-time " " file-size symlink) :right (omit yank index)))
+              (dirvish-header-line-format . '(:left (path) :right (free-space)))
+              (dirvish-mode-line-height . 10)
+              (dirvish-attributes . '(nerd-icons file-time file-size collapse subtree-state vc-state git-msg))
+              ;; (dirvish-subtree-state-style . 'arrow)
+              (delete-by-moving-to-trash . t)
+              ;; (dirvish-path-separators . '(
+              ;;                              ,(format "  %s " (nerd-icons-codicon "nf-cod-home"))
+              ;;                              ,(format "  %s " (nerd-icons-codicon "nf-cod-root_folder"))
+              ;;                              ,(format " %s " (nerd-icons-faicon "nf-fa-angle_right"))))
+              (dired-listing-switches .  "-l --almost-all --human-readable --group-directories-first --no-group")
+              )))
+
 (leaf flycheck
   :doc "On-the-fly syntax checking"
   :emacs>= 24.3
@@ -343,6 +367,11 @@
   :ensure t
   ;; :after git-commit with-editor
   :bind (("C-x g" . magit-status)))
+(leaf vc
+  :doc "drive a version-control system from within Emacs"
+  :tag "builtin"
+  :added "2024-04-12"
+  :require t)
 
 (leaf pcre2el
   :doc "regexp syntax converter"
