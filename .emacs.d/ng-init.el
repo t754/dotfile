@@ -82,23 +82,24 @@
 ;; |アイウ エオカ|
 ;; |ｱｲｳｴｵｶ ｷｸｹｺｻｼ|
 
+(leaf fonts
+  :defun my/configure-font
+  :preface
+  (defun my/configure-font (frame)
+    (interactive)
+    (when (display-graphic-p frame)
+      (let* ((family "Cica")
+             (fontspec (font-spec :family family :weight 'normal))
+             (fsize 12))
+        (setq use-default-font-for-symbols nil)
+        (add-to-list 'default-frame-alist '(font . (concat family "-" (number-to-string fsize))))
+        (set-fontset-font "fontset-default" 'unicode family)
+        (set-face-attribute 'default nil :family "monospace" :height (* fsize 10)))
+      (remove-hook 'after-make-frame-functions #'my/configure-font)))
+  :hook
+  (after-make-frame-functions . my/configure-font))
 
 
-(defun my/configure-font (frame)
-  ;; (leaf font
-  ;;   :config
-    (let* ((family "Cica")
-           (fontspec (font-spec :family family :weight 'normal))
-           (fsize 12))
-      (setq use-default-font-for-symbols nil)
-      (add-to-list 'default-frame-alist '(font . (concat family "-" (number-to-string fsize))))
-      (set-fontset-font "fontset-default" 'unicode family)
-      (set-face-attribute 'default nil :family "monospace" :height (* fsize 10))
-      )
-  ;; Do stuff with FRAME...
-  (remove-hook 'after-make-frame-functions #'my/configure-font))
-
-(add-hook 'after-make-frame-functions #'my/configure-font)
 
 
 
