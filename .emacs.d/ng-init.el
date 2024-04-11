@@ -202,6 +202,18 @@
   :custom ((auto-revert-interval . 0.1))
   :global-minor-mode global-auto-revert-mode)
 
+(leaf doom-themes
+  :doc "an opinionated pack of modern color-themes"
+  :req "emacs-25.1" "cl-lib-0.5"
+  :tag "faces" "themes" "emacs>=25.1"
+  :url "https://github.com/doomemacs/themes"
+  :added "2024-04-10"
+  :emacs>= 25.1
+  :ensure t
+  :config
+  (load-theme 'doom-nord t)
+  (doom-themes-org-config))
+
 (leaf flycheck
   :doc "On-the-fly syntax checking"
   :emacs>= 24.3
@@ -439,13 +451,13 @@
     :after org-roam websocket))
 
 
-(leaf color-theme-sanityinc-tomorrow
-  :doc "A version of Chris Kempson's \"tomorrow\" themes"
-  :tag "themes" "faces"
-  :added "2020-11-04"
-  :url "https://github.com/purcell/color-theme-sanityinc-tomorrow"
-  :ensure t
-  :config (load-theme 'sanityinc-tomorrow-night t))
+;; (leaf color-theme-sanityinc-tomorrow
+;;   :doc "A version of Chris Kempson's \"tomorrow\" themes"
+;;   :tag "themes" "faces"
+;;   :added "2020-11-04"
+;;   :url "https://github.com/purcell/color-theme-sanityinc-tomorrow"
+;;   :ensure t
+;;   :config (load-theme 'sanityinc-tomorrow-night t))
 
 (leaf my/scratch
   :defun my/make-scratch
