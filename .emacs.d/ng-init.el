@@ -163,20 +163,6 @@
   :init
   (exec-path-from-shell-copy-envs '("MANPATH" "PATH" "GOROOT" "GOPATH" )))
 
-(leaf beacon
-  :doc "Highlight the cursor whenever the window scrolls"
-  :req "seq-2.14"
-  :tag "convenience"
-  :added "2020-10-24"
-  :url "https://github.com/Malabarba/beacon"
-  :ensure t
-  :defun beacon--blink-on-focus
-  :global-minor-mode t
-  :custom ((beacon-blink-when-focused . t))
-  :init   (add-function :after after-focus-change-function
-                        (lambda ()
-                          (beacon--blink-on-focus))))
-
 (leaf paren
   :doc "highlight matching paren"
   :tag "builtin"
@@ -261,6 +247,22 @@
            (company-minimum-prefix-length . 1)
            (company-transformers . '(company-sort-by-occurrence)))
   :global-minor-mode global-company-mode)
+
+
+(leaf pulsar
+  :doc "Pulse highlight on demand or after select functions"
+  :req "emacs-27.1"
+  :tag "highlight" "pulse" "convenience" "emacs>=27.1"
+  :url "https://git.sr.ht/~protesilaos/pulsar"
+  :added "2024-04-10"
+  :emacs>= 27.1
+  :ensure t
+  :custom ((pulsar-pulse . t)
+           (pulsar-delay . 0.055)
+           (pulsar-iterations . 10)
+           (pulsar-face . 'pulsar-magenta)
+           (pulsar-highlight-face . 'pulsar-yellow))
+  :global-minor-mode pulsar-global-mode)
 
 (leaf magit
   :doc "A Git porcelain inside Emacs."
