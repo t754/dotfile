@@ -411,8 +411,7 @@
           ("C-c i v" . yas-visit-snippet-file)
           ("C-c i i" . yas-insert-snippet)))
   :config
-  (yas-reload-all)
-   )
+  (yas-reload-all))
 
 (leaf org
   :doc "Export Framework for Org Mode"
@@ -464,7 +463,7 @@
     (org-refile-targets . '(
                             ;; ("~/org/inbox.org" :maxlevel . 2)
                             ;; ("~/org/daily.org" :level . 3)
-                            
+
                             )))
   :init
   (org-babel-do-load-languages
@@ -482,15 +481,15 @@
     (auto-save-default . nil)
     :init
     (org-crypt-use-before-save-magic))
-    
-  
+
+
   (leaf ox-gfm
     :doc "Github Flavored Markdown Back-End for Org Export Engine"
     :tag "github" "markdown" "wp" "org"
     :added "2021-04-26"
     :ensure t)
 
-  
+
   (leaf org-journal
     :doc "a simple org-mode based journaling mode"
     :req "emacs-25.1" "org-9.1"
@@ -636,7 +635,7 @@
             ([remap xref-find-definitions] . #'lsp-ui-peek-find-definitions)
             ([remap xref-find-references]  . #'lsp-ui-peek-find-references)))
     :after lsp-mode markdown-mode)
-  
+
   (setq read-process-output-max 10240)
   (setq gc-cons-threshold  (* 1024 1024 10)))
 
@@ -669,9 +668,8 @@
     :tag "convenience" "project"
     :url "https://github.com/ericdanan/counsel-projectile"
     :added "2023-10-10"
-    :ensure t
-    :after counsel projectile)
-  
+    :ensure t)
+
   (leaf counsel-tramp
     :doc "Tramp ivy interface for ssh, docker, vagrant"
     :req "emacs-24.3" "counsel-0.10"
@@ -680,9 +678,8 @@
     :added "2022-11-01"
     :emacs>= 24.3
     :ensure t
-    :after counsel
     :custom (tramp-default-method . "ssh"))
-  
+
   (leaf consult-ghq
     :doc "Ghq interface using consult"
     :req "emacs-26.1" "consult-0.8" "affe-0.1"
@@ -690,8 +687,7 @@
     :added "2021-06-18"
     :url "https://github.com/tomoya/consult-ghq"
     :emacs>= 26.1
-    :ensure t
-    :after consult affe)
+    :ensure t)
   (leaf orderless
     :doc "Completion style for matching regexps in any order"
     :req "emacs-24.4"
@@ -795,7 +791,7 @@
     :url "https://github.com/oantolin/embark"
     :emacs>= 25.1
     :ensure t
-    :after embark consult))
+    ))
 
 
 
@@ -887,7 +883,6 @@
   :added "2023-10-25"
   :emacs>= 26.1
   :ensure t
-  :after nadvice
   :defun editorconfig-mode
   :config
   (editorconfig-mode 1)
