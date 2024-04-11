@@ -302,6 +302,23 @@
   :global-minor-mode global-company-mode)
 
 
+(leaf helpful
+  :doc "A better *help* buffer"
+  :req "emacs-25" "dash-2.18.0" "s-1.11.0" "f-0.20.0" "elisp-refs-1.2"
+  :tag "lisp" "help" "emacs>=25"
+  :url "https://github.com/Wilfred/helpful"
+  :added "2024-04-10"
+  :emacs>= 25
+  :ensure t
+  :custom ((counsel-describe-function-function . #'helpful-callable)
+           (counsel-describe-variable-function . #'helpful-variable))
+  :bind  (("C-h f" . helpful-callable)
+          ("C-h v" . helpful-variable)
+          ("C-h k" . helpful-key)
+          ("C-h x" . helpful-command)
+          ("C-c C-d" . helpful-at-point)))
+
+
 (leaf pulsar
   :doc "Pulse highlight on demand or after select functions"
   :req "emacs-27.1"
@@ -551,7 +568,6 @@
   :ensure t
   :custom ((python-indent-guess-indent-offset . t)
            (python-indent-guess-indent-offset-verbose . nil))
-
   :init
   (leaf lsp-python-ms
     :doc "The lsp-mode client for Microsoft python-language-server"
