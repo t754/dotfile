@@ -214,6 +214,47 @@
   (load-theme 'doom-nord t)
   (doom-themes-org-config))
 
+(leaf dimmer
+  :doc "Visually highlight the selected buffer"
+  :req "emacs-25.1"
+  :tag "editing" "faces" "emacs>=25.1"
+  :url "https://github.com/gonewest818/dimmer.el"
+  :added "2024-04-11"
+  :emacs>= 25.1
+  :ensure t
+  :global-minor-mode dimmer-mode)
+
+(leaf indent-guide
+  :doc "show vertical lines to guide indentation"
+  :url "http://hins11.yu-yake.com/"
+  :added "2024-04-11"
+  :ensure t
+  :global-minor-mode indent-guide-global-mode)
+
+(leaf nerd-icons
+  :doc "Emacs Nerd Font Icons Library"
+  :req "emacs-24.3"
+  :tag "lisp" "emacs>=24.3"
+  :url "https://github.com/rainstormstudio/nerd-icons.el"
+  :added "2024-04-11"
+  :emacs>= 24.3
+  :ensure t
+  :init
+  (leaf ibuffer
+    :doc "operate on buffers like dired"
+    :tag "builtin"
+    :added "2024-04-11"
+    :bind ("C-x C-b" . ibuffer))
+  (leaf nerd-icons-ibuffer
+    :doc "Display nerd icons in ibuffer"
+    :req "emacs-24.3" "nerd-icons-0.0.1"
+    :tag "ibuffer" "icons" "convenience" "emacs>=24.3"
+    :url "https://github.com/seagle0128/nerd-icons-ibuffer"
+    :added "2024-04-11"
+    :emacs>= 24.3
+    :ensure t
+    :hook (ibuffer-mode-hook . nerd-icons-ibuffer-mode)
+    :custom ((inhibit-compacting-font-caches . t))))
 (leaf flycheck
   :doc "On-the-fly syntax checking"
   :emacs>= 24.3
@@ -582,6 +623,19 @@
   (setq read-process-output-max 10240)
   (setq gc-cons-threshold  (* 1024 1024 10)))
 
+
+(leaf ivy
+  :doc "Incremental Vertical completYon"
+  :req "emacs-24.5"
+  :tag "matching" "emacs>=24.5"
+  :url "https://github.com/abo-abo/swiper"
+  :added "2024-04-11"
+  :emacs>= 24.5
+  :ensure t
+  :custom ((ivy-use-virtual-buffers . t))
+  :global-minor-mode ivy-mode
+  :bind (("C-h b" .  counsel-descbinds)))
+
 (leaf consult
   :doc "Consulting completing-read"
   :req "emacs-26.1"
@@ -693,7 +747,6 @@
          ("M-#" . consult-register-load)
          ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
          ("C-M-#" . consult-register)
-         ("C-x C-b" . consult-buffer)
          ("C-x C-r" . consult-recent-file)
          ("C-x b" . consult-buffer)
          ("M-s f" . consult-find)
@@ -732,7 +785,6 @@
   :url "https://github.com/oantolin/embark"
   :emacs>= 26.1
   :ensure t
-  :bind (("C-h b" . embark-bindings))
   :init
   (leaf embark-consult
     :doc "Consult integration for Embark"
