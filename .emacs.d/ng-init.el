@@ -382,16 +382,6 @@
   :emacs>= 24
   :ensure t)
 
-(leaf find-file-in-project
-  :doc "Find file/directory and review Diff/Patch/Commit efficiently everywhere"
-  :req "ivy-0.10.0" "emacs-24.4"
-  :tag "convenience" "project" "emacs>=24.4"
-  :added "2020-10-30"
-  :url "https://github.com/technomancy/find-file-in-project"
-  :emacs>= 24.4
-  :ensure t
-  :after ivy
-  :bind (("C-M-o" . find-file-in-project)))
 
 (leaf projectile
   :doc "Manage and navigate projects in Emacs easily"
@@ -537,15 +527,6 @@
     :ensure t
     :after org-roam websocket))
 
-
-;; (leaf color-theme-sanityinc-tomorrow
-;;   :doc "A version of Chris Kempson's \"tomorrow\" themes"
-;;   :tag "themes" "faces"
-;;   :added "2020-11-04"
-;;   :url "https://github.com/purcell/color-theme-sanityinc-tomorrow"
-;;   :ensure t
-;;   :config (load-theme 'sanityinc-tomorrow-night t))
-
 (leaf my/scratch
   :defun my/make-scratch
   :hook
@@ -656,30 +637,9 @@
             ([remap xref-find-references]  . #'lsp-ui-peek-find-references)))
     :after lsp-mode markdown-mode)
   
-  (leaf lsp-ivy
-    :doc "LSP ivy integration"
-    :req "emacs-25.1" "dash-2.14.1" "lsp-mode-6.2.1" "ivy-0.13.0"
-    :tag "debug" "languages" "emacs>=25.1"
-    :added "2020-12-10"
-    :url "https://github.com/emacs-lsp/lsp-ivy"
-    :emacs>= 25.1
-    :ensure t
-    :after lsp-mode ivy)
   (setq read-process-output-max 10240)
   (setq gc-cons-threshold  (* 1024 1024 10)))
 
-
-(leaf ivy
-  :doc "Incremental Vertical completYon"
-  :req "emacs-24.5"
-  :tag "matching" "emacs>=24.5"
-  :url "https://github.com/abo-abo/swiper"
-  :added "2024-04-11"
-  :emacs>= 24.5
-  :ensure t
-  :custom ((ivy-use-virtual-buffers . t))
-  :global-minor-mode ivy-mode
-  :bind (("C-h b" .  counsel-descbinds)))
 
 (leaf consult
   :doc "Consulting completing-read"
@@ -775,11 +735,7 @@
    consult--source-recent-file
    consult--source-project-recent-file
    )
-  ;; (setq consult-project-root-function
-  ;;       (lambda ()
-  ;;         (when-let (project (project-current))
-  ;;           (car (project-roots project)))))
-  ;; :global-minor-mode consult-mode
+
   :bind (
          ("C-c h" . consult-history)
          ("C-c m" . consult-mode-command)
