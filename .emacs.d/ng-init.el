@@ -380,6 +380,27 @@
   :added "2024-04-12"
   :require t)
 
+(leaf diff-hl
+  :doc "Highlight uncommitted changes using VC"
+  :req "cl-lib-0.2" "emacs-25.1"
+  :tag "diff" "vc" "emacs>=25.1"
+  :url "https://github.com/dgutov/diff-hl"
+  :added "2024-04-12"
+  :emacs>= 25.1
+  :ensure t
+  :global-minor-mode global-diff-hl-mode)
+
+(leaf format-all
+  :doc "Auto-format C, C++, JS, Python, Ruby and 50 other languages"
+  :req "emacs-24.4" "inheritenv-0.1" "language-id-0.20"
+  :tag "util" "languages" "emacs>=24.4"
+  :url "https://github.com/lassik/emacs-format-all-the-code"
+  :added "2024-04-12"
+  :emacs>= 24.4
+  :ensure t
+  :after inheritenv language-id
+  :hook prog-mode-hook)
+
 (leaf pcre2el
   :doc "regexp syntax converter"
   :req "emacs-24" "cl-lib-0.3"
