@@ -82,22 +82,29 @@
 ;; |アイウ エオカ|
 ;; |ｱｲｳｴｵｶ ｷｸｹｺｻｼ|
 
-(leaf fonts
-  :defun my/configure-font
-  :preface
-  (defun my/configure-font (frame)
-    (interactive)
-    (when (display-graphic-p frame)
-      (let* ((family "Cica")
-             (fontspec (font-spec :family family :weight 'normal))
-             (fsize 12))
-        (setq use-default-font-for-symbols nil)
-        (add-to-list 'default-frame-alist '(font . (concat family "-" (number-to-string fsize))))
-        (set-fontset-font "fontset-default" 'unicode family)
-        (set-face-attribute 'default nil :family "monospace" :height (* fsize 10)))
-      (remove-hook 'after-make-frame-functions #'my/configure-font)))
-  :hook
-  (after-make-frame-functions . my/configure-font))
+(leaf fontaine
+  :doc "Set font configurations using presets"
+  :req "emacs-27.1"
+  :tag "emacs>=27.1"
+  :url "https://git.sr.ht/~protesilaos/fontaine"
+  :added "2024-04-15"
+  :emacs>= 27.1
+  :ensure t
+  :custom ((fontaine-presets .
+                             '((regular
+                                :default-family "Cica"
+                                :default-height 120
+                                :fixed-pitch-family "Cica"
+                                :variable-pitch-family "Noto Sans"
+                                :italic-family "Source Code Pro"
+                                :line-spacing 1)
+                               (large
+                                :default-family "Cica"
+                                :default-height 150
+                                :variable-pitch-family "Noto Sans"
+                                :line-spacing 1))))
+  :config
+  (fontaine-set-preset 'regular))
 
 
 
