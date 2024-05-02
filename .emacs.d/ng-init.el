@@ -109,7 +109,7 @@
   :config
   (run-at-time nil (* 5 60) 'recentf-save-list)
   (defalias 'yes-or-no-p 'y-or-n-p)
-  (setq use-short-answers t))
+  (setopt use-short-answers t))
 
 
 (leaf dired
