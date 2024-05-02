@@ -3,8 +3,8 @@ Description=Emacs: the extensible, self-documenting text editor
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/emacs --fg-daemon
-ExecStop=/usr/local/bin/emacsclient --eval "(kill-emacs)"
+ExecStart=/usr/bin/emacs --fg-daemon
+ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
 
 Environment=LC_ALL=ja_JP.UTF-8
 Environment=XMODIFIERS=@im=fcitx
