@@ -3,10 +3,14 @@ alias ls='ls -x -v --color=auto'
 alias ll='ls -la'
 alias la='ls -a'
 alias starte='emacs --daemon'
-alias e="emacsclient -c -n"
-alias et="emacsclient -t -n"
-alias enox="emacsclient -nw"
-alias en="emacsclient"
+
+export emacsc="emacsclient"
+export EDITOR="$emacsc"
+
+alias e="$emacsc -c -n"
+alias et="$emacsc -t -n"
+alias enox="$emacsc -nw"
+alias en="$emacsc"
 alias E='SUDO_EDITOR="emacsclient -c" sudo -e '
 alias Enox='SUDO_EDITOR="emacsclient -nw " sudo -e '
 alias En='SUDO_EDITOR="emacsclient  " sudo -e '
@@ -20,6 +24,7 @@ alias open="mimeopen"
 alias feh="feh -."
 alias sudo='sudo '
 
+# alias akamai='docker run -it -v $HOME/.edgerc:/root/.edgerc:ro akamai/shell akamai'
 
 # if [[ -x "$(which bundle 2>/dev/null)" ]] ; then
 #     function rails (){
@@ -115,46 +120,14 @@ function route () {
   echo 'Use `ip r`'
 }
 
-function cdd {
-    local dir=$( find . -maxdepth 1 -type d | sed  -e '1d' -e 's;\./;;' | sort | sed -e '$a..\n.' | peco --query "$READLINE_LINE" --initial-filter Migemo)
-    if [ ! -z "$dir" ] ; then
-        cd "$dir"
+function ghq_cd() {
+    local ghq_root="$(ghq root)"
+    local selected_dir="$(ghq list | fzf --no-multi --exit-0 --preview='ls -FA1 '${ghq_root}/'{}')"
+    local res="${ghq_root}/$selected_dir"
+    if [ -d "$res" ]; then
+         cd "$res"
     fi
 }
-
-function peco-ssh() {
-  local SSH=$(\grep "^\s*Host " ~/.ssh/config | sed s/"[\s ]*Host "// | \grep -v "^\*$" | sort | peco)
-  ssh $SSH
-}
-
-function google() {
-    local str opt
-    if [ $# != 0 ]; then
-        for i in $*; do
-            # $strが空じゃない場合、検索ワードを+記号でつなぐ(and検索)
-            str="$str${str:++}$i"
-        done
-        opt='search?num=100'
-        opt="${opt}&q=${str}"
-    fi
-    xdg-open http://www.google.co.jp/$opt
-}
-
-function ghq-peco() {
-    local selected_dir=$(ghq list -p | peco --query "$*")
-    if [ -d "$selected_dir" ]; then
-        cd $selected_dir
-    fi
-}
-function hg-peco() {
-    local selected_dir=$(hg locate | peco --query "$READLINE_LINE")
-    if [ -n "$selected_dir" ]; then
-        cd $(dirname $selected_dir)
-    fi
-}
-
-
-
 
 
 function parse_git_branch() {
@@ -191,31 +164,30 @@ function colors() {
 
 
 
-# function peco-select-history () {
-#     # declare l=$(HISTTIMEFORMAT= buildin histoy | \
-# 	# 					sort -k1,1r | \
-# 	# 					perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; ' | \
-# 	# 					peco --query "$READLINE_LINE")
-#     # READLINE_LINE="$l"
-#     # READLINE_POINT=${#l}
-# }
-
-
-
 
 function j() {
-    if [ $# -eq 0 ] ; then
-        local ccc
-        ccc="$(z  | tac | awk '{for(i=2;i<NF;i++){printf("%s ",$i)}print $NF}'  | peco)"
-        echo cd "$ccc"
-        cd -- "$ccc"
-    else
-        z $*
-    fi
+    [ $# -gt 0 ] && fasd_cd -d "$*" && return
+    local dir
+    dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
 }
-function lll() {
-    ls -a1t | tail -n +3 | peco
+
+# fh - repeat history
+runcmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, <>' ; }
+
+fh() {
+  HISTTIMEFORMAT=""
+  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | runcmd
 }
+
+# fhe - repeat history edit
+writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
+
+fhe() {
+  HISTTIMEFORMAT=""
+  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | writecmd
+}
+
+
 function man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
@@ -298,6 +270,11 @@ function alias_completion {
     source "$tmp_file" && rm -f "$tmp_file"
 }; alias_completion
 
+
+complete -F _filedir_xspec e
+complete -F _filedir_xspec et
+complete -F _filedir_xspec enox
+complete -F _filedir_xspec en
 
 function ips ()
 {
@@ -580,72 +557,6 @@ fi
 }
 
 
-### ------------------------------------------------
-### hg
-function hg_dirty() {
-    hg status --no-color 2> /dev/null \
-    | awk '$1 == "?" { print "?" } $1 != "?" { print "!" }' \
-    | sort | uniq | head -c1
-}
-
-function peco-run(){
-    function _peco_run(){       # clone dmenu_path
-        cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
-        if [ -d "$cachedir" ]; then
-	        cache=$cachedir/dmenu_run
-        else
-	        cache=$HOME/.dmenu_cache # if no xdg dir, fall back to dotfile in ~
-        fi
-        IFS=:
-        if stest -dqr -n "$cache" $PATH; then
-	        stest -flx $PATH | sort -u | tee "$cache"
-        else
-	        cat "$cache"
-        fi
-    }
-    local selected=$(_peco_run | peco | tail -1)
-    nohup ${selected} &
-}
-
-function _alc(){
-    if [ $# -le 1 ] ; then
-       return
-    fi
-    local dicPath
-    dicPath=$1
-    shift
-    ag  --nonumbers "^$*" ${dicPath} | peco --initial-filter CaseSensitive --query "$*" | sed -e 's/[●¥]/\n/g' -e 's@/// @\n\n@' -e 's/◆/ ◆ /g'
-}
-function _alc2(){
-    if [ $# -le 1 ] ; then
-       return
-    fi
-	local dicPath
-	local dicPath2
-	dicPath=$1
-	dicPath2=/tmp/"$(basename ${dicPath})"
-	if [[ ! -e ${dicPath2} ]] ; then
-		cp "${dicPath}" "${dicPath2}"
-	fi
-	shift
-    peco --initial-filter CaseSensitive --query "$*" "${dicPath2}" | sed -e 's/[●¥]/\n/g' -e 's@/// @\n\n@' -e 's/◆/ ◆ /g'
-}
-
-
-function alcw(){
-    _alc ~/Dropbox/eijiroDIC/waeiji98.txt "$*"
-}
-function alcw2(){
-    _alc2 ~/Dropbox/eijiroDIC/waeiji98.txt "$*"
-}
-
-
-function alce(){
-    _alc ~/Dropbox/eijiroDIC/eijiro98.txt "$*"
-}
-function alce2(){
-    _alc2 ~/Dropbox/eijiroDIC/eijiro98.txt "$*"
-}
 
 function jsay() {
     # open_jtalk でしゃべらす

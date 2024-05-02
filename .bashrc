@@ -70,7 +70,7 @@ if type akamai >/dev/null 2>&1; then
     eval "$(akamai --bash)"
 fi
 
-
+[[ -x "$(which direnv 2>/dev/null)" ]] && eval "$(direnv hook bash)"
 if type luarocks >/dev/null 2>&1; then
     eval "$(luarocks path --bin)"
 fi
@@ -98,7 +98,6 @@ fi
 [[ -r "$HOME/google-cloud-sdk/completion.bash.inc" ]] && source "$HOME/google-cloud-sdk/completion.bash.inc"
 [[ -r "$HOME/lib/azure-cli/az.completion" ]] && source "$HOME/lib/azure-cli/az.completion"
 [[ -r "$HOME/.bashrc.local.bash" ]] && source "$HOME/.bashrc.local.bash"
-[[ -r "$HOME/.fzf.bash" ]] && source "$HOME/.fzf.bash"
 
 export HISTTIMEFORMAT="%Y-%m-%dT%H:%M:%S "
 if which npm &> /dev/null ; then
@@ -125,11 +124,19 @@ fi
 
 export powerlineShellPath="$(ghq list -p | grep 'milkbikis/powerline-shell')"
 export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 --mode ${POWERSHELL_MODE} --shell bash"
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 
 railsComp="$(ghq list -p | grep 'jweslley/rails_completion')"
 [[ -d $railsComp  ]] && source $railsComp"/rails.bash"
 
-[[ -x "$(which fasd 2>/dev/null)" ]] && eval "$(fasd --init auto)"
+if [[ -x "$(which fasd 2>/dev/null)" ]] ; then
+    eval "$(fasd --init auto)"
+    __fasd_cmd_list=("f" "d")
+    for c in "${__fasd_cmd_list[@]}" ; do
+        unalias "${c}"
+        complete -r "${c}"
+    done
+fi
 [[ -x "$(which kubectl 2>/dev/null)" ]] && source <(kubectl completion bash)
 [[ -x "$(which helm 2>/dev/null)" ]] && source <(helm completion bash)
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
@@ -146,8 +153,6 @@ fi
 complete -cf sudo
 complete -cf man
 
-function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
-trap EC ERR
 
 # source ~/.ghq/github.com/arialdomartini/oh-my-git/prompt.sh
 
@@ -155,10 +160,16 @@ peco() {
     fzf +s
 }
 
-
+if command -v fzf 1>/dev/null 2>&1; then
+    eval "$(fzf --bash)"
+fi
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+if command -v rye 1>/dev/null 2>&1; then
+  source "$HOME/.rye/env"
+fi
+
 # [[ -x "$(which pyenv 2>/dev/null)" ]] && ( eval "$(pyenv init -)" ; echo "aaaa" )
 
 #Load pyenv virtualenv if the virtualenv plugin is installed.
@@ -169,9 +180,10 @@ fi
 
 [ -f $HOME/.complete_bundle_exec.sh ] && source $HOME/.complete_bundle_exec.sh
 [ -f $HOME/.complete_bundle_exec.sh ] && complete -C $HOME/bin/terraform terraform
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f $HOME/.bashrc.local ] && source $HOME/.bashrc.local
-
+if [[ -f $HOME/.local/share/blesh/ble.sh ]] ; then
+    source $HOME/.local/share/blesh/ble.sh
+fi
 if [[ -d $HOME/Android/Sdk ]] ; then
     export ANDROID_HOME=$HOME/Android/Sdk
     export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
@@ -190,6 +202,9 @@ case $HOSTNAME in
     ;;
     *tam*)
         export BASH_IT_THEME='doubletime'
+    ;;
+    *work*)
+        export BASH_IT_THEME="powerline-multiline"
     ;;
     *)
         export BASH_IT_THEME='bobby'
@@ -248,3 +263,5 @@ export SCM_CHECK=true
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+function EC() { echo -e '\e[1;33m'code $?'\e[m'; }
+trap EC ERR

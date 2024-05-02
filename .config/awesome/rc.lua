@@ -10,6 +10,7 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
+-- local naughty = require("naughty")
 local menubar = require("menubar")
 
 -- Freedesktop integration
@@ -21,7 +22,7 @@ local menubar = require("menubar")
 local vicious = require("vicious")
 -- to create shortcuts help screen
 
-local ror = require("aweror")
+-- local ror = require("aweror")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
 
@@ -915,6 +916,22 @@ awful.rules.rules = {
                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
 
    } },
+   {
+    -- https://itakeshi.hatenablog.com/entry/2021/08/20/180414
+    rule = { class = "zoom", type = "normal", name = "zoom" },
+    properties = { focus = false, focusable = false, floating = true },
+    callback = function(c)
+      f = function(_c)
+        _c:disconnect_signal("property::name", f)
+        if _c.name ~= "zoom" then
+          _c.focus = false
+          _c.focusable = true
+          _c.floating = false
+        end
+      end
+      c:connect_signal("property::name", f)
+    end
+   },
    { rule = { class = "gimp" },
      properties = { floating = true } },
    { rule = { class = "Firefox" },

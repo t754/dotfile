@@ -1,7 +1,8 @@
 ;;; package --- Summary
 
 ;;; Commentary:
-
+(defconst my/saved-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
 ;;; Code:
 (eval-and-compile
   (customize-set-variable
@@ -48,23 +49,24 @@
   :config
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>")))
 
-(leaf my/font
-  :preface
-  (defun font-available-p (font-name)
-    (find-font (font-spec :name font-name)))
-  :config
-  (setq default-frame-alist '((font . "Cica-12")))
-  (set-fontset-font "fontset-default" 'unicode "Noto Color Emoji" nil 'prepend)
-  ;; 日本語 | 🍣
-  (cond
-   ((font-available-p "Cica")
-    (set-frame-font "Cica-12"))
-   ((font-available-p "Cascadia Code")
-    (set-frame-font "Cascadia Code-12"))
-   ((font-available-p "Menlo")
-    (set-frame-font "Menlo-12"))
-   ((font-available-p "Inconsolata")
-    (set-frame-font "Inconsolata-12"))))
+
+;; (leaf my/font
+;;   :preface
+;;   (defun font-available-p (font-name)
+;;     (find-font (font-spec :name font-name)))
+;;   :config
+;;   (setq default-frame-alist '((font . "Cica-12")))
+;;   (set-fontset-font "fontset-default" 'unicode "Noto Color Emoji" nil 'prepend)
+;;   ;; 日本語 | 🍣
+;;   (cond
+;;    ((font-available-p "Cica")
+;;     (set-frame-font "Cica-12"))
+;;    ((font-available-p "Cascadia Code")
+;;     (set-frame-font "Cascadia Code-12"))
+;;    ((font-available-p "Menlo")
+;;     (set-frame-font "Menlo-12"))
+;;    ((font-available-p "Inconsolata")
+;;     (set-frame-font "Inconsolata-12"))))
 
 (leaf my/window
   :hook (after-make-frame-functions
@@ -81,8 +83,54 @@
   :custom `((custom-file  . ,(locate-user-emacs-file "custom.el"))))
 
 
+
 (leaf ssh
   :custom ((tramp-default-method  . "ssh")))
+
+
+;; initial-frame-alist '((font . "Cica-13.5"))
+;; default-frame-alist '((font . "Cica-13.5"))
+
+;; |012345 678910|
+;; |abcdef ghijkl|
+;; |ABCDEF GHIJKL|
+;; |αβγδεζ ηθικλμ|
+;; |ΑΒΓΔΕΖ ΗΘΙΚΛΜ|
+;; |∩∪∞≤≥∏ ∑∫×±⊆⊇|
+;; |'";:-+ =/\~`?|
+;; |日本語 の美観|
+;; |あいう えおか|
+;; |アイウ エオカ|
+;; |ｱｲｳｴｵｶ ｷｸｹｺｻｼ|
+
+(leaf fontaine
+  :doc "Set font configurations using presets"
+  :req "emacs-27.1"
+  :tag "emacs>=27.1"
+  :url "https://git.sr.ht/~protesilaos/fontaine"
+  :added "2024-04-15"
+  :emacs>= 27.1
+  :ensure t
+  :custom ((fontaine-presets .
+                             '((regular
+                                :default-family "Cica"
+                                :default-height 120
+                                :fixed-pitch-family "Cica"
+                                :variable-pitch-family "Noto Sans"
+                                :italic-family "Source Code Pro"
+                                :line-spacing 1)
+                               (large
+                                :default-family "Cica"
+                                :default-height 150
+                                :variable-pitch-family "Noto Sans"
+                                :line-spacing 1))))
+  :config
+  (fontaine-set-preset 'regular))
+
+
+
+
+
 (leaf cus-start
   :doc "define customization properties of builtins"
   :tag "builtin" "internal"
@@ -103,6 +151,7 @@
            (abbrev-file-name . "~/.emacs.d/abbrev_defs")
            (recentf-max-saved-items . 2000)
            (recentf-auto-cleanup . 10)
+           (use-short-answers . t)
            )
   :init
   (recentf-mode 1)
@@ -110,6 +159,7 @@
   (run-at-time nil (* 5 60) 'recentf-save-list)
   (defalias 'yes-or-no-p 'y-or-n-p)
   (setopt use-short-answers t))
+
 
 
 (leaf dired
@@ -142,20 +192,6 @@
   :ensure t
   :init
   (exec-path-from-shell-copy-envs '("MANPATH" "PATH" "GOROOT" "GOPATH" )))
-
-(leaf beacon
-  :doc "Highlight the cursor whenever the window scrolls"
-  :req "seq-2.14"
-  :tag "convenience"
-  :added "2020-10-24"
-  :url "https://github.com/Malabarba/beacon"
-  :ensure t
-  :defun beacon--blink-on-focus
-  :global-minor-mode t
-  :custom ((beacon-blink-when-focused . t))
-  :init   (add-function :after after-focus-change-function
-                        (lambda ()
-                          (beacon--blink-on-focus))))
 
 (leaf paren
   :doc "highlight matching paren"
@@ -195,6 +231,83 @@
   :tag "builtin"
   :custom ((auto-revert-interval . 0.1))
   :global-minor-mode global-auto-revert-mode)
+
+(leaf doom-themes
+  :doc "an opinionated pack of modern color-themes"
+  :req "emacs-25.1" "cl-lib-0.5"
+  :tag "faces" "themes" "emacs>=25.1"
+  :url "https://github.com/doomemacs/themes"
+  :added "2024-04-10"
+  :emacs>= 25.1
+  :ensure t
+  :config
+  (load-theme 'doom-nord t)
+  (doom-themes-org-config))
+
+(leaf dimmer
+  :doc "Visually highlight the selected buffer"
+  :req "emacs-25.1"
+  :tag "editing" "faces" "emacs>=25.1"
+  :url "https://github.com/gonewest818/dimmer.el"
+  :added "2024-04-11"
+  :emacs>= 25.1
+  :ensure t
+  :global-minor-mode dimmer-mode)
+
+(leaf indent-guide
+  :doc "show vertical lines to guide indentation"
+  :url "http://hins11.yu-yake.com/"
+  :added "2024-04-11"
+  :ensure t
+  :global-minor-mode indent-guide-global-mode)
+
+(leaf nerd-icons
+  :doc "Emacs Nerd Font Icons Library"
+  :req "emacs-24.3"
+  :tag "lisp" "emacs>=24.3"
+  :url "https://github.com/rainstormstudio/nerd-icons.el"
+  :added "2024-04-11"
+  :emacs>= 24.3
+  :ensure t
+  :init
+  (leaf ibuffer
+    :doc "operate on buffers like dired"
+    :tag "builtin"
+    :added "2024-04-11"
+    :bind ("C-x C-b" . ibuffer))
+  (leaf nerd-icons-ibuffer
+    :doc "Display nerd icons in ibuffer"
+    :req "emacs-24.3" "nerd-icons-0.0.1"
+    :tag "ibuffer" "icons" "convenience" "emacs>=24.3"
+    :url "https://github.com/seagle0128/nerd-icons-ibuffer"
+    :added "2024-04-11"
+    :emacs>= 24.3
+    :ensure t
+    :hook (ibuffer-mode-hook . nerd-icons-ibuffer-mode)
+    :custom ((inhibit-compacting-font-caches . t)))
+
+  (leaf dirvish
+    :doc "A modern file manager based on dired mode"
+    :req "emacs-27.1" "transient-0.3.7"
+    :tag "convenience" "files" "emacs>=27.1"
+    :url "https://github.com/alexluigit/dirvish"
+    :added "2024-04-11"
+    :emacs>= 27.1
+    :ensure t
+    :global-minor-mode dirvish-override-dired-mode dirvish-peek-mode
+    :custom '(
+              (dirvish-mode-line-format . '(:left (sort file-time " " file-size symlink) :right (omit yank index)))
+              (dirvish-header-line-format . '(:left (path) :right (free-space)))
+              (dirvish-mode-line-height . 10)
+              (dirvish-attributes . '(nerd-icons file-time file-size collapse subtree-state vc-state git-msg))
+              ;; (dirvish-subtree-state-style . 'arrow)
+              (delete-by-moving-to-trash . t)
+              ;; (dirvish-path-separators . '(
+              ;;                              ,(format "  %s " (nerd-icons-codicon "nf-cod-home"))
+              ;;                              ,(format "  %s " (nerd-icons-codicon "nf-cod-root_folder"))
+              ;;                              ,(format " %s " (nerd-icons-faicon "nf-fa-angle_right"))))
+              (dired-listing-switches .  "-l --almost-all --human-readable --group-directories-first --no-group")
+              )))
 
 (leaf flycheck
   :doc "On-the-fly syntax checking"
@@ -244,6 +357,39 @@
            (company-transformers . '(company-sort-by-occurrence)))
   :global-minor-mode global-company-mode)
 
+
+(leaf helpful
+  :doc "A better *help* buffer"
+  :req "emacs-25" "dash-2.18.0" "s-1.11.0" "f-0.20.0" "elisp-refs-1.2"
+  :tag "lisp" "help" "emacs>=25"
+  :url "https://github.com/Wilfred/helpful"
+  :added "2024-04-10"
+  :emacs>= 25
+  :ensure t
+  :custom ((counsel-describe-function-function . #'helpful-callable)
+           (counsel-describe-variable-function . #'helpful-variable))
+  :bind  (("C-h f" . helpful-callable)
+          ("C-h v" . helpful-variable)
+          ("C-h k" . helpful-key)
+          ("C-h x" . helpful-command)
+          ("C-c C-d" . helpful-at-point)))
+
+
+(leaf pulsar
+  :doc "Pulse highlight on demand or after select functions"
+  :req "emacs-27.1"
+  :tag "highlight" "pulse" "convenience" "emacs>=27.1"
+  :url "https://git.sr.ht/~protesilaos/pulsar"
+  :added "2024-04-10"
+  :emacs>= 27.1
+  :ensure t
+  :custom ((pulsar-pulse . t)
+           (pulsar-delay . 0.055)
+           (pulsar-iterations . 10)
+           (pulsar-face . 'pulsar-magenta)
+           (pulsar-highlight-face . 'pulsar-yellow))
+  :global-minor-mode pulsar-global-mode)
+
 (leaf magit
   :doc "A Git porcelain inside Emacs."
   :req "emacs-25.1" "async-20200113" "dash-20200524" "git-commit-20200516" "transient-20200601" "with-editor-20200522"
@@ -253,6 +399,32 @@
   :ensure t
   ;; :after git-commit with-editor
   :bind (("C-x g" . magit-status)))
+(leaf vc
+  :doc "drive a version-control system from within Emacs"
+  :tag "builtin"
+  :added "2024-04-12"
+  :require t)
+
+(leaf diff-hl
+  :doc "Highlight uncommitted changes using VC"
+  :req "cl-lib-0.2" "emacs-25.1"
+  :tag "diff" "vc" "emacs>=25.1"
+  :url "https://github.com/dgutov/diff-hl"
+  :added "2024-04-12"
+  :emacs>= 25.1
+  :ensure t
+  :global-minor-mode global-diff-hl-mode)
+
+(leaf format-all
+  :doc "Auto-format C, C++, JS, Python, Ruby and 50 other languages"
+  :req "emacs-24.4" "inheritenv-0.1" "language-id-0.20"
+  :tag "util" "languages" "emacs>=24.4"
+  :url "https://github.com/lassik/emacs-format-all-the-code"
+  :added "2024-04-12"
+  :emacs>= 24.4
+  :ensure t
+  :after inheritenv language-id
+  :hook prog-mode-hook)
 
 (leaf pcre2el
   :doc "regexp syntax converter"
@@ -263,16 +435,18 @@
   :emacs>= 24
   :ensure t)
 
-(leaf find-file-in-project
-  :doc "Find file/directory and review Diff/Patch/Commit efficiently everywhere"
-  :req "ivy-0.10.0" "emacs-24.4"
-  :tag "convenience" "project" "emacs>=24.4"
-  :added "2020-10-30"
-  :url "https://github.com/technomancy/find-file-in-project"
-  :emacs>= 24.4
+
+(leaf projectile
+  :doc "Manage and navigate projects in Emacs easily"
+  :req "emacs-25.1"
+  :tag "convenience" "project" "emacs>=25.1"
+  :url "https://github.com/bbatsov/projectile"
+  :added "2023-10-06"
+  :emacs>= 25.1
   :ensure t
-  :after ivy
-  :bind (("C-M-o" . find-file-in-project)))
+  :bind ((projectile-mode-map ("C-c p" . projectile-command-map)))
+  :config
+  (projectile-mode +1))
 
 (leaf avy
   :doc "Jump to arbitrary positions in visible text and select text quickly."
@@ -290,7 +464,17 @@
   :tag "emulation" "convenience"
   :added "2020-12-27"
   :url "http://github.com/joaotavora/yasnippet"
-  :ensure t)
+  :ensure t
+  :defun yas-reload-all
+  ;; :hook (prog-mode-hook . #'yas-minor-mode)
+  ;; :global-minor-mode yas-minor-mode
+  :hook (after-init . yas-global-mode)
+  :bind ((yas-minor-mode-map
+          ("C-c i n" . yas-new-snippet)
+          ("C-c i v" . yas-visit-snippet-file)
+          ("C-c i i" . yas-insert-snippet)))
+  :config
+  (yas-reload-all))
 
 (leaf org
   :doc "Export Framework for Org Mode"
@@ -322,6 +506,10 @@
         entry (file "~/org/work.org")
         "* %?\n %T\n %i\n"
         :empty-lines 1)
+       ("t" "todo-work"
+        entry
+        (file+headline "~/org/work.org" "tasks")
+        "** TODO %?\n  SCHEDULED: %^t\n ")
        ("d" "daily-template"
         entry
         (file+olp+datetree "daily.org")
@@ -332,6 +520,10 @@
         )))
     (org-archive-location . ,(format-time-string "%%s_archive_%Y::" (current-time)))
     (org-use-speed-commands . t)
+
+    (org-todo-keywords . '("TODO(t)" "DOING(g)" "WAITING(w)" "|" "DONE(d)"))
+    (org-log-done . 'note)
+    (org-tag-alist . '(("crypt" . ?c)))
     (org-refile-targets . '(("~/org/inbox.org" :maxlevel . 2)
                             ("~/org/daily.org" :level . 3)
                             ("~/org/hobby.org" :level . 2)))
@@ -347,10 +539,20 @@
   :init
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((python . t)))
+   '((python . t)
+     (shell . t)))
   (require 'org-protocol)
   (require 'org-id)
-  (org-crypt-use-before-save-magic)
+  (leaf org-crypt
+    :doc "Public Key Encryption for Org Entries"
+    :tag "builtin"
+    :added "2022-06-14"
+    :custom
+    (org-tags-exclude-from-inheritance . '("crypt"))
+    (org-crypt-key . nil)
+    (auto-save-default . nil)
+    :init
+    (org-crypt-use-before-save-magic))
   (leaf ox-gfm
     :doc "Github Flavored Markdown Back-End for Org Export Engine"
     :tag "github" "markdown" "wp" "org"
@@ -393,15 +595,41 @@
   (require 'org-roam-protocol)
   )
 
-
-
-(leaf color-theme-sanityinc-tomorrow
-  :doc "A version of Chris Kempson's \"tomorrow\" themes"
-  :tag "themes" "faces"
-  :added "2020-11-04"
-  :url "https://github.com/purcell/color-theme-sanityinc-tomorrow"
-  :ensure t
-  :config (load-theme 'sanityinc-tomorrow-night t))
+  (leaf org-journal
+    :doc "a simple org-mode based journaling mode"
+    :req "emacs-25.1" "org-9.1"
+    :tag "emacs>=25.1"
+    :url "http://github.com/bastibe/org-journal"
+    :added "2022-12-20"
+    :emacs>= 25.1
+    :ensure t
+    :after org
+    :bind (("C-c j" . org-journal-new-entry))
+    :custom `((org-journal-dir . ,(file-truename "~/org/roam"))
+              (org-journal-date-format . "%Y-%m-%d, %A")
+              (org-journal-time-format . "%R\n\n")
+              (org-journal-file-format . "%Y%m%d.org")
+              (org-journal-file-type . 'weekly)
+              ))
+  (leaf org-roam
+    :doc "A database abstraction layer for Org-mode"
+    :req "emacs-26.1" "dash-2.13" "org-9.4" "emacsql-3.0.0" "emacsql-sqlite-1.0.0" "magit-section-3.0.0"
+    :tag "convenience" "roam" "org-mode" "emacs>=26.1"
+    :url "https://github.com/org-roam/org-roam"
+    :added "2022-12-20"
+    :emacs>= 26.1
+    :ensure t
+    :after org emacsql emacsql-sqlite magit-section
+    :custom `((org-roam-directory . ,(file-truename "~/org/roam"))))
+  (leaf org-roam-ui
+    :doc "User Interface for Org-roam"
+    :req "emacs-27.1" "org-roam-2.0.0" "simple-httpd-20191103.1446" "websocket-1.13"
+    :tag "outlines" "files" "emacs>=27.1"
+    :url "https://github.com/org-roam/org-roam-ui"
+    :added "2022-12-20"
+    :emacs>= 27.1
+    :ensure t
+    :after org-roam websocket))
 
 (leaf my/scratch
   :defun my/make-scratch
@@ -454,7 +682,6 @@
   :ensure t
   :custom ((python-indent-guess-indent-offset . t)
            (python-indent-guess-indent-offset-verbose . nil))
-
   :init
   (leaf lsp-python-ms
     :doc "The lsp-mode client for Microsoft python-language-server"
@@ -495,18 +722,28 @@
   :ensure t
   :after spinner markdown-mode lv
   :custom ((lsp-log-io . t))
+  :defvar my/format-on-save
+  :hook (before-save-hook . (lambda ()
+                              ;; consider setproject-local variables on `.dir-locals.el`
+                              (when (intern-soft (concat "my/" (symbol-name 'format-on-save)))
+                                (lsp-format-buffer))))
   :init
-  (leaf lsp-ivy
-    :doc "LSP ivy integration"
-    :req "emacs-25.1" "dash-2.14.1" "lsp-mode-6.2.1" "ivy-0.13.0"
-    :tag "debug" "languages" "emacs>=25.1"
-    :added "2020-12-10"
-    :url "https://github.com/emacs-lsp/lsp-ivy"
-    :emacs>= 25.1
+  (leaf lsp-ui
+    :doc "UI modules for lsp-mode"
+    :req "emacs-26.1" "dash-2.18.0" "lsp-mode-6.0" "markdown-mode-2.3"
+    :tag "tools" "languages" "emacs>=26.1"
+    :added "2022-05-01"
+    :url "https://github.com/emacs-lsp/lsp-ui"
+    :emacs>= 26.1
     :ensure t
-    :after lsp-mode ivy)
+    :bind ((:lsp-ui-mode-map
+            ([remap xref-find-definitions] . #'lsp-ui-peek-find-definitions)
+            ([remap xref-find-references]  . #'lsp-ui-peek-find-references)))
+    :after lsp-mode markdown-mode)
+
   (setq read-process-output-max 10240)
   (setq gc-cons-threshold  (* 1024 1024 10)))
+
 
 (leaf consult
   :doc "Consulting completing-read"
@@ -522,11 +759,32 @@
   consult-bookmark consult-recent-file consult-xref
   consult--source-file consult--source-project-file consult--source-bookmark
   consult-project-root-function
+  consult--source-recent-file
+  consult--source-project-recent-file
+  consult-narrow-key
   :init
-  (setq register-preview-delay 0
+  (setq register-preview-delay 0.5
         register-preview-function #'consult-register-format)
   (advice-add #'register-preview :override #'consult-register-window)
-  
+
+  (leaf counsel-projectile
+    :doc "Ivy integration for Projectile"
+    :req "counsel-0.13.4" "projectile-2.5.0"
+    :tag "convenience" "project"
+    :url "https://github.com/ericdanan/counsel-projectile"
+    :added "2023-10-10"
+    :ensure t)
+
+  (leaf counsel-tramp
+    :doc "Tramp ivy interface for ssh, docker, vagrant"
+    :req "emacs-24.3" "counsel-0.10"
+    :tag "emacs>=24.3"
+    :url "https://github.com/masasam/emacs-counsel-tramp"
+    :added "2022-11-01"
+    :emacs>= 24.3
+    :ensure t
+    :custom (tramp-default-method . "ssh"))
+
   (leaf consult-ghq
     :doc "Ghq interface using consult"
     :req "emacs-26.1" "consult-0.8" "affe-0.1"
@@ -534,8 +792,7 @@
     :added "2021-06-18"
     :url "https://github.com/tomoya/consult-ghq"
     :emacs>= 26.1
-    :ensure t
-    :after consult affe)
+    :ensure t)
   (leaf orderless
     :doc "Completion style for matching regexps in any order"
     :req "emacs-24.4"
@@ -544,7 +801,8 @@
     :url "https://github.com/oantolin/orderless"
     :emacs>= 24.4
     :ensure t
-    :custom ((completion-styles . '(orderless))))
+    :custom ((completion-styles . '(orderless basic))
+             (completion-category-overrides . '((file (styles basic partial-completion))))))
 
   (leaf vertico
     :doc "VERTical Interactive COmpletion"
@@ -569,19 +827,29 @@
                                (marginalia-mode)
                                (savehist-mode))))
   :config
+  (setq consult-narrow-key "<")
   (consult-customize
-   consult-theme
-   :preview-key '(:debounce 0.2 any)
+   consult-theme :preview-key '(:debounce 0.2 any)
    consult-ripgrep consult-git-grep consult-grep
    consult-bookmark consult-recent-file consult-xref
-   consult--source-file consult--source-project-file consult--source-bookmark
-   :preview-key (kbd "M-."))
-  (setq consult-project-root-function
-        (lambda ()
-          (when-let (project (project-current))
-            (car (project-roots project)))))
+   consult--source-bookmark
+   consult--source-recent-file
+   consult--source-project-recent-file
+   :preview-key '(:debounce 0.4 any)
+   )
+
   :bind (
-         ("C-x C-b" . consult-buffer)
+         ("C-c h" . consult-history)
+         ("C-c m" . consult-mode-command)
+         ("C-c k" . consult-kmacro)
+         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ("M-#" . consult-register-load)
+         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+         ("C-M-#" . consult-register)
          ("C-x C-r" . consult-recent-file)
          ("C-x b" . consult-buffer)
          ("M-s f" . consult-find)
@@ -590,13 +858,30 @@
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
          ("M-s l" . consult-line)
-         ("C-s" . consult-line)
          ("M-s m" . consult-multi-occur)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
          ("M-y" . consult-yank-pop)
-         )
-  )
+         ("M-g e" . consult-compile-error)
+         ("M-g f" . consult-flymake)
+         ("M-g g" . consult-goto-line)             ;; orig. goto-line
+         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+         ("M-g o" . consult-outline)
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
+         (isearch-mode-map
+          ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+          ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+          ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+          ("M-s L" . consult-line-multi))
+         (minibuffer-local-map
+          ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+          ("M-r" . consult-history))
+         ))
+
+
 
 
 (leaf embark
@@ -607,7 +892,11 @@
   :url "https://github.com/oantolin/embark"
   :emacs>= 26.1
   :ensure t
-  :bind (("C-h b" . embark-bindings))
+  :bind (("C-h b" . (lambda () (interactive) (embark-bindings 4)))
+         ("C-h B" . embark-bindings)
+         ("C-." . embark-act)
+         ("C-;" . embark-dwim))
+  :custom ((prefix-help-command . #'embark-prefix-help-command))
   :init
   (leaf embark-consult
     :doc "Consult integration for Embark"
@@ -617,7 +906,7 @@
     :url "https://github.com/oantolin/embark"
     :emacs>= 25.1
     :ensure t
-    :after embark consult))
+    ))
 
 
 
@@ -648,9 +937,83 @@
   :emacs>= 24.3
   :ensure t)
 
+(leaf terraform-mode
+  :doc "Major mode for terraform configuration file"
+  :req "emacs-24.3" "hcl-mode-0.3" "dash-2.17.0"
+  :tag "emacs>=24.3"
+  :url "https://github.com/syohex/emacs-terraform-mode"
+  :added "2022-05-19"
+  :emacs>= 24.3
+  :ensure t
+  :after hcl-mode)
 
+(leaf jinja2-mode
+  :doc "A major mode for jinja2"
+  :added "2022-05-23"
+  :ensure t)
+(leaf php-mode
+  :doc "Major mode for editing PHP code"
+  :req "emacs-25.2"
+  :tag "php" "languages" "emacs>=25.2"
+  :url "https://github.com/emacs-php/php-mode"
+  :added "2023-02-06"
+  :emacs>= 25.2
+  :ensure t)
+(leaf xml-format
+  :doc "XML reformatter using xmllint"
+  :req "emacs-25" "reformatter-0.4"
+  :tag "languages" "emacs>=25"
+  :url "https://github.com/wbolster/emacs-xml-format"
+  :added "2023-05-19"
+  :emacs>= 25
+  :ensure t
+  :after reformatter)
+
+(leaf dashboard
+  :doc "A startup screen extracted from Spacemacs"
+  :req "emacs-26.1"
+  :tag "dashboard" "tools" "screen" "startup" "emacs>=26.1"
+  :url "https://github.com/emacs-dashboard/emacs-dashboard"
+  :added "2023-10-06"
+  :emacs>= 26.1
+  :ensure t
+  :hook (elpaca-after-init-hook . dashboard-insert-startupify-lists)
+  :hook (elpaca-after-init-hook . dashboard-initialize)
+  :defvar dashboard-projects-switch-function
+  :init
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+  (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
+  (dashboard-setup-startup-hook)
+  :custom ((dashboard-items . '((recents  . 5)
+                                (bookmarks . 5)
+                                (projects . 5)
+                                (agenda . 5)
+                                (registers . 5)))))
+
+(leaf editorconfig
+  :doc "EditorConfig Emacs Plugin"
+  :req "emacs-26.1" "nadvice-0.3"
+  :tag "editorconfig" "convenience" "emacs>=26.1"
+  :url "https://github.com/editorconfig/editorconfig-emacs#readme"
+  :added "2023-10-25"
+  :emacs>= 26.1
+  :ensure t
+  :defun editorconfig-mode
+  :config
+  (editorconfig-mode 1)
+  )
+
+(leaf ansible-vault
+  :doc "Minor mode for editing ansible vault files"
+  :req "emacs-24.3"
+  :tag "tools" "ansible-vault" "ansible" "emacs>=24.3"
+  :url "http://github.com/zellio/ansible-vault-mode"
+  :added "2023-12-08"
+  :emacs>= 24.3
+  :ensure t)
 (provide 'init)
 
+(setq file-name-handler-alist my/saved-file-name-handler-alist)
 ;; Local Variables:
 ;; byte-compile-warnings: (not cl-functions obsolete)
 ;; indent-tabs-mode: nil
