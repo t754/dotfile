@@ -946,6 +946,24 @@
   :added "2023-12-08"
   :emacs>= 24.3
   :ensure t)
+(leaf dockerfile-mode
+  :doc "Major mode for editing Docker's Dockerfiles"
+  :req "emacs-24"
+  :tag "tools" "processes" "languages" "docker" "emacs>=24"
+  :url "https://github.com/spotify/dockerfile-mode"
+  :added "2024-05-10"
+  :emacs>= 24
+  :ensure t)
+
+(leaf jsonnet-mode
+  :doc "Major mode for editing jsonnet files"
+  :req "emacs-24" "dash-2.17.0"
+  :tag "languages" "emacs>=24"
+  :url "https://github.com/mgyucht/jsonnet-mode"
+  :added "2024-04-22"
+  :emacs>= 24
+  :ensure t)
+
 (provide 'init)
 
 (setq file-name-handler-alist my/saved-file-name-handler-alist)
