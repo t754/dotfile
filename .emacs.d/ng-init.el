@@ -218,7 +218,7 @@
   :emacs>= 25.1
   :ensure t
   :config
-  (load-theme 'doom-nord t)
+  (load-theme 'doom-dark+ t)
   (doom-themes-org-config))
 
 (leaf dimmer
@@ -233,10 +233,12 @@
 
 (leaf indent-guide
   :doc "show vertical lines to guide indentation"
-  :url "http://hins11.yu-yake.com/"
+  :url "https://github.com/zk-phi/indent-guide/indent-guide.el"
   :added "2024-04-11"
   :ensure t
-  :global-minor-mode indent-guide-global-mode)
+  :global-minor-mode indent-guide-global-mode
+  :custom-face ((indent-guide-face . '((t (:foreground "#535353" :slant normal))))))
+
 
 (leaf nerd-icons
   :doc "Emacs Nerd Font Icons Library"
