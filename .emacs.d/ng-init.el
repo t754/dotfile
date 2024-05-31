@@ -310,6 +310,15 @@
     :config
     (flycheck-elsa-setup)))
 
+(leaf multiple-cursors
+  :doc "Multiple cursors for Emacs."
+  :req "cl-lib-0.5"
+  :tag "cursors" "editing"
+  :url "https://github.com/magnars/multiple-cursors.el"
+  :added "2024-04-22"
+  :ensure t
+  ;; :bind ("M-t M-t" . mc/edit-lines)
+  )
 (leaf company
   :doc "Modular text completion framework"
   :req "emacs-24.3"
