@@ -618,19 +618,18 @@
   :custom ((python-indent-guess-indent-offset . t)
            (python-indent-guess-indent-offset-verbose . nil))
   :init
-  (leaf lsp-python-ms
-    :doc "The lsp-mode client for Microsoft python-language-server"
-    :req "emacs-25.1" "lsp-mode-6.1"
-    :tag "tools" "languages" "emacs>=25.1"
-    :added "2020-12-16"
-    :url "https://github.com/emacs-lsp/lsp-python-ms"
-    :emacs>= 25.1
+  (leaf lsp-pyright
+    :doc "Python LSP client using Pyright"
+    :req "emacs-26.1" "lsp-mode-7.0" "dash-2.18.0" "ht-2.0"
+    :tag "lsp" "tools" "languages" "emacs>=26.1"
+    :url "https://github.com/emacs-lsp/lsp-pyright"
+    :added "2024-05-31"
+    :emacs>= 26.1
     :ensure t
-    :after lsp-mode
-    :custom ((lsp-python-ms-auto-install-server . t)))
+    )
   :hook (python-mode-hook . (lambda ()
-                              (require 'lsp-python-ms)
-                              (lsp-deferred))))
+                              (require 'lsp-pyright)
+                              (lsp))))
 (leaf go-mode
   :doc "Major mode for the Go programming language"
   :tag "go" "languages"
