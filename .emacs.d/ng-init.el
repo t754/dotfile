@@ -399,7 +399,9 @@
   :added "2024-04-12"
   :emacs>= 25.1
   :ensure t
-  :global-minor-mode global-diff-hl-mode)
+  :global-minor-mode global-diff-hl-mode
+  :hook (magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
+        (magit-post-refresh-hook . diff-hl-magit-post-refresh))
 
 (leaf format-all
   :doc "Auto-format C, C++, JS, Python, Ruby and 50 other languages"
