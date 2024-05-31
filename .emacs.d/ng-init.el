@@ -912,12 +912,11 @@
   :added "2023-10-06"
   :emacs>= 26.1
   :ensure t
-  :hook (elpaca-after-init-hook . dashboard-insert-startupify-lists)
-  :hook (elpaca-after-init-hook . dashboard-initialize)
-  :defvar dashboard-projects-switch-function
+  :hook
+  (elpaca-after-init-hook . dashboard-insert-startupify-lists)
+  (elpaca-after-init-hook . dashboard-initialize)
   :init
   (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-  (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
   (dashboard-setup-startup-hook)
   :custom ((dashboard-items . '((recents  . 5)
                                 (bookmarks . 5)
