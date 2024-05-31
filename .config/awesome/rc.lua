@@ -8,12 +8,12 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
--- local naughty = require("naughty")
+local naughty = require("naughty")
 local menubar = require("menubar")
 
 -- Freedesktop integration
---require("freedesktop.menu")
---require("freedesktop.desktop")
+require("freedesktop.menu")
+require("freedesktop.desktop")
 -- calendar functions
 
 -- Extra widgets
@@ -648,6 +648,23 @@ globalkeys = awful.util.table.join(
       {description = "swap with next client by index", group = "client"}),
    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
       {description = "swap with previous client by index", group = "client"}),
+   awful.key({ modkey, "Control" }, "g", function ()
+         local matcher = function (c)
+            return awful.rules.match(c, {class = 'KeePassXC'})
+         end
+         awful.client.run_or_raise('keepassxc', matcher)
+   end,
+      {description = "keepass", group = "ror"}),
+   awful.key({ modkey, "Control" }, "d", function ()
+         local matcher = function (c)
+            return awful.rules.match(c, {class = 'Emacs'})
+         end
+         awful.client.run_or_raise('emacs', matcher)
+   end,
+      {description = "emacs", group = "ror"}),
+   awful.key({ modkey, "Control" }, "p", function ()
+         naughty.destroy_all_notifications()
+   end, {description = "delete notify", group = "screen"}),
    awful.key({ modkey, "Control" }, "j",
       function ()
          awful.screen.focus_relative(1)
@@ -670,7 +687,7 @@ globalkeys = awful.util.table.join(
       {description = "open a terminal", group = "launcher"}),
    awful.key({ modkey, "Control" }, "r", awesome.restart,
       {description = "reload awesome", group = "awesome"}),
-    --awesome.quit
+   --awesome.quit
    awful.key({ modkey, "Shift"   }, "q", function () confirmQuitmenu:show() end,
       {description = "quit awesome", group = "awesome"}),
 
@@ -819,7 +836,7 @@ clientkeys = awful.util.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-globalkeys = awful.util.table.join(globalkeys, ror.genkeys(modkey))
+-- globalkeys = awful.util.table.join(globalkeys, ror.genkeys(modkey))
 
 for i = 1, 9 do
    globalkeys = awful.util.table.join(globalkeys,
