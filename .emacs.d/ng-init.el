@@ -328,7 +328,8 @@
   :ensure t
   :blackout t
   :leaf-defer nil
-  :bind ((company-active-map
+  :bind (("C-M-i" . company-complete)
+         (company-active-map
           ("M-n" . nil)
           ("M-p" . nil)
           ("C-s" . company-filter-candidates)
@@ -654,11 +655,14 @@
   :emacs>= 26.1
   :ensure t
   :require t
+  :custom ((lsp-log-io . t)
+           (lsp-keymap-prefix . "C-c l"))
   :defvar my/format-on-save
   :hook (before-save-hook . (lambda ()
                               ;; consider setproject-local variables on `.dir-locals.el`
                               (when (intern-soft (concat "my/" (symbol-name 'format-on-save)))
                                 (lsp-format-buffer))))
+  (lsp-mode-hook . lsp-enable-which-key-integration)
   :init
   (leaf lsp-ui
     :doc "UI modules for lsp-mode"
