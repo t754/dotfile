@@ -411,7 +411,6 @@
   :added "2024-04-12"
   :emacs>= 24.4
   :ensure t
-  :after inheritenv language-id
   :hook prog-mode-hook)
 
 (leaf pcre2el
@@ -654,8 +653,7 @@
   :url "https://github.com/emacs-lsp/lsp-mode"
   :emacs>= 26.1
   :ensure t
-  :after spinner markdown-mode lv
-  :custom ((lsp-log-io . t))
+  :require t
   :defvar my/format-on-save
   :hook (before-save-hook . (lambda ()
                               ;; consider setproject-local variables on `.dir-locals.el`
@@ -672,9 +670,7 @@
     :ensure t
     :bind ((:lsp-ui-mode-map
             ([remap xref-find-definitions] . #'lsp-ui-peek-find-definitions)
-            ([remap xref-find-references]  . #'lsp-ui-peek-find-references)))
-    :after lsp-mode markdown-mode)
-
+            ([remap xref-find-references]  . #'lsp-ui-peek-find-references))))
   (setq read-process-output-max 10240)
   (setq gc-cons-threshold  (* 1024 1024 10)))
 
@@ -879,7 +875,7 @@
   :added "2022-05-19"
   :emacs>= 24.3
   :ensure t
-  :after hcl-mode)
+  :hook (terraform-mode-hook . lsp))
 
 (leaf jinja2-mode
   :doc "A major mode for jinja2"
