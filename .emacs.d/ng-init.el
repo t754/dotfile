@@ -692,29 +692,12 @@
   consult--source-recent-file
   consult--source-project-recent-file
   consult-narrow-key
+  :custom (
+           (consult-narrow-key . "<")
+           (register-preview-delay . 0.5)
+           (register-preview-function . #'consult-register-format))
   :init
-  (setq register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
   (advice-add #'register-preview :override #'consult-register-window)
-
-  (leaf counsel-projectile
-    :doc "Ivy integration for Projectile"
-    :req "counsel-0.13.4" "projectile-2.5.0"
-    :tag "convenience" "project"
-    :url "https://github.com/ericdanan/counsel-projectile"
-    :added "2023-10-10"
-    :ensure t)
-
-  (leaf counsel-tramp
-    :doc "Tramp ivy interface for ssh, docker, vagrant"
-    :req "emacs-24.3" "counsel-0.10"
-    :tag "emacs>=24.3"
-    :url "https://github.com/masasam/emacs-counsel-tramp"
-    :added "2022-11-01"
-    :emacs>= 24.3
-    :ensure t
-    :custom (tramp-default-method . "ssh"))
-
   (leaf consult-ghq
     :doc "Ghq interface using consult"
     :req "emacs-26.1" "consult-0.8" "affe-0.1"
@@ -756,8 +739,32 @@
     :hook (after-init-hook . (lambda()
                                (marginalia-mode)
                                (savehist-mode))))
+  (leaf consult-company
+    :doc "Consult frontend for company"
+    :req "emacs-27.1" "company-0.9" "consult-0.9"
+    :tag "emacs>=27.1"
+    :url "https://github.com/mohkale/consult-company"
+    :added "2024-04-18"
+    :emacs>= 27.1
+    :ensure t
+    :defvar company-mode-map
+    :defun consult-company
+    :config
+    (define-key company-mode-map [remap completion-at-point] #'consult-company))
+
+  (leaf consult-lsp
+    :doc "LSP-mode Consult integration"
+    :req "emacs-27.1" "lsp-mode-5.0" "consult-0.16" "f-0.20.0"
+    :tag "lsp" "completion" "tools" "emacs>=27.1"
+    :url "https://github.com/gagbo/consult-lsp"
+    :added "2024-04-16"
+    :emacs>= 27.1
+    :ensure t
+    :defvar lsp-mode-map
+    :config
+    (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
+    )
   :config
-  (setq consult-narrow-key "<")
   (consult-customize
    consult-theme :preview-key '(:debounce 0.2 any)
    consult-ripgrep consult-git-grep consult-grep
@@ -801,6 +808,7 @@
          ("M-g k" . consult-global-mark)
          ("M-g i" . consult-imenu)
          ("M-g I" . consult-imenu-multi)
+         ("C-s" . consult-line)
          (isearch-mode-map
           ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
           ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
@@ -808,8 +816,7 @@
           ("M-s L" . consult-line-multi))
          (minibuffer-local-map
           ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-          ("M-r" . consult-history))
-         ))
+          ("M-r" . consult-history))))
 
 
 
