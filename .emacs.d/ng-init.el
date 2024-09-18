@@ -1004,6 +1004,28 @@
   :emacs>= 24
   :ensure t)
 
+(leaf vterm
+  :doc "Fully-featured terminal emulator"
+  :req "emacs-25.1"
+  :tag "terminals" "emacs>=25.1"
+  :url "https://github.com/akermu/emacs-libvterm"
+  :added "2024-06-05"
+  :emacs>= 25.1
+  :ensure t)
+
+
+ (leaf tree-sitter
+    :ensure (t tree-sitter-langs)
+    :require tree-sitter-langs
+    :defvar tree-sitter-major-mode-language-alist
+    :config
+    (global-tree-sitter-mode)
+    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+    (tree-sitter-require 'tsx)
+    (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-tsx-mode . tsx))
+    )
+
+
 (provide 'init)
 
 (setq file-name-handler-alist my/saved-file-name-handler-alist)
