@@ -681,7 +681,12 @@
   :hook (before-save-hook . (lambda ()
                               ;; consider setproject-local variables on `.dir-locals.el`
                               (when (intern-soft (concat "my/" (symbol-name 'format-on-save)))
-                                (lsp-format-buffer))))
+                                (let ((result (ignore-errors
+                                                (lsp-format-buffer)
+                                                t)))
+                                  (unless result
+                                    (message result)))
+                                )))
   (lsp-mode-hook . lsp-enable-which-key-integration)
   :init
   (leaf lsp-ui
