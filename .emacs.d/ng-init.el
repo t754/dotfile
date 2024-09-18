@@ -230,13 +230,31 @@
   :ensure t
   :global-minor-mode dimmer-mode)
 
-(leaf indent-guide
-  :doc "show vertical lines to guide indentation"
-  :url "https://github.com/zk-phi/indent-guide/indent-guide.el"
-  :added "2024-04-11"
+
+
+(leaf highlight-indent-guides
+  :doc "Minor mode to highlight indentation"
+  :req "emacs-24.1"
+  :tag "emacs>=24.1"
+  :url "https://github.com/DarthFennec/highlight-indent-guides"
+  :added "2024-08-01"
+  :emacs>= 24.1
   :ensure t
-  :global-minor-mode indent-guide-global-mode
-  :custom-face ((indent-guide-face . '((t (:foreground "#535353" :slant normal))))))
+  :hook ((prog-mode-hook yaml-mode-hook) . highlight-indent-guides-mode)
+  :custom ((highlight-indent-guides-method . 'column))
+  :custom-face `(
+                 (highlight-indent-guides-odd-face . '((t (:background ,(doom-color 'base2)))))
+                 (highlight-indent-guides-even-face . '((t (:background ,(doom-color 'base3)))))))
+
+
+
+
+(leaf rainbow-mode
+  :doc "Colorize color names in buffers"
+  :tag "faces"
+  :url "https://elpa.gnu.org/packages/rainbow-mode.html"
+  :added "2024-08-01"
+  :ensure t)
 
 
 (leaf nerd-icons
