@@ -129,11 +129,10 @@
            (tab-width . 4)
            (abbrev-file-name . "~/.emacs.d/abbrev_defs")
            (recentf-max-saved-items . 2000)
-           (recentf-auto-cleanup . 10)
+           (recentf-auto-cleanup . 600)
            (use-short-answers . t)
            )
-  :init
-  (recentf-mode 1)
+  :global-minor-mode recentf-mode
   :config
   (run-at-time nil (* 5 60) 'recentf-save-list)
   (defalias 'yes-or-no-p 'y-or-n-p))
