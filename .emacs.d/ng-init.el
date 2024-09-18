@@ -449,9 +449,12 @@
   :added "2023-10-06"
   :emacs>= 25.1
   :ensure t
+  :custom ((projectile-mode-line-prefix . " Prj")
+           (projectile-sort-order . 'recentf)
+           (projectile-enable-caching . t))
   :bind ((projectile-mode-map ("C-c p" . projectile-command-map)))
-  :config
-  (projectile-mode +1))
+  :global-minor-mode projectile-mode
+  )
 
 (leaf yasnippet
   :doc "Yet another snippet extension for Emacs"
