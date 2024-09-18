@@ -703,6 +703,16 @@
   (setq read-process-output-max 10240)
   (setq gc-cons-threshold  (* 1024 1024 10)))
 
+(leaf which-key
+  :doc "Display available keybindings in popup"
+  :req "emacs-24.4"
+  :tag "emacs>=24.4"
+  :added "2024-04-18"
+  :emacs>= 24.4
+  :ensure t
+  :global-minor-mode which-key-mode
+  :config
+  (which-key-setup-minibuffer))
 
 (leaf consult
   :doc "Consulting completing-read"
