@@ -8,6 +8,7 @@ modmap:
 
 keymap:
   - name: Slack
+    exact_match: true
     application:
       only:
         - Slack
@@ -96,6 +97,7 @@ keymap:
     application:
       not:
         - Emacs
+        - "/emacs-.*/"
         - Gnome-terminal
         - urxvt
         - St-256color
@@ -110,6 +112,9 @@ keymap:
         - "openshot"
         - "Tigervnc viewer"
         - Slack
+        - vivaldi-stable
+        - "code"
+        - "Code"
     remap:
       # Cursor
       C-b: { with_mark: left }
@@ -153,6 +158,7 @@ keymap:
       M-Shift-5: C-h
       # Cancel
       C-g: [esc, { set_mark: false }]
+      C-M-g: C-M-g
       # C-x YYY
       C-x:
         remap:
