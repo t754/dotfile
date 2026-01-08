@@ -240,17 +240,8 @@
   :custom ((auto-revert-interval . 0.1))
   :global-minor-mode global-auto-revert-mode)
 
-(leaf doom-themes
-  :doc "an opinionated pack of modern color-themes"
-  :req "emacs-25.1" "cl-lib-0.5"
-  :tag "faces" "themes" "emacs>=25.1"
-  :url "https://github.com/doomemacs/themes"
-  :added "2024-04-10"
-  :emacs>= 25.1
-  :ensure t
-  :config
-  (load-theme 'doom-dark+ t)
-  (doom-themes-org-config))
+
+
 
 (leaf dimmer
   :doc "Visually highlight the selected buffer"
@@ -277,8 +268,6 @@
   :custom-face `(
                  (highlight-indent-guides-odd-face . '((t (:background ,(doom-color 'base2)))))
                  (highlight-indent-guides-even-face . '((t (:background ,(doom-color 'base3)))))))
-
-
 
 
 (leaf rainbow-mode
@@ -451,7 +440,7 @@
   :ensure t
   :global-minor-mode global-diff-hl-mode
   :hook (magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
-        (magit-post-refresh-hook . diff-hl-magit-post-refresh))
+  (magit-post-refresh-hook . diff-hl-magit-post-refresh))
 
 (leaf format-all
   :doc "Auto-format C, C++, JS, Python, Ruby and 50 other languages"
@@ -581,7 +570,6 @@
     :added "2021-04-26"
     :ensure t)
 
-
   (leaf org-journal
     :doc "a simple org-mode based journaling mode"
     :req "emacs-25.1" "org-9.1"
@@ -617,6 +605,11 @@
     :emacs>= 27.1
     :ensure t
     :after org-roam websocket))
+
+(leaf theme
+  :added "2025-05-30"
+  :config
+  (load-theme 'tango-dark t))
 
 (leaf my/scratch
   :defun my/make-scratch
