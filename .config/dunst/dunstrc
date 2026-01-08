@@ -1,4 +1,6 @@
 [global]
+    icon_theme = Papirus
+    enable_recursive_icon_lookup = true
     font = monospace 10
 
     # Allow a small subset of html markup:
