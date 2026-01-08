@@ -77,6 +77,7 @@ keymap:
       only:
         - Firefox
         - firefox
+        - "/.*firefox/"
         - Google-chrome
         - Chromium
     remap:
@@ -94,11 +95,13 @@ keymap:
       C-Shift-a: C-Shift-a
       
   - name: Emacs
+    exact_match: true
     application:
       not:
         - Emacs
         - "/emacs-.*/"
         - Gnome-terminal
+        - "/xfce4-terminal.*/"
         - urxvt
         - St-256color
         - "org.remmina.remmina"
