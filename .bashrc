@@ -119,8 +119,6 @@ else
     export POWERSHELL_MODE="patched"
 fi
 
-export powerlineShellPath="$(ghq list -p | grep 'milkbikis/powerline-shell')"
-export powerlineArgopt="--colorize-hostname --cwd-mode=fancy --cwd-max-depth=4 --mode ${POWERSHELL_MODE} --shell bash"
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 
 railsComp="$(ghq list -p | grep 'jweslley/rails_completion')"
