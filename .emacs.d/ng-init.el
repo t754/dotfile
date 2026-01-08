@@ -291,7 +291,8 @@
     :doc "operate on buffers like dired"
     :tag "builtin"
     :added "2024-04-11"
-    :bind ("C-x C-b" . ibuffer))
+    ;; :bind ("C-x C-b" . ibuffer)
+    )
   (leaf nerd-icons-ibuffer
     :doc "Display nerd icons in ibuffer"
     :req "emacs-24.3" "nerd-icons-0.0.1"
@@ -853,6 +854,7 @@
          ("C-M-#" . consult-register)
          ("C-x C-r" . consult-recent-file)
          ("C-x b" . consult-buffer)
+         ("C-x C-b" . consult-buffer)
          ("M-s f" . consult-find)
          ("M-s L" . consult-locate)
          ("M-s g" . consult-grep)
