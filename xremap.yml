@@ -102,6 +102,7 @@ keymap:
         - "/emacs-.*/"
         - Gnome-terminal
         - "/xfce4-terminal.*/"
+        - kitty
         - urxvt
         - St-256color
         - "org.remmina.remmina"
